@@ -12,13 +12,18 @@ namespace PersonClasses
         private string _name;
         private string _surname;
         private int _age;
-
-        public Person(string  name, string surname, int age, Gender gender)
+        
+        /// <summary>
+        /// Конструктор класса
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="age"></param>
+        public Person(string  name, string surname, int age)
         {
             Name = name;
             Surname = surname;
             Age = age;
-            Gender = gender;
         }
 
         public string Name
@@ -34,6 +39,7 @@ namespace PersonClasses
                 _name = value; 
             }
         }
+
         public string Surname
         {
             get { return _surname; }
@@ -44,9 +50,10 @@ namespace PersonClasses
                     throw new Exception($"{nameof(Surname)} не может быть пустым " +
                         $"или незаполненным!");
                 }
-                _name = value;
+                _surname = value;
             }
         }
+
         public int Age
         {
             get { return _age; }
@@ -56,17 +63,17 @@ namespace PersonClasses
                 const int maxAge = 124;
                 if (value < minAge || value > maxAge)
                 {
-                    throw new Exception($"{nameof(Age)} не может быть меньше {minAge} или больше {maxAge}!");
+                    throw new Exception($"{nameof(Age)} не может быть меньше {minAge}" +
+                        $" или больше {maxAge}!");
                 }
                 _age = value;
             }
         }
 
         public Gender Gender { get; set; }
+       
+        
+
     }
 }
 
-
-
-//Реализуйте класс Person, содержащий: имя, фамилию, возраст, пол 
-//(используйте перечисления – enum), конструктор класса
