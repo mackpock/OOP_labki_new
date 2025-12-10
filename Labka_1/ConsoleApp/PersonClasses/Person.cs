@@ -19,11 +19,12 @@ namespace PersonClasses
         /// <param name="name"></param>
         /// <param name="surname"></param>
         /// <param name="age"></param>
-        public Person(string  name, string surname, int age)
+        public Person(string  name, string surname, int age, Gender gender)
         {
             Name = name;
             Surname = surname;
             Age = age;
+            Gender = gender;
         }
 
         public string Name
@@ -70,9 +71,30 @@ namespace PersonClasses
             }
         }
 
-        public Gender Gender { get; set; }
-       
-        
+     public Gender Gender { get; set; }
+     //
+     //public string GenderTranslate(Person person) 
+     //{
+     //    string gender = string.Empty;
+     //    switch (person.Gender)
+     //    {
+     //        case Gender.Male: 
+     //        {
+     //            gender = "Мужчина"; break;
+     //        }
+     //
+     //        case Gender.Female:
+     //        {
+     //            gender = "Женщина"; break;
+     //        }
+     //        default:
+     //        
+     //        {
+     //            gender = "В нашей стране это запрещено!"; break;
+     //        }
+     //    }
+     //    return $"Персонаж {person.Name} {person.Surname} \n $пол: is {gender}";
+     //}
 
     }
 }
