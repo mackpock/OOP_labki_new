@@ -19,13 +19,29 @@ namespace PersonClasses
         /// <param name="name"></param>
         /// <param name="surname"></param>
         /// <param name="age"></param>
-        public Person(string  name, string surname, int age, Gender gender)
+        public Person(string  name, string surname, int age)
         {
             Name = name;
             Surname = surname;
             Age = age;
-            Gender = gender;
+            
         }
+
+        /// <summary>
+        /// Конструктор с явным указанием пола (чтобы работала первая часть задания)
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="age"></param>
+        /// <param name="gender"></param>
+        public Person(string name, string surname, int age, Gender gender) :
+            this(name, surname, age) { Gender = gender; }
+        
+
+        /// <summary>
+        /// Конструктор по умолчанию - создаёт персону
+        /// </summary>
+        public Person(): this("Default", "Person", 18) { }
 
         public string Name
         {
@@ -71,31 +87,41 @@ namespace PersonClasses
             }
         }
 
-     public Gender Gender { get; set; }
-     //
-     //public string GenderTranslate(Person person) 
-     //{
-     //    string gender = string.Empty;
-     //    switch (person.Gender)
-     //    {
-     //        case Gender.Male: 
-     //        {
-     //            gender = "Мужчина"; break;
-     //        }
-     //
-     //        case Gender.Female:
-     //        {
-     //            gender = "Женщина"; break;
-     //        }
-     //        default:
-     //        
-     //        {
-     //            gender = "В нашей стране это запрещено!"; break;
-     //        }
-     //    }
-     //    return $"Персонаж {person.Name} {person.Surname} \n $пол: is {gender}";
-     //}
+        /// <summary>
+        /// Пол
+        /// </summary>
+        public Gender Gender { get; set; }
 
+
+        /// <summary>
+        /// Формирование текстового описания указанного персонажа
+        /// </summary>
+        /// <param name="person"></param>
+        /// <returns></returns>
+        public string SayAbout(Person person)
+        {
+            string gender = string.Empty;
+            switch (person.Gender) 
+            {
+                case Gender.Male: 
+                {
+                        gender = "Мужчина";
+                        break;
+                }
+                case Gender.Female:
+                {
+                        gender = "Женщина";
+                        break;
+                }
+                default:
+                {
+                        gender = "Введите корректный пол";
+                        break;
+                }
+            }
+            return $"Получился персонаж: \nИмя: {person.Name} \nФамилия:" +
+                $" {person.Surname} \nВозраст: {person.Age} \nПол: {gender}";
+        }
     }
 }
 
