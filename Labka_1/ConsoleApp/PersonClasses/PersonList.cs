@@ -7,6 +7,9 @@ using System.Xml.Linq;
 
 namespace PersonClasses
 {
+    /// <summary>
+    /// Описание абстракции писка
+    /// </summary>
     public class PersonList
     {
         
@@ -85,7 +88,9 @@ namespace PersonClasses
             return _person.IndexOf(person);
         }
 
-
+        /// <summary>
+        /// Очистка списка
+        /// </summary>
         public void Clear() 
         {
             _person.Clear();

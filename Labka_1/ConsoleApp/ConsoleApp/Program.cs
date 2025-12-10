@@ -4,6 +4,9 @@ using System.Security.Principal;
 
 class Program
 {
+    /// <summary>
+    /// Метод ReadKey чтобы продолжить
+    /// </summary>
     static void PressButton()
     {
         Console.WriteLine("Нажмите любую клавишу для продолжения");
@@ -49,20 +52,20 @@ class Program
         list2.Add(p5);
         list2.Add(p6);
 
-        //a+b
+        //3 a+b
         Console.WriteLine("Созданы два списка по 3 человека!");
         ShowList(list1, "Горожане");
         ShowList(list2, "Призжие");
         PressButton();
 
-        //c
+        //3 c
         var p7 = new Person("Кирилл", "Накипелов", 19 , Gender.Male);
         list1.Add(p7);
         Console.WriteLine("\nВ список 1 добавлен новый персонаж! (4)");
         ShowList(list1, "\nТеперь первый список выглядит так:");
         PressButton();
 
-        //d
+        //3 d
         var secondPersonFromList1 = list1.GetFromIndex(1);
         list2.Add(secondPersonFromList1);
         Console.WriteLine("\nВторой человек из первого списка добавлен во второй!");
@@ -70,14 +73,14 @@ class Program
         ShowList(list2, "Призжие");
         PressButton();
 
-        //e
+        //3 e
         list1.RemoveAt(1);
         Console.WriteLine("\nВторой человек удален из первого списка");
         ShowList(list1, "Горожане");
         ShowList(list2, "Призжие");
         PressButton();
 
-        //f
+        //3 f
         list2.Clear();
         Console.WriteLine("\nВторой список очищен");
         ShowList(list1, "Горожане");
@@ -87,8 +90,9 @@ class Program
         Console.WriteLine("\nТеперь можно ввести своего персонажа!");
         PressButton();
 
-        
+        //методы чтения персоны с клавиатуры и вывод персоны на экран
         Person person1 = new Person();
+        
         var actionDictionary = new Dictionary<string, Action>()
         {
             {
@@ -132,7 +136,19 @@ class Program
         person1.Gender = Gender.Male; 
         var person2 = new Person();
         Console.WriteLine(person2.SayAbout(person1));
+        PressButton();
 
+
+        //Вывод рандомных персонажей
+        Console.WriteLine("\nВывод рандомного списка персонажей:");
+        PersonList randomList = new PersonList();
+        for (int i = 0; i < 10; i++)
+        {
+            Person randomPerson = Person.GetRandomPerson();
+            randomList.Add(randomPerson);
+        }
+        ShowList(randomList, "Наши случайные персонажи:");
+        PressButton();
     }
 
     /// <summary>
@@ -156,5 +172,9 @@ class Program
             }
         }
     }
+
+    
+    
+    
 
 }

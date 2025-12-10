@@ -4,15 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PersonClasses
 {
+    /// <summary>
+    /// Класс показывает ФИ, возраст, пол
+    /// </summary>
     public class Person
     {
         private string _name;
         private string _surname;
         private int _age;
-        
+        private const int minAge = 0;
+        private const int maxAge = 124;
         /// <summary>
         /// Конструктор класса
         /// </summary>
@@ -43,6 +48,9 @@ namespace PersonClasses
         /// </summary>
         public Person(): this("Default", "Person", 18) { }
 
+        /// <summary>
+        /// Имя
+        /// </summary>
         public string Name
         {
             get { return _name; }
@@ -57,6 +65,9 @@ namespace PersonClasses
             }
         }
 
+        /// <summary>
+        /// Фамилия
+        /// </summary>
         public string Surname
         {
             get { return _surname; }
@@ -71,13 +82,14 @@ namespace PersonClasses
             }
         }
 
+        /// <summary>
+        /// Возраст
+        /// </summary>
         public int Age
         {
             get { return _age; }
             set
             {
-                const int minAge = 0;
-                const int maxAge = 124;
                 if (value < minAge || value > maxAge)
                 {
                     throw new Exception($"{nameof(Age)} не может быть меньше {minAge}" +
@@ -121,6 +133,46 @@ namespace PersonClasses
             }
             return $"Получился персонаж: \nИмя: {person.Name} \nФамилия:" +
                 $" {person.Surname} \nВозраст: {person.Age} \nПол: {gender}";
+        }
+
+        /// <summary>
+        /// Метод набора случайных персонажей
+        /// </summary>
+        /// <returns></returns>
+        public static Person GetRandomPerson()
+        {
+            var random = new Random();
+            string[] maleNames = { "Артём", "Кирилл", "Егор", "Тимофей", 
+                "Михаил", "Степан", "Глеб", "Лев", "Фёдор", "Платон" };
+            string[] femaleNames = { "София", "Полина", "Алиса", "Василиса", 
+                "Ева", "Милана", "Арина", "Ульяна", "Дарья", "Вера" };
+            string[] maleSurname = { "Морозов", "Белов", "Крылов", "Ермаков",
+                "Федоров", "Лебедев", "Громов", "Соколов", "Макаров", "Никитин" };
+            string[] femaleSurname = { "Морозова", "Белова", "Крылова", "Ермакова",
+                "Федорова", "Лебедева", "Громова", "Соколова", "Макарова", "Никитина" };
+
+            Gender gender;
+            switch (random.Next(2))
+            {
+                case 0: gender = Gender.Male; break;
+                case 1: gender = Gender.Female; break;
+                default: gender = Gender.Male; break;
+            }
+            
+            string name;
+            string surname;
+            if (gender == Gender.Male)
+            {
+                name = maleNames[random.Next(maleNames.Length)];
+                surname = maleSurname[random.Next(maleSurname.Length)];
+            }
+            else
+            {
+                name = femaleNames[random.Next(femaleNames.Length)];
+                surname = femaleSurname[random.Next(femaleSurname.Length)];
+            }
+            int age = random.Next(minAge, maxAge);
+            return new Person(name, surname, age, gender);
         }
     }
 }
