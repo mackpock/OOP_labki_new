@@ -182,7 +182,7 @@ class Labka1
                           $"Пол:     {genderNewPerson}");
         PressButton();
 
-
+        
 
         //Вывод рандомных персонажей
         Console.WriteLine("\nВывод рандомного списка персонажей:");
@@ -195,6 +195,8 @@ class Labka1
         ShowList(randomList, "Наши случайные персонажи:");
         PressButton();
     }
+    
+    
 
     /// <summary>
     /// Метод для выброса исключения при пустом вводе ФИ и возраста

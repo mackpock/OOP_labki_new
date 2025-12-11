@@ -79,12 +79,7 @@ namespace PersonClasses
             get { return _name; }
             set 
             {
-                if (string.IsNullOrEmpty(value)) 
-                {
-                    throw new Exception($"{nameof(Name)} не может быть пустым " +
-                        $"или незаполненным!");
-                }
-                _name = value; 
+                _name = NameSurnameValidation(value, "Имя");
             }
         }
 
@@ -96,12 +91,7 @@ namespace PersonClasses
             get { return _surname; }
             set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new Exception($"{nameof(Surname)} не может быть пустым " +
-                        $"или незаполненным!");
-                }
-                _surname = value;
+                _surname = NameSurnameValidation(value, "Фамилия");
             }
         }
 
@@ -126,6 +116,47 @@ namespace PersonClasses
         /// Пол
         /// </summary>
         public Gender Gender { get; set; }
+
+        /// <summary>
+        /// Метод для разрешенных символов, двойных имён и первой заглавной буквы
+        /// </summary>
+        /// <param name="input">Ввод</param>
+        /// <param name="fieldName">Поле (И или Ф)</param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        private static string NameSurnameValidation
+            (string input, string fieldName)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+                throw new Exception($"{fieldName} не должен быть пустой");
+
+            const string allowedChars =
+                "abcdefghijklmnopqrstuvwxyz" +
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+                "абвгдеёжзийклмнопрстуфхцчшщъыьэюя" +
+                "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ" +
+                " -";
+            foreach (char symbol in input)
+            {
+                if (allowedChars.IndexOf(symbol) == -1)
+                {
+                    throw new Exception($"{fieldName} может быть только" +
+                        $" русскими/англ символами, а также с дефисом!");
+                }
+            }
+            
+            //Первая буква - всегда заглавная
+            char[] chars = input.ToLower().ToCharArray();
+            for (int i = 0; i < chars.Length; i++)
+            {
+                if (i == 0 || chars[i - 1] == ' ' || chars[i - 1] == '-')
+                {
+                    chars[i] = char.ToUpper(chars[i]);
+                }
+            }
+
+            return new string(chars);
+        }
 
      // //TODO: remove +
      // /// <summary>
@@ -158,64 +189,64 @@ namespace PersonClasses
      //         $" {person.Surname} \nВозраст: {person.Age} \nПол: {gender}";
      // }
 
-      // /// <summary>
-      // /// Метод набора случайных персонажей
-      // /// </summary>
-      // /// <returns></returns>
-      // public static Person GetRandomPerson()
-      // {
-      //     var random = new Random();
-      //     //TODO: RSDN
-      //     string[] maleNames = 
-      //     { 
-      //         "Артём",    "Кирилл",   "Егор", 
-      //         "Тимофей",  "Михаил",   "Степан", 
-      //         "Глеб",     "Лев",      "Фёдор",    
-      //         "Платон" 
-      //     };
-      //     string[] femaleNames = 
-      //     { 
-      //         "София",    "Полина",  "Алиса",
-      //         "Ева",      "Милана",  "Арина", 
-      //         "Ульяна",   "Дарья",   "Вера"
-      //     };
-      //     string[] maleSurname = 
-      //     {   "Морозов",   "Белов",   "Крылов",
-      //         "Ермаков",   "Федоров", "Лебедев", 
-      //         "Громов",    "Соколов", "Макаров", 
-      //         "Никитин" 
-      //     };
-      //     string[] femaleSurname = 
-      //     { "Морозова",   "Белова",   "Крылова",
-      //       "Ермакова",   "Федорова", "Лебедева", 
-      //       "Громова",    "Соколова", "Макарова", 
-      //       "Никитина" 
-      //     };
-      //
-      //     Gender gender;
-      //     switch (random.Next(2))
-      //     {
-      //         //TODO: rsdn +
-      //         case 0: 
-      //             gender = Gender.Male; 
-      //             break;
-      //         default: 
-      //         case 1: 
-      //             gender = Gender.Female; 
-      //             break;
-      //     }
-      //
-      //     //TOOD: refactor +
-      //     string name = gender == Gender.Male
-      //         ? maleNames[random.Next(maleNames.Length)]
-      //         : femaleNames[random.Next(femaleNames.Length)];
-      //     string surname = gender == Gender.Male
-      //         ?  maleSurname[random.Next(maleSurname.Length)]
-      //         :  femaleSurname[random.Next(femaleSurname.Length)];
-      //     
-      //     int age = random.Next(_minAge, _maxAge);
-      //     return new Person(name, surname, age, gender);
-      // }
+        // /// <summary>
+        // /// Метод набора случайных персонажей
+        // /// </summary>
+        // /// <returns></returns>
+        // public static Person GetRandomPerson()
+        // {
+        //     var random = new Random();
+        //     //TODO: RSDN
+        //     string[] maleNames = 
+        //     { 
+        //         "Артём",    "Кирилл",   "Егор", 
+        //         "Тимофей",  "Михаил",   "Степан", 
+        //         "Глеб",     "Лев",      "Фёдор",    
+        //         "Платон" 
+        //     };
+        //     string[] femaleNames = 
+        //     { 
+        //         "София",    "Полина",  "Алиса",
+        //         "Ева",      "Милана",  "Арина", 
+        //         "Ульяна",   "Дарья",   "Вера"
+        //     };
+        //     string[] maleSurname = 
+        //     {   "Морозов",   "Белов",   "Крылов",
+        //         "Ермаков",   "Федоров", "Лебедев", 
+        //         "Громов",    "Соколов", "Макаров", 
+        //         "Никитин" 
+        //     };
+        //     string[] femaleSurname = 
+        //     { "Морозова",   "Белова",   "Крылова",
+        //       "Ермакова",   "Федорова", "Лебедева", 
+        //       "Громова",    "Соколова", "Макарова", 
+        //       "Никитина" 
+        //     };
+        //
+        //     Gender gender;
+        //     switch (random.Next(2))
+        //     {
+        //         //TODO: rsdn +
+        //         case 0: 
+        //             gender = Gender.Male; 
+        //             break;
+        //         default: 
+        //         case 1: 
+        //             gender = Gender.Female; 
+        //             break;
+        //     }
+        //
+        //     //TOOD: refactor +
+        //     string name = gender == Gender.Male
+        //         ? maleNames[random.Next(maleNames.Length)]
+        //         : femaleNames[random.Next(femaleNames.Length)];
+        //     string surname = gender == Gender.Male
+        //         ?  maleSurname[random.Next(maleSurname.Length)]
+        //         :  femaleSurname[random.Next(femaleSurname.Length)];
+        //     
+        //     int age = random.Next(_minAge, _maxAge);
+        //     return new Person(name, surname, age, gender);
+        // }
     }
 }
 
