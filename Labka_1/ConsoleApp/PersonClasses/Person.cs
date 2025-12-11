@@ -13,20 +13,37 @@ namespace PersonClasses
     /// </summary>
     public class Person
     {
-        //TODO: XML
+        //TODO: XML +
+        /// <summary>
+        /// Имя
+        /// </summary>
         private string _name;
+
+        /// <summary>
+        /// Фамилия
+        /// </summary>
         private string _surname;
+
+        /// <summary>
+        /// Возраст
+        /// </summary>
         private int _age;
-        //TODO: RSDN
-        private const int minAge = 0;
-        private const int maxAge = 124;
+        //TODO: RSDN +
+        /// <summary>
+        /// Минимальный возраст
+        /// </summary>
+        private const int _minAge = 0;
+        /// <summary>
+        /// Максимальный возраст
+        /// </summary>
+        private const int _maxAge = 124;
 
         /// <summary>
         /// Конструктор класса
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="surname"></param>
-        /// <param name="age"></param>
+        /// <param name="name">Имя</param>
+        /// <param name="surname">Фамилия</param>
+        /// <param name="age">Возраст</param>
         public Person(string  name, string surname, int age)
         {
             Name = name;
@@ -38,10 +55,10 @@ namespace PersonClasses
         /// <summary>
         /// Конструктор с явным указанием пола (чтобы работала первая часть задания)
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="surname"></param>
-        /// <param name="age"></param>
-        /// <param name="gender"></param>
+        /// <param name="name">Имя</param>
+        /// <param name="surname">Фамилия</param>
+        /// <param name="age">Возраст</param>
+        /// <param name="gender">Пол</param>
         public Person(string name, string surname, int age, Gender gender) :
             this(name, surname, age) 
         { 
@@ -96,10 +113,10 @@ namespace PersonClasses
             get { return _age; }
             set
             {
-                if (value < minAge || value > maxAge)
+                if (value < _minAge || value > _maxAge)
                 {
-                    throw new Exception($"{nameof(Age)} не может быть меньше {minAge}" +
-                        $" или больше {maxAge}!");
+                    throw new Exception($"{nameof(Age)} не может быть меньше {_minAge}" +
+                        $" или больше {_maxAge}!");
                 }
                 _age = value;
             }
@@ -110,84 +127,95 @@ namespace PersonClasses
         /// </summary>
         public Gender Gender { get; set; }
 
-        //TODO: remove
-        /// <summary>
-        /// Формирование текстового описания указанного персонажа
-        /// </summary>
-        /// <param name="person"></param>
-        /// <returns></returns>
-        public string SayAbout(Person person)
-        {
-            string gender = string.Empty;
-            switch (person.Gender) 
-            {
-                case Gender.Male: 
-                {
-                        gender = "Мужчина";
-                        break;
-                }
-                case Gender.Female:
-                {
-                        gender = "Женщина";
-                        break;
-                }
-                default:
-                {
-                        gender = "Введите корректный пол";
-                        break;
-                }
-            }
-            return $"Получился персонаж: \nИмя: {person.Name} \nФамилия:" +
-                $" {person.Surname} \nВозраст: {person.Age} \nПол: {gender}";
-        }
+     // //TODO: remove +
+     // /// <summary>
+     // /// Формирование текстового описания указанного персонажа
+     // /// </summary>
+     // /// <param name="person">Персонаж</param>
+     // /// <returns></returns>
+     // public string SayAbout(Person person)
+     // {
+     //     string gender = string.Empty;
+     //     switch (person.Gender) 
+     //     {
+     //         case Gender.Male: 
+     //         {
+     //                 gender = "Мужчина";
+     //                 break;
+     //         }
+     //         case Gender.Female:
+     //         {
+     //                 gender = "Женщина";
+     //                 break;
+     //         }
+     //         default:
+     //         {
+     //                 gender = "Введите корректный пол";
+     //                 break;
+     //         }
+     //     }
+     //     return $"Получился персонаж: \nИмя: {person.Name} \nФамилия:" +
+     //         $" {person.Surname} \nВозраст: {person.Age} \nПол: {gender}";
+     // }
 
-        /// <summary>
-        /// Метод набора случайных персонажей
-        /// </summary>
-        /// <returns></returns>
-        public static Person GetRandomPerson()
-        {
-            var random = new Random();
-            //TODO: RSDN
-            string[] maleNames = 
-            { 
-                "Артём",    "Кирилл",   "Егор", 
-                "Тимофей",  "Михаил",   "Степан", 
-                "Глеб",     "Лев",      "Фёдор",    
-                "Платон" 
-            };
-            string[] femaleNames = { "София", "Полина", "Алиса", "Василиса", 
-                "Ева", "Милана", "Арина", "Ульяна", "Дарья", "Вера" };
-            string[] maleSurname = { "Морозов", "Белов", "Крылов", "Ермаков",
-                "Федоров", "Лебедев", "Громов", "Соколов", "Макаров", "Никитин" };
-            string[] femaleSurname = { "Морозова", "Белова", "Крылова", "Ермакова",
-                "Федорова", "Лебедева", "Громова", "Соколова", "Макарова", "Никитина" };
-
-            Gender gender;
-            switch (random.Next(2))
-            {
-                //TODO: rsdn
-                case 0: gender = Gender.Male; break;
-                default: gender = Gender.Male; break;
-                case 1: gender = Gender.Female; break;
-            }
-            
-            //TOOD: refactor
-            string name;
-            string surname;
-            if (gender == Gender.Male)
-            {
-                name = maleNames[random.Next(maleNames.Length)];
-                surname = maleSurname[random.Next(maleSurname.Length)];
-            }
-            else
-            {
-                name = femaleNames[random.Next(femaleNames.Length)];
-                surname = femaleSurname[random.Next(femaleSurname.Length)];
-            }
-            int age = random.Next(minAge, maxAge);
-            return new Person(name, surname, age, gender);
-        }
+      // /// <summary>
+      // /// Метод набора случайных персонажей
+      // /// </summary>
+      // /// <returns></returns>
+      // public static Person GetRandomPerson()
+      // {
+      //     var random = new Random();
+      //     //TODO: RSDN
+      //     string[] maleNames = 
+      //     { 
+      //         "Артём",    "Кирилл",   "Егор", 
+      //         "Тимофей",  "Михаил",   "Степан", 
+      //         "Глеб",     "Лев",      "Фёдор",    
+      //         "Платон" 
+      //     };
+      //     string[] femaleNames = 
+      //     { 
+      //         "София",    "Полина",  "Алиса",
+      //         "Ева",      "Милана",  "Арина", 
+      //         "Ульяна",   "Дарья",   "Вера"
+      //     };
+      //     string[] maleSurname = 
+      //     {   "Морозов",   "Белов",   "Крылов",
+      //         "Ермаков",   "Федоров", "Лебедев", 
+      //         "Громов",    "Соколов", "Макаров", 
+      //         "Никитин" 
+      //     };
+      //     string[] femaleSurname = 
+      //     { "Морозова",   "Белова",   "Крылова",
+      //       "Ермакова",   "Федорова", "Лебедева", 
+      //       "Громова",    "Соколова", "Макарова", 
+      //       "Никитина" 
+      //     };
+      //
+      //     Gender gender;
+      //     switch (random.Next(2))
+      //     {
+      //         //TODO: rsdn +
+      //         case 0: 
+      //             gender = Gender.Male; 
+      //             break;
+      //         default: 
+      //         case 1: 
+      //             gender = Gender.Female; 
+      //             break;
+      //     }
+      //
+      //     //TOOD: refactor +
+      //     string name = gender == Gender.Male
+      //         ? maleNames[random.Next(maleNames.Length)]
+      //         : femaleNames[random.Next(femaleNames.Length)];
+      //     string surname = gender == Gender.Male
+      //         ?  maleSurname[random.Next(maleSurname.Length)]
+      //         :  femaleSurname[random.Next(femaleSurname.Length)];
+      //     
+      //     int age = random.Next(_minAge, _maxAge);
+      //     return new Person(name, surname, age, gender);
+      // }
     }
 }
 

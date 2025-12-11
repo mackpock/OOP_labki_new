@@ -2,8 +2,8 @@
 using System;
 using System.Security.Principal;
 
-//TODO: RSDN
-class Program
+//TODO: RSDN +
+class Labka1
 {
     /// <summary>
     /// Метод ReadKey чтобы продолжить
@@ -17,21 +17,25 @@ class Program
     /// <summary>
     /// Метод для вывода списка
     /// </summary>
-    /// <param name="list"></param>
-    /// <param name="listName"></param>
+    /// <param name="list">Список </param>
+    /// <param name="listName">Название списка</param>
     static void ShowList(PersonList list, string listName) 
     {
         Console.WriteLine($"\n{listName}");
-        //TODO: {}
+        //TODO: {} +
 
-        if (list.Count == 0) { Console.WriteLine("Список пуст!"); return; };
+        if (list.Count == 0) 
+        { 
+            Console.WriteLine("Список пуст!");
+            return; 
+        };
 
         for (int i = 0; i < list.Count; i++) 
         { 
-            //TODO: RSDN
-            var p = list.GetFromIndex(i);
-            Console.WriteLine($"{i + 1}. {p.Name} {p.Surname}, " +
-             $"возраст: {p.Age}, пол: {p.Gender}"); 
+            //TODO: RSDN +
+            var person = list.GetFromIndex(i);
+            Console.WriteLine($"{i + 1}. {person.Name} {person.Surname}, " +
+             $"возраст: {person.Age}, пол: {person.Gender}"); 
         }
     }
 
@@ -41,21 +45,21 @@ class Program
         PersonList list1 = new PersonList();
         PersonList list2 = new PersonList();
 
-        Person p1 = new Person("Олег", "Олегович", 44, Gender.Male);
-        Person p2 = new Person("Максим", "Покацкий", 23, Gender.Male);
-        Person p3 = new Person("Ольга", "Святая", 18, Gender.Female);
+        Person person1 = new Person("Олег", "Олегович", 44, Gender.Male);
+        Person person2 = new Person("Максим", "Покацкий", 23, Gender.Male);
+        Person person3 = new Person("Ольга", "Святая", 18, Gender.Female);
 
-        Person p4 = new Person("Мехродж", "Демьянов", 67, Gender.Male);
-        Person p5 = new Person("Абдулбек", "Алексеев", 47, Gender.Male);
-        Person p6 = new Person("Цыцыгма", "Армяновна", 19, Gender.Female);
+        Person person4 = new Person("Мехродж", "Демьянов", 67, Gender.Male);
+        Person person5 = new Person("Абдулбек", "Алексеев", 47, Gender.Male);
+        Person person6 = new Person("Цыцыгма", "Армяновна", 19, Gender.Female);
 
-        list1.Add(p1);
-        list1.Add(p2);
-        list1.Add(p3); 
+        list1.Add(person1);
+        list1.Add(person2);
+        list1.Add(person3); 
 
-        list2.Add(p4);
-        list2.Add(p5);
-        list2.Add(p6);
+        list2.Add(person4);
+        list2.Add(person5);
+        list2.Add(person6);
 
         //3 a+b
         Console.WriteLine("Созданы два списка по 3 человека!");
@@ -64,8 +68,8 @@ class Program
         PressButton();
 
         //3 c
-        var p7 = new Person("Кирилл", "Накипелов", 19 , Gender.Male);
-        list1.Add(p7);
+        var person7 = new Person("Кирилл", "Накипелов", 19 , Gender.Male);
+        list1.Add(person7);
         Console.WriteLine("\nВ список 1 добавлен новый персонаж! (4)");
         ShowList(list1, "\nТеперь первый список выглядит так:");
         PressButton();
@@ -96,7 +100,7 @@ class Program
         PressButton();
 
         //методы чтения персоны с клавиатуры и вывод персоны на экран
-        Person person1 = new Person();
+        Person personNew = new Person();
         
         var actionDictionary = new Dictionary<string, Action>()
         {
@@ -104,23 +108,23 @@ class Program
                 "Имя",
                 new Action(() =>
                     {
-                        person1.Name = Console.ReadLine();
+                        personNew.Name = Console.ReadLine();
                     })
             },
             {
                 "Фамилия",
                 new Action(() =>
                     {
-                        person1.Surname = Console.ReadLine();
+                        personNew.Surname = Console.ReadLine();
                     })
             },
             {
                 "Возраст",
-                new Action(() =>
+                new Action(() =>    
                     {
                         if (int.TryParse(Console.ReadLine(), out int age))
                         {
-                            person1.Age = age;
+                            personNew.Age = age;
                         }
                         else
                         {
@@ -137,11 +141,28 @@ class Program
         {
             ActionHander(actionHandler.Value, actionHandler.Key);
         }
+        
+        string genderNewPerson;
+        switch(personNew.Gender)
+        {
+            case Gender.Male:
+                genderNewPerson = "Мужчина";
+                break;
+            case Gender.Female:
+                genderNewPerson = "Женщина";
+                break;
+            default:
+                genderNewPerson = "Анон";
+                break;
 
-        person1.Gender = Gender.Male; 
-        var person2 = new Person();
-        Console.WriteLine(person2.SayAbout(person1));
+        }
+        Console.WriteLine($"\nВы создали персонажа:\n" +
+                          $"Имя:     {personNew.Name}\n" +
+                          $"Фамилия: {personNew.Surname}\n" +
+                          $"Возраст: {personNew.Age}\n" +
+                          $"Пол:     {genderNewPerson}");
         PressButton();
+
 
 
         //Вывод рандомных персонажей
@@ -149,7 +170,7 @@ class Program
         PersonList randomList = new PersonList();
         for (int i = 0; i < 10; i++)
         {
-            Person randomPerson = Person.GetRandomPerson();
+            Person randomPerson = GetRandomPersonClass.GetRandomPerson();
             randomList.Add(randomPerson);
         }
         ShowList(randomList, "Наши случайные персонажи:");

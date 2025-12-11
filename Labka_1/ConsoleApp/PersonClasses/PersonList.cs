@@ -34,9 +34,11 @@ namespace PersonClasses
         /// Исключение, если индекс находится за допустимыми пределами
         public void Add(Person person) 
         {
-            //TODO: {}
-            if (person == null) throw new Exception($"{nameof(person)}" +
-                $" не может быть null!");
+            //TODO: {} +
+            if (person == null)
+            {
+                throw new Exception($"{nameof(person)} не может быть null!");
+            }
             _person.Add(person);
         }
 
@@ -58,10 +60,11 @@ namespace PersonClasses
         /// Исключение, если индекс находится за допустимыми пределами
         public void RemoveAt(int index) 
         {
-            //TODO: {}
-
-            if (index < 0 || index >= _person.Count) 
+            //TODO: {} +
+            if (index < 0 || index >= _person.Count)
+            {
                 throw new Exception($"{nameof(index)} введите корректный индекс!");
+            }
             _person.RemoveAt(index);
         }
 
@@ -74,10 +77,11 @@ namespace PersonClasses
         /// Исключение, если индекс находится за допустимыми пределами
         public Person GetFromIndex(int index)
         {
-            //TODO: {}
-
+            //TODO: {} +
             if (index <0 || index  >= _person.Count)
+            {
                 throw new Exception($"{nameof(index)} введите корректный индекс!");
+            }
             return _person[index]; 
         }
 
@@ -88,8 +92,10 @@ namespace PersonClasses
         /// <returns></returns>
         public int IndexOf(Person person) 
         {
-            if (person == null) throw new Exception($"{nameof(person)} " +
-                $"не может быть null!");
+            if (person == null)
+            {
+                throw new Exception($"{nameof(person)} не может быть null!");
+            }
             return _person.IndexOf(person);
         }
 
@@ -102,6 +108,9 @@ namespace PersonClasses
         }
 
         //TODO: XML
+        /// <summary>
+        /// Очистка списка
+        /// </summary>
         public int Count => _person.Count;
     }
 }

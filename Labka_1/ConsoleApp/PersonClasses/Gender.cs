@@ -7,14 +7,20 @@ using System.Threading.Tasks;
 namespace PersonClasses
 {
     /// <summary>
-    /// Гендер
+    /// Пол
     /// </summary>
     public enum Gender
     {
-        //TODO: XML
+        //TODO: XML+
+        /// <summary>
+        /// Мужской
+        /// </summary>
         Male,
 
         //TODO: XML
+        /// <summary>
+        /// Женский
+        /// </summary>
         Female
     }
 }
