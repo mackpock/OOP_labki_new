@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -79,6 +80,7 @@ namespace PersonClasses
             set 
             {
                 _name = NameSurnameValidation(value, "Имя");
+                OnlyOneLanguageNaming();
             }
         }
 
@@ -91,6 +93,7 @@ namespace PersonClasses
             set
             {
                 _surname = NameSurnameValidation(value, "Фамилия");
+                OnlyOneLanguageNaming();
             }
         }
 
@@ -116,45 +119,83 @@ namespace PersonClasses
         /// </summary>
         public Gender Gender { get; set; }
 
-        /// <summary>
-        /// Метод для разрешенных символов, двойных имён и первой заглавной буквы
-        /// </summary>
-        /// <param name="input">Ввод</param>
-        /// <param name="fieldName">Поле (И или Ф)</param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        private static string NameSurnameValidation
-            (string input, string fieldName)
+        private static bool EnglishCheck (string text)
         {
-            if (string.IsNullOrWhiteSpace(input))
-                throw new Exception($"{fieldName} не должен быть пустой");
-
-            const string allowedChars =
-                "abcdefghijklmnopqrstuvwxyz" +
-                "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-                "абвгдеёжзийклмнопрстуфхцчшщъыьэюя" +
-                "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ" +
-                " -";
-            foreach (char symbol in input)
+            const string allowedChars = "abcdefghijklmnopqrstuvwxyz" +
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            foreach (char symbol in text)
             {
-                if (allowedChars.IndexOf(symbol) == -1)
-                {
-                    throw new Exception($"{fieldName} может быть только" +
-                        $" русскими/англ символами, а также с дефисом!");
-                }
+                if (symbol != ' ' && symbol != '-' && allowedChars.IndexOf(symbol) == -1)
+                    return false;
             }
-            
-            //Первая буква - всегда заглавная
-            char[] chars = input.ToLower().ToCharArray();
-            for (int i = 0; i < chars.Length; i++)
-            {
-                if (i == 0 || chars[i - 1] == ' ' || chars[i - 1] == '-')
-                {
-                    chars[i] = char.ToUpper(chars[i]);
-                }
-            }
-
-            return new string(chars);
+            return true;
         }
+        private static bool RussianCheck(string text)
+        {
+            const string allowedChars = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя" +
+                "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+            foreach (char symbol in text)
+            {
+                if (symbol != ' ' && symbol != '-' && allowedChars.IndexOf(symbol) == -1)
+                    return false;
+            }
+            return true;
+        }
+
+
+        private void OnlyOneLanguageNaming()
+        {
+            if (string.IsNullOrWhiteSpace(_name) || string.IsNullOrWhiteSpace(_surname))
+                return;
+
+            bool nameIsEng = EnglishCheck(_name);
+            bool nameIsRus = RussianCheck(_name);
+            bool surnameIsEng = EnglishCheck(_surname);
+            bool surnameIsRus = RussianCheck(_surname);
+
+
+            if (!nameIsEng && !nameIsRus)
+                throw new Exception("Имя содержит недопустимые символы)");
+
+            if (!surnameIsEng && !surnameIsRus)
+                throw new Exception("Фамилия содержит недопустимые символы)");
+
+            if ((nameIsEng && surnameIsEng) || (nameIsRus && surnameIsRus))
+                return;
+
+
+            throw new Exception("Имя и фамилия должны быть на одном языке (только русский или только английский).");
+        }
+        private static string NameSurnameValidation(string input, string fieldName)
+        {
+        const string allowedChars =
+            "abcdefghijklmnopqrstuvwxyz" +
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+            "абвгдеёжзийклмнопрстуфхцчшщъыьэюя" +
+            "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ" +
+            " -";
+        foreach (char symbol in input)
+        {
+            if (allowedChars.IndexOf(symbol) == -1)
+            {
+                throw new Exception($"{fieldName} может быть только" +
+                    $" русскими/англ символами, а также с дефисом!");
+            }
+        }
+
+        //Первая буква - всегда заглавная
+        char[] chars = input.ToLower().ToCharArray();
+        for (int i = 0; i < chars.Length; i++)
+        {
+            if (i == 0 || chars[i - 1] == ' ' || chars[i - 1] == '-')
+            {
+                chars[i] = char.ToUpper(chars[i]);
+            }
+        }
+
+        return new string(chars);
+        }
+            
+        
     }
 }

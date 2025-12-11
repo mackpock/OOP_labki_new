@@ -11,38 +11,38 @@ namespace PersonClasses
     /// </summary>
     public static class GetRandomPersonClass
     {
-        //TODO: RSDN 
+        //TODO: RSDN +
 
-        private const int MinAge = 0;
+        private const int _minAge = 0;
 
-        //TODO: RSDN 
+        //TODO: RSDN +
 
-        private const int MaxAge = 124;
+        private const int _maxAge = 124;
         
-        //TODO: RSDN 
-        private static readonly string[] MaleNames =
+        //TODO: RSDN +
+        private static readonly string[] _maleNames =
         {
             "Артём",  "Кирилл", "Егор", "Тимофей", "Михаил",
             "Степан", "Глеб",   "Лев",  "Фёдор",   "Платон"
         };
 
-        //TODO: RSDN 
+        //TODO: RSDN +
 
-        private static readonly string[] FemaleNames =
+        private static readonly string[] _femaleNames =
         {
             "София", "Полина", "Алиса", "Ева", "Милана",
             "Арина", "Ульяна", "Дарья", "Вера"
         };
 
-        //TODO: RSDN 
+        //TODO: RSDN +
 
-        private static readonly string[] MaleSurnames =
+        private static readonly string[] _maleSurnames =
         {
             "Морозов", "Белов",  "Крылов",  "Ермаков", "Федоров",
             "Лебедев", "Громов", "Соколов", "Макаров", "Никитин"
         };
 
-        private static readonly string[] FemaleSurnames =
+        private static readonly string[] _femaleSurnames =
         {
             "Морозова", "Белова",  "Крылова",  "Ермакова", "Федорова",
             "Лебедева", "Громова", "Соколова", "Макарова", "Никитина"
@@ -60,14 +60,14 @@ namespace PersonClasses
                 : Gender.Female;
 
             string name = gender == Gender.Male
-                ? MaleNames[Random.Next(MaleNames.Length)]
-                : FemaleNames[Random.Next(FemaleNames.Length)];
+                ? _maleNames[Random.Next(_maleNames.Length)]
+                : _femaleNames[Random.Next(_femaleNames.Length)];
 
             string surname = gender == Gender.Male
-                ? MaleSurnames[Random.Next(MaleSurnames.Length)]
-                : FemaleSurnames[Random.Next(FemaleSurnames.Length)];
+                ? _maleSurnames[Random.Next(_maleSurnames.Length)]
+                : _femaleSurnames[Random.Next(_femaleSurnames.Length)];
 
-            int age = Random.Next(MinAge, MaxAge); 
+            int age = Random.Next(_minAge, _maxAge); 
 
             return new Person(name, surname, age, gender);
         }
