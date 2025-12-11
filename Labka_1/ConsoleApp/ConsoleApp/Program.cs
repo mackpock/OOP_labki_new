@@ -2,6 +2,7 @@
 using System;
 using System.Security.Principal;
 
+//TODO: RSDN
 class Program
 {
     /// <summary>
@@ -21,15 +22,19 @@ class Program
     static void ShowList(PersonList list, string listName) 
     {
         Console.WriteLine($"\n{listName}");
+        //TODO: {}
+
         if (list.Count == 0) { Console.WriteLine("Список пуст!"); return; };
 
         for (int i = 0; i < list.Count; i++) 
         { 
+            //TODO: RSDN
             var p = list.GetFromIndex(i);
             Console.WriteLine($"{i + 1}. {p.Name} {p.Surname}, " +
              $"возраст: {p.Age}, пол: {p.Gender}"); 
         }
     }
+
 
     static void Main(string[] args)
     {
@@ -172,9 +177,4 @@ class Program
             }
         }
     }
-
-    
-    
-    
-
 }

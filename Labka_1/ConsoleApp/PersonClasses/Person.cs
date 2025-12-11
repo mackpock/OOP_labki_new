@@ -13,11 +13,14 @@ namespace PersonClasses
     /// </summary>
     public class Person
     {
+        //TODO: XML
         private string _name;
         private string _surname;
         private int _age;
+        //TODO: RSDN
         private const int minAge = 0;
         private const int maxAge = 124;
+
         /// <summary>
         /// Конструктор класса
         /// </summary>
@@ -40,7 +43,10 @@ namespace PersonClasses
         /// <param name="age"></param>
         /// <param name="gender"></param>
         public Person(string name, string surname, int age, Gender gender) :
-            this(name, surname, age) { Gender = gender; }
+            this(name, surname, age) 
+        { 
+            Gender = gender; 
+        }
         
 
         /// <summary>
@@ -104,7 +110,7 @@ namespace PersonClasses
         /// </summary>
         public Gender Gender { get; set; }
 
-
+        //TODO: remove
         /// <summary>
         /// Формирование текстового описания указанного персонажа
         /// </summary>
@@ -142,8 +148,14 @@ namespace PersonClasses
         public static Person GetRandomPerson()
         {
             var random = new Random();
-            string[] maleNames = { "Артём", "Кирилл", "Егор", "Тимофей", 
-                "Михаил", "Степан", "Глеб", "Лев", "Фёдор", "Платон" };
+            //TODO: RSDN
+            string[] maleNames = 
+            { 
+                "Артём",    "Кирилл",   "Егор", 
+                "Тимофей",  "Михаил",   "Степан", 
+                "Глеб",     "Лев",      "Фёдор",    
+                "Платон" 
+            };
             string[] femaleNames = { "София", "Полина", "Алиса", "Василиса", 
                 "Ева", "Милана", "Арина", "Ульяна", "Дарья", "Вера" };
             string[] maleSurname = { "Морозов", "Белов", "Крылов", "Ермаков",
@@ -154,11 +166,13 @@ namespace PersonClasses
             Gender gender;
             switch (random.Next(2))
             {
+                //TODO: rsdn
                 case 0: gender = Gender.Male; break;
-                case 1: gender = Gender.Female; break;
                 default: gender = Gender.Male; break;
+                case 1: gender = Gender.Female; break;
             }
             
+            //TOOD: refactor
             string name;
             string surname;
             if (gender == Gender.Male)
