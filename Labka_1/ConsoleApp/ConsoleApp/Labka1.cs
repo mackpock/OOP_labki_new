@@ -122,14 +122,33 @@ class Labka1
                 "Возраст",
                 new Action(() =>    
                     {
-                        if (int.TryParse(Console.ReadLine(), out int age))
+                        
+                        //6 b При вводе не должно быть возможности ввода символов
+
+                        string  input = Console.ReadLine();
+                        if (string.IsNullOrWhiteSpace(input))
+                        {
+                            throw new Exception("Возраст не может быть пустым!");
+                        }
+
+                        foreach (char digit  in input)
+                        {
+                            if (!char.IsDigit(digit))
+                            {
+                                throw new Exception ("Возраст должен содержать" +
+                                    " ТОЛЬКО цифры!");
+                            }
+                        }
+
+
+                        if (int.TryParse(input, out int age))
                         {
                             personNew.Age = age;
                         }
                         else
                         {
                             throw new Exception(
-                                "Возраст не может быть нецелым!");
+                                "Не удалось преобразовать возраст в чило!");
                         }
                     })
 
