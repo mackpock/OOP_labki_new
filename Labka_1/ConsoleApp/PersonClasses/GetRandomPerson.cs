@@ -11,20 +11,30 @@ namespace PersonClasses
     /// </summary>
     public static class GetRandomPersonClass
     {
+        //TODO: RSDN 
+
         private const int MinAge = 0;
+
+        //TODO: RSDN 
+
         private const int MaxAge = 124;
-        //TODO: RSDN +
+        
+        //TODO: RSDN 
         private static readonly string[] MaleNames =
         {
             "Артём",  "Кирилл", "Егор", "Тимофей", "Михаил",
             "Степан", "Глеб",   "Лев",  "Фёдор",   "Платон"
         };
 
+        //TODO: RSDN 
+
         private static readonly string[] FemaleNames =
         {
             "София", "Полина", "Алиса", "Ева", "Милана",
             "Арина", "Ульяна", "Дарья", "Вера"
         };
+
+        //TODO: RSDN 
 
         private static readonly string[] MaleSurnames =
         {
@@ -45,13 +55,14 @@ namespace PersonClasses
         /// </summary>
         public static Person GetRandomPerson()
         {
-            //TODO: rsdn +
-            Gender gender = Random.Next(2) == 0 ? Gender.Male : Gender.Female;
+            Gender gender = Random.Next(2) == 0 
+                ? Gender.Male 
+                : Gender.Female;
 
             string name = gender == Gender.Male
                 ? MaleNames[Random.Next(MaleNames.Length)]
                 : FemaleNames[Random.Next(FemaleNames.Length)];
-            //TOOD: refactor +
+
             string surname = gender == Gender.Male
                 ? MaleSurnames[Random.Next(MaleSurnames.Length)]
                 : FemaleSurnames[Random.Next(FemaleSurnames.Length)];

@@ -12,7 +12,6 @@ namespace PersonClasses
     /// </summary>
     public class PersonList
     {
-        
         /// <summary>
         /// Объявление списка объектов _person (приватный)
         /// </summary>
@@ -34,7 +33,6 @@ namespace PersonClasses
         /// Исключение, если индекс находится за допустимыми пределами
         public void Add(Person person) 
         {
-            //TODO: {} +
             if (person == null)
             {
                 throw new Exception($"{nameof(person)} не может быть null!");
@@ -60,7 +58,6 @@ namespace PersonClasses
         /// Исключение, если индекс находится за допустимыми пределами
         public void RemoveAt(int index) 
         {
-            //TODO: {} +
             if (index < 0 || index >= _person.Count)
             {
                 throw new Exception($"{nameof(index)} введите корректный индекс!");
@@ -77,8 +74,7 @@ namespace PersonClasses
         /// Исключение, если индекс находится за допустимыми пределами
         public Person GetFromIndex(int index)
         {
-            //TODO: {} +
-            if (index <0 || index  >= _person.Count)
+            if (index < 0 || index  >= _person.Count)
             {
                 throw new Exception($"{nameof(index)} введите корректный индекс!");
             }
@@ -107,7 +103,6 @@ namespace PersonClasses
             _person.Clear();
         }
 
-        //TODO: XML
         /// <summary>
         /// Очистка списка
         /// </summary>

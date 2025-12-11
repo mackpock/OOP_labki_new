@@ -11,13 +11,11 @@ namespace PersonClasses
     /// </summary>
     public enum Gender
     {
-        //TODO: XML+
         /// <summary>
         /// Мужской
         /// </summary>
         Male,
 
-        //TODO: XML
         /// <summary>
         /// Женский
         /// </summary>

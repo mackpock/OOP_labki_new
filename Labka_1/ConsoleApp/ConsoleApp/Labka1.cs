@@ -2,7 +2,6 @@
 using System;
 using System.Security.Principal;
 
-//TODO: RSDN +
 class Labka1
 {
     /// <summary>
@@ -22,7 +21,6 @@ class Labka1
     static void ShowList(PersonList list, string listName) 
     {
         Console.WriteLine($"\n{listName}");
-        //TODO: {} +
 
         if (list.Count == 0) 
         { 
@@ -32,14 +30,13 @@ class Labka1
 
         for (int i = 0; i < list.Count; i++) 
         { 
-            //TODO: RSDN +
             var person = list.GetFromIndex(i);
             Console.WriteLine($"{i + 1}. {person.Name} {person.Surname}, " +
-             $"возраст: {person.Age}, пол: {person.Gender}"); 
+                $"возраст: {person.Age}, пол: {person.Gender}"); 
         }
     }
 
-
+    //TODO: RSDN
     static void Main(string[] args)
     {
         PersonList list1 = new PersonList();
