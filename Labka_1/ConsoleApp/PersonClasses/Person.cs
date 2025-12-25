@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
@@ -37,6 +38,16 @@ namespace PersonClasses
         /// Максимальный возраст
         /// </summary>
         private const int _maxAge = 124;
+
+        /// <summary>
+        /// Русские символы
+        /// </summary>
+        private const string _russianPattern = @"^[а-яА-ЯёЁ]+([ -][а-яА-ЯёЁ]+)*$";
+
+        /// <summary>
+        /// Латинские символы.
+        /// </summary>
+        private const string _englishPattern = @"^[a-zA-Z]+([ -][a-zA-Z]+)*$";
 
         /// <summary>
         /// Конструктор класса
@@ -78,6 +89,9 @@ namespace PersonClasses
             get { return _name; }
             set 
             {
+                if (!IsSingleLanguage(value))
+                    throw new Exception("Имя должно быть либо полностью на русском," +
+                        " либо полностью на английском!");
                 _name = NameSurnameValidation(value, "Имя");
             }
         }
@@ -90,6 +104,12 @@ namespace PersonClasses
             get { return _surname; }
             set
             {
+                if (!IsSingleLanguage(value))
+                    throw new Exception("Фамилия должна быть либо полностью " +
+                        "на русском, либо полностью на английском!");
+                if (!AreNameAndSurnameSameLanguage(_name, value))
+                    throw new Exception("Имя и фамилия должны быть на одном языке!");
+
                 _surname = NameSurnameValidation(value, "Фамилия");
             }
         }
@@ -117,6 +137,34 @@ namespace PersonClasses
         public Gender Gender { get; set; }
 
         /// <summary>
+        /// Проверка, что строка на одном языке.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        private static bool IsSingleLanguage(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input)) return false;
+            return Regex.IsMatch(input, _russianPattern) 
+                || Regex.IsMatch(input, _englishPattern);
+        }
+
+        /// <summary>
+        /// Проверка, что имя и фамилия на одном языке.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <returns></returns>
+        private static bool AreNameAndSurnameSameLanguage(string name, string surname)
+        {
+            bool nameIsRu = Regex.IsMatch(name, _russianPattern);
+            bool nameIsEn = Regex.IsMatch(name, _englishPattern);
+            bool surnameIsRu = Regex.IsMatch(surname, _russianPattern);
+            bool surnameIsEn = Regex.IsMatch(surname, _englishPattern);
+
+            return (nameIsRu && surnameIsRu) || (nameIsEn && surnameIsEn);
+        }
+
+        /// <summary>
         /// Метод для разрешенных символов, двойных имён и первой заглавной буквы
         /// </summary>
         /// <param name="input">Ввод</param>
@@ -127,7 +175,7 @@ namespace PersonClasses
             (string input, string fieldName)
         {
             if (string.IsNullOrWhiteSpace(input))
-                throw new Exception($"{fieldName} не должен быть пустой");
+                throw new Exception($"поле {fieldName} пустое!");
 
             const string allowedChars =
                 "abcdefghijklmnopqrstuvwxyz" +
@@ -143,7 +191,7 @@ namespace PersonClasses
                         $" русскими/англ символами, а также с дефисом!");
                 }
             }
-            
+
             //Первая буква - всегда заглавная
             char[] chars = input.ToLower().ToCharArray();
             for (int i = 0; i < chars.Length; i++)

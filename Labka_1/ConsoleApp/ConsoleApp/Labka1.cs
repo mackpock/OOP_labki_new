@@ -36,7 +36,13 @@ class Labka1
         }
     }
 
-    //TODO: RSDN
+    //TODO: RSDN +
+
+    /// <summary>
+    /// Основной метод
+    /// </summary>
+    /// <param name="args"></param>
+    /// <exception cref="Exception"></exception>
     static void Main(string[] args)
     {
         PersonList list1 = new PersonList();
