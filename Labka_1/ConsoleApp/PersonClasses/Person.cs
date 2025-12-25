@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -86,13 +87,16 @@ namespace PersonClasses
         /// </summary>
         public string Name
         {
-            get { return _name; }
+            get => _name;
             set 
             {
-                if (!IsSingleLanguage(value))
-                    throw new Exception("Имя должно быть либо полностью на русском," +
-                        " либо полностью на английском!");
-                _name = NameSurnameValidation(value, "Имя");
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new Exception("Имя не может быть пустым!");
+
+                if (!IsRussian(value) && !IsEnglish(value))
+                    throw new Exception("Имя должно быть либо полностью на русском, либо полностью на английском!");
+
+                _name = FormatName(value);
             }
         }
 
@@ -101,16 +105,20 @@ namespace PersonClasses
         /// </summary>
         public string Surname
         {
-            get { return _surname; }
+            get => _surname;
             set
             {
-                if (!IsSingleLanguage(value))
-                    throw new Exception("Фамилия должна быть либо полностью " +
-                        "на русском, либо полностью на английском!");
-                if (!AreNameAndSurnameSameLanguage(_name, value))
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new Exception("Фамилия не может быть пустой!");
+
+                if (!IsRussian(value) && !IsEnglish(value))
+                    throw new Exception("Фамилия должна быть либо полностью на русском, либо полностью на английском!");
+
+                // Главная проверка: язык должен совпадать с именем
+                if ((IsRussian(_name) && !IsRussian(value)) || (IsEnglish(_name) && !IsEnglish(value)))
                     throw new Exception("Имя и фамилия должны быть на одном языке!");
 
-                _surname = NameSurnameValidation(value, "Фамилия");
+                _surname = FormatName(value);
             }
         }
 
@@ -119,14 +127,11 @@ namespace PersonClasses
         /// </summary>
         public int Age
         {
-            get { return _age; }
+            get => _age;
             set
             {
                 if (value < _minAge || value > _maxAge)
-                {
-                    throw new Exception($"{nameof(Age)} не может быть меньше {_minAge}" +
-                        $" или больше {_maxAge}!");
-                }
+                    throw new Exception($"{nameof(Age)} не может быть меньше {_minAge} или больше {_maxAge}!");
                 _age = value;
             }
         }
@@ -137,72 +142,28 @@ namespace PersonClasses
         public Gender Gender { get; set; }
 
         /// <summary>
-        /// Проверка, что строка на одном языке.
+        /// Соответствие русскому языку. Вспомогательный метод
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="s"></param>
         /// <returns></returns>
-        private static bool IsSingleLanguage(string input)
-        {
-            if (string.IsNullOrWhiteSpace(input)) return false;
-            return Regex.IsMatch(input, _russianPattern) 
-                || Regex.IsMatch(input, _englishPattern);
-        }
+        private static bool IsRussian(string s) => Regex.IsMatch(s, _russianPattern);
 
         /// <summary>
-        /// Проверка, что имя и фамилия на одном языке.
+        /// Соответствие Латинскому языку. Вспомогательный метод
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        private static bool IsEnglish(string s) => Regex.IsMatch(s, _englishPattern);
+
+
+        /// <summary>
+        /// "оЛеГ" -> "Олег" 
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="surname"></param>
         /// <returns></returns>
-        private static bool AreNameAndSurnameSameLanguage(string name, string surname)
+        private static string FormatName(string name)
         {
-            bool nameIsRu = Regex.IsMatch(name, _russianPattern);
-            bool nameIsEn = Regex.IsMatch(name, _englishPattern);
-            bool surnameIsRu = Regex.IsMatch(surname, _russianPattern);
-            bool surnameIsEn = Regex.IsMatch(surname, _englishPattern);
-
-            return (nameIsRu && surnameIsRu) || (nameIsEn && surnameIsEn);
-        }
-
-        /// <summary>
-        /// Метод для разрешенных символов, двойных имён и первой заглавной буквы
-        /// </summary>
-        /// <param name="input">Ввод</param>
-        /// <param name="fieldName">Поле (И или Ф)</param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        private static string NameSurnameValidation
-            (string input, string fieldName)
-        {
-            if (string.IsNullOrWhiteSpace(input))
-                throw new Exception($"поле {fieldName} пустое!");
-
-            const string allowedChars =
-                "abcdefghijklmnopqrstuvwxyz" +
-                "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-                "абвгдеёжзийклмнопрстуфхцчшщъыьэюя" +
-                "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ" +
-                " -";
-            foreach (char symbol in input)
-            {
-                if (allowedChars.IndexOf(symbol) == -1)
-                {
-                    throw new Exception($"{fieldName} может быть только" +
-                        $" русскими/англ символами, а также с дефисом!");
-                }
-            }
-
-            //Первая буква - всегда заглавная
-            char[] chars = input.ToLower().ToCharArray();
-            for (int i = 0; i < chars.Length; i++)
-            {
-                if (i == 0 || chars[i - 1] == ' ' || chars[i - 1] == '-')
-                {
-                    chars[i] = char.ToUpper(chars[i]);
-                }
-            }
-
-            return new string(chars);
+             return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
         }
     }
 }
