@@ -43,12 +43,14 @@ namespace PersonClasses
         /// <summary>
         /// Русские символы
         /// </summary>
-        private const string _russianPattern = @"^[а-яА-ЯёЁ]+([ -][а-яА-ЯёЁ]+)*$";
+        private const string _russianPattern =
+            @"^[а-яА-ЯёЁ]+([ -][а-яА-ЯёЁ]+)*$";
 
         /// <summary>
         /// Латинские символы.
         /// </summary>
-        private const string _englishPattern = @"^[a-zA-Z]+([ -][a-zA-Z]+)*$";
+        private const string _englishPattern =
+            @"^[a-zA-Z]+([ -][a-zA-Z]+)*$";
 
         /// <summary>
         /// Конструктор класса
@@ -94,7 +96,8 @@ namespace PersonClasses
                     throw new Exception("Имя не может быть пустым!");
 
                 if (!IsRussian(value) && !IsEnglish(value))
-                    throw new Exception("Имя должно быть либо полностью на русском, либо полностью на английском!");
+                    throw new Exception("Имя должно быть либо полностью" +
+                        " на русском, либо полностью на английском!");
 
                 _name = FormatName(value);
             }
@@ -112,10 +115,12 @@ namespace PersonClasses
                     throw new Exception("Фамилия не может быть пустой!");
 
                 if (!IsRussian(value) && !IsEnglish(value))
-                    throw new Exception("Фамилия должна быть либо полностью на русском, либо полностью на английском!");
+                    throw new Exception("Фамилия должна быть либо полностью" +
+                        " на русском, либо полностью на английском!");
 
-                // Главная проверка: язык должен совпадать с именем
-                if ((IsRussian(_name) && !IsRussian(value)) || (IsEnglish(_name) && !IsEnglish(value)))
+               
+                if ((IsRussian(_name) && !IsRussian(value)) 
+                 || (IsEnglish(_name) && !IsEnglish(value)))
                     throw new Exception("Имя и фамилия должны быть на одном языке!");
 
                 _surname = FormatName(value);
@@ -131,7 +136,8 @@ namespace PersonClasses
             set
             {
                 if (value < _minAge || value > _maxAge)
-                    throw new Exception($"{nameof(Age)} не может быть меньше {_minAge} или больше {_maxAge}!");
+                    throw new Exception($"{nameof(Age)} " +
+                        $"не может быть меньше {_minAge} или больше {_maxAge}!");
                 _age = value;
             }
         }
