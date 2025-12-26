@@ -11,21 +11,17 @@ namespace PersonClasses
     /// </summary>
     public static class GetRandomPersonClass
     {
-        //TODO: RSDN +
         /// <summary>
         /// Минимальный возраст
         /// </summary>
         private const int MinAge = 0;
-
-        //TODO: RSDN +
 
         /// <summary>
         /// Максимальный возраст
         /// </summary>
         private const int MaxAge = 124;
         
-        //TODO: RSDN +
-
+        //TODO: RSDN
         /// <summary>
         /// Мужские имена
         /// </summary>
@@ -35,7 +31,7 @@ namespace PersonClasses
             "Степан", "Глеб",   "Лев",  "Фёдор",   "Платон"
         };
 
-        //TODO: RSDN +
+        //TODO: RSDN
         /// <summary>
         /// Женские имена
         /// </summary>
@@ -45,7 +41,7 @@ namespace PersonClasses
             "Арина", "Ульяна", "Дарья", "Вера"
         };
 
-        //TODO: RSDN +
+        //TODO: RSDN
         /// <summary>
         /// Мужские фамилии
         /// </summary>
@@ -55,6 +51,7 @@ namespace PersonClasses
             "Лебедев", "Громов", "Соколов", "Макаров", "Никитин"
         };
 
+        //TODO: RSDN
         /// <summary>
         /// Женские фамилии
         /// </summary>
@@ -64,6 +61,7 @@ namespace PersonClasses
             "Лебедева", "Громова", "Соколова", "Макарова", "Никитина"
         };
 
+        //TODO: RSDN
         private static readonly Random Random = new Random();
 
         /// <summary>

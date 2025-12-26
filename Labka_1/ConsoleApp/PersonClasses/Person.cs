@@ -92,9 +92,11 @@ namespace PersonClasses
             get => _name;
             set 
             {
+                //TODO: {}
                 if (string.IsNullOrWhiteSpace(value))
                     throw new Exception("Имя не может быть пустым!");
 
+                //TODO: {}
                 if (!IsRussian(value) && !IsEnglish(value))
                     throw new Exception("Имя должно быть либо полностью" +
                         " на русском, либо полностью на английском!");
@@ -111,14 +113,17 @@ namespace PersonClasses
             get => _surname;
             set
             {
+                //TODO: {}
                 if (string.IsNullOrWhiteSpace(value))
                     throw new Exception("Фамилия не может быть пустой!");
 
+                //TODO: {}
                 if (!IsRussian(value) && !IsEnglish(value))
                     throw new Exception("Фамилия должна быть либо полностью" +
                         " на русском, либо полностью на английском!");
 
                
+                //TODO: {}
                 if ((IsRussian(_name) && !IsRussian(value)) 
                  || (IsEnglish(_name) && !IsEnglish(value)))
                     throw new Exception("Имя и фамилия должны быть на одном языке!");
@@ -135,6 +140,7 @@ namespace PersonClasses
             get => _age;
             set
             {
+                //TODO: {}
                 if (value < _minAge || value > _maxAge)
                     throw new Exception($"{nameof(Age)} " +
                         $"не может быть меньше {_minAge} или больше {_maxAge}!");
@@ -160,7 +166,6 @@ namespace PersonClasses
         /// <param name="s"></param>
         /// <returns></returns>
         private static bool IsEnglish(string s) => Regex.IsMatch(s, _englishPattern);
-
 
         /// <summary>
         /// "оЛеГ" -> "Олег" 

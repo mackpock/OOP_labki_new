@@ -2,8 +2,11 @@
 using System;
 using System.Security.Principal;
 
+//TODO: XML
+//TODO: RSDN
 class Labka1
 {
+    //TODO: RSDN
     /// <summary>
     /// Метод ReadKey чтобы продолжить
     /// </summary>
@@ -13,6 +16,7 @@ class Labka1
         Console.ReadKey();
     }
 
+    //TODO: RSDN
     /// <summary>
     /// Метод для вывода списка
     /// </summary>
@@ -36,8 +40,7 @@ class Labka1
         }
     }
 
-    //TODO: RSDN +
-
+    //TODO: RSDN
     /// <summary>
     /// Основной метод
     /// </summary>
@@ -154,7 +157,7 @@ class Labka1
                                 "Не удалось преобразовать возраст в чило!");
                         }
                     })
-
+                //TODO: enter gender
             },
 
         };
@@ -199,8 +202,6 @@ class Labka1
         PressButton();
     }
     
-    
-
     /// <summary>
     /// Метод для выброса исключения при пустом вводе ФИ и возраста
     /// </summary>

@@ -60,6 +60,7 @@ namespace PersonClasses
         {
             if (index < 0 || index >= _person.Count)
             {
+                //TODO: rewrite
                 throw new Exception($"{nameof(index)} введите корректный индекс!");
             }
             _person.RemoveAt(index);
@@ -76,6 +77,7 @@ namespace PersonClasses
         {
             if (index < 0 || index  >= _person.Count)
             {
+                //TODO: rewrite
                 throw new Exception($"{nameof(index)} введите корректный индекс!");
             }
             return _person[index]; 
