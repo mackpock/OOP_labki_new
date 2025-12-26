@@ -92,15 +92,20 @@ namespace PersonClasses
             get => _name;
             set 
             {
-                //TODO: {}
+                //TODO: {} +
                 if (string.IsNullOrWhiteSpace(value))
+                {
                     throw new Exception("Имя не может быть пустым!");
+                }
+                   
 
-                //TODO: {}
+                //TODO: {} +
                 if (!IsRussian(value) && !IsEnglish(value))
+                {
                     throw new Exception("Имя должно быть либо полностью" +
                         " на русском, либо полностью на английском!");
-
+                }
+                    
                 _name = FormatName(value);
             }
         }
@@ -113,20 +118,29 @@ namespace PersonClasses
             get => _surname;
             set
             {
-                //TODO: {}
+                //TODO: {} +
                 if (string.IsNullOrWhiteSpace(value))
+                {
                     throw new Exception("Фамилия не может быть пустой!");
+                }
+                    
 
-                //TODO: {}
+                //TODO: {} +
                 if (!IsRussian(value) && !IsEnglish(value))
+                {
                     throw new Exception("Фамилия должна быть либо полностью" +
                         " на русском, либо полностью на английском!");
+                }
+                    
 
                
-                //TODO: {}
+                //TODO: {} +
                 if ((IsRussian(_name) && !IsRussian(value)) 
                  || (IsEnglish(_name) && !IsEnglish(value)))
+                {
                     throw new Exception("Имя и фамилия должны быть на одном языке!");
+                }
+                    
 
                 _surname = FormatName(value);
             }
@@ -140,10 +154,13 @@ namespace PersonClasses
             get => _age;
             set
             {
-                //TODO: {}
+                //TODO: {} +
                 if (value < _minAge || value > _maxAge)
+                {
                     throw new Exception($"{nameof(Age)} " +
                         $"не может быть меньше {_minAge} или больше {_maxAge}!");
+                }
+                    
                 _age = value;
             }
         }
