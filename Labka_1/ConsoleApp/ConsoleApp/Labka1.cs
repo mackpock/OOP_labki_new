@@ -167,7 +167,6 @@ public class Labka1
                           {
                               throw new Exception("Пол не может быть пустым!");
                           }
-                          //TODO: switch-case +
                           switch (input)
                           {
                                case "0":
