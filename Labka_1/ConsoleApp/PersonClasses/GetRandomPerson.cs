@@ -57,7 +57,10 @@ namespace PersonClasses
             "Лебедева", "Громова", "Соколова", "Макарова", "Никитина"
         };
 
-        //TODO: RSDN
+        //TODO: RSDN+
+        /// <summary>
+        /// Случайные персонажи.
+        /// </summary>
         private static readonly Random _random = new Random();
 
         /// <summary>

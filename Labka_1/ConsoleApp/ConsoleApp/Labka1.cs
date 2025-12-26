@@ -167,19 +167,26 @@ public class Labka1
                           {
                               throw new Exception("Пол не может быть пустым!");
                           }
-                          //TODO: switch-case
-                          if (input == "0")
+                          //TODO: switch-case +
+                          switch (input)
                           {
-                              personNew.Gender = Gender.Male;
-                          }
-                          else if (input == "1")
-                          {
-                              personNew.Gender = Gender.Female;
-                          }
-                          else
-                          {
-                              throw new Exception("Пол должен быть 0 (мужчина) " +
-                                  "или 1 (женщина)!");
+                               case "0":
+                               {
+                                   personNew.Gender = Gender.Male;
+                                   break;
+                               }                         
+
+                               case "1":
+                               {
+                                   personNew.Gender = Gender.Female;
+                                   break;
+                               }
+
+                               default:
+                               {
+                                   throw new Exception("Пол должен быть 0 (мужчина)" +
+                                   " или 1 (женщина)!");
+                               }
                           }
                    })
             }
