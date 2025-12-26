@@ -2,27 +2,30 @@
 using System;
 using System.Security.Principal;
 
-//TODO: XML
-//TODO: RSDN
-class Labka1
+//TODO: XML +
+//TODO: RSDN +
+/// <summary>
+/// Класс Labka1
+/// </summary>
+public class Labka1
 {
-    //TODO: RSDN
+    //TODO: RSDN +
     /// <summary>
     /// Метод ReadKey чтобы продолжить
     /// </summary>
-    static void PressButton()
+    public static void PressButton()
     {
         Console.WriteLine("Нажмите любую клавишу для продолжения");
         Console.ReadKey();
     }
 
-    //TODO: RSDN
+    //TODO: RSDN +
     /// <summary>
     /// Метод для вывода списка
     /// </summary>
     /// <param name="list">Список </param>
     /// <param name="listName">Название списка</param>
-    static void ShowList(PersonList list, string listName) 
+    private static void ShowList(PersonList list, string listName) 
     {
         Console.WriteLine($"\n{listName}");
 
@@ -40,13 +43,13 @@ class Labka1
         }
     }
 
-    //TODO: RSDN
+    //TODO: RSDN +
     /// <summary>
     /// Основной метод
     /// </summary>
     /// <param name="args"></param>
     /// <exception cref="Exception"></exception>
-    static void Main(string[] args)
+    private static void Main(string[] args)
     {
         PersonList list1 = new PersonList();
         PersonList list2 = new PersonList();
@@ -129,37 +132,63 @@ class Labka1
                 new Action(() =>    
                     {
                         
-                        //6 b При вводе не должно быть возможности ввода символов
+                         //6 b При вводе не должно быть возможности ввода символов
 
-                        string  input = Console.ReadLine();
-                        if (string.IsNullOrWhiteSpace(input))
-                        {
-                            throw new Exception("Возраст не может быть пустым!");
-                        }
+                         string  input = Console.ReadLine();
+                         if (string.IsNullOrWhiteSpace(input))
+                         {
+                             throw new Exception("Возраст не может быть пустым!");
+                         }
 
-                        foreach (char digit  in input)
-                        {
-                            if (!char.IsDigit(digit))
-                            {
-                                throw new Exception ("Возраст должен содержать" +
-                                    " ТОЛЬКО цифры!");
-                            }
-                        }
+                         foreach (char digit  in input)
+                         {
+                             if (!char.IsDigit(digit))
+                             {
+                                 throw new Exception ("Возраст должен содержать" +
+                                     " ТОЛЬКО цифры!");
+                             }
+                         }
 
 
-                        if (int.TryParse(input, out int age))
-                        {
-                            personNew.Age = age;
-                        }
-                        else
-                        {
-                            throw new Exception(
-                                "Не удалось преобразовать возраст в чило!");
-                        }
+                         if (int.TryParse(input, out int age))
+                         {
+                             personNew.Age = age;
+                         }
+                         else
+                         {
+                             throw new Exception(
+                                 "Не удалось преобразовать возраст в чило!");
+                         }
                     })
-                //TODO: enter gender
+                //TODO: enter gender +
             },
+            {
+                "Пол",
+                new Action(() =>
+                   {
+                          Console.WriteLine("0 - Мужчина, 1 - Женщина");
+                          string input = Console.ReadLine();
 
+                          if (string.IsNullOrWhiteSpace(input))
+                          {
+                              throw new Exception("Пол не может быть пустым!");
+                          }
+
+                          if (input == "0")
+                          {
+                              personNew.Gender = Gender.Male;
+                          }
+                          else if (input == "1")
+                          {
+                              personNew.Gender = Gender.Female;
+                          }
+                          else
+                          {
+                              throw new Exception("Пол должен быть 0 (мужчина) " +
+                                  "или 1 (женщина)!");
+                          }
+                   })
+            }
         };
 
         foreach (var actionHandler in actionDictionary)
