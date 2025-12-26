@@ -2,14 +2,11 @@
 using System;
 using System.Security.Principal;
 
-//TODO: XML +
-//TODO: RSDN +
 /// <summary>
 /// Класс Labka1
 /// </summary>
 public class Labka1
 {
-    //TODO: RSDN +
     /// <summary>
     /// Метод ReadKey чтобы продолжить
     /// </summary>
@@ -19,7 +16,6 @@ public class Labka1
         Console.ReadKey();
     }
 
-    //TODO: RSDN +
     /// <summary>
     /// Метод для вывода списка
     /// </summary>
@@ -43,7 +39,6 @@ public class Labka1
         }
     }
 
-    //TODO: RSDN +
     /// <summary>
     /// Основной метод
     /// </summary>
@@ -160,7 +155,6 @@ public class Labka1
                                  "Не удалось преобразовать возраст в чило!");
                          }
                     })
-                //TODO: enter gender +
             },
             {
                 "Пол",
@@ -173,7 +167,7 @@ public class Labka1
                           {
                               throw new Exception("Пол не может быть пустым!");
                           }
-
+                          //TODO: switch-case
                           if (input == "0")
                           {
                               personNew.Gender = Gender.Male;
