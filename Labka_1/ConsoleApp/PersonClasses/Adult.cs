@@ -171,28 +171,34 @@ namespace PersonClasses
         }
 
         /// <summary>
-        /// Метод получения информации о взрослом человеке
+        /// Реализация абстрактного метода получения информации
         /// </summary>
-        /// <returns>Строка с информацией</returns>
-        public string GetAdultInfo()
+        /// <returns>Строка с информацией о взрослом человеке</returns>
+        public override string GetInfo()
         {
-            string partnerInfo = "Нет партнера";
+            string partnerInfo = "";
             if (Partner != null)
             {
-                partnerInfo = $"{Partner.Surname} {Partner.Name}";
+                partnerInfo = Partner.Gender == Gender.Male ?
+                    $"женился на {Partner.Surname} {Partner.Name}" :
+                    $"вышла замуж за {Partner.Surname} {Partner.Name}";
+            }
+            else
+            {
+                string maritalStatus = Gender == Gender.Male 
+                    ? "не женат" : "не замужем";
+                partnerInfo = maritalStatus;
             }
 
-            string maritalStatus = Gender == Gender.Male ?
-                (Partner != null ? "Женат" : "Не женат") :
-                (Partner != null ? "Замужем" : "Не замужем");
+            string jobInfo = string.IsNullOrEmpty(Job) || Job == "Безработный" ?
+                "безработный" : Job;
 
-            return $"{base.Name} {base.Surname}, возраст: {base.Age}, " +
-                   $"пол: {(base.Gender == Gender.Male ? "Мужчина" : "Женщина")}, " +
-                   $"серия паспорта: {PassportSeries}, " +
-                   $"номер паспорта: {PassportNumber}, " +
-                   $"статус: {maritalStatus}, " +
-                   $"партнер: {partnerInfo}, " +
-                   $"работа: {Job}";
+            return 
+            $"{Name} {Surname}, возраст: {Age}, " +
+            $"пол: {(Gender == Gender.Male ? "мужчина" : "женщина")}, " +
+            $"паспорт: {PassportSeries} {PassportNumber}, " +
+            $"статус: {partnerInfo}, " +
+            $"работа: {jobInfo}";
         }
     }
 }

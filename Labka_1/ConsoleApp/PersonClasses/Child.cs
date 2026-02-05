@@ -104,28 +104,23 @@ namespace PersonClasses
         }
 
         /// <summary>
-        /// Метод получения информации о ребенке
+        /// Реализация абстрактного метода получения информации
         /// </summary>
-        /// <returns>Строка с информацией</returns>
-        public string GetChildInfo()
+        /// <returns>Строка с информацией о ребенке</returns>
+        public override string GetInfo()
         {
-            string motherInfo = "Нет матери)";
-            if (Mother != null)
-            {
-                motherInfo = $"{Mother.Surname} {Mother.Name}";
-            }
+            string motherInfo = Mother != null ?
+                $"{Mother.Surname} {Mother.Name}" : "Нет информации о матери";
 
-            string fatherInfo = "Нет отца";
-            if (Father != null)
-            {
-                fatherInfo = $"{Father.Surname} {Father.Name}";
-            }
+            string fatherInfo = Father != null ?
+                $"{Father.Surname} {Father.Name}" : "Нет информации об отце";
 
-            return $"{base.Name} {base.Surname}, возраст: {base.Age}, " +
-                   $"пол: {(base.Gender == Gender.Male ? "Мальчик" : "Девочка")}, " +
-                   $"мама: {motherInfo}, " +
-                   $"папа: {fatherInfo}, " +
-                   $"учеба: {PlaceOfStudy}";
+            return 
+            $"{Name} {Surname}, возраст: {Age}, " +
+            $"пол: {(Gender == Gender.Male ? "мальчик" : "девочка")}, " +
+            $"мама: {motherInfo}, " +
+            $"папа: {fatherInfo}, " +
+            $"учеба: {PlaceOfStudy}";
         }
     }
 }
