@@ -13,7 +13,7 @@ namespace PersonClasses
     /// <summary>
     /// Класс показывает ФИ, возраст, пол
     /// </summary>
-    public class Person
+    public abstract class Person
     {
         /// <summary>
         /// Имя
@@ -66,7 +66,7 @@ namespace PersonClasses
         }
 
         /// <summary>
-        /// Конструктор с явным указанием пола (чтобы работала первая часть задания)
+        /// Конструктор с явным указанием пола 
         /// </summary>
         /// <param name="name">Имя</param>
         /// <param name="surname">Фамилия</param>
@@ -154,6 +154,13 @@ namespace PersonClasses
                 _age = value;
             }
         }
+
+
+        /// <summary>
+        /// Абстрактный метод получения информации о персоне
+        /// </summary>
+        /// <returns>Строка с информацией о персоне</returns>
+        public abstract string GetInfo();
 
         /// <summary>
         /// Пол
