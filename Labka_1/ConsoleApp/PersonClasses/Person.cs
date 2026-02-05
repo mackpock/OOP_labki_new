@@ -33,12 +33,12 @@ namespace PersonClasses
         /// <summary>
         /// Минимальный возраст
         /// </summary>
-        private const int _minAge = 0;
+        public virtual int MinAge => 0;
 
         /// <summary>
         /// Максимальный возраст
         /// </summary>
-        private const int _maxAge = 124;
+        public virtual int MaxAge => 124;
 
         /// <summary>
         /// Русские символы
@@ -145,10 +145,10 @@ namespace PersonClasses
             get => _age;
             set
             {
-                if (value < _minAge || value > _maxAge)
+                if (value < MinAge || value > MaxAge)
                 {
                     throw new Exception($"{nameof(Age)} " +
-                        $"не может быть меньше {_minAge} или больше {_maxAge}!");
+                        $"не может быть меньше {MinAge} или больше {MaxAge}!");
                 }
                     
                 _age = value;

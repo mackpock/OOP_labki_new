@@ -12,6 +12,16 @@ namespace PersonClasses
     public class Adult : Person
     {
         /// <summary>
+        /// Минимальный возраст для взрослого
+        /// </summary>
+        public override int MinAge => 18;
+
+        /// <summary>
+        /// Максимальный возраст для взрослого
+        /// </summary>
+        public override int MaxAge => 124;
+
+        /// <summary>
         /// Номер паспорта
         /// </summary>
         private string _passportNumber;

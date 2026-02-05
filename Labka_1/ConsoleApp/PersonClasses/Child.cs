@@ -12,6 +12,16 @@ namespace PersonClasses
     public class Child : Person
     {
         /// <summary>
+        /// Минимальный возраст для ребенка
+        /// </summary>
+        public override int MinAge => 0;
+
+        /// <summary>
+        /// Максимальный возраст для ребенка
+        /// </summary>
+        public override int MaxAge => 17;
+
+        /// <summary>
         /// Мама
         /// </summary>
         private Adult _mother;

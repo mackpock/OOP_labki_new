@@ -46,189 +46,105 @@ public class Labka1
     /// <exception cref="Exception"></exception>
     private static void Main(string[] args)
     {
-        PersonList list1 = new PersonList();
-        PersonList list2 = new PersonList();
+       // 5.a. Создание списка PersonList, состоящего из рандомного кол-ва
+        // взрослых и детей
+        PersonList personList = new PersonList();
 
-        Person person1 = new Person("Олег", "Олегович", 44, Gender.Male);
-        Person person2 = new Person("Максим", "Покацкий", 23, Gender.Male);
-        Person person3 = new Person("Ольга", "Святая", 18, Gender.Female);
+        Console.WriteLine("Рандомный список взрослых и детей:\n");
 
-        Person person4 = new Person("Мехродж", "Демьянов", 67, Gender.Male);
-        Person person5 = new Person("Абдулбек", "Алексеев", 47, Gender.Male);
-        Person person6 = new Person("Цыцыгма", "Армяновна", 19, Gender.Female);
+        Random random = new Random();
 
-        list1.Add(person1);
-        list1.Add(person2);
-        list1.Add(person3); 
-
-        list2.Add(person4);
-        list2.Add(person5);
-        list2.Add(person6);
-
-        //3 a+b
-        Console.WriteLine("Созданы два списка по 3 человека!");
-        ShowList(list1, "Горожане");
-        ShowList(list2, "Призжие");
-        PressButton();
-
-        //3 c
-        var person7 = new Person("Кирилл", "Накипелов", 19 , Gender.Male);
-        list1.Add(person7);
-        Console.WriteLine("\nВ список 1 добавлен новый персонаж! (4)");
-        ShowList(list1, "\nТеперь первый список выглядит так:");
-        PressButton();
-
-        //3 d
-        var secondPersonFromList1 = list1.GetFromIndex(1);
-        list2.Add(secondPersonFromList1);
-        Console.WriteLine("\nВторой человек из первого списка добавлен во второй!");
-        ShowList(list1, "Горожане");
-        ShowList(list2, "Призжие");
-        PressButton();
-
-        //3 e
-        list1.RemoveAt(1);
-        Console.WriteLine("\nВторой человек удален из первого списка");
-        ShowList(list1, "Горожане");
-        ShowList(list2, "Призжие");
-        PressButton();
-
-        //3 f
-        list2.Clear();
-        Console.WriteLine("\nВторой список очищен");
-        ShowList(list1, "Горожане");
-        ShowList(list2, "Призжие");
-        PressButton();
-
-        Console.WriteLine("\nТеперь можно ввести своего персонажа!");
-        PressButton();
-
-        //методы чтения персоны с клавиатуры и вывод персоны на экран
-        Person personNew = new Person();
-        
-        var actionDictionary = new Dictionary<string, Action>()
+        for (int i = 0; i < 7; i++)
         {
+            if (random.NextDouble() < 0.5)
             {
-                "Имя",
-                new Action(() =>
-                    {
-                        personNew.Name = Console.ReadLine();
-                    })
-            },
-            {
-                "Фамилия",
-                new Action(() =>
-                    {
-                        personNew.Surname = Console.ReadLine();
-                    })
-            },
-            {
-                "Возраст",
-                new Action(() =>    
-                    {
-                        
-                         //6 b При вводе не должно быть возможности ввода символов
-
-                         string  input = Console.ReadLine();
-                         if (string.IsNullOrWhiteSpace(input))
-                         {
-                             throw new Exception("Возраст не может быть пустым!");
-                         }
-
-                         foreach (char digit  in input)
-                         {
-                             if (!char.IsDigit(digit))
-                             {
-                                 throw new Exception ("Возраст должен содержать" +
-                                     " ТОЛЬКО цифры!");
-                             }
-                         }
-
-
-                         if (int.TryParse(input, out int age))
-                         {
-                             personNew.Age = age;
-                         }
-                         else
-                         {
-                             throw new Exception(
-                                 "Не удалось преобразовать возраст в чило!");
-                         }
-                    })
-            },
-            {
-                "Пол",
-                new Action(() =>
-                   {
-                          Console.WriteLine("0 - Мужчина, 1 - Женщина");
-                          string input = Console.ReadLine();
-
-                          if (string.IsNullOrWhiteSpace(input))
-                          {
-                              throw new Exception("Пол не может быть пустым!");
-                          }
-                          switch (input)
-                          {
-                               case "0":
-                               {
-                                   personNew.Gender = Gender.Male;
-                                   break;
-                               }                         
-
-                               case "1":
-                               {
-                                   personNew.Gender = Gender.Female;
-                                   break;
-                               }
-
-                               default:
-                               {
-                                   throw new Exception("Пол должен быть 0 (мужчина)" +
-                                   " или 1 (женщина)!");
-                               }
-                          }
-                   })
+                personList.Add(GetRandomPersonClass.GetRandomAdult());
             }
-        };
-
-        foreach (var actionHandler in actionDictionary)
-        {
-            ActionHander(actionHandler.Value, actionHandler.Key);
+            else
+            {
+                personList.Add(GetRandomPersonClass.GetRandomChild());
+            }
         }
-        
-        string genderNewPerson;
-        switch(personNew.Gender)
-        {
-            case Gender.Male:
-                genderNewPerson = "Мужчина";
-                break;
-            case Gender.Female:
-                genderNewPerson = "Женщина";
-                break;
-            default:
-                genderNewPerson = "Анон";
-                break;
 
-        }
-        Console.WriteLine($"\nВы создали персонажа:\n" +
-                          $"Имя:     {personNew.Name}\n" +
-                          $"Фамилия: {personNew.Surname}\n" +
-                          $"Возраст: {personNew.Age}\n" +
-                          $"Пол:     {genderNewPerson}");
+        // 5.b. Вывод на экран описания всех людей списка.
+        // Демонстрация того, что для различных типов людей описания
+        // содержат разную информацию
+        ShowList(personList, "Список персонажей (взрослые и дети):");
         PressButton();
 
-        
-
-        //Вывод рандомных персонажей
-        Console.WriteLine("\nВывод рандомного списка персонажей:");
-        PersonList randomList = new PersonList();
-        for (int i = 0; i < 10; i++)
+        // 5.c. Определение типа четвертого человека в списке
+        // и выполнения методов, присущих этому классу.
+        if (personList.Count > 3)
         {
-            Person randomPerson = GetRandomPersonClass.GetRandomPerson();
-            randomList.Add(randomPerson);
+            var fourthPerson = personList.GetFromIndex(3);
+            Console.WriteLine($"\nТип четвертого человека: {fourthPerson.GetType().Name}");
+
+            switch (fourthPerson)
+            {
+                case Adult adult:
+                    {
+                        Console.WriteLine($"Четвертый взрослый: {adult.Surname} {adult.Name}");
+                        
+                        // Дополнительная информация для взрослого
+                        string maritalStatus = adult.Partner != null ? 
+                            "женат/замужем" : "не женат/не замужем";
+                        Console.WriteLine($"Семейное положение: {maritalStatus}");
+                        
+                        if (adult.Partner != null)
+                        {
+                            Console.WriteLine($"Партнер: {adult.Partner.Surname}" +
+                                $" {adult.Partner.Name}");
+                        }
+                        
+                        Console.WriteLine($"Работа: {adult.Job}");
+                        Console.WriteLine($"Паспорт: {adult.PassportSeries}" +
+                            $" {adult.PassportNumber}");
+                        break;
+                    }
+                case Child child:
+                    {
+                        Console.WriteLine($"Четвертый ребенок: {child.Surname} {child.Name}");
+                        
+                        // Дополнительная информация для ребенка
+                        Console.WriteLine($"Мама: {(child.Mother != null ? 
+                            $"{child.Mother.Surname} {child.Mother.Name}" : "неизвестна")}");
+                        Console.WriteLine($"Папа: {(child.Father != null ? 
+                            $"{child.Father.Surname} {child.Father.Name}" : "неизвестен")}");
+                        Console.WriteLine($"Учеба: {child.PlaceOfStudy}");
+                        break;
+                    }
+                default:
+                    {
+                        Console.WriteLine($"Обычный человек: {fourthPerson.Surname}" +
+                            $" {fourthPerson.Name}");
+                        Console.WriteLine($"Возраст: {fourthPerson.Age}, " +
+                            $"Пол: {(fourthPerson.Gender == Gender.Male ? "Мужчина" : "Женщина")}");
+                        break;
+                    }
+            }
         }
-        ShowList(randomList, "Наши случайные персонажи:");
+
         PressButton();
+
+        Console.WriteLine("Демонстрация работы с отдельными объектами:");
+        
+        // Создание конкретных примеров
+        Adult adultExample = new Adult("Иван", "Иванов", 30, Gender.Male, "1234", "567890", null, "Инженер");
+        Child childExample = new Child("Мария", "Иванова", 10, Gender.Female, 
+            new Adult("Анна", "Иванова", 30, Gender.Female, "1111", "222333", null, "Учитель"), 
+            new Adult("Иван", "Иванов", 32, Gender.Male, "4444", "555666", null, "Программист"), 
+            "Школа №1");
+        
+        Console.WriteLine("\nПример взрослого:");
+        Console.WriteLine(adultExample.GetInfo());
+        
+        Console.WriteLine("\nПример ребенка:");
+        Console.WriteLine(childExample.GetInfo());
+        
+        PressButton();
+        
+        Console.WriteLine("Для завершения программы нажмите на любую клавишу...");
+        Console.ReadKey();
     }
     
     /// <summary>
