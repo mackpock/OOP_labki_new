@@ -119,15 +119,21 @@ namespace PersonClasses
         /// <returns>Строка с информацией о ребенке</returns>
         public override string GetInfo()
         {
-            string motherInfo = Mother != null ?
-                $"{Mother.Surname} {Mother.Name}" : "Нет информации о матери";
+            string motherInfo = Mother != null
+                ? $"{Mother.Surname} {Mother.Name}"
+                : "Нет информации о матери";
 
-            string fatherInfo = Father != null ?
-                $"{Father.Surname} {Father.Name}" : "Нет информации об отце";
+            string fatherInfo = Father != null
+                ? $"{Father.Surname} {Father.Name}"
+                : "Нет информации об отце";
 
-            return 
+            return
+
             $"{Name} {Surname}, возраст: {Age}, " +
-            $"пол: {(Gender == Gender.Male ? "мальчик" : "девочка")}, " +
+            $"пол: " +
+            $"{(Gender == Gender.Male
+                    ? "мальчик"
+                    : "девочка")}," +
             $"мама: {motherInfo}, " +
             $"папа: {fatherInfo}, " +
             $"учеба: {PlaceOfStudy}";

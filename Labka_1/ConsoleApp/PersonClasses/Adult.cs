@@ -53,7 +53,7 @@ namespace PersonClasses
         /// <param name="partner">Партнер</param>
         /// <param name="job">Место работы</param>
         public Adult(string name, string surname, int age, Gender gender,
-            string passportNumber, string passportSeries, 
+            string passportNumber, string passportSeries,
             Adult partner, string job)
             : base(name, surname, age, gender)
         {
@@ -122,9 +122,9 @@ namespace PersonClasses
                     throw new Exception("Серия паспорта должна содержать 4 цифры!");
                 }
 
-                foreach (char c in value)
+                foreach (char ciferka in value)
                 {
-                    if (!char.IsDigit(c))
+                    if (!char.IsDigit(ciferka))
                     {
                         throw new Exception("Серия паспорта должна содержать только цифры!");
                     }
@@ -147,20 +147,8 @@ namespace PersonClasses
                     throw new Exception("Партнер должен быть противоположного пола!");
                 }
 
-                // Если устанавливаем нового партнера то у старого надо удалить ссылку
-                if (_partner != null && _partner.Partner == this)
-                {
-                    _partner._partner = null;
-                }
-
-                
                 if (value != null)
                 {
-                    // Если у нового партнера уже был другой партнер убираем ссылку
-                    if (value._partner != null && value._partner != this)
-                    {
-                        value._partner._partner = null;
-                    }
                     value._partner = this;
                 }
 
@@ -186,29 +174,36 @@ namespace PersonClasses
         /// <returns>Строка с информацией о взрослом человеке</returns>
         public override string GetInfo()
         {
-            string partnerInfo = "";
+            string partnerInfo;
             if (Partner != null)
             {
-                partnerInfo = Partner.Gender == Gender.Male ?
-                    $"женился на {Partner.Surname} {Partner.Name}" :
-                    $"вышла замуж за {Partner.Surname} {Partner.Name}";
+                if (Gender == Gender.Male)
+                    partnerInfo = $"женился на " +
+                        $"{Partner.Surname} {Partner.Name}";
+                else
+                    partnerInfo = $"вышла замуж за " +
+                        $"{Partner.Surname} {Partner.Name}";
             }
             else
             {
-                string maritalStatus = Gender == Gender.Male 
-                    ? "не женат" : "не замужем";
-                partnerInfo = maritalStatus;
+                partnerInfo = Gender == Gender.Male
+                    ? "не женат"
+                    : "не замужем";
             }
 
-            string jobInfo = string.IsNullOrEmpty(Job) || Job == "Безработный" ?
-                "безработный" : Job;
+            string jobInfo = string.IsNullOrEmpty(Job) || Job == "Безработный"
+                ? "безработный"
+                : Job;
 
-            return 
-            $"{Name} {Surname}, возраст: {Age}, " +
-            $"пол: {(Gender == Gender.Male ? "мужчина" : "женщина")}, " +
-            $"паспорт: {PassportSeries} {PassportNumber}, " +
-            $"статус: {partnerInfo}, " +
-            $"работа: {jobInfo}";
+            return
+                   $"{Name} {Surname}, возраст: {Age}, " +
+                   $"пол: " +
+                   $"{(Gender == Gender.Male
+                             ? "мужчина"
+                             : "женщина")}, " +
+                   $"паспорт: {PassportSeries} {PassportNumber}, " +
+                   $"статус: {partnerInfo}, " +
+                   $"работа: {jobInfo}";
         }
     }
 }

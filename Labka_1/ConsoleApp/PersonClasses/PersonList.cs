@@ -31,7 +31,7 @@ namespace PersonClasses
         /// <param name="person"></param>
         /// <exception cref="Exception"></exception>
         /// Исключение, если индекс находится за допустимыми пределами
-        public void Add(Person person) 
+        public void Add(Person person)
         {
             if (person == null)
             {
@@ -45,7 +45,7 @@ namespace PersonClasses
         /// </summary>
         /// <param name="person"></param>
         /// <returns></returns>
-        public bool Remove(Person person) 
+        public bool Remove(Person person)
         {
             return _person.Remove(person);
         }
@@ -56,7 +56,7 @@ namespace PersonClasses
         /// <param name="index"></param>
         /// <exception cref="Exception"></exception>
         /// Исключение, если индекс находится за допустимыми пределами
-        public void RemoveAt(int index) 
+        public void RemoveAt(int index)
         {
             if (index < 0 || index >= _person.Count)
             {
@@ -74,11 +74,11 @@ namespace PersonClasses
         /// Исключение, если индекс находится за допустимыми пределами
         public Person GetFromIndex(int index)
         {
-            if (index < 0 || index  >= _person.Count)
+            if (index < 0 || index >= _person.Count)
             {
                 throw new Exception($"{nameof(index)} введите корректно!");
             }
-            return _person[index]; 
+            return _person[index];
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace PersonClasses
         /// </summary>
         /// <param name="person"></param>
         /// <returns></returns>
-        public int IndexOf(Person person) 
+        public int IndexOf(Person person)
         {
             if (person == null)
             {
@@ -98,7 +98,7 @@ namespace PersonClasses
         /// <summary>
         /// Очистка списка
         /// </summary>
-        public void Clear() 
+        public void Clear()
         {
             _person.Clear();
         }

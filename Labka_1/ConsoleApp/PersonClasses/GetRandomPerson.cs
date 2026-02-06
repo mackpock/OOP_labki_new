@@ -62,8 +62,8 @@ namespace PersonClasses
         /// </summary>
         private static readonly string[] _jobPlaces =
         {
-            "Газпром нефть", "Роснефть", "Магнит", "Росатом",
-            "Почта России",  "Россети",  "Сбер",   "Роскосмос",
+            "Газпром нефть", "Роснефть", "Магнит",   "Росатом",
+            "Почта России",  "Россети",  "Сбер",     "Роскосмос",
             "Норникель",     "Русгидро", "Тинькофф", "Яндекс",
         };
 
@@ -72,9 +72,9 @@ namespace PersonClasses
         /// </summary>
         private static readonly string[] _studyPlaces =
         {
-            "МБОУ СОШ 1",  "МБОУ СОШ 4»",
-            "МБОУ СОШ 2»", "МБОУ СОШ 5",
-            "МБОУ СОШ 6",  "МБОУ СОШ 7",   
+            "МБОУ СОШ 1",  "МБОУ СОШ 4",
+            "МБОУ СОШ 2",  "МБОУ СОШ 5",
+            "МБОУ СОШ 6",  "МБОУ СОШ 7",
             "МБОУ СОШ 9",  "Гимназия 228",
         };
 
@@ -82,46 +82,6 @@ namespace PersonClasses
         /// Случайные персонажи.
         /// </summary>
         private static readonly Random _random = new Random();
-
-
-        /// <summary>
-        /// Генерирует случайного взрослого
-        /// </summary>
-        /// <returns>Объект класса Adult</returns>
-        public static Adult GetRandomAdult()
-        {
-            Gender gender = (Gender)_random.Next(2);
-
-            string name = gender == Gender.Male
-                ? _maleNames[_random.Next(_maleNames.Length)]
-                : _femaleNames[_random.Next(_femaleNames.Length)];
-
-            string surname = gender == Gender.Male
-                ? _maleSurnames[_random.Next(_maleSurnames.Length)]
-                : _femaleSurnames[_random.Next(_femaleSurnames.Length)];
-
-            int age = _random.Next(18, 66); // Возраст взрослого
-
-            // Рандом ПД
-            string passportSeries = GeneratePassportData(4);
-            string passportNumber = GeneratePassportData(6);
-
-            // Рандом работа
-            string job = _jobPlaces[_random.Next(_jobPlaces.Length)];
-
-            // Пусть будет партнёр с 50% шансом
-            Adult partner = null;
-            if (_random.Next(2) == 0) // 50% шанс наличия партнера
-            {
-                Gender partnerGender = gender == Gender.Male ? Gender.Female : Gender.Male;
-                partner = GetRandomAdult(partnerGender);
-            }
-
-            Adult adult = new Adult(name, surname, age, gender, passportNumber, passportSeries, partner, job);
-
-            return adult;
-        }
-
 
         /// <summary>
         /// Генерирует случайного взрослого с определенным полом
@@ -149,15 +109,28 @@ namespace PersonClasses
 
             // Пусть будет партнёр с 50% шансом
             Adult partner = null;
-            Gender partnerGender = gender == Gender.Male ? Gender.Female : Gender.Male;
+            Gender partnerGender = gender == Gender.Male
+                ? Gender.Female
+                : Gender.Male;
             if (_random.Next(2) == 0) // 50% шанс наличия партнера
             {
                 partner = GetRandomAdult(partnerGender);
             }
 
-            Adult adult = new Adult(name, surname, age, gender, passportNumber, passportSeries, partner, job);
+            Adult adult = new Adult(name, surname, age, gender,
+                passportNumber, passportSeries, partner, job);
 
             return adult;
+        }
+
+        /// <summary>
+        /// Генерирует случайного взрослого
+        /// </summary>
+        /// <returns>Объект класса Adult</returns>
+        public static Adult GetRandomAdult()
+        {
+            Gender gender = (Gender)_random.Next(2);
+            return GetRandomAdult(gender);
         }
 
         /// <summary>
@@ -172,30 +145,21 @@ namespace PersonClasses
                 ? _maleNames[_random.Next(_maleNames.Length)]
                 : _femaleNames[_random.Next(_femaleNames.Length)];
 
-            string surname = gender == Gender.Male
-                ? _maleSurnames[_random.Next(_maleSurnames.Length)]
-                : _femaleSurnames[_random.Next(_femaleSurnames.Length)];
-
-            int age = _random.Next(0, 18); 
+            int age = _random.Next(0, 18);
 
             // Присваиваем маму папу
             Adult father = GetRandomAdult(Gender.Male);
             Adult mother = GetRandomAdult(Gender.Female);
 
-            // Даём ребёнку фамилию мамы папы (даже если нет отца)
-            if (gender == Gender.Male)
-            {
-                surname = father.Surname;
-            }
-            else
-            {
-                surname = mother.Surname;
-            }
+            // Даём ребёнку фамилию отца для мальчиков, и фамилию матери для девочек
+            string surname = gender == Gender.Male
+                ? father.Surname
+                : mother.Surname;
 
             // Выбор места учебы
             string placeOfStudy = _studyPlaces[_random.Next(_studyPlaces.Length)];
 
-            Child child = new Child(name, surname, age, gender, 
+            Child child = new Child(name, surname, age, gender,
                 mother, father, placeOfStudy);
 
             return child;

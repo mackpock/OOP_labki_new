@@ -29,7 +29,7 @@ namespace PersonClasses
         /// Возраст
         /// </summary>
         private int _age;
-        
+
         /// <summary>
         /// Минимальный возраст
         /// </summary>
@@ -58,7 +58,7 @@ namespace PersonClasses
         /// <param name="name">Имя</param>
         /// <param name="surname">Фамилия</param>
         /// <param name="age">Возраст</param>
-        public Person(string  name, string surname, int age)
+        public Person(string name, string surname, int age)
         {
             Name = name;
             Surname = surname;
@@ -73,16 +73,16 @@ namespace PersonClasses
         /// <param name="age">Возраст</param>
         /// <param name="gender">Пол</param>
         public Person(string name, string surname, int age, Gender gender) :
-            this(name, surname, age) 
-        { 
-            Gender = gender; 
+            this(name, surname, age)
+        {
+            Gender = gender;
         }
-        
+
 
         /// <summary>
         /// Конструктор по умолчанию - создаёт персону
         /// </summary>
-        public Person(): this("Default", "Person", 18) { }
+        public Person() : this("Default", "Person", 18) { }
 
         /// <summary>
         /// Имя
@@ -90,19 +90,19 @@ namespace PersonClasses
         public string Name
         {
             get => _name;
-            set 
+            set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
                     throw new Exception("Имя не может быть пустым!");
                 }
-                
+
                 if (!IsRussian(value) && !IsEnglish(value))
                 {
                     throw new Exception("Имя должно быть либо полностью" +
                         " на русском, либо полностью на английском!");
                 }
-                    
+
                 _name = FormatName(value);
             }
         }
@@ -119,19 +119,19 @@ namespace PersonClasses
                 {
                     throw new Exception("Фамилия не может быть пустой!");
                 }
-                
+
                 if (!IsRussian(value) && !IsEnglish(value))
                 {
                     throw new Exception("Фамилия должна быть либо полностью" +
                         " на русском, либо полностью на английском!");
                 }
-               
-                if ((IsRussian(_name) && !IsRussian(value)) 
+
+                if ((IsRussian(_name) && !IsRussian(value))
                  || (IsEnglish(_name) && !IsEnglish(value)))
                 {
                     throw new Exception("Имя и фамилия должны быть на одном языке!");
                 }
-                    
+
 
                 _surname = FormatName(value);
             }
@@ -150,7 +150,7 @@ namespace PersonClasses
                     throw new Exception($"{nameof(Age)} " +
                         $"не может быть меньше {MinAge} или больше {MaxAge}!");
                 }
-                    
+
                 _age = value;
             }
         }
@@ -188,7 +188,7 @@ namespace PersonClasses
         /// <returns></returns>
         private static string FormatName(string name)
         {
-             return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
+            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
         }
     }
 }
