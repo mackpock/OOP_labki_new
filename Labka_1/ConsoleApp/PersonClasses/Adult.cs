@@ -9,7 +9,7 @@ namespace PersonClasses
     /// <summary>
     /// Класс взрослого человека
     /// </summary>
-    public class Adult : Person
+    public class Adult : PersonBase
     {
         /// <summary>
         /// Минимальный возраст для взрослого

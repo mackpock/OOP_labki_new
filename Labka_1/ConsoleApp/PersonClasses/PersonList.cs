@@ -15,14 +15,14 @@ namespace PersonClasses
         /// <summary>
         /// Объявление списка объектов _person (приватный)
         /// </summary>
-        private List<Person> _person;
+        private List<PersonBase> _person;
 
         /// <summary>
         /// Конструктор внутреннего списка (паблик)
         /// </summary>
         public PersonList()
         {
-            _person = new List<Person>();
+            _person = new List<PersonBase>();
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace PersonClasses
         /// <param name="person"></param>
         /// <exception cref="Exception"></exception>
         /// Исключение, если индекс находится за допустимыми пределами
-        public void Add(Person person)
+        public void Add(PersonBase person)
         {
             if (person == null)
             {
@@ -45,7 +45,7 @@ namespace PersonClasses
         /// </summary>
         /// <param name="person"></param>
         /// <returns></returns>
-        public bool Remove(Person person)
+        public bool Remove(PersonBase person)
         {
             return _person.Remove(person);
         }
@@ -72,7 +72,7 @@ namespace PersonClasses
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         /// Исключение, если индекс находится за допустимыми пределами
-        public Person GetFromIndex(int index)
+        public PersonBase GetFromIndex(int index)
         {
             if (index < 0 || index >= _person.Count)
             {
@@ -86,7 +86,7 @@ namespace PersonClasses
         /// </summary>
         /// <param name="person"></param>
         /// <returns></returns>
-        public int IndexOf(Person person)
+        public int IndexOf(PersonBase person)
         {
             if (person == null)
             {

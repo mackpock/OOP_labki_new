@@ -3,9 +3,9 @@ using System;
 using System.Security.Principal;
 
 /// <summary>
-/// Класс Labka1
+/// Класс Labka2
 /// </summary>
-public class Labka1
+public class Labka2
 {
     /// <summary>
     /// Метод ReadKey чтобы продолжить

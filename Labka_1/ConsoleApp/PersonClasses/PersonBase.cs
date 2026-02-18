@@ -13,7 +13,7 @@ namespace PersonClasses
     /// <summary>
     /// Класс показывает ФИ, возраст, пол
     /// </summary>
-    public abstract class Person
+    public abstract class PersonBase
     {
         /// <summary>
         /// Имя
@@ -58,7 +58,7 @@ namespace PersonClasses
         /// <param name="name">Имя</param>
         /// <param name="surname">Фамилия</param>
         /// <param name="age">Возраст</param>
-        public Person(string name, string surname, int age)
+        public PersonBase(string name, string surname, int age)
         {
             Name = name;
             Surname = surname;
@@ -72,7 +72,7 @@ namespace PersonClasses
         /// <param name="surname">Фамилия</param>
         /// <param name="age">Возраст</param>
         /// <param name="gender">Пол</param>
-        public Person(string name, string surname, int age, Gender gender) :
+        public PersonBase(string name, string surname, int age, Gender gender) :
             this(name, surname, age)
         {
             Gender = gender;
@@ -82,7 +82,7 @@ namespace PersonClasses
         /// <summary>
         /// Конструктор по умолчанию - создаёт персону
         /// </summary>
-        public Person() : this("Default", "Person", 18) { }
+        public PersonBase() : this("Default", "Person", 18) { }
 
         /// <summary>
         /// Имя
