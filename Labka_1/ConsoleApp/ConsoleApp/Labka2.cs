@@ -1,6 +1,5 @@
 ﻿using PersonClasses;
-using System;
-using System.Security.Principal;
+
 
 /// <summary>
 /// Класс Labka2
