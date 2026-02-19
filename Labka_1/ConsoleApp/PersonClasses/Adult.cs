@@ -160,7 +160,9 @@ namespace PersonClasses
             get => _job;
             set
             {
-                _job = string.IsNullOrWhiteSpace(value) ? "Безработный" : value;
+                _job = string.IsNullOrWhiteSpace(value) 
+                    ? "Безработный" 
+                    : value;
             }
         }
 
