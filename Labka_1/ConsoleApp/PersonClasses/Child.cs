@@ -56,6 +56,7 @@ namespace PersonClasses
         /// </summary>
         public Child() : base()
         {
+            //TODO: dummy object
             _mother = null;
             _father = null;
             _placeOfStudy = "не указано";

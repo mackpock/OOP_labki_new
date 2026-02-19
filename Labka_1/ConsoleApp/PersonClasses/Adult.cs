@@ -67,6 +67,7 @@ namespace PersonClasses
             _passportNumber = "000000";
             _passportSeries = "0000";
             _partner = null;
+            //TODO: duplication
             _job = "Безработный";
         }
 
@@ -80,11 +81,13 @@ namespace PersonClasses
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
+                    //TODO: RSDN
                     throw new Exception("Номер паспорта не может быть пустым!");
                 }
-
+                //TODO: magic (to const)
                 if (value.Length != 6)
                 {
+                    //TODO: RSDN
                     throw new Exception("Номер паспорта должен содержать 6 цифр!");
                 }
 
@@ -92,6 +95,7 @@ namespace PersonClasses
                 {
                     if (!char.IsDigit(c))
                     {
+                        //TODO: RSDN
                         throw new Exception("Номер паспорта должен содержать только цифры!");
                     }
                 }
@@ -112,16 +116,19 @@ namespace PersonClasses
                 {
                     throw new Exception("Серия паспорта не может быть пустой!");
                 }
-
+                //TODO: magic (to const)
                 if (value.Length != 4)
                 {
+                    //TODO: RSDN
                     throw new Exception("Серия паспорта должна содержать 4 цифры!");
                 }
 
+                //TODO: rename
                 foreach (char ciferka in value)
                 {
                     if (!char.IsDigit(ciferka))
                     {
+                        //TODO: RSDN
                         throw new Exception("Серия паспорта должна содержать только цифры!");
                     }
                 }
@@ -140,6 +147,7 @@ namespace PersonClasses
             {
                 if (value != null && value.Gender == this.Gender)
                 {
+                    //TODO: RSDN
                     throw new Exception("Партнер должен быть противоположного пола!");
                 }
 
@@ -161,6 +169,7 @@ namespace PersonClasses
             set
             {
                 _job = string.IsNullOrWhiteSpace(value) 
+                    //TODO: duplication
                     ? "Безработный" 
                     : value;
             }
@@ -189,6 +198,7 @@ namespace PersonClasses
                     : "не замужем";
             }
 
+            //TODO: duplication
             string jobInfo = string.IsNullOrEmpty(Job) || Job == "Безработный"
                 ? "безработный"
                 : Job;

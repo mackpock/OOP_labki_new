@@ -70,7 +70,7 @@ public class Labka2
         // содержат разную информацию
         ShowList(personList, "Список персонажей (взрослые и дети):");
         PressButton();
-
+        //TODO: polymorphism
         // 5.c. Определение типа четвертого человека в списке
         // и выполнения методов, присущих этому классу.
         if (personList.Count > 3)
@@ -81,6 +81,7 @@ public class Labka2
 
             switch (fourthPerson)
             {
+                //TOOD: отступы
                 case Adult adult:
                     {
                         Console.WriteLine($"Четвертый взрослый: " +
@@ -130,11 +131,6 @@ public class Labka2
                     }
             }
         }
-
         PressButton();
-
-
     }
-
-
 }

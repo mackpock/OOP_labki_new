@@ -59,6 +59,7 @@ namespace PersonClasses
             Age = age;
         }
 
+        //TODO: модификатор доступа
         /// <summary>
         /// Конструктор с явным указанием пола 
         /// </summary>
@@ -72,7 +73,7 @@ namespace PersonClasses
             Gender = gender;
         }
 
-
+        //TODO: remove
         /// <summary>
         /// Конструктор по умолчанию - создаёт персону
         /// </summary>
@@ -86,6 +87,7 @@ namespace PersonClasses
             get => _name;
             set
             {
+                //TODO: duplication
                 if (string.IsNullOrWhiteSpace(value))
                 {
                     throw new Exception("Имя не может быть пустым!");
@@ -109,6 +111,7 @@ namespace PersonClasses
             get => _surname;
             set
             {
+                //TODO: duplication
                 if (string.IsNullOrWhiteSpace(value))
                 {
                     throw new Exception("Фамилия не может быть пустой!");
@@ -166,6 +169,7 @@ namespace PersonClasses
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
+        /// //TODO: RSDN
         private static bool IsRussian(string s) => Regex.IsMatch(s, _russianPattern);
 
         /// <summary>
@@ -173,6 +177,7 @@ namespace PersonClasses
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
+        /// //TODO: RSDN
         private static bool IsEnglish(string s) => Regex.IsMatch(s, _englishPattern);
 
         /// <summary>
@@ -182,6 +187,7 @@ namespace PersonClasses
         /// <returns></returns>
         private static string FormatName(string name)
         {
+            //TODO: RSDN
             return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
         }
     }

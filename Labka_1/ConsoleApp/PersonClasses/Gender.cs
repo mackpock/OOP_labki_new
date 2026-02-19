@@ -1,6 +1,4 @@
-﻿
-
-namespace PersonClasses
+﻿namespace PersonClasses
 {
     /// <summary>
     /// Пол
