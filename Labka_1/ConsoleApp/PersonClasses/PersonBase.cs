@@ -59,7 +59,7 @@ namespace PersonClasses
             Age = age;
         }
 
-        //TODO: модификатор доступа
+        //TODO: модификатор доступа +
         /// <summary>
         /// Конструктор с явным указанием пола 
         /// </summary>
@@ -67,39 +67,41 @@ namespace PersonClasses
         /// <param name="surname">Фамилия</param>
         /// <param name="age">Возраст</param>
         /// <param name="gender">Пол</param>
-        public PersonBase(string name, string surname, int age, Gender gender) :
-            this(name, surname, age)
+        protected PersonBase(string name, string surname, int age,
+            Gender gender) : this(name, surname, age)
         {
             Gender = gender;
         }
 
-        //TODO: remove
+        //TODO: remove +
+        //сделал protected из public (чтобы не трогать adult child)
+        //чтобы ограничить использование только наследниками
+        //
         /// <summary>
         /// Конструктор по умолчанию - создаёт персону
         /// </summary>
-        public PersonBase() : this("Default", "Person", 18) { }
+        protected PersonBase() : this("Default", "Person", 18) { }
 
         /// <summary>
         /// Имя
         /// </summary>
+        // TODO: duplication + вынес общую логику в приватный метод
+        // ValidateAndFormatName
         public string Name
         {
             get => _name;
             set
             {
-                //TODO: duplication
-                if (string.IsNullOrWhiteSpace(value))
+                if (_surname != null && !string.IsNullOrWhiteSpace(value))
                 {
-                    throw new Exception("Имя не может быть пустым!");
+                    if ((IsRussian(value) && !IsRussian(_surname)) ||
+                        (IsEnglish(value) && !IsEnglish(_surname)))
+                    {
+                        throw new ArgumentException("Имя и фамилия " +
+                            "должны быть на одном языке!");
+                    }
                 }
-
-                if (!IsRussian(value) && !IsEnglish(value))
-                {
-                    throw new Exception("Имя должно быть либо полностью" +
-                        " на русском, либо полностью на английском!");
-                }
-
-                _name = FormatName(value);
+                _name = ValidateAndFormatName(value, nameof(Name));
             }
         }
 
@@ -108,30 +110,20 @@ namespace PersonClasses
         /// </summary>
         public string Surname
         {
-            get => _surname;
-            set
+          get => _surname;
+          set
+          {
+            if (_name != null && !string.IsNullOrWhiteSpace(value))
             {
-                //TODO: duplication
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new Exception("Фамилия не может быть пустой!");
-                }
-
-                if (!IsRussian(value) && !IsEnglish(value))
-                {
-                    throw new Exception("Фамилия должна быть либо полностью" +
-                        " на русском, либо полностью на английском!");
-                }
-
-                if ((IsRussian(_name) && !IsRussian(value))
-                 || (IsEnglish(_name) && !IsEnglish(value)))
-                {
-                    throw new Exception("Имя и фамилия должны быть на одном языке!");
-                }
-
-
-                _surname = FormatName(value);
+               if ((IsRussian(_name) && !IsRussian(value)) ||
+                   (IsEnglish(_name) && !IsEnglish(value)))
+               {
+                   throw new ArgumentException
+                            ("Имя и фамилия должны быть на одном языке!");
+               }
             }
+              _surname = ValidateAndFormatName(value, nameof(Surname));
+          }
         }
 
         /// <summary>
@@ -139,17 +131,16 @@ namespace PersonClasses
         /// </summary>
         public int Age
         {
-            get => _age;
-            set
-            {
-                if (value < MinAge || value > MaxAge)
-                {
-                    throw new Exception($"{nameof(Age)} " +
-                        $"не может быть меньше {MinAge} или больше {MaxAge}!");
-                }
-
-                _age = value;
-            }
+           get => _age;
+           set
+           {
+             if (value < MinAge || value > MaxAge)
+             {
+               throw new ArgumentOutOfRangeException($"{nameof(Age)} " +
+                   $"не может быть меньше {MinAge} или больше {MaxAge}!");
+             }
+             _age = value;
+           }
         }
 
 
@@ -169,16 +160,42 @@ namespace PersonClasses
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        /// //TODO: RSDN
-        private static bool IsRussian(string s) => Regex.IsMatch(s, _russianPattern);
+        /// //TODO: RSDN +
+        private static bool IsRussian(string s) 
+            => Regex.IsMatch(s, _russianPattern);
 
         /// <summary>
         /// Соответствие Латинскому языку. Вспомогательный метод
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        /// //TODO: RSDN
-        private static bool IsEnglish(string s) => Regex.IsMatch(s, _englishPattern);
+        /// //TODO: RSDN +
+        private static bool IsEnglish(string s) 
+            => Regex.IsMatch(s, _englishPattern);
+
+        /// <summary>
+        /// Валидация и форматирование имени/фамилии
+        /// </summary>
+        /// <param name="value">Проверяемое значение</param>
+        /// <param name="paramName">Имя параметра для сообщения об ошибке</param>
+        /// <returns>Отформатированная строка</returns>
+        /// <exception cref="ArgumentException">Если значение не проходит валидацию</exception>
+        private static string ValidateAndFormatName(string value, string paramName)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentException($"{paramName} не может быть пустым!", paramName);
+            }
+
+            if (!IsRussian(value) && !IsEnglish(value))
+            {
+                throw new ArgumentException(
+                    $"{paramName} должен быть либо полностью на русском, либо полностью на английском!",
+                    paramName);
+            }
+
+            return FormatName(value);
+        }
 
         /// <summary>
         /// "оЛеГ" -> "Олег" 
@@ -187,8 +204,9 @@ namespace PersonClasses
         /// <returns></returns>
         private static string FormatName(string name)
         {
-            //TODO: RSDN
-            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
+            //TODO: RSDN +
+            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase
+                (name.ToLower());
         }
     }
 }

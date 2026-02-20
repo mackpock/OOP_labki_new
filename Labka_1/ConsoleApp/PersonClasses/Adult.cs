@@ -20,6 +20,16 @@ namespace PersonClasses
         /// <summary>
         /// Номер паспорта
         /// </summary>
+        private const int PassportNumberLength = 6;
+
+        /// <summary>
+        /// Серия паспорта
+        /// </summary>
+        private const int PassportSeriesLength = 4;
+
+        /// <summary>
+        /// Номер паспорта
+        /// </summary>
         private string _passportNumber;
 
         /// <summary>
@@ -36,6 +46,11 @@ namespace PersonClasses
         /// Место работы
         /// </summary>
         private string _job;
+
+        /// <summary>
+        /// Значение по умолчанию для места работы
+        /// </summary>
+        private const string DefaultJob = "Безработный";
 
         /// <summary>
         /// Конструктор класса Adult
@@ -67,8 +82,7 @@ namespace PersonClasses
             _passportNumber = "000000";
             _passportSeries = "0000";
             _partner = null;
-            //TODO: duplication
-            _job = "Безработный";
+            _job = DefaultJob;
         }
 
         /// <summary>
@@ -81,22 +95,25 @@ namespace PersonClasses
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    //TODO: RSDN
-                    throw new Exception("Номер паспорта не может быть пустым!");
+                    //TODO: RSDN +
+                    throw new ArgumentException("Номер паспорта" +
+                        " не может быть пустым!");
                 }
-                //TODO: magic (to const)
-                if (value.Length != 6)
+                //TODO: magic (to const) +
+                if (value.Length != PassportNumberLength)
                 {
-                    //TODO: RSDN
-                    throw new Exception("Номер паспорта должен содержать 6 цифр!");
+                    //TODO: RSDN +
+                    throw new ArgumentException("Номер паспорта" +
+                        " должен содержать 6 цифр!");
                 }
 
-                foreach (char c in value)
+                foreach (char digit in value)
                 {
-                    if (!char.IsDigit(c))
+                    if (!char.IsDigit(digit))
                     {
-                        //TODO: RSDN
-                        throw new Exception("Номер паспорта должен содержать только цифры!");
+                        //TODO: RSDN +
+                        throw new ArgumentException("Номер паспорта " +
+                            "должен содержать только цифры!");
                     }
                 }
 
@@ -114,22 +131,25 @@ namespace PersonClasses
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new Exception("Серия паспорта не может быть пустой!");
+                    throw new ArgumentException("Серия паспорта" +
+                        " не может быть пустой!");
                 }
-                //TODO: magic (to const)
-                if (value.Length != 4)
+                //TODO: magic (to const) +
+                if (value.Length != PassportSeriesLength)
                 {
-                    //TODO: RSDN
-                    throw new Exception("Серия паспорта должна содержать 4 цифры!");
+                    //TODO: RSDN +
+                    throw new ArgumentException("Серия паспорта" +
+                        " должна содержать 4 цифры!");
                 }
 
-                //TODO: rename
-                foreach (char ciferka in value)
+                //TODO: rename +
+                foreach (char digit in value)
                 {
-                    if (!char.IsDigit(ciferka))
+                    if (!char.IsDigit(digit))
                     {
-                        //TODO: RSDN
-                        throw new Exception("Серия паспорта должна содержать только цифры!");
+                        //TODO: RSDN +
+                        throw new Exception("Серия паспорта" +
+                            " должна содержать только цифры!");
                     }
                 }
 
@@ -147,8 +167,9 @@ namespace PersonClasses
             {
                 if (value != null && value.Gender == this.Gender)
                 {
-                    //TODO: RSDN
-                    throw new Exception("Партнер должен быть противоположного пола!");
+                    //TODO: RSDN +
+                    throw new InvalidOperationException("Партнер" +
+                        " должен быть противоположного пола!");
                 }
 
                 if (value != null)
@@ -164,15 +185,11 @@ namespace PersonClasses
         /// Место работы
         /// </summary>
         public string Job
-        {
+        {//TODO: duplication +
             get => _job;
-            set
-            {
-                _job = string.IsNullOrWhiteSpace(value) 
-                    //TODO: duplication
-                    ? "Безработный" 
-                    : value;
-            }
+            set => _job = string.IsNullOrWhiteSpace(value) 
+                ? DefaultJob 
+                : value;
         }
 
         /// <summary>
@@ -181,36 +198,20 @@ namespace PersonClasses
         /// <returns>Строка с информацией о взрослом человеке</returns>
         public override string GetInfo()
         {
-            string partnerInfo;
-            if (Partner != null)
-            {
-                if (Gender == Gender.Male)
-                    partnerInfo = $"женился на " +
-                        $"{Partner.Surname} {Partner.Name}";
-                else
-                    partnerInfo = $"вышла замуж за " +
-                        $"{Partner.Surname} {Partner.Name}";
-            }
-            else
-            {
-                partnerInfo = Gender == Gender.Male
-                    ? "не женат"
-                    : "не замужем";
-            }
+            string partnerInfo = Partner != null
+                 ? (Gender == Gender.Male
+                     ? $"женился на {Partner.Surname} {Partner.Name}"
+                     : $"вышла замуж за {Partner.Surname} {Partner.Name}")
+                 : (Gender == Gender.Male ? "не женат" : "не замужем");
 
-            //TODO: duplication
-            string jobInfo = string.IsNullOrEmpty(Job) || Job == "Безработный"
-                ? "безработный"
-                : Job;
+            string jobInfo = Job == DefaultJob ? "безработный" : Job;
 
-            return
-                   $"{Name} {Surname}, возраст: {Age}, " +
-                   $"пол: " +
-                   $"{(Gender == Gender.Male
-                             ? "мужчина"
-                             : "женщина")}, " +
+            return $"{Name} {Surname}, возраст: {Age}, " +
+                   $"пол: {(Gender == Gender.Male 
+                         ? "мужчина" 
+                         : "женщина")}, " +
                    $"паспорт: {PassportSeries} {PassportNumber}, " +
-                   $"статус: {partnerInfo}, " +
+                   $"СП: {partnerInfo}, " +
                    $"работа: {jobInfo}";
         }
     }

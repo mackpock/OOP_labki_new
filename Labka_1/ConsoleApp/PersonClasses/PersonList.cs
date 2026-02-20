@@ -24,13 +24,14 @@ namespace PersonClasses
         /// Добавление персонажа
         /// </summary>
         /// <param name="person"></param>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
         /// Исключение, если индекс находится за допустимыми пределами
         public void Add(PersonBase person)
         {
             if (person == null)
             {
-                throw new Exception($"{nameof(person)} не может быть null!");
+                throw new ArgumentNullException
+                    ($"{nameof(person)} не может быть null!");
             }
             _person.Add(person);
         }
@@ -49,14 +50,15 @@ namespace PersonClasses
         /// Удалить персонажа по индексу
         /// </summary>
         /// <param name="index"></param>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// Исключение, если индекс находится за допустимыми пределами
         public void RemoveAt(int index)
         {
             if (index < 0 || index >= _person.Count)
             {
-                //TODO: Specify exception
-                throw new Exception($"{nameof(index)} введите корректно!");
+                //TODO: Specify exception +
+                throw new ArgumentOutOfRangeException
+                    ($"{nameof(index)} введите корректно!");
             }
             _person.RemoveAt(index);
         }
@@ -66,14 +68,15 @@ namespace PersonClasses
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// Исключение, если индекс находится за допустимыми пределами
         public PersonBase GetFromIndex(int index)
         {
             if (index < 0 || index >= _person.Count)
             {
-                //TODO: Specify exception
-                throw new Exception($"{nameof(index)} введите корректно!");
+               //TODO: Specify exception +
+               throw new ArgumentOutOfRangeException
+                  ($"{nameof(index)} введите корректно!");
             }
             return _person[index];
         }
@@ -87,8 +90,9 @@ namespace PersonClasses
         {
             if (person == null)
             {
-                //TODO: Specify exception
-                throw new Exception($"{nameof(person)} не может быть null!");
+                //TODO: Specify exception +
+                throw new ArgumentNullException
+                    ($"{nameof(person)} не может быть null!");
             }
             return _person.IndexOf(person);
         }

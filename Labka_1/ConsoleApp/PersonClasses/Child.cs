@@ -56,7 +56,6 @@ namespace PersonClasses
         /// </summary>
         public Child() : base()
         {
-            //TODO: dummy object
             _mother = null;
             _father = null;
             _placeOfStudy = "не указано";
@@ -72,7 +71,8 @@ namespace PersonClasses
             {
                 if (value != null && value.Gender != Gender.Female)
                 {
-                    throw new Exception("Мама должна быть женского пола!)");
+                    throw new ArgumentException("Мама должна" +
+                        " быть женского пола!)");
                 }
                 _mother = value;
             }
@@ -88,7 +88,8 @@ namespace PersonClasses
             {
                 if (value != null && value.Gender != Gender.Male)
                 {
-                    throw new Exception("Папа должен быть мужского пола!");
+                    throw new ArgumentException("Папа должен" +
+                        " быть мужского пола!");
                 }
                 _father = value;
             }
@@ -104,7 +105,8 @@ namespace PersonClasses
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new Exception("Место учебы не может быть пустым!");
+                    throw new ArgumentException("Место учебы " +
+                        "не может быть пустым!");
                 }
                 _placeOfStudy = value;
             }
