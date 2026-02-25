@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{7C47C7F5-E5EB-41FC-A923-BAAF074833E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonClasses", "PersonClasses\PersonClasses.csproj", "{1F5B04F5-3E1C-42F3-BA0C-E62BD24AC490}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{3DB23A83-0D88-412C-9DB7-AEDDB4C84C65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{7C47C7F5-E5EB-41FC-A923-BAAF074833E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C47C7F5-E5EB-41FC-A923-BAAF074833E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C47C7F5-E5EB-41FC-A923-BAAF074833E6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1F5B04F5-3E1C-42F3-BA0C-E62BD24AC490}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1F5B04F5-3E1C-42F3-BA0C-E62BD24AC490}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1F5B04F5-3E1C-42F3-BA0C-E62BD24AC490}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1F5B04F5-3E1C-42F3-BA0C-E62BD24AC490}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DB23A83-0D88-412C-9DB7-AEDDB4C84C65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DB23A83-0D88-412C-9DB7-AEDDB4C84C65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DB23A83-0D88-412C-9DB7-AEDDB4C84C65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DB23A83-0D88-412C-9DB7-AEDDB4C84C65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

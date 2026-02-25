@@ -1,0 +1,232 @@
+﻿using System;
+
+namespace Model
+{
+    /// <summary>
+    /// Базовый класс для всех упражнений
+    /// </summary>
+    public abstract class ExerciseBase : IExercise
+    {
+        /// <summary>
+        /// Название упражнения
+        /// </summary>
+        private string _name;
+
+        /// <summary>
+        /// Детальная информация об упражнении
+        /// </summary>
+        public abstract string ExerciseInfo { get; }
+
+        /// <summary>
+        /// Название упражнения
+        /// </summary>
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Название упражнения не может" +
+                                                " быть пустым", nameof(Name));
+                }
+
+                if (value.Length > 50)
+                {
+                    throw new ArgumentException("Название упражнения слишком" +
+                                                " длинное", nameof(Name));
+                }
+
+                _name = value;
+            }
+        }
+
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="ExerciseBase"/>
+        /// </summary>
+        /// <param name="название упражнения"></param>
+        protected ExerciseBase(string name)
+        {
+            Name = name;
+        }
+
+        /// <summary>
+        /// Проверка значения на абсурдность
+        /// </summary>
+        /// <param></param>
+        protected void ValidatePositiveValue(double value, string parameterName)
+        {
+            if (value <= 0)
+            {
+                throw new ArgumentOutOfRangeException(parameterName, "Значение" +
+                                                    "должно быть положительным");
+            }
+        }
+
+        /// <summary>
+        /// Проверка диапазона значения
+        /// </summary>
+        /// <param name="проверяемое значение"></param>
+        /// <param name="нижняя граница значения min"></param>
+        /// <param name="верхняя граница значения max"></param>
+        protected void ValidateRange(double value, double min, double max,
+                                     string parameterName)
+        {
+            if (value < min || value > max)
+            {
+                throw new ArgumentOutOfRangeException(parameterName,
+                    $"Значение должно быть в диапазоне от {min} до {max}");
+            }
+        }
+
+        /// <summary>
+        /// Валидный строковый ввод от пользователя
+        /// </summary>
+        /// <param name="проверяемое значение"></param>
+        /// <returns></returns>
+        public static string GetValidStringInput(string prompt)
+        {
+            while (true)
+            {
+                try
+                {
+                    Console.Write(prompt);
+                    string input = Console.ReadLine();
+
+                    if (string.IsNullOrWhiteSpace(input))
+                    {
+                        throw new ArgumentException("Название не может быть" +
+                                                    "пустым");
+                    }
+
+                    if (input.Length > 78)
+                    {
+                        throw new ArgumentException("Название слишком длинное" +
+                                                    "(макс. 78 символов)");
+                    }
+
+                    return input;
+                }
+                catch (ArgumentException ex)
+                {
+                    throw new ArgumentException($"Ошибка ввода: {ex.Message}");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Валидный числовой ввод с плавающей точкой от пользователя
+        /// </summary>
+        /// <param name="проверяемое значение"></param>
+        /// <param name="нижняя граница значения min"></param>
+        /// <param name="верхняя граница значения max"></param>
+        /// <returns></returns>
+        public static double GetValidDoubleInput(string prompt, double min,
+                                                 double max)
+        {
+            while (true)
+            {
+                try
+                {
+                    Console.Write(prompt);
+                    string input = Console.ReadLine();
+
+                    if (!double.TryParse(input, out double value))
+                    {
+                        throw new FormatException("Неверный формат числа");
+                    }
+
+                    if (value < min || value > max)
+                    {
+                        throw new ArgumentOutOfRangeException($"Значение должно" +
+                                                        $" быть от {min} до {max}");
+                    }
+
+                    return value;
+                }
+                catch (Exception ex) when (ex is FormatException || ex is
+                                           ArgumentOutOfRangeException)
+                {
+                    throw new Exception($"Ошибка ввода: {ex.Message}");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Валидный целочисленный ввод от пользователя
+        /// </summary>
+        /// <param name="проверяемое значение"></param>
+        /// <param name="минимальное допустимое значение"></param>
+        /// <param name="максимальное допустимое значение"></param>
+        /// <returns>Валидное целое число</returns>
+        public static int GetValidIntInput(string prompt, int min, int max)
+        {
+            while (true)
+            {
+                try
+                {
+                    Console.Write(prompt);
+                    string input = Console.ReadLine();
+
+                    if (!int.TryParse(input, out int value))
+                    {
+                        throw new FormatException("Неверный формат числа");
+                    }
+
+                    if (value < min || value > max)
+                    {
+                        throw new ArgumentOutOfRangeException($"Значение должно" +
+                                                      $" быть от {min} до {max}");
+                    }
+
+                    return value;
+                }
+                catch (Exception ex) when (ex is FormatException || ex is
+                                           ArgumentOutOfRangeException)
+                {
+                    throw new Exception($"Ошибка ввода: {ex.Message}");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Валидация стиля плавания от юзернейма
+        /// </summary>
+        /// <returns></returns>
+        public static SwimmingStyle GetValidSwimmingStyleInput()
+        {
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Выберите стиль: ");
+                    string input = Console.ReadLine();
+
+                    if (!int.TryParse(input, out int styleValue))
+                    {
+                        throw new FormatException("Неверный формат числа");
+                    }
+
+                    if (!Enum.IsDefined(typeof(SwimmingStyle), styleValue))
+                    {
+                        throw new ArgumentOutOfRangeException("Неверное значение" +
+                                                " стиля. Введите число от 0 до 1.");
+                    }
+
+                    return (SwimmingStyle)styleValue;
+                }
+                catch (Exception ex) when (ex is FormatException || ex is
+                                           ArgumentOutOfRangeException)
+                {
+                    throw new Exception($"Ошибка ввода: {ex.Message}");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Калькулятор калорий
+        /// </summary>
+        /// <returns></returns>
+        public abstract double CalculateCalories();
+    }
+}

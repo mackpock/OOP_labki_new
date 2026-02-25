@@ -1,0 +1,74 @@
+﻿using System.Xml.Linq;
+
+namespace Model
+{
+    /// <summary>
+    /// Класс бег 
+    /// </summary>
+    public class Running : ExerciseBase
+    {
+        /// <summary>
+        /// Дистанция бега
+        /// </summary>
+        private double _distance;
+
+        /// <summary>
+        /// Интенсивность бега
+        /// </summary>
+        private double _intensity;
+
+        /// <summary>
+        /// Пройденное расстояние
+        /// </summary>
+        public double Distance
+        {
+            get => _distance;
+            set
+            {
+                ValidatePositiveValue(value, nameof(Distance));
+                _distance = value;
+            }
+        }
+
+        /// <summary>
+        /// Интенсивность бега
+        /// </summary>
+        public double Intensity
+        {
+            get => _intensity;
+            set
+            {
+                ValidateRange(value, 1, 30, nameof(Intensity));
+                _intensity = value;
+            }
+        }
+
+        /// <summary>
+        /// Детальная информация об упражнении
+        /// </summary>
+        public override string ExerciseInfo => $"Бег: {Name}, Интенсивность:" +
+                                $" {Intensity} км/ч, Дистанция: {Distance} км";
+
+        /// <summary>
+        /// Бег
+        /// </summary>
+        /// <param name="name упражнения"></param>
+        /// <param name="intensity бега"></param>
+        /// <param name="distance бега"></param>
+        public Running(string name, double intensity, double distance) :
+                       base(name)
+        {
+            Intensity = intensity;
+            Distance = distance;
+        }
+
+        /// <summary>
+        /// Расчет затраты калорий на Бег
+        /// </summary>
+        /// <returns>Калькулятор калорий для бега</returns>
+        public override double CalculateCalories()
+        {
+            return Distance * Intensity * 45;
+        }
+    }
+}
