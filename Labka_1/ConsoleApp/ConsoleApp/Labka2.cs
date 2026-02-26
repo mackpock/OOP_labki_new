@@ -85,42 +85,50 @@ public class Labka2
             switch (fourthPerson)
             {
                 case Adult adult:
-                    Console.WriteLine($"Четвертый взрослый: {adult.Surname}" +
-                        $" {adult.Name}");
-                    Console.WriteLine($"Семейное положение: {(adult.Partner
-                        != null ? "женат/замужем" : "не женат/не замужем")}");
-
-                    if (adult.Partner != null)
                     {
-                        Console.WriteLine($"Партнер: {adult.Partner.Surname}" +
-                            $" {adult.Partner.Name}");
+                        Console.WriteLine($"Четвертый взрослый: " +
+                            $"{adult.Surname} {adult.Name}");
+                        Console.WriteLine($"Семейное положение: " +
+                            $"{(adult.Partner != null 
+                            ? "женат/замужем" 
+                            : "не женат/не замужем")}");
+
+                        if (adult.Partner != null)
+                        {
+                            Console.WriteLine($"Партнер: {adult.Partner.Surname}" +
+                                $" {adult.Partner.Name}");
+                        }
+
+                        Console.WriteLine($"Работа: {adult.Job}");
+                        Console.WriteLine($"Паспорт: {adult.PassportSeries}" +
+                            $" {adult.PassportNumber}");
+                        break;
                     }
 
-                    Console.WriteLine($"Работа: {adult.Job}");
-                    Console.WriteLine($"Паспорт: {adult.PassportSeries}" +
-                        $" {adult.PassportNumber}");
-                    break;
-
                 case Child child:
-                    Console.WriteLine($"Четвертый ребенок: {child.Surname}" +
-                        $" {child.Name}");
-                    Console.WriteLine($"Мама: {(child.Mother != null 
-                        ? $"{child.Mother.Surname} {child.Mother.Name}" 
-                        : "неизвестна")}");
-                    Console.WriteLine($"Папа: {(child.Father != null 
-                        ? $"{child.Father.Surname} {child.Father.Name}" 
-                        : "неизвестен")}");
-                    Console.WriteLine($"Учеба: {child.PlaceOfStudy}");
-                    break;
+                    {
+                        Console.WriteLine($"Четвертый ребенок: {child.Surname}" +
+                            $" {child.Name}");
+                        Console.WriteLine($"Мама: {(child.Mother != null 
+                            ? $"{child.Mother.Surname} {child.Mother.Name}" 
+                            : "неизвестна")}");
+                        Console.WriteLine($"Папа: {(child.Father != null 
+                            ? $"{child.Father.Surname} {child.Father.Name}" 
+                            : "неизвестен")}");
+                        Console.WriteLine($"Учеба: {child.PlaceOfStudy}");
+                        break;
+                    }
 
                 default:
-                    Console.WriteLine($"Обычный человек: " +
-                        $"{fourthPerson.Surname} {fourthPerson.Name}");
-                    Console.WriteLine($"Возраст: {fourthPerson.Age}, " +
-                        $"Пол: {(fourthPerson.Gender == Gender.Male 
-                        ? "Мужчина" 
-                        : "Женщина")}");
-                    break;
+                    {
+                        Console.WriteLine($"Обычный человек: {fourthPerson.Surname}" +
+                            $" {fourthPerson.Name}");
+                        Console.WriteLine($"Возраст: {fourthPerson.Age}, " +
+                            $"Пол: {(fourthPerson.Gender == Gender.Male 
+                            ? "Мужчина" 
+                            : "Женщина")}");
+                        break;
+                    }
             }
         }
         else
