@@ -127,7 +127,7 @@ namespace PersonClasses
                 : "Нет информации об отце";
 
             return
-
+                //TOOD: отступы
             $"{Name} {Surname}, возраст: {Age}, " +
             $"пол: " +
             $"{(Gender == Gender.Male

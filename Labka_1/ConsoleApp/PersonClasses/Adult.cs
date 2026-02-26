@@ -93,16 +93,15 @@ namespace PersonClasses
             get => _passportNumber;
             set
             {
+                //TODO: duplication
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    //TODO: RSDN +
                     throw new ArgumentException("Номер паспорта" +
                         " не может быть пустым!");
                 }
-                //TODO: magic (to const) +
                 if (value.Length != PassportNumberLength)
                 {
-                    //TODO: RSDN +
+                    //TODO: magic (to const)
                     throw new ArgumentException("Номер паспорта" +
                         " должен содержать 6 цифр!");
                 }
@@ -111,7 +110,6 @@ namespace PersonClasses
                 {
                     if (!char.IsDigit(digit))
                     {
-                        //TODO: RSDN +
                         throw new ArgumentException("Номер паспорта " +
                             "должен содержать только цифры!");
                     }
@@ -129,25 +127,23 @@ namespace PersonClasses
             get => _passportSeries;
             set
             {
+                //TODO: duplication
                 if (string.IsNullOrWhiteSpace(value))
                 {
                     throw new ArgumentException("Серия паспорта" +
                         " не может быть пустой!");
                 }
-                //TODO: magic (to const) +
                 if (value.Length != PassportSeriesLength)
                 {
-                    //TODO: RSDN +
+                    //TODO: magic (to const)
                     throw new ArgumentException("Серия паспорта" +
                         " должна содержать 4 цифры!");
                 }
 
-                //TODO: rename +
                 foreach (char digit in value)
                 {
                     if (!char.IsDigit(digit))
                     {
-                        //TODO: RSDN +
                         throw new Exception("Серия паспорта" +
                             " должна содержать только цифры!");
                     }
@@ -167,7 +163,6 @@ namespace PersonClasses
             {
                 if (value != null && value.Gender == this.Gender)
                 {
-                    //TODO: RSDN +
                     throw new InvalidOperationException("Партнер" +
                         " должен быть противоположного пола!");
                 }
@@ -185,7 +180,7 @@ namespace PersonClasses
         /// Место работы
         /// </summary>
         public string Job
-        {//TODO: duplication +
+        {
             get => _job;
             set => _job = string.IsNullOrWhiteSpace(value) 
                 ? DefaultJob 

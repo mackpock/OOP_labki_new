@@ -14,11 +14,13 @@ public class Labka2
         Console.WriteLine("Нажмите любую клавишу для продолжения");
         Console.ReadKey();
     }
+    //TODO: in method
     /// <summary>
     /// Индекс четвертого персонажа
     /// </summary>
     private const int FourthPersonIndex = 3;
 
+    //TODO: in method
     /// <summary>
     /// Количество случайных персонажей для генерации
     /// </summary>
@@ -79,7 +81,7 @@ public class Labka2
         ShowList(personList, "Список персонажей (взрослые и дети):");
         PressButton();
 
-        //TODO: polymorphism +
+        //TODO: polymorphism
 
         // 5.c. Демонстрация полиморфизма: определение типа объекта 
         // и вызов методов, специфичных для конкретного класса наследника
@@ -93,6 +95,7 @@ public class Labka2
             // демонстрация полиморфизма
             switch (fourthPerson)
             {
+                //TODO: {}
                 case Adult adult:
                     Console.WriteLine($"Четвертый взрослый: " +
                         $"{adult.Surname} {adult.Name}");

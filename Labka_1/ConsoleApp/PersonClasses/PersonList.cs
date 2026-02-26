@@ -56,7 +56,6 @@ namespace PersonClasses
         {
             if (index < 0 || index >= _person.Count)
             {
-                //TODO: Specify exception +
                 throw new ArgumentOutOfRangeException
                     ($"{nameof(index)} введите корректно!");
             }
@@ -74,7 +73,6 @@ namespace PersonClasses
         {
             if (index < 0 || index >= _person.Count)
             {
-               //TODO: Specify exception +
                throw new ArgumentOutOfRangeException
                   ($"{nameof(index)} введите корректно!");
             }
@@ -90,7 +88,6 @@ namespace PersonClasses
         {
             if (person == null)
             {
-                //TODO: Specify exception +
                 throw new ArgumentNullException
                     ($"{nameof(person)} не может быть null!");
             }

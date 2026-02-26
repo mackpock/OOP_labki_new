@@ -59,7 +59,6 @@ namespace PersonClasses
             Age = age;
         }
 
-        //TODO: модификатор доступа +
         /// <summary>
         /// Конструктор с явным указанием пола 
         /// </summary>
@@ -73,10 +72,6 @@ namespace PersonClasses
             Gender = gender;
         }
 
-        //TODO: remove +
-        //сделал protected из public (чтобы не трогать adult child)
-        //чтобы ограничить использование только наследниками
-        //
         /// <summary>
         /// Конструктор по умолчанию - создаёт персону
         /// </summary>
@@ -85,13 +80,12 @@ namespace PersonClasses
         /// <summary>
         /// Имя
         /// </summary>
-        // TODO: duplication + вынес общую логику в приватный метод
-        // ValidateAndFormatName
         public string Name
         {
             get => _name;
             set
             {
+                //TODO: duplication
                 if (_surname != null && !string.IsNullOrWhiteSpace(value))
                 {
                     if ((IsRussian(value) && !IsRussian(_surname)) ||
@@ -113,6 +107,8 @@ namespace PersonClasses
           get => _surname;
           set
           {
+                //TODO: duplication
+                //TOOD: отступы
             if (_name != null && !string.IsNullOrWhiteSpace(value))
             {
                if ((IsRussian(_name) && !IsRussian(value)) ||
@@ -160,7 +156,6 @@ namespace PersonClasses
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        /// //TODO: RSDN +
         private static bool IsRussian(string s) 
             => Regex.IsMatch(s, _russianPattern);
 
@@ -169,7 +164,6 @@ namespace PersonClasses
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        /// //TODO: RSDN +
         private static bool IsEnglish(string s) 
             => Regex.IsMatch(s, _englishPattern);
 
@@ -184,12 +178,14 @@ namespace PersonClasses
         {
             if (string.IsNullOrWhiteSpace(value))
             {
+                //TODO: RSDN
                 throw new ArgumentException($"{paramName} не может быть пустым!", paramName);
             }
 
             if (!IsRussian(value) && !IsEnglish(value))
             {
                 throw new ArgumentException(
+                    //TODO: RSDN
                     $"{paramName} должен быть либо полностью на русском, либо полностью на английском!",
                     paramName);
             }
@@ -204,7 +200,6 @@ namespace PersonClasses
         /// <returns></returns>
         private static string FormatName(string name)
         {
-            //TODO: RSDN +
             return CultureInfo.CurrentCulture.TextInfo.ToTitleCase
                 (name.ToLower());
         }

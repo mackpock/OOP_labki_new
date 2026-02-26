@@ -8,11 +8,13 @@ namespace PersonClasses
     /// </summary>
     public static class GetRandomPersonClass
     {
+        //TODO: remove
         /// <summary>
         /// Минимальный возраст
         /// </summary>
         private const int MinAge = 0;
 
+        //TODO: remove
         /// <summary>
         /// Максимальный возраст
         /// </summary>
@@ -95,9 +97,11 @@ namespace PersonClasses
                 ? _maleSurnames[_random.Next(_maleSurnames.Length)]
                 : _femaleSurnames[_random.Next(_femaleSurnames.Length)];
 
-            int age = _random.Next(18, 94); // Возраст взрослого
+            //TODO: get from adult
+            int age = _random.Next(18, 94);
 
             // Рандом ПД
+            //TODO: get from adult
             string passportSeries = GeneratePassportData(4);
             string passportNumber = GeneratePassportData(6);
 
@@ -109,7 +113,8 @@ namespace PersonClasses
             Gender partnerGender = gender == Gender.Male
                 ? Gender.Female
                 : Gender.Male;
-            if (_random.Next(2) == 0) // 50% шанс наличия партнера
+            // 50% шанс наличия партнера
+            if (_random.Next(2) == 0) 
             {
                 partner = GetRandomAdult(partnerGender);
             }
@@ -148,6 +153,7 @@ namespace PersonClasses
             Adult father = GetRandomAdult(Gender.Male);
             Adult mother = GetRandomAdult(Gender.Female);
 
+            //TODO: redo
             // Даём ребёнку фамилию отца для мальчиков, и фамилию матери для девочек
             string surname = gender == Gender.Male
                 ? father.Surname
