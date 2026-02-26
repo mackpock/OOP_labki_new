@@ -138,16 +138,16 @@ namespace PersonClasses
         /// </summary>
         public int Age
         {
-            //TOOD: отступы
+            //TOOD: отступы +
            get => _age;
            set
            {
-             if (value < MinAge || value > MaxAge)
-             {
-               throw new ArgumentOutOfRangeException($"{nameof(Age)} " +
-                   $"не может быть меньше {MinAge} или больше {MaxAge}!");
-             }
-             _age = value;
+                if (value < MinAge || value > MaxAge)
+                {
+                    throw new ArgumentOutOfRangeException($"{nameof(Age)} " +
+                      $"не может быть меньше {MinAge} или больше {MaxAge}!");
+                }
+                _age = value;
            }
         }
 
