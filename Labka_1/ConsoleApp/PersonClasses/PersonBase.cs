@@ -80,21 +80,15 @@ namespace PersonClasses
         /// <summary>
         /// Имя
         /// </summary>
+
+        //TODO: duplication +
         public string Name
         {
             get => _name;
             set
             {
-                //TODO: duplication
-                if (_surname != null && !string.IsNullOrWhiteSpace(value))
-                {
-                    if ((IsRussian(value) && !IsRussian(_surname)) ||
-                        (IsEnglish(value) && !IsEnglish(_surname)))
-                    {
-                        throw new ArgumentException("Имя и фамилия " +
-                            "должны быть на одном языке!");
-                    }
-                }
+                ValidateSameLanguage(value, _surname, nameof(Name),
+                    nameof(Surname));
                 _name = ValidateAndFormatName(value, nameof(Name));
             }
         }
@@ -102,24 +96,45 @@ namespace PersonClasses
         /// <summary>
         /// Фамилия
         /// </summary>
+
+        //TODO: duplication +
         public string Surname
         {
-          get => _surname;
-          set
-          {
-                //TODO: duplication
-                //TOOD: отступы
-            if (_name != null && !string.IsNullOrWhiteSpace(value))
+            get => _surname;
+            set
             {
-               if ((IsRussian(_name) && !IsRussian(value)) ||
-                   (IsEnglish(_name) && !IsEnglish(value)))
-               {
-                   throw new ArgumentException
-                            ("Имя и фамилия должны быть на одном языке!");
-               }
+                ValidateSameLanguage(value, _name, nameof(Surname),
+                    nameof(Name));
+                _surname = ValidateAndFormatName(value, nameof(Surname));
             }
-              _surname = ValidateAndFormatName(value, nameof(Surname));
-          }
+        }
+
+        /// <summary>
+        /// Проверяет, что имя и фамилия на одном языке (если оба заданы)
+        /// </summary>
+        private static void ValidateSameLanguage(
+            string newValue,
+            string existingValue,
+            string newParamName,
+            string existingParamName)
+        {
+            if (!string.IsNullOrWhiteSpace(newValue) 
+                && !string.IsNullOrWhiteSpace(existingValue))
+            {
+                bool newValueIsRussian = IsRussian(newValue);
+                bool newValueIsEnglish = IsEnglish(newValue);
+                bool existingValueIsRussian = IsRussian(existingValue);
+                bool existingValueIsEnglish = IsEnglish(existingValue);
+
+                if ((newValueIsRussian && !existingValueIsRussian) ||
+                    (newValueIsEnglish && !existingValueIsEnglish))
+                {
+                    throw new ArgumentException(
+                        $"{newParamName} и {existingParamName} " +
+                        $"должны быть на одном языке!",
+                        newParamName);
+                }
+            }
         }
 
         /// <summary>
@@ -178,15 +193,17 @@ namespace PersonClasses
         {
             if (string.IsNullOrWhiteSpace(value))
             {
-                //TODO: RSDN
-                throw new ArgumentException($"{paramName} не может быть пустым!", paramName);
+                //TODO: RSDN +
+                throw new ArgumentException($"{paramName} " +
+                    $"не может быть пустым!", paramName);
             }
 
             if (!IsRussian(value) && !IsEnglish(value))
             {
                 throw new ArgumentException(
-                    //TODO: RSDN
-                    $"{paramName} должен быть либо полностью на русском, либо полностью на английском!",
+                    //TODO: RSDN +
+                    $"{paramName} должен быть либо полностью " +
+                    $"на русском, либо полностью на английском!",
                     paramName);
             }
 

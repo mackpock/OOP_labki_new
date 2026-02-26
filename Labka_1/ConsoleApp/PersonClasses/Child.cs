@@ -72,7 +72,7 @@ namespace PersonClasses
                 if (value != null && value.Gender != Gender.Female)
                 {
                     throw new ArgumentException("Мама должна" +
-                        " быть женского пола!)");
+                        " быть женского пола!", nameof(value));
                 }
                 _mother = value;
             }
@@ -89,7 +89,7 @@ namespace PersonClasses
                 if (value != null && value.Gender != Gender.Male)
                 {
                     throw new ArgumentException("Папа должен" +
-                        " быть мужского пола!");
+                        " быть мужского пола!", nameof(value));
                 }
                 _father = value;
             }
@@ -106,7 +106,7 @@ namespace PersonClasses
                 if (string.IsNullOrWhiteSpace(value))
                 {
                     throw new ArgumentException("Место учебы " +
-                        "не может быть пустым!");
+                        "не может быть пустым!", nameof(value));
                 }
                 _placeOfStudy = value;
             }
@@ -125,17 +125,13 @@ namespace PersonClasses
             string fatherInfo = Father != null
                 ? $"{Father.Surname} {Father.Name}"
                 : "Нет информации об отце";
-
-            return
-                //TOOD: отступы
-            $"{Name} {Surname}, возраст: {Age}, " +
-            $"пол: " +
-            $"{(Gender == Gender.Male
-                    ? "мальчик"
-                    : "девочка")}," +
-            $"мама: {motherInfo}, " +
-            $"папа: {fatherInfo}, " +
-            $"учеба: {PlaceOfStudy}";
+            //TOOD: отступы +
+            
+            return $"{Name} {Surname}, возраст: {Age}, " +
+                   $"пол: {(Gender == Gender.Male ? "мальчик" : "девочка")}, " +
+                   $"мама: {motherInfo}, " +
+                   $"папа: {fatherInfo}, " +
+                   $"учеба: {PlaceOfStudy}";
         }
     }
 }

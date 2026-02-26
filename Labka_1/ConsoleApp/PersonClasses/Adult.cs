@@ -8,24 +8,35 @@ namespace PersonClasses
     public class Adult : PersonBase
     {
         /// <summary>
-        /// Минимальный возраст для взрослого
+        /// Минимальный возраст
         /// </summary>
-        public override int MinAge => 18;
+        public const int MinAgeValue = 18;
 
         /// <summary>
-        /// Максимальный возраст для взрослого
+        /// Максимальный возраст
         /// </summary>
-        public override int MaxAge => 124;
+        public const int MaxAgeValue = 124;
+
+        /// <summary>
+        /// Минимальный возраст override
+        /// </summary>
+        public override int MinAge => MinAgeValue;
+
+        /// <summary>
+        /// Максимальный возраст override
+        /// </summary>
+        public override int MaxAge => MaxAgeValue;
+        
 
         /// <summary>
         /// Номер паспорта
         /// </summary>
-        private const int PassportNumberLength = 6;
+        public const int PassportNumberLength = 6;
 
         /// <summary>
         /// Серия паспорта
         /// </summary>
-        private const int PassportSeriesLength = 4;
+        public const int PassportSeriesLength = 4;
 
         /// <summary>
         /// Номер паспорта
@@ -86,6 +97,41 @@ namespace PersonClasses
         }
 
         /// <summary>
+        /// Валидация строки паспортных данных (только цифры, нужная длина)
+        /// </summary>
+        /// <param name="value">Проверяемое значение</param>
+        /// <param name="length">Ожидаемая длина</param>
+        /// <param name="fieldName">Название поля для сообщения об ошибке</param>
+        /// <exception cref="ArgumentException">Если значение не проходит валидацию</exception>
+        private static void ValidatePassportDigits(string value,
+            int length, string fieldName)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentException($"{fieldName}" +
+                    $" не может быть пустым!", nameof(value));
+            }
+
+            if (value.Length != length)
+            {
+                throw new ArgumentException(
+                    $"{fieldName} должен содержать {length} цифр!",
+                    nameof(value));
+            }
+
+            foreach (char digit in value)
+            {
+                if (!char.IsDigit(digit))
+                {
+                    throw new ArgumentException(
+                        $"{fieldName} должен содержать только цифры!",
+                        nameof(value));
+                }
+            }
+        }
+
+        //TODO: duplication +
+        /// <summary>
         /// Номер паспорта
         /// </summary>
         public string PassportNumber
@@ -93,32 +139,13 @@ namespace PersonClasses
             get => _passportNumber;
             set
             {
-                //TODO: duplication
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException("Номер паспорта" +
-                        " не может быть пустым!");
-                }
-                if (value.Length != PassportNumberLength)
-                {
-                    //TODO: magic (to const)
-                    throw new ArgumentException("Номер паспорта" +
-                        " должен содержать 6 цифр!");
-                }
-
-                foreach (char digit in value)
-                {
-                    if (!char.IsDigit(digit))
-                    {
-                        throw new ArgumentException("Номер паспорта " +
-                            "должен содержать только цифры!");
-                    }
-                }
-
+                ValidatePassportDigits(value, PassportNumberLength,
+                    "Номер паспорта");
                 _passportNumber = value;
             }
         }
 
+        //TODO: duplication +
         /// <summary>
         /// Серия паспорта
         /// </summary>
@@ -127,28 +154,8 @@ namespace PersonClasses
             get => _passportSeries;
             set
             {
-                //TODO: duplication
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException("Серия паспорта" +
-                        " не может быть пустой!");
-                }
-                if (value.Length != PassportSeriesLength)
-                {
-                    //TODO: magic (to const)
-                    throw new ArgumentException("Серия паспорта" +
-                        " должна содержать 4 цифры!");
-                }
-
-                foreach (char digit in value)
-                {
-                    if (!char.IsDigit(digit))
-                    {
-                        throw new Exception("Серия паспорта" +
-                            " должна содержать только цифры!");
-                    }
-                }
-
+                ValidatePassportDigits(value, PassportSeriesLength,
+                    "Серия паспорта");
                 _passportSeries = value;
             }
         }
@@ -195,19 +202,19 @@ namespace PersonClasses
         {
             string partnerInfo = Partner != null
                  ? (Gender == Gender.Male
-                     ? $"женился на {Partner.Surname} {Partner.Name}"
-                     : $"вышла замуж за {Partner.Surname} {Partner.Name}")
+                 ? $"женился на {Partner.Surname} {Partner.Name}"
+                 : $"вышла замуж за {Partner.Surname} {Partner.Name}")
                  : (Gender == Gender.Male ? "не женат" : "не замужем");
 
             string jobInfo = Job == DefaultJob ? "безработный" : Job;
 
             return $"{Name} {Surname}, возраст: {Age}, " +
-                   $"пол: {(Gender == Gender.Male 
-                         ? "мужчина" 
-                         : "женщина")}, " +
-                   $"паспорт: {PassportSeries} {PassportNumber}, " +
-                   $"СП: {partnerInfo}, " +
-                   $"работа: {jobInfo}";
+                 $"пол: {(Gender == Gender.Male 
+                 ? "мужчина" 
+                 : "женщина")}, " +
+                 $"паспорт: {PassportSeries} {PassportNumber}, " +
+                 $"СП: {partnerInfo}, " +
+                 $"работа: {jobInfo}";
         }
     }
 }

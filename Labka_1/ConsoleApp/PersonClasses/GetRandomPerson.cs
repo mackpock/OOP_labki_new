@@ -8,18 +8,6 @@ namespace PersonClasses
     /// </summary>
     public static class GetRandomPersonClass
     {
-        //TODO: remove
-        /// <summary>
-        /// Минимальный возраст
-        /// </summary>
-        private const int MinAge = 0;
-
-        //TODO: remove
-        /// <summary>
-        /// Максимальный возраст
-        /// </summary>
-        private const int MaxAge = 124;
-
         /// <summary>
         /// Мужские имена
         /// </summary>
@@ -97,13 +85,15 @@ namespace PersonClasses
                 ? _maleSurnames[_random.Next(_maleSurnames.Length)]
                 : _femaleSurnames[_random.Next(_femaleSurnames.Length)];
 
-            //TODO: get from adult
-            int age = _random.Next(18, 94);
+            //TODO: get from adult +
+            int age = _random.Next(Adult.MinAgeValue, Adult.MaxAgeValue);
 
             // Рандом ПД
-            //TODO: get from adult
-            string passportSeries = GeneratePassportData(4);
-            string passportNumber = GeneratePassportData(6);
+            //TODO: get from adult +
+            string passportSeries = GeneratePassportData
+                (Adult.PassportSeriesLength);
+            string passportNumber = GeneratePassportData
+                (Adult.PassportNumberLength);
 
             // Рандом работа
             string job = _jobPlaces[_random.Next(_jobPlaces.Length)];
@@ -153,11 +143,9 @@ namespace PersonClasses
             Adult father = GetRandomAdult(Gender.Male);
             Adult mother = GetRandomAdult(Gender.Female);
 
-            //TODO: redo
-            // Даём ребёнку фамилию отца для мальчиков, и фамилию матери для девочек
-            string surname = gender == Gender.Male
-                ? father.Surname
-                : mother.Surname;
+            //TODO: redo +
+            // Даём ребёнку фамилию отца 
+            string surname = father.Surname;
 
             // Выбор места учебы
             string placeOfStudy = _studyPlaces[_random.Next(_studyPlaces.Length)];
