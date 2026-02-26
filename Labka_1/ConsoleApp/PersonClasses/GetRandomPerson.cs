@@ -85,11 +85,9 @@ namespace PersonClasses
                 ? _maleSurnames[_random.Next(_maleSurnames.Length)]
                 : _femaleSurnames[_random.Next(_femaleSurnames.Length)];
 
-            //TODO: get from adult +
             int age = _random.Next(Adult.MinAgeValue, Adult.MaxAgeValue);
 
             // Рандом ПД
-            //TODO: get from adult +
             string passportSeries = GeneratePassportData
                 (Adult.PassportSeriesLength);
             string passportNumber = GeneratePassportData
@@ -143,7 +141,6 @@ namespace PersonClasses
             Adult father = GetRandomAdult(Gender.Male);
             Adult mother = GetRandomAdult(Gender.Female);
 
-            //TODO: redo +
             // Даём ребёнку фамилию отца 
             string surname = father.Surname;
 

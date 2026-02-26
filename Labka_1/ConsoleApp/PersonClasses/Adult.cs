@@ -27,7 +27,6 @@ namespace PersonClasses
         /// </summary>
         public override int MaxAge => MaxAgeValue;
         
-
         /// <summary>
         /// Номер паспорта
         /// </summary>
@@ -130,7 +129,6 @@ namespace PersonClasses
             }
         }
 
-        //TODO: duplication +
         /// <summary>
         /// Номер паспорта
         /// </summary>
@@ -145,7 +143,6 @@ namespace PersonClasses
             }
         }
 
-        //TODO: duplication +
         /// <summary>
         /// Серия паспорта
         /// </summary>

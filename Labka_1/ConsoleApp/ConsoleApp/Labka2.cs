@@ -42,6 +42,7 @@ public class Labka2
     /// <exception cref="Exception"></exception>
     private static void Main(string[] args)
     {
+        //TODO: RSDN
         const int FourthPersonIndex = 3;
         const int RandomPersonCount = 7;
 
@@ -71,8 +72,6 @@ public class Labka2
         ShowList(personList, "Список персонажей (взрослые и дети):");
         PressButton();
 
-        //TODO: polymorphism +++
-
         // 5.c. Демонстрация полиморфизма: определение типа объекта 
         // и вызов методов, специфичных для конкретного класса наследника
         if (personList.Count > FourthPersonIndex)
@@ -84,6 +83,7 @@ public class Labka2
             
             switch (fourthPerson)
             {
+                //TOOD: отступы
                 case Adult adult:
                     {
                         Console.WriteLine($"Четвертый взрослый: " +
@@ -133,6 +133,8 @@ public class Labka2
         }
         else
         {
+            //TODO: magic (to const)
+            //TODO: RSDN
             Console.WriteLine("\nВ списке меньше 4 персонажей, анализ невозможен.");
         }
         PressButton();

@@ -1,6 +1,4 @@
-﻿
-
-namespace PersonClasses
+﻿namespace PersonClasses
 {
     /// <summary>
     /// Класс ребенка
@@ -125,7 +123,6 @@ namespace PersonClasses
             string fatherInfo = Father != null
                 ? $"{Father.Surname} {Father.Name}"
                 : "Нет информации об отце";
-            //TOOD: отступы +
             
             return $"{Name} {Surname}, возраст: {Age}, " +
                    $"пол: {(Gender == Gender.Male ? "мальчик" : "девочка")}, " +

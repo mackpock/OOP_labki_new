@@ -80,8 +80,6 @@ namespace PersonClasses
         /// <summary>
         /// Имя
         /// </summary>
-
-        //TODO: duplication +
         public string Name
         {
             get => _name;
@@ -96,8 +94,6 @@ namespace PersonClasses
         /// <summary>
         /// Фамилия
         /// </summary>
-
-        //TODO: duplication +
         public string Surname
         {
             get => _surname;
@@ -142,6 +138,7 @@ namespace PersonClasses
         /// </summary>
         public int Age
         {
+            //TOOD: отступы
            get => _age;
            set
            {
@@ -193,7 +190,6 @@ namespace PersonClasses
         {
             if (string.IsNullOrWhiteSpace(value))
             {
-                //TODO: RSDN +
                 throw new ArgumentException($"{paramName} " +
                     $"не может быть пустым!", paramName);
             }
@@ -201,7 +197,6 @@ namespace PersonClasses
             if (!IsRussian(value) && !IsEnglish(value))
             {
                 throw new ArgumentException(
-                    //TODO: RSDN +
                     $"{paramName} должен быть либо полностью " +
                     $"на русском, либо полностью на английском!",
                     paramName);
