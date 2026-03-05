@@ -20,8 +20,7 @@ public class Labka2
     private static void ShowList(PersonList list, string listName)
     {
         Console.WriteLine($"\n{listName}");
-        Console.WriteLine(new string('-', 50));
-
+        
         if (list.Count == 0)
         {
             Console.WriteLine("Список пуст!");
