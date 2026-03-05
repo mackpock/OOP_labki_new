@@ -41,7 +41,6 @@ public class Labka2
     /// <exception cref="Exception"></exception>
     private static void Main(string[] args)
     {
-        //TODO: RSDN +
         const int fourthPersonIndex = 3;
         const int randomPersonCount = 7;
 
@@ -82,7 +81,7 @@ public class Labka2
             
             switch (fourthPerson)
             {
-                //TOOD: отступы +
+                //TODO: duplication
                 case Adult adult:
                 {
                     Console.WriteLine($"Четвертый взрослый: " +
@@ -103,7 +102,7 @@ public class Labka2
                         $" {adult.PassportNumber}");
                     break;
                 }
-
+                //TODO: duplication
                 case Child child:
                 {
                     Console.WriteLine($"Четвертый ребенок: {child.Surname}" +
@@ -117,7 +116,7 @@ public class Labka2
                     Console.WriteLine($"Учеба: {child.PlaceOfStudy}");
                     break;
                 }
-
+                //TODO: duplication
                 default:
                 {
                     Console.WriteLine($"Обычный человек: " +
@@ -133,8 +132,6 @@ public class Labka2
         }
         else
         {
-            //TODO: magic (to const) +
-            
             Console.WriteLine($"\nВ списке меньше {fourthPersonIndex + 1}" +
                 $" персонажей, анализ невозможен.");
         }

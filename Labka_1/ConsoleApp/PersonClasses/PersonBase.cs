@@ -138,7 +138,6 @@ namespace PersonClasses
         /// </summary>
         public int Age
         {
-            //TOOD: отступы +
            get => _age;
            set
            {
