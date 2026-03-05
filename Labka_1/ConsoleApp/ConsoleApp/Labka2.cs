@@ -79,9 +79,9 @@ public class Labka2
                 $" {fourthPersonIndex + 1})");
             Console.WriteLine($"Тип персонажа: {fourthPerson.GetType().Name}");
             Console.WriteLine($"Информация: {fourthPerson.GetInfo()}");
-            //TODO: dublication +++
             switch (fourthPerson)
             {
+                //TODO: {}
                 case Adult adult:
                     if (adult.Partner != null)
                     {
