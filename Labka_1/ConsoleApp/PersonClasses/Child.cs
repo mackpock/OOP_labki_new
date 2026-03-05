@@ -94,6 +94,17 @@
         }
 
         /// <summary>
+        /// Может ли ребёнок посещать школу самостоятельно
+        /// </summary>
+        /// <returns>true, если возраст >= 7 лет</returns>
+        public string CanGoToSchoolAlone()
+        {
+            return Age >= 7
+            ? "Да"
+            : "Нет";
+        }
+
+        /// <summary>
         /// Место учебы
         /// </summary>
         public string PlaceOfStudy
@@ -127,8 +138,7 @@
             return $"{Name} {Surname}, возраст: {Age}, " +
                    $"пол: {(Gender == Gender.Male ? "мальчик" : "девочка")}, " +
                    $"мама: {motherInfo}, " +
-                   $"папа: {fatherInfo}, " +
-                   $"учеба: {PlaceOfStudy}";
+                   $"папа: {fatherInfo}, " ;
         }
     }
 }
