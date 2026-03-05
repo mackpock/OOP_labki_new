@@ -185,8 +185,10 @@ namespace PersonClasses
         /// <param name="value">Проверяемое значение</param>
         /// <param name="paramName">Имя параметра для сообщения об ошибке</param>
         /// <returns>Отформатированная строка</returns>
-        /// <exception cref="ArgumentException">Если значение не проходит валидацию</exception>
-        private static string ValidateAndFormatName(string value, string paramName)
+        /// <exception cref="ArgumentException">
+        /// Если значение не проходит валидацию</exception>
+        private static string ValidateAndFormatName(string value,
+            string paramName)
         {
             if (string.IsNullOrWhiteSpace(value))
             {

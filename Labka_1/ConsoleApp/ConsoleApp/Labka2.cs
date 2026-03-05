@@ -120,7 +120,8 @@ public class Labka2
 
                 default:
                 {
-                    Console.WriteLine($"Обычный человек: {fourthPerson.Surname}" +
+                    Console.WriteLine($"Обычный человек: " +
+                        $"{fourthPerson.Surname}" +
                         $" {fourthPerson.Name}");
                     Console.WriteLine($"Возраст: {fourthPerson.Age}, " +
                         $"Пол: {(fourthPerson.Gender == Gender.Male 

@@ -101,7 +101,8 @@ namespace PersonClasses
         /// <param name="value">Проверяемое значение</param>
         /// <param name="length">Ожидаемая длина</param>
         /// <param name="fieldName">Название поля для сообщения об ошибке</param>
-        /// <exception cref="ArgumentException">Если значение не проходит валидацию</exception>
+        /// <exception cref="ArgumentException">
+        /// Если значение не проходит валидацию</exception>
         private static void ValidatePassportDigits(string value,
             int length, string fieldName)
         {

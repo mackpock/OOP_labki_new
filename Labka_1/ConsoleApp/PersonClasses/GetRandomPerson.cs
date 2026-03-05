@@ -145,7 +145,8 @@ namespace PersonClasses
             string surname = father.Surname;
 
             // Выбор места учебы
-            string placeOfStudy = _studyPlaces[_random.Next(_studyPlaces.Length)];
+            string placeOfStudy = 
+                _studyPlaces[_random.Next(_studyPlaces.Length)];
 
             Child child = new Child(name, surname, age, gender,
                 mother, father, placeOfStudy);
