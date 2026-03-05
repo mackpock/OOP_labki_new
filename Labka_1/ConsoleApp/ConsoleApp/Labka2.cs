@@ -81,28 +81,25 @@ public class Labka2
             Console.WriteLine($"Информация: {fourthPerson.GetInfo()}");
             switch (fourthPerson)
             {
-                //TODO: {} ^-^
                 case Adult adult:
+                {
+                    if (adult.Partner != null)
                     {
-                        if (adult.Partner != null)
-                        {
-                            Console.WriteLine($"Партнёр:" +
-                                $" {adult.Partner.GetInfo()}");
-                        }
-                        break;
+                        Console.WriteLine($"Партнёр:" +
+                            $" {adult.Partner.GetInfo()}");
                     }
+                    break;
+                }
 
                 case Child child:
-                    {
-                        Console.WriteLine($"Может ходить в школу один:" +
-                            $" {child.CanGoToSchoolAlone()}");
-                        Console.WriteLine($"Место учёбы:" +
-                            $" {child.PlaceOfStudy}");
-                        break;
+                {
+                    Console.WriteLine($"Может ходить в школу один:" +
+                        $" {child.CanGoToSchoolAlone()}");
+                    Console.WriteLine($"Место учёбы:" +
+                        $" {child.PlaceOfStudy}");
+                    break;
 
-                    }
-                    
-
+                }
             }
 
         }
