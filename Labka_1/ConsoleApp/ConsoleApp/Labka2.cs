@@ -77,58 +77,25 @@ public class Labka2
             var fourthPerson = personList.GetFromIndex(fourthPersonIndex); 
             Console.WriteLine($"Анализ четвертого персонажа (индекс" +
                 $" {fourthPersonIndex + 1})");
-            Console.WriteLine($"Тип объекта: {fourthPerson.GetType().Name}");
-            
+            Console.WriteLine($"Тип персонажа: {fourthPerson.GetType().Name}");
+            Console.WriteLine($"Информация: {fourthPerson.GetInfo()}");
+            //TODO: dublication +++
             switch (fourthPerson)
             {
-                //TODO: duplication
                 case Adult adult:
-                {
-                    Console.WriteLine($"Четвертый взрослый: " +
-                        $"{adult.Surname} {adult.Name}");
-                    Console.WriteLine($"Семейное положение: " +
-                        $"{(adult.Partner != null
-                        ? "женат/замужем" 
-                        : "не женат/не замужем")}");
-
                     if (adult.Partner != null)
                     {
-                        Console.WriteLine($"Партнер: {adult.Partner.Surname}" +
-                            $" {adult.Partner.Name}");
+                        Console.WriteLine($"Партнёр:" +
+                            $" {adult.Partner.GetInfo()}");
                     }
+                    break;
 
-                    Console.WriteLine($"Работа: {adult.Job}");
-                    Console.WriteLine($"Паспорт: {adult.PassportSeries}" +
-                        $" {adult.PassportNumber}");
-                    break;
-                }
-                //TODO: duplication
                 case Child child:
-                {
-                    Console.WriteLine($"Четвертый ребенок: {child.Surname}" +
-                        $" {child.Name}");
-                    Console.WriteLine($"Мама: {(child.Mother != null 
-                        ? $"{child.Mother.Surname} {child.Mother.Name}" 
-                        : "неизвестна")}");
-                    Console.WriteLine($"Папа: {(child.Father != null 
-                        ? $"{child.Father.Surname} {child.Father.Name}" 
-                        : "неизвестен")}");
-                    Console.WriteLine($"Учеба: {child.PlaceOfStudy}");
+                    // никакая доп. информация не нужна
                     break;
-                }
-                //TODO: duplication
-                default:
-                {
-                    Console.WriteLine($"Обычный человек: " +
-                        $"{fourthPerson.Surname}" +
-                        $" {fourthPerson.Name}");
-                    Console.WriteLine($"Возраст: {fourthPerson.Age}, " +
-                        $"Пол: {(fourthPerson.Gender == Gender.Male 
-                        ? "Мужчина" 
-                        : "Женщина")}");
-                    break;
-                }
+
             }
+
         }
         else
         {
