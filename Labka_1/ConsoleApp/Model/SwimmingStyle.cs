@@ -1,18 +1,17 @@
-﻿namespace Model
+﻿namespace Model;
+
+/// <summary>
+/// Стили плавания
+/// </summary>
+public enum SwimmingStyle
 {
     /// <summary>
-    /// Выбор стиля плавания
+    /// Вольный стиль (кроль)
     /// </summary>
-    public enum SwimmingStyle
-    {
-        /// <summary>
-        /// Свободное плавание
-        /// </summary>
-        Freestyle,
+    Freestyle = 0,
 
-        /// <summary>
-        /// Баттерфляй
-        /// </summary>
-        Butterfly
-    }
+    /// <summary>
+    /// Баттерфляй
+    /// </summary>
+    Butterfly = 1
 }

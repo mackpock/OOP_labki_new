@@ -1,25 +1,23 @@
-﻿namespace Model
+﻿namespace Model;
+
+/// <summary>
+/// Интерфейс для упражнений с расчётом калорий
+/// </summary>
+public interface IExercise
 {
     /// <summary>
-    /// Интерфейс расчета калорий
+    /// Название упражнения
     /// </summary>
-    public interface IExercise
-    {
-        /// <summary>
-        /// Название упражнения
-        /// </summary>
-        string Name { get; }
+    string Name { get; }
 
-        /// <summary>
-        /// Калькулятор калорий для упражнения
-        /// </summary>
-        /// <returns></returns>
-        double CalculateCalories();
+    /// <summary>
+    /// Расчёт затраченных калорий
+    /// </summary>
+    /// <returns>Количество сожжённых калорий</returns>
+    double CalculateCalories();
 
-        /// <summary>
-        /// Информация об упражнении
-        /// </summary>
-        /// <returns>Строка с информацией</returns>
-        string ExerciseInfo { get; }
-    }
+    /// <summary>
+    /// Подробная информация об упражнении
+    /// </summary>
+    string ExerciseInfo { get; }
 }

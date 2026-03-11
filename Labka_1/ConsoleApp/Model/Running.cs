@@ -3,7 +3,7 @@
 namespace Model
 {
     /// <summary>
-    /// Класс бег 
+    /// Упражнение - бег
     /// </summary>
     public class Running : ExerciseBase
     {
@@ -18,7 +18,7 @@ namespace Model
         private double _intensity;
 
         /// <summary>
-        /// Пройденное расстояние
+        /// Дистанция бега (км)
         /// </summary>
         public double Distance
         {
@@ -31,7 +31,7 @@ namespace Model
         }
 
         /// <summary>
-        /// Интенсивность бега
+        /// Интенсивность бега (км/ч)
         /// </summary>
         public double Intensity
         {
@@ -44,31 +44,31 @@ namespace Model
         }
 
         /// <summary>
-        /// Детальная информация об упражнении
+        /// Информация об упражнении
         /// </summary>
         public override string ExerciseInfo => $"Бег: {Name}, Интенсивность:" +
                                 $" {Intensity} км/ч, Дистанция: {Distance} км";
 
         /// <summary>
-        /// Бег
+        /// Создание упражнения «Бег»
         /// </summary>
-        /// <param name="name упражнения"></param>
-        /// <param name="intensity бега"></param>
-        /// <param name="distance бега"></param>
-        public Running(string name, double intensity, double distance) :
-                       base(name)
+        /// <param name="name">Название упражнения</param>
+        /// <param name="intensity">Интенсивность (км/ч)</param>
+        /// <param name="distance">Дистанция (км)</param>
+        public Running(string name, double intensity, double distance) 
+            :base(name)
         {
             Intensity = intensity;
             Distance = distance;
         }
 
         /// <summary>
-        /// Расчет затраты калорий на Бег
+        /// Расчёт калорий для бега
         /// </summary>
-        /// <returns>Калькулятор калорий для бега</returns>
+        /// <returns>Количество сожжённых калорий</returns>
         public override double CalculateCalories()
         {
-            return Distance * Intensity * 45;
+            return Distance * Intensity * 20;
         }
     }
 }
