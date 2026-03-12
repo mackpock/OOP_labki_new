@@ -7,7 +7,14 @@ namespace Model;
 /// </summary>
 public abstract class ExerciseBase : IExercise
 {
-    //TODO: XML
+    /// <summary>
+    /// Максимальная длина названия упражнения
+    /// </summary>
+    protected const int MaxNameLength = 50;
+
+    /// <summary>
+    /// Название упражнения
+    /// </summary>
     private string _name;
 
     /// <summary>
@@ -27,8 +34,8 @@ public abstract class ExerciseBase : IExercise
 
             if (value.Length > 50)
             {
-                throw new ArgumentException("Название упражнения" +
-                    " слишком длинное", nameof(Name));
+                throw new ArgumentException($"Название упражнения слишком" +
+                    $" длинное (макс. {MaxNameLength} символов)", nameof(Name));
             }
 
             _name = value;
@@ -84,122 +91,6 @@ public abstract class ExerciseBase : IExercise
         {
             throw new ArgumentOutOfRangeException(parameterName,
                 $"Значение должно быть в диапазоне от {min} до {max}");
-        }
-    }
-
-    //TODO: refactor
-    /// <summary>
-    /// Ввод строки с валидацией
-    /// </summary>
-    /// <param name="prompt">Приглашение к вводу</param>
-    /// <returns>Валидная строка</returns>
-    public static string GetValidStringInput(string prompt)
-    {
-        while (true)
-        {
-            Console.Write(prompt);
-            string input = Console.ReadLine();
-
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                throw new ArgumentException("Название не может быть пустым");
-            }
-                
-            //TODO: magic (to const)
-            if (input.Length > 78)
-            {
-                throw new ArgumentException("Название слишком длинное" +
-                    " (макс. 78 символов)");
-            }
-
-            return input;
-        }
-    }
-    //TODO: refactor
-    /// <summary>
-    /// Ввод числа с плавающей точкой с валидацией
-    /// </summary>
-    /// <param name="prompt">Приглашение к вводу</param>
-    /// <param name="min">Минимальное значение</param>
-    /// <param name="max">Максимальное значение</param>
-    /// <returns>Валидное число</returns>
-    public static double GetValidDoubleInput(string prompt, double min, double max)
-    {
-        while (true)
-        {
-            Console.Write(prompt);
-            string input = Console.ReadLine();
-
-            if (!double.TryParse(input, out double value))
-            {
-                throw new FormatException("Неверный формат числа");
-            }
-
-            if (value < min || value > max)
-            {
-                throw new ArgumentOutOfRangeException($"Значение" +
-                    $" должно быть от {min} до {max}");
-            }
-
-            return value;
-        }
-    }
-
-    //TODO: refactor
-    /// <summary>
-    /// Ввод целого числа с валидацией
-    /// </summary>
-    /// <param name="prompt">Приглашение к вводу</param>
-    /// <param name="min">Минимальное значение</param>
-    /// <param name="max">Максимальное значение</param>
-    /// <returns>Валидное целое число</returns>
-    public static int GetValidIntInput(string prompt, int min, int max)
-    {
-        while (true)
-        {
-            Console.Write(prompt);
-            string input = Console.ReadLine();
-
-            if (!int.TryParse(input, out int value))
-            {
-                throw new FormatException("Неверный формат числа");
-            }
-                
-
-            if (value < min || value > max)
-            {
-                throw new ArgumentOutOfRangeException($"Значение" +
-                   $" должно быть от {min} до {max}");
-            }
-     
-            return value;
-        }
-    }
-
-    //TODO: refactor
-    /// <summary>
-    /// Ввод стиля плавания с валидацией
-    /// </summary>
-    /// <returns>Валидный стиль плавания</returns>
-    public static SwimmingStyle GetValidSwimmingStyleInput()
-    {
-        while (true)
-        {
-            Console.Write("Выберите стиль (0-1): ");
-            string input = Console.ReadLine();
-
-            if (!int.TryParse(input, out int styleValue))
-            {
-                throw new FormatException("Неверный формат числа");
-            }
-
-            if (!Enum.IsDefined(typeof(SwimmingStyle), styleValue))
-            {
-                throw new ArgumentOutOfRangeException("Неверное " +
-                    "значение стиля. Введите число от 0 до 1.");
-            }
-
-            return (SwimmingStyle)styleValue;
         }
     }
 

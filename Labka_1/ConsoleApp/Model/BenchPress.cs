@@ -5,8 +5,35 @@
 /// </summary>
 public class BenchPress : ExerciseBase
 {
-    //TODO: XML
+    /// <summary>
+    /// Минимальный допустимый вес штанги (кг)
+    /// </summary>
+    private const double MinWeight = 1;
+
+    /// <summary>
+    /// Максимальный допустимый вес штанги (кг)
+    /// </summary>
+    private const double MaxWeight = 341;
+
+    /// <summary>
+    /// Минимальное допустимое количество повторений
+    /// </summary>
+    private const int MinRepetitions = 1;
+
+
+    /// <summary>
+    /// Максимальное допустимое количество повторений
+    /// </summary>
+    private const int MaxRepetitions = 1000;
+
+    /// <summary>
+    /// Вес штанги (кг)
+    /// </summary>
     private double _weight;
+
+    /// <summary>
+    /// Количество повторений
+    /// </summary>
     private int _repetitions;
 
     /// <summary>
@@ -17,8 +44,8 @@ public class BenchPress : ExerciseBase
         get => _weight;
         set
         {
-            //TODO: magic (to const)
-            ValidateRange(value, 1, 341, nameof(Weight));
+            //TODO: magic (to const) +
+            ValidateRange(value, MinWeight, MaxWeight, nameof(Weight));
             _weight = value;
         }
     }
@@ -31,8 +58,9 @@ public class BenchPress : ExerciseBase
         get => _repetitions;
         set
         {
-            //TODO: magic (to const)
-            ValidateRange(value, 1, 1000, nameof(Repetitions));
+            //TODO: magic (to const) +
+            ValidateRange(value, MinRepetitions,
+                MaxRepetitions, nameof(Repetitions));
             _repetitions = value;
         }
     }

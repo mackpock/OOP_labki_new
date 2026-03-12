@@ -30,38 +30,53 @@ public class Program
 
             int choice = GetValidIntInput("Введите цифру (1-4): ", 1, 4);
 
+            //TODO: {} +
             switch (choice)
             {
-                //TODO: {}
                 case 1:
+                {
                     var running = CreateRunningExercise();
-                    //TODO: {}
                     if (running != null)
+                    {
                         exercises.Add(running);
+                    }
                     break;
+                }
 
                 case 2:
+                {
                     var swimming = CreateSwimmingExercise();
-                    //TODO: {}
                     if (swimming != null)
+                    {
                         exercises.Add(swimming);
+                    }
                     break;
+                }
 
                 case 3:
+                {
                     var benchPress = CreateBenchPressExercise();
-                    //TODO: {}
                     if (benchPress != null)
+                    {
                         exercises.Add(benchPress);
+                    }
                     break;
+                }
 
                 case 4:
+                {
                     continueAdding = false;
                     break;
+                }
             }
 
-            //TODO: {}
+            //TODO: {} +
             if (continueAdding && exercises.Count > 0)
-                Console.WriteLine($"\nДобавлено упражнений: {exercises.Count}");
+            {
+                Console.WriteLine($"\nДобавлено упражнений:" +
+                    $" {exercises.Count}");
+            }
+               
         }
 
         if (exercises.Count > 0)
@@ -182,7 +197,7 @@ public class Program
         {
             try
             {
-                return ExerciseBase.GetValidStringInput(prompt);
+                return InputHelper.GetValidStringInput(prompt);
             }
             catch (Exception ex)
             {
@@ -202,7 +217,7 @@ public class Program
         {
             try
             {
-                return ExerciseBase.GetValidDoubleInput(prompt, min, max);
+                return InputHelper.GetValidDoubleInput(prompt, min, max);
             }
             catch (Exception ex)
             {
@@ -221,7 +236,7 @@ public class Program
         {
             try
             {
-                return ExerciseBase.GetValidIntInput(prompt, min, max);
+                return InputHelper.GetValidIntInput(prompt, min, max);
             }
             catch (Exception ex)
             {
@@ -240,7 +255,7 @@ public class Program
         {
             try
             {
-                return ExerciseBase.GetValidSwimmingStyleInput();
+                return InputHelper.GetValidSwimmingStyleInput();
             }
             catch (Exception ex)
             {

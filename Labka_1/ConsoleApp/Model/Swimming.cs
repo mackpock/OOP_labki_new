@@ -5,8 +5,14 @@
 /// </summary>
 public class Swimming : ExerciseBase
 {
-    //TODO: XML
+    /// <summary>
+    /// Стиль плавания
+    /// </summary>
     private SwimmingStyle _style;
+
+    /// <summary>
+    /// Дистанция плавания (м)
+    /// </summary>
     private double _distance;
 
     /// <summary>

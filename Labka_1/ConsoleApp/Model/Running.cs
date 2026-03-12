@@ -8,6 +8,16 @@ namespace Model
     public class Running : ExerciseBase
     {
         /// <summary>
+        /// Минимальная допустимая интенсивность бега (км/ч)
+        /// </summary>
+        private const double MinIntensity = 1;
+
+        /// <summary>
+        /// Максимальная допустимая интенсивность бега (км/ч)
+        /// </summary>
+        private const double MaxIntensity = 30;
+
+        /// <summary>
         /// Дистанция бега
         /// </summary>
         private double _distance;
@@ -38,8 +48,9 @@ namespace Model
             get => _intensity;
             set
             {
-                //TODO: magic (to const)
-                ValidateRange(value, 1, 30, nameof(Intensity));
+                //TODO: magic (to const) +
+                ValidateRange(value, MinIntensity,
+                    MaxIntensity, nameof(Intensity));
                 _intensity = value;
             }
         }
