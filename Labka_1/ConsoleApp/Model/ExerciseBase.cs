@@ -7,6 +7,7 @@ namespace Model;
 /// </summary>
 public abstract class ExerciseBase : IExercise
 {
+    //TODO: XML
     private string _name;
 
     /// <summary>
@@ -86,6 +87,7 @@ public abstract class ExerciseBase : IExercise
         }
     }
 
+    //TODO: refactor
     /// <summary>
     /// Ввод строки с валидацией
     /// </summary>
@@ -103,7 +105,7 @@ public abstract class ExerciseBase : IExercise
                 throw new ArgumentException("Название не может быть пустым");
             }
                 
-
+            //TODO: magic (to const)
             if (input.Length > 78)
             {
                 throw new ArgumentException("Название слишком длинное" +
@@ -113,7 +115,7 @@ public abstract class ExerciseBase : IExercise
             return input;
         }
     }
-
+    //TODO: refactor
     /// <summary>
     /// Ввод числа с плавающей точкой с валидацией
     /// </summary>
@@ -143,6 +145,7 @@ public abstract class ExerciseBase : IExercise
         }
     }
 
+    //TODO: refactor
     /// <summary>
     /// Ввод целого числа с валидацией
     /// </summary>
@@ -173,6 +176,7 @@ public abstract class ExerciseBase : IExercise
         }
     }
 
+    //TODO: refactor
     /// <summary>
     /// Ввод стиля плавания с валидацией
     /// </summary>

@@ -5,6 +5,7 @@
 /// </summary>
 public class BenchPress : ExerciseBase
 {
+    //TODO: XML
     private double _weight;
     private int _repetitions;
 
@@ -16,6 +17,7 @@ public class BenchPress : ExerciseBase
         get => _weight;
         set
         {
+            //TODO: magic (to const)
             ValidateRange(value, 1, 341, nameof(Weight));
             _weight = value;
         }
@@ -29,6 +31,7 @@ public class BenchPress : ExerciseBase
         get => _repetitions;
         set
         {
+            //TODO: magic (to const)
             ValidateRange(value, 1, 1000, nameof(Repetitions));
             _repetitions = value;
         }

@@ -32,20 +32,24 @@ public class Program
 
             switch (choice)
             {
+                //TODO: {}
                 case 1:
                     var running = CreateRunningExercise();
+                    //TODO: {}
                     if (running != null)
                         exercises.Add(running);
                     break;
 
                 case 2:
                     var swimming = CreateSwimmingExercise();
+                    //TODO: {}
                     if (swimming != null)
                         exercises.Add(swimming);
                     break;
 
                 case 3:
                     var benchPress = CreateBenchPressExercise();
+                    //TODO: {}
                     if (benchPress != null)
                         exercises.Add(benchPress);
                     break;
@@ -55,6 +59,7 @@ public class Program
                     break;
             }
 
+            //TODO: {}
             if (continueAdding && exercises.Count > 0)
                 Console.WriteLine($"\nДобавлено упражнений: {exercises.Count}");
         }

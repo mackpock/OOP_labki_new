@@ -5,6 +5,7 @@
 /// </summary>
 public class Swimming : ExerciseBase
 {
+    //TODO: XML
     private SwimmingStyle _style;
     private double _distance;
 

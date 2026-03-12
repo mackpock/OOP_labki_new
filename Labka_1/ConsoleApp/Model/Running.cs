@@ -38,6 +38,7 @@ namespace Model
             get => _intensity;
             set
             {
+                //TODO: magic (to const)
                 ValidateRange(value, 1, 30, nameof(Intensity));
                 _intensity = value;
             }
