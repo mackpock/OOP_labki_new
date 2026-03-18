@@ -32,12 +32,13 @@ public static class InputHelper
             if (string.IsNullOrWhiteSpace(input))
             {
                 Console.WriteLine("Ошибка: Название не может быть пустым");
+                continue;
             }
 
             if (input.Length > MaxNameLength)
             {
-                Console.WriteLine($"Ошибка: Название слишком длинное" +
-                    $" (макс. {MaxNameLength} символов)");
+                Console.WriteLine($"Ошибка: Название слишком длинное (макс. {MaxNameLength} символов)");
+                continue;
             }
 
             return input;
@@ -47,8 +48,7 @@ public static class InputHelper
     /// <summary>
     /// Ввод числа с плавающей точкой с валидацией
     /// </summary>
-    public static double GetValidDoubleInput(string prompt, double min,
-        double max)
+    public static double GetValidDoubleInput(string prompt, double min, double max)
     {
         while (true)
         {
@@ -58,12 +58,13 @@ public static class InputHelper
             if (!double.TryParse(input, out double value))
             {
                 Console.WriteLine("Ошибка: Неверный формат числа");
+                continue;
             }
 
             if (value < min || value > max)
             {
-                Console.WriteLine($"Ошибка: Значение должно быть" +
-                    $" от {min} до {max}");
+                Console.WriteLine($"Ошибка: Значение должно быть от {min} до {max}");
+                continue;
             }
 
             return value;
@@ -83,12 +84,13 @@ public static class InputHelper
             if (!int.TryParse(input, out int value))
             {
                 Console.WriteLine("Ошибка: Неверный формат числа");
+                continue;
             }
 
             if (value < min || value > max)
             {
-                Console.WriteLine($"Ошибка: Значение должно" +
-                    $" быть от {min} до {max}");
+                Console.WriteLine($"Ошибка: Значение должно быть от {min} до {max}");
+                continue;
             }
 
             return value;
@@ -108,12 +110,13 @@ public static class InputHelper
             if (!int.TryParse(input, out int styleValue))
             {
                 Console.WriteLine("Ошибка: Неверный формат числа");
+                continue;
             }
 
             if (!Enum.IsDefined(typeof(SwimmingStyle), styleValue))
             {
-                Console.WriteLine("Ошибка: Неверное" +
-                    " значение стиля. Введите число от 0 до 1.");
+                Console.WriteLine("Ошибка: Неверное значение стиля. Введите число от 0 до 1.");
+                continue;
             }
 
             return (SwimmingStyle)styleValue;

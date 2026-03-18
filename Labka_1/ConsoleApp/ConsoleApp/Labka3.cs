@@ -99,31 +99,24 @@ public class Program
     /// </summary>
     private static Running CreateRunningExercise()
     {
-        try
-        {
-            Console.WriteLine("\n--- Бег ---");
+        
+        Console.WriteLine("\n--- Бег ---");
+        
+        string name = InputHelper.GetValidStringInput("Название " +
+            "упражнения: ");
+        double intensity = InputHelper.GetValidDoubleInput("Интенсивность " +
+            "(км/ч): ", 1, 30);
+        double distance = InputHelper.GetValidDoubleInput("Дистанция " +
+            "(км): ", 0.1, 100);
+        
+        var running = new Running(name, intensity, distance);
+        double calories = running.CalculateCalories();
+        
+        Console.WriteLine("Упражнение успешно создано!");
+        Console.WriteLine($"Сожжено калорий: {calories:F2}");
+        
+        return running;
 
-            string name = InputHelper.GetValidStringInput("Название " +
-                "упражнения: ");
-            double intensity = InputHelper.GetValidDoubleInput("Интенсивность " +
-                "(км/ч): ", 1, 30);
-            double distance = InputHelper.GetValidDoubleInput("Дистанция " +
-                "(км): ", 0.1, 100);
-
-            var running = new Running(name, intensity, distance);
-            double calories = running.CalculateCalories();
-
-            Console.WriteLine("Упражнение успешно создано!");
-            Console.WriteLine($"Сожжено калорий: {calories:F2}");
-
-            return running;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"\nОшибка: {ex.Message}");
-            Console.WriteLine("Создание упражнения отменено.");
-            return null;
-        }
     }
 
     /// <summary>
@@ -131,35 +124,27 @@ public class Program
     /// </summary>
     private static Swimming CreateSwimmingExercise()
     {
-        try
-        {
-            Console.WriteLine("\n--- Плавание ---");
+       
+         Console.WriteLine("\n--- Плавание ---");
+         
+         string name = InputHelper.GetValidStringInput("Название" +
+             " упражнения: ");
+         
+         Console.WriteLine("\nДоступные стили плавания:");
+         Console.WriteLine("0 — Вольный стиль (кроль)");
+         Console.WriteLine("1 — Баттерфляй");
+         
+         SwimmingStyle style = InputHelper.GetValidSwimmingStyleInput();
+         double distance = InputHelper.GetValidDoubleInput("Дистанция" +
+             " (м): ", 1, 100000);
+         
+         var swimming = new Swimming(name, style, distance);
+         double calories = swimming.CalculateCalories();
+         
+         Console.WriteLine("Упражнение успешно создано!");
+         Console.WriteLine($"Сожжено калорий: {calories:F2}");
 
-            string name = InputHelper.GetValidStringInput("Название" +
-                " упражнения: ");
-
-            Console.WriteLine("\nДоступные стили плавания:");
-            Console.WriteLine("0 — Вольный стиль (кроль)");
-            Console.WriteLine("1 — Баттерфляй");
-
-            SwimmingStyle style = InputHelper.GetValidSwimmingStyleInput();
-            double distance = InputHelper.GetValidDoubleInput("Дистанция" +
-                " (м): ", 1, 100000);
-
-            var swimming = new Swimming(name, style, distance);
-            double calories = swimming.CalculateCalories();
-
-            Console.WriteLine("Упражнение успешно создано!");
-            Console.WriteLine($"Сожжено калорий: {calories:F2}");
-
-            return swimming;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"\nОшибка: {ex.Message}");
-            Console.WriteLine("Создание упражнения отменено.");
-            return null;
-        }
+        return swimming;
     }
 
     /// <summary>
@@ -167,31 +152,26 @@ public class Program
     /// </summary>
     private static BenchPress CreateBenchPressExercise()
     {
-        try
-        {
-            Console.WriteLine("\nxXx Жим штанги xXx");
+        
+        
+         Console.WriteLine("\nxXx Жим штанги xXx");
 
-            string name = InputHelper.GetValidStringInput("Название" +
-                " упражнения: ");
-            double weight = InputHelper.GetValidDoubleInput("Вес (кг):" +
-                " ", 1, 341);
-            int repetitions = InputHelper.GetValidIntInput("Повторения:" +
-                " ", 1, 1000);
+         string name = InputHelper.GetValidStringInput("Название" +
+             " упражнения: ");
+         double weight = InputHelper.GetValidDoubleInput("Вес (кг):" +
+             " ", 1, 341);
+         int repetitions = InputHelper.GetValidIntInput("Повторения:" +
+             " ", 1, 1000);
 
-            var benchPress = new BenchPress(name, weight, repetitions);
-            double calories = benchPress.CalculateCalories();
+         var benchPress = new BenchPress(name, weight, repetitions);
+         double calories = benchPress.CalculateCalories();
 
-            Console.WriteLine("Упражнение успешно создано!");
-            Console.WriteLine($"Затрачено калорий: {calories:F2}");
+         Console.WriteLine("Упражнение успешно создано!");
+         Console.WriteLine($"Затрачено калорий: {calories:F2}");
 
-            return benchPress;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"\nОшибка: {ex.Message}");
-            Console.WriteLine("Создание упражнения отменено.");
-            return null;
-        }
+         return benchPress;
+        
+
     }
 
 
