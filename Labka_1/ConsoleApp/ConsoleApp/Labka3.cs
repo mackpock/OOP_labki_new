@@ -28,7 +28,8 @@ public class Program
             Console.WriteLine("3. Жим штанги");
             Console.WriteLine("4. Выход");
 
-            int choice = GetValidIntInput("Введите цифру (1-4): ", 1, 4);
+            int choice = InputHelper.GetValidIntInput("Введите цифру" +
+                " (1-4): ", 1, 4);
 
             //TODO: {} +
             switch (choice)
@@ -102,10 +103,11 @@ public class Program
         {
             Console.WriteLine("\n--- Бег ---");
 
-            string name = GetValidStringInput("Название упражнения: ");
-            double intensity = GetValidDoubleInput("Интенсивность " +
+            string name = InputHelper.GetValidStringInput("Название " +
+                "упражнения: ");
+            double intensity = InputHelper.GetValidDoubleInput("Интенсивность " +
                 "(км/ч): ", 1, 30);
-            double distance = GetValidDoubleInput("Дистанция " +
+            double distance = InputHelper.GetValidDoubleInput("Дистанция " +
                 "(км): ", 0.1, 100);
 
             var running = new Running(name, intensity, distance);
@@ -133,14 +135,15 @@ public class Program
         {
             Console.WriteLine("\n--- Плавание ---");
 
-            string name = GetValidStringInput("Название упражнения: ");
+            string name = InputHelper.GetValidStringInput("Название" +
+                " упражнения: ");
 
             Console.WriteLine("\nДоступные стили плавания:");
             Console.WriteLine("0 — Вольный стиль (кроль)");
             Console.WriteLine("1 — Баттерфляй");
 
-            SwimmingStyle style = GetValidSwimmingStyleInput();
-            double distance = GetValidDoubleInput("Дистанция" +
+            SwimmingStyle style = InputHelper.GetValidSwimmingStyleInput();
+            double distance = InputHelper.GetValidDoubleInput("Дистанция" +
                 " (м): ", 1, 100000);
 
             var swimming = new Swimming(name, style, distance);
@@ -168,9 +171,12 @@ public class Program
         {
             Console.WriteLine("\nxXx Жим штанги xXx");
 
-            string name = GetValidStringInput("Название упражнения: ");
-            double weight = GetValidDoubleInput("Вес (кг): ", 1, 341);
-            int repetitions = GetValidIntInput("Повторения: ", 1, 1000);
+            string name = InputHelper.GetValidStringInput("Название" +
+                " упражнения: ");
+            double weight = InputHelper.GetValidDoubleInput("Вес (кг):" +
+                " ", 1, 341);
+            int repetitions = InputHelper.GetValidIntInput("Повторения:" +
+                " ", 1, 1000);
 
             var benchPress = new BenchPress(name, weight, repetitions);
             double calories = benchPress.CalculateCalories();
@@ -188,82 +194,6 @@ public class Program
         }
     }
 
-    /// <summary>
-    /// Ввод строки с валидацией
-    /// </summary>
-    private static string GetValidStringInput(string prompt)
-    {
-        while (true)
-        {
-            try
-            {
-                return InputHelper.GetValidStringInput(prompt);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка: {ex.Message}");
-                Console.WriteLine("Попробуйте снова:");
-            }
-        }
-    }
-
-    /// <summary>
-    /// Ввод числа с плавающей точкой с валидацией
-    /// </summary>
-    private static double GetValidDoubleInput(string prompt, 
-        double min, double max)
-    {
-        while (true)
-        {
-            try
-            {
-                return InputHelper.GetValidDoubleInput(prompt, min, max);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка: {ex.Message}");
-                Console.WriteLine("Попробуйте снова:");
-            }
-        }
-    }
-
-    /// <summary>
-    /// Ввод целого числа с валидацией
-    /// </summary>
-    private static int GetValidIntInput(string prompt, int min, int max)
-    {
-        while (true)
-        {
-            try
-            {
-                return InputHelper.GetValidIntInput(prompt, min, max);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка: {ex.Message}");
-                Console.WriteLine("Попробуйте снова:");
-            }
-        }
-    }
-
-    /// <summary>
-    /// Ввод стиля плавания с валидацией
-    /// </summary>
-    private static SwimmingStyle GetValidSwimmingStyleInput()
-    {
-        while (true)
-        {
-            try
-            {
-                return InputHelper.GetValidSwimmingStyleInput();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка: {ex.Message}");
-                Console.WriteLine("Попробуйте снова:");
-            }
-        }
-    }
 
     /// <summary>
     /// Вывод результатов по каждому упражнению
@@ -299,12 +229,12 @@ public class Program
             totalCalories += exercise.CalculateCalories();
         }
 
-        Console.WriteLine("\n\n=== Итоговый результат ===");
+        Console.WriteLine("\n=== Итоговый результат ===");
         Console.WriteLine("Введите целевое значение калорий" +
             " для визуализации:");
 
-        double maxCaloriesForVisualization = GetValidDoubleInput("Цель" +
-            " (ккал): ", 1, 15000);
+        double maxCaloriesForVisualization = InputHelper.GetValidDoubleInput
+            ("Цель (ккал): ", 1, 15000);
 
         double progressPercent = (totalCalories / 
             maxCaloriesForVisualization) * 100;
