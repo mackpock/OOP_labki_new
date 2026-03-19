@@ -12,6 +12,7 @@ namespace ConsoleLoader;
 /// </summary>
 public static class InputHelper
 {
+    //TODO: duplication
     /// <summary>
     /// Максимальная длина названия упражнения
     /// </summary>
@@ -37,6 +38,7 @@ public static class InputHelper
 
             if (input.Length > MaxNameLength)
             {
+                //TODO: RSDN
                 Console.WriteLine($"Ошибка: Название слишком длинное (макс. {MaxNameLength} символов)");
                 continue;
             }

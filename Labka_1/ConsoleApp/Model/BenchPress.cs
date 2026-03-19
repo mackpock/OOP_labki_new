@@ -44,7 +44,6 @@ public class BenchPress : ExerciseBase
         get => _weight;
         set
         {
-            //TODO: magic (to const) +
             ValidateRange(value, MinWeight, MaxWeight, nameof(Weight));
             _weight = value;
         }
@@ -58,7 +57,6 @@ public class BenchPress : ExerciseBase
         get => _repetitions;
         set
         {
-            //TODO: magic (to const) +
             ValidateRange(value, MinRepetitions,
                 MaxRepetitions, nameof(Repetitions));
             _repetitions = value;

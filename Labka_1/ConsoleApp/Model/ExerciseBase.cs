@@ -7,6 +7,7 @@ namespace Model;
 /// </summary>
 public abstract class ExerciseBase : IExercise
 {
+    //TODO: duplication
     /// <summary>
     /// Максимальная длина названия упражнения
     /// </summary>
@@ -31,7 +32,7 @@ public abstract class ExerciseBase : IExercise
                     " не может быть пустым", nameof(Name));
             }
                
-
+            //TODO: magic (to const)
             if (value.Length > 50)
             {
                 throw new ArgumentException($"Название упражнения слишком" +
@@ -65,7 +66,6 @@ public abstract class ExerciseBase : IExercise
             throw new ArgumentOutOfRangeException(parameterName,
                 "Значение должно быть положительным");
         }
-            
     }
 
     /// <summary>

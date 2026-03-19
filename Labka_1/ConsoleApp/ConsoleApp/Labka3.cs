@@ -31,7 +31,7 @@ public class Program
             int choice = InputHelper.GetValidIntInput("Введите цифру" +
                 " (1-4): ", 1, 4);
 
-            //TODO: {} +
+            //TODO: refactor
             switch (choice)
             {
                 case 1:
@@ -71,7 +71,6 @@ public class Program
                 }
             }
 
-            //TODO: {} +
             if (continueAdding && exercises.Count > 0)
             {
                 Console.WriteLine($"\nДобавлено упражнений:" +

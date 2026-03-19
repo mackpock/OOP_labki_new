@@ -62,6 +62,7 @@ public class Swimming : ExerciseBase
     /// <returns>Количество сожжённых калорий</returns>
     public override double CalculateCalories()
     {
+        //TODO: refactor
         double styleCoefficient = Style 
         switch
         {
