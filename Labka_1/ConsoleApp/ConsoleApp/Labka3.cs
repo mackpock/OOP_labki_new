@@ -16,7 +16,8 @@ public class Program
     {
         public string DisplayName { get; }
         public Func<IExercise> Creator { get; }
-        public ExerciseFactoryInfo(string displayName, Func<IExercise> creator)
+        public ExerciseFactoryInfo(string displayName,
+            Func<IExercise> creator)
         {
             DisplayName = displayName;
             Creator = creator;

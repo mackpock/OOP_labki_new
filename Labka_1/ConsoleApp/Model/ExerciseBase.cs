@@ -8,7 +8,9 @@ namespace Model;
 /// </summary>
 public abstract class ExerciseBase : IExercise
 {
-
+    /// <summary>
+    /// Название
+    /// </summary>
     private string _name;
 
     /// <summary>
