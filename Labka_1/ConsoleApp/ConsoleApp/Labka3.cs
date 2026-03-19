@@ -9,13 +9,19 @@ namespace ConsoleLoader;
 /// </summary>
 public class Program
 {
+    //TODO: remove
     /// <summary>
     /// Информация о фабрике упражнений
     /// </summary>
     public class ExerciseFactoryInfo
     {
+        //TODO: XML
         public string DisplayName { get; }
+
+        //TODO: XML
         public Func<IExercise> Creator { get; }
+
+        //TODO: XML
         public ExerciseFactoryInfo(string displayName,
             Func<IExercise> creator)
         {
@@ -154,8 +160,6 @@ public class Program
     /// </summary>
     private static BenchPress CreateBenchPressExercise()
     {
-        
-        
          Console.WriteLine("\nxXx Жим штанги xXx");
 
          string name = InputHelper.GetValidStringInput("Название" +
