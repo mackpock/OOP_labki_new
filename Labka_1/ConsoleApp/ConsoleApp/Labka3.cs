@@ -9,26 +9,7 @@ namespace ConsoleLoader;
 /// </summary>
 public class Program
 {
-    //TODO: remove
-    /// <summary>
-    /// Информация о фабрике упражнений
-    /// </summary>
-    public class ExerciseFactoryInfo
-    {
-        //TODO: XML
-        public string DisplayName { get; }
-
-        //TODO: XML
-        public Func<IExercise> Creator { get; }
-
-        //TODO: XML
-        public ExerciseFactoryInfo(string displayName,
-            Func<IExercise> creator)
-        {
-            DisplayName = displayName;
-            Creator = creator;
-        }
-    }
+    
     /// <summary>
     /// Словарь выбора пользователя 
     /// </summary>
@@ -57,7 +38,7 @@ public class Program
     /// </summary>
     public static void Main(string[] args)
     {
-        Console.WriteLine("Exercise - Расчёт затраченных калорий" +
+        Console.WriteLine("Ex0rcise - Расчёт затраченных калорий" +
             " в зависимости от вида упражнений");
 
         var exercises = new List<IExercise>();
