@@ -12,12 +12,16 @@ public class Program
     /// <summary>
     /// Информация о фабрике упражнений
     /// </summary>
-    /// <param name="DisplayName">Отображаемое имя в меню</param>
-    /// <param name="Creator">Делегат создания упражнения</param>
-    public readonly record struct ExerciseFactoryInfo
-    (string DisplayName,
-    Func<IExercise> Creator);
-
+    public class ExerciseFactoryInfo
+    {
+        public string DisplayName { get; }
+        public Func<IExercise> Creator { get; }
+        public ExerciseFactoryInfo(string displayName, Func<IExercise> creator)
+        {
+            DisplayName = displayName;
+            Creator = creator;
+        }
+    }
     /// <summary>
     /// Словарь выбора пользователя 
     /// </summary>
