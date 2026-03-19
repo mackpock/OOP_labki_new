@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleLoader;
+using System;
 
 namespace Model;
 
@@ -7,15 +8,7 @@ namespace Model;
 /// </summary>
 public abstract class ExerciseBase : IExercise
 {
-    //TODO: duplication
-    /// <summary>
-    /// Максимальная длина названия упражнения
-    /// </summary>
-    protected const int MaxNameLength = 50;
 
-    /// <summary>
-    /// Название упражнения
-    /// </summary>
     private string _name;
 
     /// <summary>
@@ -28,15 +21,17 @@ public abstract class ExerciseBase : IExercise
         {
             if (string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException("Название упражнения" +
-                    " не может быть пустым", nameof(Name));
+                throw new ArgumentException(
+                    "Название упражнения не может быть пустым",
+                    nameof(Name));
             }
-               
-            //TODO: magic (to const)
-            if (value.Length > 50)
+
+            if (value.Length > InputHelper.MaxNameLength)
             {
-                throw new ArgumentException($"Название упражнения слишком" +
-                    $" длинное (макс. {MaxNameLength} символов)", nameof(Name));
+                throw new ArgumentException(
+                    $"Название упражнения слишком длинное " +
+                    $"(макс. {InputHelper.MaxNameLength} символов)",
+                    nameof(Name));
             }
 
             _name = value;
@@ -57,13 +52,14 @@ public abstract class ExerciseBase : IExercise
     /// <summary>
     /// Проверка положительности значения
     /// </summary>
-    /// <param name="value">Проверяемое значение</param>
-    /// <param name="parameterName">Имя параметра</param>
-    protected void ValidatePositiveValue(double value, string parameterName)
+    protected static void ValidatePositiveValue(
+        double value,
+        string parameterName)
     {
         if (value <= 0)
         {
-            throw new ArgumentOutOfRangeException(parameterName,
+            throw new ArgumentOutOfRangeException(
+                parameterName,
                 "Значение должно быть положительным");
         }
     }
@@ -71,32 +67,41 @@ public abstract class ExerciseBase : IExercise
     /// <summary>
     /// Проверка диапазона значений (double)
     /// </summary>
-    protected void ValidateRange(double value, double min,
-        double max, string parameterName)
+    protected static void ValidateRange(
+        double value,
+        double min,
+        double max,
+        string parameterName)
     {
         if (value < min || value > max)
         {
-            throw new ArgumentOutOfRangeException(parameterName,
-                $"Значение должно быть в диапазоне от {min} до {max}");
+            throw new ArgumentOutOfRangeException(
+                parameterName,
+                $"Значение должно быть в диапазоне " +
+                $"от {min} до {max}");
         }
     }
 
     /// <summary>
     /// Проверка диапазона значений (int)
     /// </summary>
-    protected void ValidateRange(int value, int min, int max,
+    protected static void ValidateRange(
+        int value,
+        int min,
+        int max,
         string parameterName)
     {
         if (value < min || value > max)
         {
-            throw new ArgumentOutOfRangeException(parameterName,
-                $"Значение должно быть в диапазоне от {min} до {max}");
+            throw new ArgumentOutOfRangeException(
+                parameterName,
+                $"Значение должно быть в диапазоне " +
+                $"от {min} до {max}");
         }
     }
 
     /// <summary>
     /// Расчёт затраченных калорий
     /// </summary>
-    /// <returns>Количество сожжённых калорий</returns>
     public abstract double CalculateCalories();
 }

@@ -60,17 +60,8 @@ public class Swimming : ExerciseBase
     /// Расчёт калорий для плавания
     /// </summary>
     /// <returns>Количество сожжённых калорий</returns>
-    public override double CalculateCalories()
-    {
-        //TODO: refactor
-        double styleCoefficient = Style 
-        switch
-        {
-            SwimmingStyle.Freestyle => 2.0,
-            SwimmingStyle.Butterfly => 3.0,
-            _ => 4.0
-        };
-
-        return Distance * styleCoefficient;
-    }
+    public override double CalculateCalories() =>
+       Distance * (Style == SwimmingStyle.Freestyle 
+        ? 2.0 
+        : 3.0);
 }

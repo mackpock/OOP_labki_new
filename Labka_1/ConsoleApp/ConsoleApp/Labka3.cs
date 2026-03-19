@@ -10,11 +10,43 @@ namespace ConsoleLoader;
 public class Program
 {
     /// <summary>
-    /// Точка входа в приложение
+    /// Информация о фабрике упражнений
+    /// </summary>
+    /// <param name="DisplayName">Отображаемое имя в меню</param>
+    /// <param name="Creator">Делегат создания упражнения</param>
+    public readonly record struct ExerciseFactoryInfo
+    (string DisplayName,
+    Func<IExercise> Creator);
+
+    /// <summary>
+    /// Словарь выбора пользователя 
+    /// </summary>
+    private static readonly Dictionary<int, ExerciseFactoryInfo>
+        ExerciseFactories = new()
+        {
+            { 1, new("Бег", CreateRunningExercise) },
+            { 2, new("Плавание", CreateSwimmingExercise) },
+            { 3, new("Жим штанги", CreateBenchPressExercise) }
+        };
+
+    /// <summary>
+    /// Отображение меню упражнений
+    /// </summary>
+    private static void ShowExerciseMenu()
+    {
+        Console.WriteLine("\nВыберите упражнение для расчёта калорий:");
+        foreach (var key in ExerciseFactories)
+        {
+            Console.WriteLine($"{key.Key}. {key.Value.DisplayName}");
+        }
+        Console.WriteLine("4. Выход");
+    }
+    /// <summary>
+    /// Точка входа
     /// </summary>
     public static void Main(string[] args)
     {
-        Console.WriteLine("Exorcise - Расчёт затраченных калорий" +
+        Console.WriteLine("Exercise - Расчёт затраченных калорий" +
             " в зависимости от вида упражнений");
 
         var exercises = new List<IExercise>();
@@ -22,61 +54,27 @@ public class Program
 
         while (continueAdding)
         {
-            Console.WriteLine("\nВыберите упражнение для расчёта калорий:");
-            Console.WriteLine("1. Бег");
-            Console.WriteLine("2. Плавание");
-            Console.WriteLine("3. Жим штанги");
-            Console.WriteLine("4. Выход");
+            ShowExerciseMenu();
 
-            int choice = InputHelper.GetValidIntInput("Введите цифру" +
-                " (1-4): ", 1, 4);
+            int choice = InputHelper.GetValidIntInput(
+                "Введите цифру (1-4): ", 1, 4);
 
-            //TODO: refactor
-            switch (choice)
+            if (choice == 4)
             {
-                case 1:
-                {
-                    var running = CreateRunningExercise();
-                    if (running != null)
-                    {
-                        exercises.Add(running);
-                    }
-                    break;
-                }
-
-                case 2:
-                {
-                    var swimming = CreateSwimmingExercise();
-                    if (swimming != null)
-                    {
-                        exercises.Add(swimming);
-                    }
-                    break;
-                }
-
-                case 3:
-                {
-                    var benchPress = CreateBenchPressExercise();
-                    if (benchPress != null)
-                    {
-                        exercises.Add(benchPress);
-                    }
-                    break;
-                }
-
-                case 4:
-                {
-                    continueAdding = false;
-                    break;
-                }
+                continueAdding = false;
+                continue;
             }
 
-            if (continueAdding && exercises.Count > 0)
+            if (ExerciseFactories.TryGetValue(choice, out var factory))
             {
-                Console.WriteLine($"\nДобавлено упражнений:" +
-                    $" {exercises.Count}");
+                var exercise = factory.Creator();
+                if (exercise != null)
+                {
+                    exercises.Add(exercise);
+                    Console.WriteLine($"\nДобавлено упражнений: " +
+                        $"{exercises.Count}");
+                }
             }
-               
         }
 
         if (exercises.Count > 0)
