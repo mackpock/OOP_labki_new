@@ -41,6 +41,7 @@ namespace View
         {
             InitializeComponent();
             InitializeData();
+            this.Text = "Ex0rcise - Калькулятор калорий";
         }
 
         /// <summary>
@@ -73,16 +74,7 @@ namespace View
                 HeaderText = "Название",
                 Name = "nameColumn",
                 ReadOnly = true,
-                Width = 150
-            };
-
-            DataGridViewTextBoxColumn typeColumn = new DataGridViewTextBoxColumn
-            {
-                DataPropertyName = "Type",
-                HeaderText = "Тип",
-                Name = "typeColumn",
-                ReadOnly = true,
-                Width = 120
+                Width = 200
             };
 
             DataGridViewTextBoxColumn detailsColumn = new DataGridViewTextBoxColumn
@@ -91,7 +83,7 @@ namespace View
                 HeaderText = "Детали",
                 Name = "detailsColumn",
                 ReadOnly = true,
-                Width = 200
+                Width = 350
             };
 
             DataGridViewTextBoxColumn caloriesColumn = new DataGridViewTextBoxColumn
@@ -100,7 +92,7 @@ namespace View
                 HeaderText = "Калории",
                 Name = "caloriesColumn",
                 ReadOnly = true,
-                Width = 80
+                Width = 100
             };
             caloriesColumn.DefaultCellStyle = new DataGridViewCellStyle
             {
@@ -109,7 +101,7 @@ namespace View
 
             ExerciseDataGridView.Columns.AddRange(new DataGridViewColumn[]
             {
-                nameColumn, typeColumn, detailsColumn, caloriesColumn
+                nameColumn, detailsColumn, caloriesColumn
             });
         }
 

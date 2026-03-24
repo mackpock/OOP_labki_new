@@ -133,12 +133,12 @@ namespace View
             this.LabelRunningDistanceUnit.Text = "км";
             // 
             // NumericRunningDistance
-            // 
+            //
             this.NumericRunningDistance.DecimalPlaces = 2;
             this.NumericRunningDistance.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
             this.NumericRunningDistance.Location = new System.Drawing.Point(123, 56);
             this.NumericRunningDistance.Margin = new System.Windows.Forms.Padding(4);
-            this.NumericRunningDistance.Maximum = new decimal(new int[] { 250, 0, 0, 0 });
+            this.NumericRunningDistance.Maximum = new decimal(new int[] { 100, 0, 0, 0 });
             this.NumericRunningDistance.Minimum = new decimal(new int[] { 1, 0, 0, 131072 });
             this.NumericRunningDistance.Name = "NumericRunningDistance";
             this.NumericRunningDistance.Size = new System.Drawing.Size(120, 22);
@@ -166,12 +166,12 @@ namespace View
             this.LabelIntensityUnit.Text = "км/ч";
             // 
             // NumericIntensity
-            // 
+            //
             this.NumericIntensity.DecimalPlaces = 2;
             this.NumericIntensity.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
             this.NumericIntensity.Location = new System.Drawing.Point(123, 19);
             this.NumericIntensity.Margin = new System.Windows.Forms.Padding(4);
-            this.NumericIntensity.Maximum = new decimal(new int[] { 40, 0, 0, 0 });
+            this.NumericIntensity.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
             this.NumericIntensity.Minimum = new decimal(new int[] { 1, 0, 0, 131072 });
             this.NumericIntensity.Name = "NumericIntensity";
             this.NumericIntensity.Size = new System.Drawing.Size(120, 22);
@@ -279,10 +279,11 @@ namespace View
             this.LabelRepetitionsUnit.Text = "раз";
             // 
             // NumericRepetitions
-            // 
+            //
             this.NumericRepetitions.Location = new System.Drawing.Point(123, 56);
             this.NumericRepetitions.Margin = new System.Windows.Forms.Padding(4);
             this.NumericRepetitions.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            this.NumericRepetitions.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             this.NumericRepetitions.Name = "NumericRepetitions";
             this.NumericRepetitions.Size = new System.Drawing.Size(120, 22);
             this.NumericRepetitions.TabIndex = 3;
@@ -309,12 +310,12 @@ namespace View
             this.LabelWeightUnit.Text = "кг";
             // 
             // NumericWeight
-            // 
+            //
             this.NumericWeight.DecimalPlaces = 2;
             this.NumericWeight.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
             this.NumericWeight.Location = new System.Drawing.Point(123, 19);
             this.NumericWeight.Margin = new System.Windows.Forms.Padding(4);
-            this.NumericWeight.Maximum = new decimal(new int[] { 300, 0, 0, 0 });
+            this.NumericWeight.Maximum = new decimal(new int[] { 341, 0, 0, 0 });
             this.NumericWeight.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             this.NumericWeight.Name = "NumericWeight";
             this.NumericWeight.Size = new System.Drawing.Size(120, 22);

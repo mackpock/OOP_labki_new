@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using Model;
 
@@ -21,9 +22,8 @@ namespace View
         {
             InitializeComponent();
             InitializeForm();
-#if !DEBUG
-            ButtonCreateRandom.Visible = false;
-#endif
+            // Кнопка видима только при отладке
+            ButtonCreateRandom.Visible = Debugger.IsAttached;
         }
 
         /// <summary>
@@ -123,20 +123,23 @@ namespace View
                 {
                     case Constants.Running:
                         {
-                            NumericIntensity.Value = (decimal)(Math.Round(random.NextDouble() * 38 + 1, 2));
-                            NumericRunningDistance.Value = (decimal)(Math.Round(random.NextDouble() * 248 + 1, 2));
+                            // Интенсивность: 1-30 км/ч, Дистанция: 0.1-100 км
+                            NumericIntensity.Value = (decimal)Math.Round(random.NextDouble() * 29 + 1, 2);
+                            NumericRunningDistance.Value = (decimal)Math.Round(random.NextDouble() * 99.9 + 0.1, 2);
                             break;
                         }
                     case Constants.Swimming:
                         {
                             ComboBoxStyle.SelectedIndex = random.Next(ComboBoxStyle.Items.Count);
-                            NumericSwimmingDistance.Value = (decimal)(Math.Round(random.NextDouble() * 9998 + 1, 2));
+                            // Дистанция: 1-10000 м
+                            NumericSwimmingDistance.Value = (decimal)Math.Round(random.NextDouble() * 9999 + 1, 2);
                             break;
                         }
                     case Constants.BenchPress:
                         {
-                            NumericWeight.Value = (decimal)(Math.Round(random.NextDouble() * 298 + 1, 2));
-                            NumericRepetitions.Value = random.Next(1, 101);
+                            // Вес: 1-341 кг, Повторения: 1-1000
+                            NumericWeight.Value = (decimal)Math.Round(random.NextDouble() * 340 + 1, 2);
+                            NumericRepetitions.Value = random.Next(1, 1001);
                             break;
                         }
                 }
@@ -210,20 +213,20 @@ namespace View
         /// <returns>true если данные валидны</returns>
         private bool ValidateRunningInput()
         {
-            if (NumericIntensity.Value < 0.01m || NumericIntensity.Value > 40)
+            if (NumericIntensity.Value < 1m || NumericIntensity.Value > 30)
             {
                 MessageBox.Show(
-                    "Интенсивность должна быть от 0,01 до 40 км/ч",
+                    "Интенсивность должна быть от 1 до 30 км/ч",
                     "Ошибка ввода",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
                 NumericIntensity.Focus();
                 return false;
             }
-            if (NumericRunningDistance.Value < 0.01m || NumericRunningDistance.Value > 250)
+            if (NumericRunningDistance.Value < 0.1m || NumericRunningDistance.Value > 100)
             {
                 MessageBox.Show(
-                    "Дистанция должна быть от 0,01 до 250 км",
+                    "Дистанция должна быть от 0,1 до 100 км",
                     "Ошибка ввода",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
@@ -258,20 +261,20 @@ namespace View
         /// <returns>true если данные валидны</returns>
         private bool ValidateBenchPressInput()
         {
-            if (NumericWeight.Value < 1 || NumericWeight.Value > 300)
+            if (NumericWeight.Value < 1 || NumericWeight.Value > 341)
             {
                 MessageBox.Show(
-                    "Вес должен быть от 1 до 300 кг",
+                    "Вес должен быть от 1 до 341 кг",
                     "Ошибка ввода",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
                 NumericWeight.Focus();
                 return false;
             }
-            if (NumericRepetitions.Value < 1 || NumericRepetitions.Value > 100)
+            if (NumericRepetitions.Value < 1 || NumericRepetitions.Value > 1000)
             {
                 MessageBox.Show(
-                    "Количество повторений должно быть от 1 до 100",
+                    "Количество повторений должно быть от 1 до 1000",
                     "Ошибка ввода",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);

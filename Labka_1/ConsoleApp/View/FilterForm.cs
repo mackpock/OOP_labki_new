@@ -46,12 +46,25 @@ namespace View
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 FilterCanceled?.Invoke();
+                ResetCheckboxes();
                 MessageBox.Show(
                     "Фильтр отменен. Показаны все упражнения.",
                     "Отмена фильтра",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }
+        }
+
+        /// <summary>
+        /// Сброс галочек на все выбранные
+        /// </summary>
+        private void ResetCheckboxes()
+        {
+            for (int i = 0; i < CheckedListBoxExercise.Items.Count; i++)
+            {
+                CheckedListBoxExercise.SetItemChecked(i, true);
+            }
+            TextBoxFilter.Clear();
         }
 
         /// <summary>
@@ -80,6 +93,7 @@ namespace View
         private void ButtonCancel_Click(object sender, EventArgs e)
         {
             FilterCanceled?.Invoke();
+            ResetCheckboxes();
             MessageBox.Show(
                 "Фильтр отменен. Показаны все упражнения.",
                 "Отмена фильтра",
