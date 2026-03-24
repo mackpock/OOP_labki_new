@@ -82,31 +82,37 @@ namespace View
         /// Отображение Дистанции при сериализации
         /// </summary>
         /// <returns>true если нужно сериализовать</returns>
-        public bool ShouldSerializeDistance() => Type == Constants.Running || Type == Constants.Swimming;
+        public bool ShouldSerializeDistance() => 
+            Type == Constants.Running || 
+            Type == Constants.Swimming;
 
         /// <summary>
         /// Отображение Интенсивность при сериализации
         /// </summary>
         /// <returns>true если нужно сериализовать</returns>
-        public bool ShouldSerializeIntensity() => Type == Constants.Running;
+        public bool ShouldSerializeIntensity() =>
+            Type == Constants.Running;
 
         /// <summary>
         /// Отображение Веса штанги при сериализации
         /// </summary>
         /// <returns>true если нужно сериализовать</returns>
-        public bool ShouldSerializeWeight() => Type == Constants.BenchPress;
+        public bool ShouldSerializeWeight() =>
+            Type == Constants.BenchPress;
 
         /// <summary>
         /// Отображение Количества повторений при сериализации
         /// </summary>
         /// <returns>true если нужно сериализовать</returns>
-        public bool ShouldSerializeRepetitions() => Type == Constants.BenchPress;
+        public bool ShouldSerializeRepetitions() =>
+            Type == Constants.BenchPress;
 
         /// <summary>
         /// Отображение Стиля плавания при сериализации
         /// </summary>
         /// <returns>true если нужно сериализовать</returns>
-        public bool ShouldSerializeStyle() => Type == Constants.Swimming;
+        public bool ShouldSerializeStyle() =>
+            Type == Constants.Swimming;
 
         /// <summary>
         /// Восстановление объекта упражнения из обертки
@@ -117,21 +123,22 @@ namespace View
             switch (Type)
             {
                 case Constants.Running:
-                    {
-                        return new Running(Name, Intensity, Distance);
-                    }
+                {
+                    return new Running(Name, Intensity, Distance);
+                }
                 case Constants.Swimming:
-                    {
-                        return new Swimming(Name, Style, Distance);
-                    }
+                {
+                    return new Swimming(Name, Style, Distance);
+                }
                 case Constants.BenchPress:
-                    {
-                        return new BenchPress(Name, Weight, Repetitions);
-                    }
+                {
+                    return new BenchPress(Name, Weight, Repetitions);
+                }
                 default:
-                    {
-                        throw new InvalidOperationException("Неизвестный тип упражнения");
-                    }
+                {
+                    throw new InvalidOperationException("Неизвестный" +
+                        " тип упражнения");
+                }
             }
         }
     }

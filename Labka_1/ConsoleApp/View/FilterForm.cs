@@ -41,9 +41,10 @@ namespace View
         /// <summary>
         /// Обрабатывает событие закрытия формы
         /// </summary>
-        private void FilterForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void FilterForm_FormClosing(object sender,
+            FormClosingEventArgs arg)
         {
-            if (e.CloseReason == CloseReason.UserClosing)
+            if (arg.CloseReason == CloseReason.UserClosing)
             {
                 FilterCanceled?.Invoke();
                 ResetCheckboxes();
@@ -82,7 +83,7 @@ namespace View
         /// <summary>
         /// Обработчик нажатия кнопки Фильтр
         /// </summary>
-        private void ButtonFilter_Click(object sender, EventArgs e)
+        private void ButtonFilter_Click(object sender, EventArgs arg)
         {
             PerformFilter();
         }
@@ -90,7 +91,7 @@ namespace View
         /// <summary>
         /// Обработчик нажатия кнопки Отменить
         /// </summary>
-        private void ButtonCancel_Click(object sender, EventArgs e)
+        private void ButtonCancel_Click(object sender, EventArgs arg)
         {
             FilterCanceled?.Invoke();
             ResetCheckboxes();
@@ -104,7 +105,7 @@ namespace View
         /// <summary>
         /// Обработчик нажатия кнопки Закрыть
         /// </summary>
-        private void ButtonClose_Click(object sender, EventArgs e)
+        private void ButtonClose_Click(object sender, EventArgs arg)
         {
             this.Close();
         }
@@ -127,9 +128,9 @@ namespace View
             }
 
             var filteredExercises = _allExercises
-                .Where(ex => IsExerciseTypeSelected(ex, selectedTypes) &&
-                             ContainsSearchTerm(ex, searchTerm))
-                .ToList();
+                .Where(ex => IsExerciseTypeSelected(ex, selectedTypes) 
+                             &&
+                             ContainsSearchTerm(ex, searchTerm)).ToList();
 
             FilterApplied?.Invoke(filteredExercises);
             MessageBox.Show(
@@ -145,30 +146,32 @@ namespace View
         /// <param name="exercise">Упражнение</param>
         /// <param name="selectedTypes">Выбранный тип</param>
         /// <returns>true если тип выбран</returns>
-        private bool IsExerciseTypeSelected(IExercise exercise, List<string> selectedTypes)
+        private bool IsExerciseTypeSelected(IExercise exercise,
+            List<string> selectedTypes)
         {
             string exerciseType;
             switch (exercise)
             {
                 case Running running:
-                    {
-                        exerciseType = Constants.Running;
-                        break;
-                    }
+                {
+                    exerciseType = Constants.Running;
+                    break;
+                }
                 case Swimming swimming:
-                    {
-                        exerciseType = Constants.Swimming;
-                        break;
-                    }
+                {
+                    exerciseType = Constants.Swimming;
+                    break;
+                }
                 case BenchPress benchPress:
-                    {
-                        exerciseType = Constants.BenchPress;
-                        break;
-                    }
+                {
+                    exerciseType = Constants.BenchPress;
+                    break;
+                }
                 default:
-                    {
-                        throw new InvalidOperationException("Неизвестный тип упражнения");
-                    }
+                {
+                    throw new InvalidOperationException("Неизвестный" +
+                        " тип упражнения");
+                }
             }
             return selectedTypes.Contains(exerciseType);
         }

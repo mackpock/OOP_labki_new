@@ -62,13 +62,16 @@ namespace View
         private void ConfigureDataGridView()
         {
             ExerciseDataGridView.AutoGenerateColumns = false;
-            ExerciseDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            ExerciseDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            ExerciseDataGridView.AutoSizeColumnsMode = 
+                DataGridViewAutoSizeColumnsMode.Fill;
+            ExerciseDataGridView.SelectionMode = 
+                DataGridViewSelectionMode.FullRowSelect;
             ExerciseDataGridView.ReadOnly = true;
             ExerciseDataGridView.RowHeadersVisible = false;
             ExerciseDataGridView.Columns.Clear();
 
-            DataGridViewTextBoxColumn nameColumn = new DataGridViewTextBoxColumn
+            DataGridViewTextBoxColumn nameColumn = new 
+                DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Name",
                 HeaderText = "Название",
@@ -77,7 +80,8 @@ namespace View
                 Width = 200
             };
 
-            DataGridViewTextBoxColumn detailsColumn = new DataGridViewTextBoxColumn
+            DataGridViewTextBoxColumn detailsColumn = new 
+                DataGridViewTextBoxColumn
             {
                 DataPropertyName = "ExerciseInfo",
                 HeaderText = "Детали",
@@ -86,7 +90,8 @@ namespace View
                 Width = 350
             };
 
-            DataGridViewTextBoxColumn caloriesColumn = new DataGridViewTextBoxColumn
+            DataGridViewTextBoxColumn caloriesColumn = new
+                DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Calories",
                 HeaderText = "Калории",
@@ -94,6 +99,7 @@ namespace View
                 ReadOnly = true,
                 Width = 100
             };
+
             caloriesColumn.DefaultCellStyle = new DataGridViewCellStyle
             {
                 Format = "F2"
@@ -101,7 +107,9 @@ namespace View
 
             ExerciseDataGridView.Columns.AddRange(new DataGridViewColumn[]
             {
-                nameColumn, detailsColumn, caloriesColumn
+                nameColumn, 
+                detailsColumn,
+                caloriesColumn
             });
         }
 
@@ -110,7 +118,8 @@ namespace View
         /// </summary>
         private void UpdateButtonsState()
         {
-            ButtonRemove.Enabled = ExerciseDataGridView.SelectedRows.Count > 0;
+            ButtonRemove.Enabled =
+                ExerciseDataGridView.SelectedRows.Count > 0;
             ButtonClear.Enabled = _exercises.Count > 0;
         }
 
@@ -145,25 +154,30 @@ namespace View
             {
                 AddExerciseInternal(exercise);
             };
+
             _addForm.FormClosed += (s, args) =>
             {
                 _addForm = null;
             };
+
             _addForm.Show();
         }
 
         /// <summary>
         /// Обработчик нажатия кнопки Удалить
         /// </summary>
-        private void ButtonRemove_Click(object sender, EventArgs e)
+        private void ButtonRemove_Click(object sender, EventArgs arg)
         {
             if (ExerciseDataGridView.SelectedRows.Count > 0)
             {
-                var selectedExercise = ExerciseDataGridView.SelectedRows[0].DataBoundItem as IExercise;
+                var selectedExercise = 
+                    ExerciseDataGridView.SelectedRows[0].DataBoundItem
+                    as IExercise;
                 if (selectedExercise != null)
                 {
                     var result = MessageBox.Show(
-                        $"Вы уверены, что хотите удалить упражнение '{selectedExercise.Name}'?",
+                        $"Вы уверены, что хотите удалить упражнение" +
+                        $" '{selectedExercise.Name}'?",
                         "Подтверждение удаления",
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question,
@@ -237,10 +251,12 @@ namespace View
             {
                 UpdateExercisesInternal(filteredExercises);
             };
+
             _filterForm.FilterCanceled += () =>
             {
                 UpdateExercisesInternal(_originalExercises);
             };
+
             _filterForm.FormClosed += (s, args) =>
             {
                 _filterForm = null;
@@ -251,7 +267,7 @@ namespace View
         /// <summary>
         /// Обработчик нажатия кнопки Сохранить
         /// </summary>
-        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs arg)
         {
             if (_exercises.Count == 0)
             {
@@ -295,7 +311,7 @@ namespace View
         /// <summary>
         /// Обработчик нажатия кнопки Открыть
         /// </summary>
-        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs arg)
         {
             using (var openDialog = new OpenFileDialog())
             {
@@ -347,7 +363,8 @@ namespace View
             }
             else
             {
-                throw new InvalidOperationException("Неизвестный тип упражнения");
+                throw new InvalidOperationException("Неизвестный" +
+                    " тип упражнения");
             }
         }
 
@@ -358,7 +375,8 @@ namespace View
         private void SaveExercises(string fileName)
         {
             var serializer = new XmlSerializer(typeof(List<ExerciseWrapper>));
-            var wrappedExercises = _originalExercises.Select(ex => CreateWrapper(ex)).ToList();
+            var wrappedExercises = _originalExercises.Select(ex
+                => CreateWrapper(ex)).ToList();
             using (var stream = new FileStream(fileName, FileMode.Create))
             {
                 serializer.Serialize(stream, wrappedExercises);
@@ -375,13 +393,15 @@ namespace View
             if (xmlContent.Contains(">NaN<") || xmlContent.Contains(">nan<"))
             {
                 throw new InvalidDataException(
-                    "Файл поврежден: содержит некорректные числовые значения (NaN).");
+                    "Файл поврежден: содержит некорректные" +
+                    " числовые значения (NaN).");
             }
 
             var serializer = new XmlSerializer(typeof(List<ExerciseWrapper>));
             using (var stream = new FileStream(fileName, FileMode.Open))
             {
-                var wrappedExercises = (List<ExerciseWrapper>)serializer.Deserialize(stream);
+                var wrappedExercises =
+                    (List<ExerciseWrapper>)serializer.Deserialize(stream);
                 _exercises.Clear();
                 _originalExercises.Clear();
                 foreach (var wrapped in wrappedExercises)
@@ -397,7 +417,8 @@ namespace View
         /// <summary>
         /// Обработчик изменения выбранной строки
         /// </summary>
-        private void ExerciseDataGridView_SelectionChanged(object sender, EventArgs e)
+        private void ExerciseDataGridView_SelectionChanged(object sender,
+            EventArgs arg)
         {
             UpdateButtonsState();
         }

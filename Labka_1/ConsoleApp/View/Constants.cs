@@ -33,11 +33,19 @@ namespace View
         /// <summary>
         /// Массив всех типов упражнений
         /// </summary>
-        public static readonly string[] AllExerciseTypes = new string[] { Running, Swimming, BenchPress };
+        public static readonly string[] AllExerciseTypes = new string[]
+        {
+            Running, 
+            Swimming, 
+            BenchPress
+        };
 
         /// <summary>
         /// Массив всех стилей плавания
         /// </summary>
-        public static readonly string[] AllSwimmingStyles = new string[] { Freestyle, Butterfly };
+        public static readonly string[] AllSwimmingStyles = new string[] 
+        {   Freestyle,
+            Butterfly
+        };
     }
 }
