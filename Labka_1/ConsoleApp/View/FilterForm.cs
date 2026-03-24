@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Model;
@@ -35,7 +36,62 @@ namespace View
             InitializeComponent();
             _allExercises = exercises;
             InitializeForm();
+            ApplyGymStyle();
             this.FormClosing += FilterForm_FormClosing;
+        }
+
+        /// <summary>
+        /// Применение "качковского" стиля
+        /// </summary>
+        private void ApplyGymStyle()
+        {
+            Color darkBg = Color.FromArgb(30, 30, 30);
+            Color darkPanel = Color.FromArgb(45, 45, 45);
+            Color accentOrange = Color.FromArgb(255, 140, 0);
+            Color accentRed = Color.FromArgb(220, 20, 60);
+            Color textLight = Color.FromArgb(240, 240, 240);
+
+            this.BackColor = darkBg;
+            this.ForeColor = textLight;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.StartPosition = FormStartPosition.CenterParent;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+
+            ExerciseGroupBox.BackColor = darkPanel;
+            ExerciseGroupBox.ForeColor = accentOrange;
+            ExerciseGroupBox.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            ExerciseGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+
+            LabelSearch.ForeColor = textLight;
+            LabelSearch.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+
+            TextBoxFilter.BackColor = Color.FromArgb(60, 60, 60);
+            TextBoxFilter.ForeColor = textLight;
+            TextBoxFilter.BorderStyle = BorderStyle.FixedSingle;
+            TextBoxFilter.Font = new Font("Segoe UI", 10F);
+
+            CheckedListBoxExercise.BackColor = Color.FromArgb(60, 60, 60);
+            CheckedListBoxExercise.ForeColor = textLight;
+            CheckedListBoxExercise.BorderStyle = BorderStyle.FixedSingle;
+            CheckedListBoxExercise.CheckOnClick = true;
+
+            StyleButton(ButtonFilter, accentOrange);
+            StyleButton(ButtonCancel, accentRed);
+            StyleButton(ButtonClose, Color.FromArgb(80, 80, 80));
+        }
+
+        /// <summary>
+        /// Стилизация кнопки
+        /// </summary>
+        private void StyleButton(Button button, Color backColor)
+        {
+            button.BackColor = backColor;
+            button.ForeColor = Color.White;
+            button.FlatStyle = FlatStyle.Flat;
+            button.FlatAppearance.BorderSize = 0;
+            button.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            button.Cursor = Cursors.Hand;
         }
 
         /// <summary>

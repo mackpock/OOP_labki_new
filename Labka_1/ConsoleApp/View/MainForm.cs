@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -42,6 +43,79 @@ namespace View
             InitializeComponent();
             InitializeData();
             this.Text = "Ex0rcise - Калькулятор калорий";
+            ApplyGymStyle();
+        }
+
+        /// <summary>
+        /// Применение "качковского" стиля
+        /// </summary>
+        private void ApplyGymStyle()
+        {
+            Color darkBg = Color.FromArgb(30, 30, 30);
+            Color darkPanel = Color.FromArgb(45, 45, 45);
+            Color accentOrange = Color.FromArgb(255, 140, 0);
+            Color accentRed = Color.FromArgb(220, 20, 60);
+            Color textLight = Color.FromArgb(240, 240, 240);
+
+            this.BackColor = darkBg;
+            this.ForeColor = textLight;
+
+            ExercisesGroupBox.BackColor = darkPanel;
+            ExercisesGroupBox.ForeColor = accentOrange;
+            ExercisesGroupBox.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+
+            // DataGridView
+            ExerciseDataGridView.BackgroundColor = Color.FromArgb(50, 50, 50);
+            ExerciseDataGridView.GridColor = Color.FromArgb(70, 70, 70);
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(40, 40, 40);
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Padding = new Padding(5);
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(60, 60, 60);
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
+            ExerciseDataGridView.EnableHeadersVisualStyles = false;
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            ExerciseDataGridView.ColumnHeadersHeight = 35;
+            ExerciseDataGridView.RowHeadersDefaultCellStyle.Padding = new Padding(0);
+            ExerciseDataGridView.RowHeadersVisible = false;
+            ExerciseDataGridView.BorderStyle = BorderStyle.None;
+            ExerciseDataGridView.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            ExerciseDataGridView.AdvancedColumnHeadersBorderStyle.All = DataGridViewAdvancedCellBorderStyle.None;
+            ExerciseDataGridView.RowTemplate.Height = 30;
+            ExerciseDataGridView.DefaultCellStyle.BackColor = Color.FromArgb(40, 40, 40);
+            ExerciseDataGridView.DefaultCellStyle.ForeColor = textLight;
+            ExerciseDataGridView.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
+            ExerciseDataGridView.DefaultCellStyle.SelectionBackColor = Color.FromArgb(80, 60, 60);
+            ExerciseDataGridView.DefaultCellStyle.SelectionForeColor = Color.White;
+
+            // Кнопки
+            StyleButton(ButtonAdd, accentOrange);
+            StyleButton(ButtonRemove, accentRed);
+            StyleButton(ButtonClear, accentRed);
+            StyleButton(ButtonFilter, accentOrange);
+
+            // MenuStrip
+            MainMenuStrip.BackColor = darkPanel;
+            MainMenuStrip.ForeColor = textLight;
+            fileToolStripMenuItem.BackColor = darkPanel;
+            fileToolStripMenuItem.ForeColor = textLight;
+            saveToolStripMenuItem.BackColor = darkPanel;
+            saveToolStripMenuItem.ForeColor = textLight;
+            openToolStripMenuItem.BackColor = darkPanel;
+            openToolStripMenuItem.ForeColor = textLight;
+        }
+
+        /// <summary>
+        /// Стилизация кнопки
+        /// </summary>
+        private void StyleButton(Button button, Color backColor)
+        {
+            button.BackColor = backColor;
+            button.ForeColor = Color.White;
+            button.FlatStyle = FlatStyle.Flat;
+            button.FlatAppearance.BorderSize = 0;
+            button.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            button.Cursor = Cursors.Hand;
         }
 
         /// <summary>
@@ -62,32 +136,34 @@ namespace View
         private void ConfigureDataGridView()
         {
             ExerciseDataGridView.AutoGenerateColumns = false;
-            ExerciseDataGridView.AutoSizeColumnsMode = 
+            ExerciseDataGridView.AutoSizeColumnsMode =
                 DataGridViewAutoSizeColumnsMode.Fill;
-            ExerciseDataGridView.SelectionMode = 
+            ExerciseDataGridView.SelectionMode =
                 DataGridViewSelectionMode.FullRowSelect;
             ExerciseDataGridView.ReadOnly = true;
             ExerciseDataGridView.RowHeadersVisible = false;
             ExerciseDataGridView.Columns.Clear();
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Padding = new Padding(0);
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
-            DataGridViewTextBoxColumn nameColumn = new 
+            DataGridViewTextBoxColumn nameColumn = new
                 DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Name",
                 HeaderText = "Название",
                 Name = "nameColumn",
                 ReadOnly = true,
-                Width = 200
+                HeaderCell = { Style = { BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White } }
             };
 
-            DataGridViewTextBoxColumn detailsColumn = new 
+            DataGridViewTextBoxColumn detailsColumn = new
                 DataGridViewTextBoxColumn
             {
                 DataPropertyName = "ExerciseInfo",
                 HeaderText = "Детали",
                 Name = "detailsColumn",
                 ReadOnly = true,
-                Width = 350
+                HeaderCell = { Style = { BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White } }
             };
 
             DataGridViewTextBoxColumn caloriesColumn = new
@@ -97,20 +173,38 @@ namespace View
                 HeaderText = "Калории",
                 Name = "caloriesColumn",
                 ReadOnly = true,
-                Width = 100
+                HeaderCell = { Style = { BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White } }
             };
+
+            // Общий стиль для ячеек
+            var cellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(40, 40, 40),
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 9F)
+            };
+            nameColumn.DefaultCellStyle = cellStyle;
+            detailsColumn.DefaultCellStyle = cellStyle;
 
             caloriesColumn.DefaultCellStyle = new DataGridViewCellStyle
             {
-                Format = "F2"
+                BackColor = Color.FromArgb(40, 40, 40),
+                ForeColor = Color.White,
+                Format = "F2",
+                Font = new Font("Segoe UI", 9F)
             };
 
             ExerciseDataGridView.Columns.AddRange(new DataGridViewColumn[]
             {
-                nameColumn, 
+                nameColumn,
                 detailsColumn,
                 caloriesColumn
             });
+
+            // Настройка пропорций колонок
+            nameColumn.FillWeight = 25;
+            detailsColumn.FillWeight = 50;
+            caloriesColumn.FillWeight = 25;
         }
 
         /// <summary>

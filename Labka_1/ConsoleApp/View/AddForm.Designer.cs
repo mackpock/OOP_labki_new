@@ -69,7 +69,7 @@ namespace View
             this.ExerciseGroupBox.Text = "Выбор упражнения";
             // 
             // ComboBoxExercise
-            // 
+            //
             this.ComboBoxExercise.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxExercise.FormattingEnabled = true;
             this.ComboBoxExercise.Location = new System.Drawing.Point(8, 23);
@@ -78,6 +78,7 @@ namespace View
             this.ComboBoxExercise.Size = new System.Drawing.Size(278, 24);
             this.ComboBoxExercise.TabIndex = 0;
             this.ComboBoxExercise.SelectedIndexChanged += new System.EventHandler(this.ComboBoxExercise_SelectedIndexChanged);
+            this.ComboBoxExercise.FlatStyle = FlatStyle.Flat;
             // 
             // LabelName
             // 
@@ -235,7 +236,7 @@ namespace View
             this.LabelSwimmingDistance.Text = "Дистанция:";
             // 
             // ComboBoxStyle
-            // 
+            //
             this.ComboBoxStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxStyle.FormattingEnabled = true;
             this.ComboBoxStyle.Location = new System.Drawing.Point(123, 19);

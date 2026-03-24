@@ -40,44 +40,47 @@ namespace View
             ((System.ComponentModel.ISupportInitialize)(this.exerciseBindingSource)).BeginInit();
             this.MainMenuStrip.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // ExercisesGroupBox
-            // 
-            this.ExercisesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.ExercisesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ExercisesGroupBox.Controls.Add(this.ButtonClear);
             this.ExercisesGroupBox.Controls.Add(this.ButtonFilter);
             this.ExercisesGroupBox.Controls.Add(this.ButtonAdd);
             this.ExercisesGroupBox.Controls.Add(this.ButtonRemove);
             this.ExercisesGroupBox.Controls.Add(this.ExerciseDataGridView);
-            this.ExercisesGroupBox.Location = new System.Drawing.Point(13, 32);
-            this.ExercisesGroupBox.Margin = new System.Windows.Forms.Padding(4);
+            this.ExercisesGroupBox.Location = new System.Drawing.Point(10, 35);
+            this.ExercisesGroupBox.Margin = new System.Windows.Forms.Padding(3);
             this.ExercisesGroupBox.Name = "ExercisesGroupBox";
-            this.ExercisesGroupBox.Padding = new System.Windows.Forms.Padding(4);
-            this.ExercisesGroupBox.Size = new System.Drawing.Size(992, 304);
+            this.ExercisesGroupBox.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.ExercisesGroupBox.Size = new System.Drawing.Size(780, 420);
             this.ExercisesGroupBox.TabIndex = 0;
             this.ExercisesGroupBox.TabStop = false;
             this.ExercisesGroupBox.Text = "Лист упражнений";
-            // 
+            //
             // ExerciseDataGridView
-            // 
+            //
             this.ExerciseDataGridView.AllowUserToAddRows = false;
             this.ExerciseDataGridView.AllowUserToDeleteRows = false;
             this.ExerciseDataGridView.AllowUserToResizeRows = false;
-            this.ExerciseDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.ExerciseDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ExerciseDataGridView.AutoGenerateColumns = false;
+            this.ExerciseDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(60, 60, 60);
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.ExerciseDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.ExerciseDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ExerciseDataGridView.ColumnHeadersVisible = true;
+            this.ExerciseDataGridView.ColumnHeadersHeight = 35;
             this.ExerciseDataGridView.DataSource = this.exerciseBindingSource;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -87,8 +90,8 @@ namespace View
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.ExerciseDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            this.ExerciseDataGridView.Location = new System.Drawing.Point(8, 23);
-            this.ExerciseDataGridView.Margin = new System.Windows.Forms.Padding(4);
+            this.ExerciseDataGridView.Location = new System.Drawing.Point(6, 30);
+            this.ExerciseDataGridView.Margin = new System.Windows.Forms.Padding(3);
             this.ExerciseDataGridView.MultiSelect = false;
             this.ExerciseDataGridView.Name = "ExerciseDataGridView";
             this.ExerciseDataGridView.ReadOnly = true;
@@ -103,108 +106,109 @@ namespace View
             this.ExerciseDataGridView.RowHeadersVisible = false;
             this.ExerciseDataGridView.RowHeadersWidth = 51;
             this.ExerciseDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ExerciseDataGridView.Size = new System.Drawing.Size(976, 222);
+            this.ExerciseDataGridView.Size = new System.Drawing.Size(768, 305);
             this.ExerciseDataGridView.TabIndex = 0;
             this.ExerciseDataGridView.SelectionChanged += new System.EventHandler(this.ExerciseDataGridView_SelectionChanged);
-            // 
+            //
             // ButtonAdd
-            // 
+            //
             this.ButtonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ButtonAdd.Location = new System.Drawing.Point(8, 253);
-            this.ButtonAdd.Margin = new System.Windows.Forms.Padding(4);
+            this.ButtonAdd.Location = new System.Drawing.Point(6, 370);
+            this.ButtonAdd.Margin = new System.Windows.Forms.Padding(3);
             this.ButtonAdd.Name = "ButtonAdd";
-            this.ButtonAdd.Size = new System.Drawing.Size(133, 37);
+            this.ButtonAdd.Size = new System.Drawing.Size(120, 40);
             this.ButtonAdd.TabIndex = 1;
             this.ButtonAdd.Text = "Добавить";
             this.ButtonAdd.UseVisualStyleBackColor = true;
             this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
-            // 
-            // ButtonRemove
-            // 
-            this.ButtonRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ButtonRemove.Enabled = false;
-            this.ButtonRemove.Location = new System.Drawing.Point(149, 253);
-            this.ButtonRemove.Margin = new System.Windows.Forms.Padding(4);
-            this.ButtonRemove.Name = "ButtonRemove";
-            this.ButtonRemove.Size = new System.Drawing.Size(133, 37);
-            this.ButtonRemove.TabIndex = 2;
-            this.ButtonRemove.Text = "Удалить";
-            this.ButtonRemove.UseVisualStyleBackColor = true;
-            this.ButtonRemove.Click += new System.EventHandler(this.ButtonRemove_Click);
-            // 
+            //
+            // ButtonFilter
+            //
+            this.ButtonFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ButtonFilter.Location = new System.Drawing.Point(135, 370);
+            this.ButtonFilter.Margin = new System.Windows.Forms.Padding(3);
+            this.ButtonFilter.Name = "ButtonFilter";
+            this.ButtonFilter.Size = new System.Drawing.Size(120, 40);
+            this.ButtonFilter.TabIndex = 2;
+            this.ButtonFilter.Text = "Фильтр";
+            this.ButtonFilter.UseVisualStyleBackColor = true;
+            this.ButtonFilter.Click += new System.EventHandler(this.ButtonFilter_Click);
+            //
             // ButtonClear
-            // 
-            this.ButtonClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            //
+            this.ButtonClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonClear.Enabled = false;
-            this.ButtonClear.Location = new System.Drawing.Point(710, 253);
-            this.ButtonClear.Margin = new System.Windows.Forms.Padding(4);
+            this.ButtonClear.Location = new System.Drawing.Point(520, 370);
+            this.ButtonClear.Margin = new System.Windows.Forms.Padding(3);
             this.ButtonClear.Name = "ButtonClear";
-            this.ButtonClear.Size = new System.Drawing.Size(133, 37);
+            this.ButtonClear.Size = new System.Drawing.Size(120, 40);
             this.ButtonClear.TabIndex = 3;
             this.ButtonClear.Text = "Удалить всё";
             this.ButtonClear.UseVisualStyleBackColor = true;
             this.ButtonClear.Click += new System.EventHandler(this.ButtonClear_Click);
-            // 
-            // ButtonFilter
-            // 
-            this.ButtonFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ButtonFilter.Location = new System.Drawing.Point(851, 253);
-            this.ButtonFilter.Margin = new System.Windows.Forms.Padding(4);
-            this.ButtonFilter.Name = "ButtonFilter";
-            this.ButtonFilter.Size = new System.Drawing.Size(133, 37);
-            this.ButtonFilter.TabIndex = 4;
-            this.ButtonFilter.Text = "Фильтр";
-            this.ButtonFilter.UseVisualStyleBackColor = true;
-            this.ButtonFilter.Click += new System.EventHandler(this.ButtonFilter_Click);
-            // 
+            //
+            // ButtonRemove
+            //
+            this.ButtonRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonRemove.Enabled = false;
+            this.ButtonRemove.Location = new System.Drawing.Point(650, 370);
+            this.ButtonRemove.Margin = new System.Windows.Forms.Padding(3);
+            this.ButtonRemove.Name = "ButtonRemove";
+            this.ButtonRemove.Size = new System.Drawing.Size(120, 40);
+            this.ButtonRemove.TabIndex = 4;
+            this.ButtonRemove.Text = "Удалить";
+            this.ButtonRemove.UseVisualStyleBackColor = true;
+            this.ButtonRemove.Click += new System.EventHandler(this.ButtonRemove_Click);
+            //
             // MainMenuStrip
-            // 
+            //
             this.MainMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
-            this.MainMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.MainMenuStrip.Location = new System.Drawing.Point(0, 5);
             this.MainMenuStrip.Name = "MainMenuStrip";
-            this.MainMenuStrip.Size = new System.Drawing.Size(1021, 28);
-            this.MainMenuStrip.TabIndex = 5;
+            this.MainMenuStrip.Padding = new System.Windows.Forms.Padding(5, 0, 0, 5);
+            this.MainMenuStrip.Size = new System.Drawing.Size(800, 24);
+            this.MainMenuStrip.TabIndex = 6;
             this.MainMenuStrip.Text = "menuStrip1";
-            // 
+            //
             // fileToolStripMenuItem
-            // 
+            //
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem,
             this.openToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
             this.fileToolStripMenuItem.Text = "Файл";
-            // 
+            //
             // saveToolStripMenuItem
-            // 
+            //
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
             this.saveToolStripMenuItem.Text = "Сохранить";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
-            // 
+            //
             // openToolStripMenuItem
-            // 
+            //
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
             this.openToolStripMenuItem.Text = "Открыть";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
-            // 
+            //
             // MainForm
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1021, 349);
+            this.ClientSize = new System.Drawing.Size(800, 490);
             this.Controls.Add(this.ExercisesGroupBox);
             this.Controls.Add(this.MainMenuStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Калькулятор калорий";
+            this.Text = "Ex0rcise - Калькулятор калорий";
             this.ExercisesGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ExerciseDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.exerciseBindingSource)).EndInit();
