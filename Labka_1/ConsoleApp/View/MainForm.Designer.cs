@@ -20,202 +20,187 @@ namespace View
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.ExercisesGroupBox = new System.Windows.Forms.GroupBox();
-            this.ExerciseDataGridView = new System.Windows.Forms.DataGridView();
-            this.exerciseBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ButtonAdd = new System.Windows.Forms.Button();
-            this.ButtonRemove = new System.Windows.Forms.Button();
-            this.ButtonClear = new System.Windows.Forms.Button();
-            this.ButtonFilter = new System.Windows.Forms.Button();
-            this.MainMenuStrip = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ExercisesGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ExerciseDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.exerciseBindingSource)).BeginInit();
-            this.MainMenuStrip.SuspendLayout();
-            this.SuspendLayout();
-            //
+            components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            ExercisesGroupBox = new GroupBox();
+            ButtonClear = new Button();
+            ButtonFilter = new Button();
+            ButtonAdd = new Button();
+            ButtonRemove = new Button();
+            ExerciseDataGridView = new DataGridView();
+            exerciseBindingSource = new BindingSource(components);
+            MainMenuStrip = new MenuStrip();
+            fileToolStripMenuItem = new ToolStripMenuItem();
+            saveToolStripMenuItem = new ToolStripMenuItem();
+            openToolStripMenuItem = new ToolStripMenuItem();
+            ExercisesGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ExerciseDataGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)exerciseBindingSource).BeginInit();
+            MainMenuStrip.SuspendLayout();
+            SuspendLayout();
+            // 
             // ExercisesGroupBox
-            //
-            this.ExercisesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ExercisesGroupBox.Controls.Add(this.ButtonClear);
-            this.ExercisesGroupBox.Controls.Add(this.ButtonFilter);
-            this.ExercisesGroupBox.Controls.Add(this.ButtonAdd);
-            this.ExercisesGroupBox.Controls.Add(this.ButtonRemove);
-            this.ExercisesGroupBox.Controls.Add(this.ExerciseDataGridView);
-            this.ExercisesGroupBox.Location = new System.Drawing.Point(10, 35);
-            this.ExercisesGroupBox.Margin = new System.Windows.Forms.Padding(3);
-            this.ExercisesGroupBox.Name = "ExercisesGroupBox";
-            this.ExercisesGroupBox.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.ExercisesGroupBox.Size = new System.Drawing.Size(780, 420);
-            this.ExercisesGroupBox.TabIndex = 0;
-            this.ExercisesGroupBox.TabStop = false;
-            this.ExercisesGroupBox.Text = "Лист упражнений";
-            //
-            // ExerciseDataGridView
-            //
-            this.ExerciseDataGridView.AllowUserToAddRows = false;
-            this.ExerciseDataGridView.AllowUserToDeleteRows = false;
-            this.ExerciseDataGridView.AllowUserToResizeRows = false;
-            this.ExerciseDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ExerciseDataGridView.AutoGenerateColumns = false;
-            this.ExerciseDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(60, 60, 60);
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ExerciseDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.ExerciseDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ExerciseDataGridView.ColumnHeadersVisible = true;
-            this.ExerciseDataGridView.ColumnHeadersHeight = 35;
-            this.ExerciseDataGridView.DataSource = this.exerciseBindingSource;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ExerciseDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            this.ExerciseDataGridView.Location = new System.Drawing.Point(6, 30);
-            this.ExerciseDataGridView.Margin = new System.Windows.Forms.Padding(3);
-            this.ExerciseDataGridView.MultiSelect = false;
-            this.ExerciseDataGridView.Name = "ExerciseDataGridView";
-            this.ExerciseDataGridView.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ExerciseDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.ExerciseDataGridView.RowHeadersVisible = false;
-            this.ExerciseDataGridView.RowHeadersWidth = 51;
-            this.ExerciseDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ExerciseDataGridView.Size = new System.Drawing.Size(768, 305);
-            this.ExerciseDataGridView.TabIndex = 0;
-            this.ExerciseDataGridView.SelectionChanged += new System.EventHandler(this.ExerciseDataGridView_SelectionChanged);
-            //
-            // ButtonAdd
-            //
-            this.ButtonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ButtonAdd.Location = new System.Drawing.Point(6, 370);
-            this.ButtonAdd.Margin = new System.Windows.Forms.Padding(3);
-            this.ButtonAdd.Name = "ButtonAdd";
-            this.ButtonAdd.Size = new System.Drawing.Size(120, 40);
-            this.ButtonAdd.TabIndex = 1;
-            this.ButtonAdd.Text = "Добавить";
-            this.ButtonAdd.UseVisualStyleBackColor = true;
-            this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
-            //
-            // ButtonFilter
-            //
-            this.ButtonFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ButtonFilter.Location = new System.Drawing.Point(135, 370);
-            this.ButtonFilter.Margin = new System.Windows.Forms.Padding(3);
-            this.ButtonFilter.Name = "ButtonFilter";
-            this.ButtonFilter.Size = new System.Drawing.Size(120, 40);
-            this.ButtonFilter.TabIndex = 2;
-            this.ButtonFilter.Text = "Фильтр";
-            this.ButtonFilter.UseVisualStyleBackColor = true;
-            this.ButtonFilter.Click += new System.EventHandler(this.ButtonFilter_Click);
-            //
+            // 
+            ExercisesGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ExercisesGroupBox.Controls.Add(ButtonClear);
+            ExercisesGroupBox.Controls.Add(ButtonFilter);
+            ExercisesGroupBox.Controls.Add(ButtonAdd);
+            ExercisesGroupBox.Controls.Add(ButtonRemove);
+            ExercisesGroupBox.Controls.Add(ExerciseDataGridView);
+            ExercisesGroupBox.Location = new Point(9, 33);
+            ExercisesGroupBox.Name = "ExercisesGroupBox";
+            ExercisesGroupBox.Padding = new Padding(3, 9, 3, 3);
+            ExercisesGroupBox.Size = new Size(566, 293);
+            ExercisesGroupBox.TabIndex = 0;
+            ExercisesGroupBox.TabStop = false;
+            ExercisesGroupBox.Text = "Лист упражнений";
+            ExercisesGroupBox.Enter += ExercisesGroupBox_Enter;
+            // 
             // ButtonClear
-            //
-            this.ButtonClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonClear.Enabled = false;
-            this.ButtonClear.Location = new System.Drawing.Point(520, 370);
-            this.ButtonClear.Margin = new System.Windows.Forms.Padding(3);
-            this.ButtonClear.Name = "ButtonClear";
-            this.ButtonClear.Size = new System.Drawing.Size(120, 40);
-            this.ButtonClear.TabIndex = 3;
-            this.ButtonClear.Text = "Удалить всё";
-            this.ButtonClear.UseVisualStyleBackColor = true;
-            this.ButtonClear.Click += new System.EventHandler(this.ButtonClear_Click);
-            //
+            // 
+            ButtonClear.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            ButtonClear.Enabled = false;
+            ButtonClear.Location = new Point(339, 246);
+            ButtonClear.Name = "ButtonClear";
+            ButtonClear.Size = new Size(105, 38);
+            ButtonClear.TabIndex = 3;
+            ButtonClear.Text = "Удалить всё";
+            ButtonClear.UseVisualStyleBackColor = true;
+            ButtonClear.Click += ButtonClear_Click;
+            // 
+            // ButtonFilter
+            // 
+            ButtonFilter.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            ButtonFilter.Location = new Point(118, 246);
+            ButtonFilter.Name = "ButtonFilter";
+            ButtonFilter.Size = new Size(105, 38);
+            ButtonFilter.TabIndex = 2;
+            ButtonFilter.Text = "Фильтр";
+            ButtonFilter.UseVisualStyleBackColor = true;
+            ButtonFilter.Click += ButtonFilter_Click;
+            // 
+            // ButtonAdd
+            // 
+            ButtonAdd.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            ButtonAdd.Location = new Point(5, 246);
+            ButtonAdd.Name = "ButtonAdd";
+            ButtonAdd.Size = new Size(105, 38);
+            ButtonAdd.TabIndex = 1;
+            ButtonAdd.Text = "Добавить";
+            ButtonAdd.UseVisualStyleBackColor = true;
+            ButtonAdd.Click += ButtonAdd_Click;
+            // 
             // ButtonRemove
-            //
-            this.ButtonRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonRemove.Enabled = false;
-            this.ButtonRemove.Location = new System.Drawing.Point(650, 370);
-            this.ButtonRemove.Margin = new System.Windows.Forms.Padding(3);
-            this.ButtonRemove.Name = "ButtonRemove";
-            this.ButtonRemove.Size = new System.Drawing.Size(120, 40);
-            this.ButtonRemove.TabIndex = 4;
-            this.ButtonRemove.Text = "Удалить";
-            this.ButtonRemove.UseVisualStyleBackColor = true;
-            this.ButtonRemove.Click += new System.EventHandler(this.ButtonRemove_Click);
-            //
+            // 
+            ButtonRemove.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            ButtonRemove.Enabled = false;
+            ButtonRemove.Location = new Point(453, 246);
+            ButtonRemove.Name = "ButtonRemove";
+            ButtonRemove.Size = new Size(105, 38);
+            ButtonRemove.TabIndex = 4;
+            ButtonRemove.Text = "Удалить";
+            ButtonRemove.UseVisualStyleBackColor = true;
+            ButtonRemove.Click += ButtonRemove_Click;
+            // 
+            // ExerciseDataGridView
+            // 
+            ExerciseDataGridView.AllowUserToAddRows = false;
+            ExerciseDataGridView.AllowUserToDeleteRows = false;
+            ExerciseDataGridView.AllowUserToResizeRows = false;
+            ExerciseDataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ExerciseDataGridView.AutoGenerateColumns = false;
+            ExerciseDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(60, 60, 60);
+            dataGridViewCellStyle1.SelectionForeColor = Color.White;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            ExerciseDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ExerciseDataGridView.DataSource = exerciseBindingSource;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            ExerciseDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            ExerciseDataGridView.Location = new Point(5, 28);
+            ExerciseDataGridView.MultiSelect = false;
+            ExerciseDataGridView.Name = "ExerciseDataGridView";
+            ExerciseDataGridView.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            ExerciseDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            ExerciseDataGridView.RowHeadersVisible = false;
+            ExerciseDataGridView.RowHeadersWidth = 51;
+            ExerciseDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            ExerciseDataGridView.Size = new Size(556, 212);
+            ExerciseDataGridView.TabIndex = 0;
+            ExerciseDataGridView.SelectionChanged += ExerciseDataGridView_SelectionChanged;
+            // 
             // MainMenuStrip
-            //
-            this.MainMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.MainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-            this.MainMenuStrip.Location = new System.Drawing.Point(0, 5);
-            this.MainMenuStrip.Name = "MainMenuStrip";
-            this.MainMenuStrip.Padding = new System.Windows.Forms.Padding(5, 0, 0, 5);
-            this.MainMenuStrip.Size = new System.Drawing.Size(800, 24);
-            this.MainMenuStrip.TabIndex = 6;
-            this.MainMenuStrip.Text = "menuStrip1";
-            //
+            // 
+            MainMenuStrip.ImageScalingSize = new Size(20, 20);
+            MainMenuStrip.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem });
+            MainMenuStrip.Location = new Point(0, 0);
+            MainMenuStrip.Name = "MainMenuStrip";
+            MainMenuStrip.Padding = new Padding(4, 0, 0, 5);
+            MainMenuStrip.Size = new Size(584, 24);
+            MainMenuStrip.TabIndex = 6;
+            MainMenuStrip.Text = "menuStrip1";
+            // 
             // fileToolStripMenuItem
-            //
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveToolStripMenuItem,
-            this.openToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
-            this.fileToolStripMenuItem.Text = "Файл";
-            //
+            // 
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveToolStripMenuItem, openToolStripMenuItem });
+            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            fileToolStripMenuItem.Size = new Size(48, 19);
+            fileToolStripMenuItem.Text = "Файл";
+            // 
             // saveToolStripMenuItem
-            //
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
-            this.saveToolStripMenuItem.Text = "Сохранить";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
-            //
+            // 
+            saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            saveToolStripMenuItem.Size = new Size(132, 22);
+            saveToolStripMenuItem.Text = "Сохранить";
+            saveToolStripMenuItem.Click += SaveToolStripMenuItem_Click;
+            // 
             // openToolStripMenuItem
-            //
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
-            this.openToolStripMenuItem.Text = "Открыть";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
-            //
+            // 
+            openToolStripMenuItem.Name = "openToolStripMenuItem";
+            openToolStripMenuItem.Size = new Size(132, 22);
+            openToolStripMenuItem.Text = "Открыть";
+            openToolStripMenuItem.Click += OpenToolStripMenuItem_Click;
+            // 
             // MainForm
-            //
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 490);
-            this.Controls.Add(this.ExercisesGroupBox);
-            this.Controls.Add(this.MainMenuStrip);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(3);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "MainForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Ex0rcise - Калькулятор калорий";
-            this.ExercisesGroupBox.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ExerciseDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.exerciseBindingSource)).EndInit();
-            this.MainMenuStrip.ResumeLayout(false);
-            this.MainMenuStrip.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(584, 338);
+            Controls.Add(ExercisesGroupBox);
+            Controls.Add(MainMenuStrip);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Ex0rcise - Калькулятор калорий";
+            ExercisesGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)ExerciseDataGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)exerciseBindingSource).EndInit();
+            MainMenuStrip.ResumeLayout(false);
+            MainMenuStrip.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 

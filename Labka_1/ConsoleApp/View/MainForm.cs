@@ -47,65 +47,6 @@ namespace View
         }
 
         /// <summary>
-        /// Применение "качковского" стиля
-        /// </summary>
-        private void ApplyGymStyle()
-        {
-            Color darkBg = Color.FromArgb(30, 30, 30);
-            Color darkPanel = Color.FromArgb(45, 45, 45);
-            Color accentOrange = Color.FromArgb(255, 140, 0);
-            Color accentRed = Color.FromArgb(220, 20, 60);
-            Color textLight = Color.FromArgb(240, 240, 240);
-
-            this.BackColor = darkBg;
-            this.ForeColor = textLight;
-
-            ExercisesGroupBox.BackColor = darkPanel;
-            ExercisesGroupBox.ForeColor = accentOrange;
-            ExercisesGroupBox.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-
-            // DataGridView
-            ExerciseDataGridView.BackgroundColor = Color.FromArgb(50, 50, 50);
-            ExerciseDataGridView.GridColor = Color.FromArgb(70, 70, 70);
-            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(40, 40, 40);
-            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Padding = new Padding(5);
-            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(60, 60, 60);
-            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
-            ExerciseDataGridView.EnableHeadersVisualStyles = false;
-            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            ExerciseDataGridView.ColumnHeadersHeight = 35;
-            ExerciseDataGridView.RowHeadersDefaultCellStyle.Padding = new Padding(0);
-            ExerciseDataGridView.RowHeadersVisible = false;
-            ExerciseDataGridView.BorderStyle = BorderStyle.None;
-            ExerciseDataGridView.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            ExerciseDataGridView.AdvancedColumnHeadersBorderStyle.All = DataGridViewAdvancedCellBorderStyle.None;
-            ExerciseDataGridView.RowTemplate.Height = 30;
-            ExerciseDataGridView.DefaultCellStyle.BackColor = Color.FromArgb(40, 40, 40);
-            ExerciseDataGridView.DefaultCellStyle.ForeColor = textLight;
-            ExerciseDataGridView.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
-            ExerciseDataGridView.DefaultCellStyle.SelectionBackColor = Color.FromArgb(80, 60, 60);
-            ExerciseDataGridView.DefaultCellStyle.SelectionForeColor = Color.White;
-
-            // Кнопки
-            StyleButton(ButtonAdd, accentOrange);
-            StyleButton(ButtonRemove, accentRed);
-            StyleButton(ButtonClear, accentRed);
-            StyleButton(ButtonFilter, accentOrange);
-
-            // MenuStrip
-            MainMenuStrip.BackColor = darkPanel;
-            MainMenuStrip.ForeColor = textLight;
-            fileToolStripMenuItem.BackColor = darkPanel;
-            fileToolStripMenuItem.ForeColor = textLight;
-            saveToolStripMenuItem.BackColor = darkPanel;
-            saveToolStripMenuItem.ForeColor = textLight;
-            openToolStripMenuItem.BackColor = darkPanel;
-            openToolStripMenuItem.ForeColor = textLight;
-        }
-
-        /// <summary>
         /// Стилизация кнопки
         /// </summary>
         private void StyleButton(Button button, Color backColor)
@@ -143,8 +84,10 @@ namespace View
             ExerciseDataGridView.ReadOnly = true;
             ExerciseDataGridView.RowHeadersVisible = false;
             ExerciseDataGridView.Columns.Clear();
-            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Padding = new Padding(0);
-            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Padding
+                = new Padding(0);
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Alignment
+                = DataGridViewContentAlignment.MiddleLeft;
 
             DataGridViewTextBoxColumn nameColumn = new
                 DataGridViewTextBoxColumn
@@ -153,7 +96,13 @@ namespace View
                 HeaderText = "Название",
                 Name = "nameColumn",
                 ReadOnly = true,
-                HeaderCell = { Style = { BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White } }
+                HeaderCell =
+                { Style =
+                    {
+                        BackColor = Color.FromArgb(40, 40, 40),
+                        ForeColor = Color.White
+                    }
+                }
             };
 
             DataGridViewTextBoxColumn detailsColumn = new
@@ -163,7 +112,13 @@ namespace View
                 HeaderText = "Детали",
                 Name = "detailsColumn",
                 ReadOnly = true,
-                HeaderCell = { Style = { BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White } }
+                HeaderCell =
+                { Style =
+                    {
+                        BackColor = Color.FromArgb(40, 40, 40),
+                        ForeColor = Color.White
+                    }
+                }
             };
 
             DataGridViewTextBoxColumn caloriesColumn = new
@@ -173,7 +128,12 @@ namespace View
                 HeaderText = "Калории",
                 Name = "caloriesColumn",
                 ReadOnly = true,
-                HeaderCell = { Style = { BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White } }
+                HeaderCell =
+                { Style =
+                    {   BackColor = Color.FromArgb(40, 40, 40),
+                        ForeColor = Color.White
+                    }
+                }
             };
 
             // Общий стиль для ячеек
@@ -183,9 +143,9 @@ namespace View
                 ForeColor = Color.White,
                 Font = new Font("Segoe UI", 9F)
             };
+
             nameColumn.DefaultCellStyle = cellStyle;
             detailsColumn.DefaultCellStyle = cellStyle;
-
             caloriesColumn.DefaultCellStyle = new DataGridViewCellStyle
             {
                 BackColor = Color.FromArgb(40, 40, 40),
@@ -213,7 +173,7 @@ namespace View
         private void UpdateButtonsState()
         {
             ButtonRemove.Enabled =
-                ExerciseDataGridView.SelectedRows.Count > 0;
+            ExerciseDataGridView.SelectedRows.Count > 0;
             ButtonClear.Enabled = _exercises.Count > 0;
         }
 
@@ -234,7 +194,7 @@ namespace View
         /// <summary>
         /// Обработчик нажатия кнопки Добавить
         /// </summary>
-        private void ButtonAdd_Click(object sender, EventArgs e)
+        private void ButtonAdd_Click(object sender, EventArgs arg)
         {
             if (_addForm != null && !_addForm.IsDisposed)
             {
@@ -264,7 +224,7 @@ namespace View
         {
             if (ExerciseDataGridView.SelectedRows.Count > 0)
             {
-                var selectedExercise = 
+                var selectedExercise =
                     ExerciseDataGridView.SelectedRows[0].DataBoundItem
                     as IExercise;
                 if (selectedExercise != null)
@@ -463,7 +423,7 @@ namespace View
         }
 
         /// <summary>
-        /// Сохраняет список упражнений в файл в формате XML
+        /// Сохраняет список упражнений в файл в формате 
         /// </summary>
         /// <param name="fileName">Имя файла для сохранения</param>
         private void SaveExercises(string fileName)
@@ -478,7 +438,7 @@ namespace View
         }
 
         /// <summary>
-        /// Загружает список упражнений из файла в формате XML
+        /// Загружает список упражнений из файла в формате
         /// </summary>
         /// <param name="fileName">Имя файла для загрузки</param>
         private void LoadExercises(string fileName)
@@ -515,6 +475,68 @@ namespace View
             EventArgs arg)
         {
             UpdateButtonsState();
+        }
+        /// <summary>
+        /// Применение стиля
+        /// </summary>
+        private void ApplyGymStyle()
+        {
+            Color darkBg = Color.FromArgb(30, 30, 30);
+            Color darkPanel = Color.FromArgb(45, 45, 45);
+            Color accentOrange = Color.FromArgb(255, 140, 0);
+            Color accentRed = Color.FromArgb(220, 20, 60);
+            Color textLight = Color.FromArgb(240, 240, 240);
+
+            this.BackColor = darkBg;
+            this.ForeColor = textLight;
+
+            ExercisesGroupBox.BackColor = darkPanel;
+            ExercisesGroupBox.ForeColor = accentOrange;
+            ExercisesGroupBox.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+
+            ExerciseDataGridView.BackgroundColor = Color.FromArgb(50, 50, 50);
+            ExerciseDataGridView.GridColor = Color.FromArgb(70, 70, 70);
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(40, 40, 40);
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Padding = new Padding(5);
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(60, 60, 60);
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
+            ExerciseDataGridView.EnableHeadersVisualStyles = false;
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            ExerciseDataGridView.ColumnHeadersHeight = 35;
+            ExerciseDataGridView.RowHeadersDefaultCellStyle.Padding = new Padding(0);
+            ExerciseDataGridView.RowHeadersVisible = false;
+            ExerciseDataGridView.BorderStyle = BorderStyle.None;
+            ExerciseDataGridView.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            ExerciseDataGridView.AdvancedColumnHeadersBorderStyle.All = DataGridViewAdvancedCellBorderStyle.None;
+            ExerciseDataGridView.RowTemplate.Height = 30;
+            ExerciseDataGridView.DefaultCellStyle.BackColor = Color.FromArgb(40, 40, 40);
+            ExerciseDataGridView.DefaultCellStyle.ForeColor = textLight;
+            ExerciseDataGridView.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
+            ExerciseDataGridView.DefaultCellStyle.SelectionBackColor = Color.FromArgb(80, 60, 60);
+            ExerciseDataGridView.DefaultCellStyle.SelectionForeColor = Color.White;
+
+            // Кнопки
+            StyleButton(ButtonAdd, accentOrange);
+            StyleButton(ButtonRemove, accentRed);
+            StyleButton(ButtonClear, accentRed);
+            StyleButton(ButtonFilter, accentOrange);
+
+            // MenuStrip
+            MainMenuStrip.BackColor = darkPanel;
+            MainMenuStrip.ForeColor = textLight;
+            fileToolStripMenuItem.BackColor = darkPanel;
+            fileToolStripMenuItem.ForeColor = textLight;
+            saveToolStripMenuItem.BackColor = darkPanel;
+            saveToolStripMenuItem.ForeColor = textLight;
+            openToolStripMenuItem.BackColor = darkPanel;
+            openToolStripMenuItem.ForeColor = textLight;
+        }
+
+        private void ExercisesGroupBox_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }
