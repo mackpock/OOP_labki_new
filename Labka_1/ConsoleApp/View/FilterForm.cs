@@ -104,7 +104,7 @@ namespace View
         {
             string search = TextBoxFilter.Text.Trim();
             var selectedTypes = new List<string>();
-            
+
             foreach (var item in CheckedListBoxExercise.CheckedItems)
                 selectedTypes.Add(item.ToString());
 
@@ -112,7 +112,7 @@ namespace View
                 selectedTypes.AddRange(ExerciseTypes.AllExerciseTypes);
 
             var filtered = _allExercises
-                .Where(ex => MatchType(ex, selectedTypes) 
+                .Where(ex => MatchType(ex, selectedTypes)
                 && MatchSearch(ex, search))
                 .ToList();
 
@@ -126,7 +126,7 @@ namespace View
         /// </summary>
         private bool MatchType(IExercise ex, List<string> types)
         {
-            string type = ex 
+            string type = ex
 
             switch
             {
@@ -150,7 +150,7 @@ namespace View
             if (ex.ExerciseInfo.ToLower().Contains(lower)) return true;
             if (ex.Calories.ToString("F2").Contains(term)) return true;
             if (ex.Calories.ToString("F0").Contains(term)) return true;
-            
+
             return false;
         }
 
@@ -175,7 +175,7 @@ namespace View
             ExerciseGroupBox.BackColor = panel;
             ExerciseGroupBox.ForeColor = orange;
             ExerciseGroupBox.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            ExerciseGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | 
+            ExerciseGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Left |
             AnchorStyles.Right;
 
             LabelSearch.ForeColor = text;
@@ -207,6 +207,11 @@ namespace View
             btn.FlatAppearance.BorderSize = 0;
             btn.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btn.Cursor = Cursors.Hand;
+        }
+
+        private void LabelSearch_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

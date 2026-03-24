@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfExerciseWrapper xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExerciseWrapper>
+    <Type>Бег</Type>
+    <Name>Упражнение 647</Name>
+    <Distance>80.6</Distance>
+    <Intensity>28.8</Intensity>
+  </ExerciseWrapper>
+  <ExerciseWrapper>
+    <Type>Бег</Type>
+    <Name>Упражнение 826</Name>
+    <Distance>72.51</Distance>
+    <Intensity>12.79</Intensity>
+  </ExerciseWrapper>
+  <ExerciseWrapper>
+    <Type>Бег</Type>
+    <Name>Упражнение 226</Name>
+    <Distance>33.48</Distance>
+    <Intensity>6.02</Intensity>
+  </ExerciseWrapper>
+  <ExerciseWrapper>
+    <Type>Бег</Type>
+    <Name>Упражнение 562</Name>
+    <Distance>23.17</Distance>
+    <Intensity>25.11</Intensity>
+  </ExerciseWrapper>
+  <ExerciseWrapper>
+    <Type>Бег</Type>
+    <Name>Упражнение 202</Name>
+    <Distance>0.61</Distance>
+    <Intensity>7.79</Intensity>
+  </ExerciseWrapper>
+  <ExerciseWrapper>
+    <Type>Бег</Type>
+    <Name>Упражнение 775</Name>
+    <Distance>12.59</Distance>
+    <Intensity>11.86</Intensity>
+  </ExerciseWrapper>
+  <ExerciseWrapper>
+    <Type>Плавание</Type>
+    <Name>Упражнение 785</Name>
+    <Distance>773.52</Distance>
+    <Style>Butterfly</Style>
+  </ExerciseWrapper>
+  <ExerciseWrapper>
+    <Type>Плавание</Type>
+    <Name>Упражнение 563</Name>
+    <Distance>5725.17</Distance>
+    <Style>Freestyle</Style>
+  </ExerciseWrapper>
+  <ExerciseWrapper>
+    <Type>Плавание</Type>
+    <Name>Упражнение 895</Name>
+    <Distance>3421.9</Distance>
+    <Style>Freestyle</Style>
+  </ExerciseWrapper>
+  <ExerciseWrapper>
+    <Type>Плавание</Type>
+    <Name>Упражнение 983</Name>
+    <Distance>9644.75</Distance>
+    <Style>Butterfly</Style>
+  </ExerciseWrapper>
+  <ExerciseWrapper>
+    <Type>Жим штанги</Type>
+    <Name>Упражнение 927</Name>
+    <Weight>277.63</Weight>
+    <Repetitions>897</Repetitions>
+  </ExerciseWrapper>
+  <ExerciseWrapper>
+    <Type>Жим штанги</Type>
+    <Name>Упражнение 731</Name>
+    <Weight>284.31</Weight>
+    <Repetitions>974</Repetitions>
+  </ExerciseWrapper>
+  <ExerciseWrapper>
+    <Type>Жим штанги</Type>
+    <Name>Упражнение 589</Name>
+    <Weight>61.37</Weight>
+    <Repetitions>977</Repetitions>
+  </ExerciseWrapper>
+  <ExerciseWrapper>
+    <Type>Жим штанги</Type>
+    <Name>Упражнение 97</Name>
+    <Weight>285.16</Weight>
+    <Repetitions>706</Repetitions>
+  </ExerciseWrapper>
+  <ExerciseWrapper>
+    <Type>Жим штанги</Type>
+    <Name>Упражнение 567</Name>
+    <Weight>65.17</Weight>
+    <Repetitions>855</Repetitions>
+  </ExerciseWrapper>
+</ArrayOfExerciseWrapper>
