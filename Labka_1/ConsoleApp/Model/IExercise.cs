@@ -20,4 +20,9 @@ public interface IExercise
     /// Подробная информация об упражнении
     /// </summary>
     string ExerciseInfo { get; }
+
+    /// <summary>
+    /// Количество затраченных калорий
+    /// </summary>
+    double Calories { get; }
 }

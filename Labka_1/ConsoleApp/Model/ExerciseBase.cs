@@ -106,4 +106,9 @@ public abstract class ExerciseBase : IExercise
     /// Расчёт затраченных калорий
     /// </summary>
     public abstract double CalculateCalories();
+
+    /// <summary>
+    /// Количество затраченных калорий
+    /// </summary>
+    public double Calories => CalculateCalories();
 }

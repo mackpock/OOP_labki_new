@@ -1,0 +1,43 @@
+namespace View
+{
+    /// <summary>
+    /// Класс для хранения константных строковых значений приложения
+    /// </summary>
+    public static class Constants
+    {
+        /// <summary>
+        /// Тип упражнения - Бег
+        /// </summary>
+        public const string Running = "Бег";
+
+        /// <summary>
+        /// Тип упражнения - Плавание
+        /// </summary>
+        public const string Swimming = "Плавание";
+
+        /// <summary>
+        /// Тип упражнения - Жим штанги
+        /// </summary>
+        public const string BenchPress = "Жим штанги";
+
+        /// <summary>
+        /// Стиль плавания - Вольный стиль
+        /// </summary>
+        public const string Freestyle = "Вольный стиль";
+
+        /// <summary>
+        /// Стиль плавания - Баттерфляй
+        /// </summary>
+        public const string Butterfly = "Баттерфляй";
+
+        /// <summary>
+        /// Массив всех типов упражнений
+        /// </summary>
+        public static readonly string[] AllExerciseTypes = new string[] { Running, Swimming, BenchPress };
+
+        /// <summary>
+        /// Массив всех стилей плавания
+        /// </summary>
+        public static readonly string[] AllSwimmingStyles = new string[] { Freestyle, Butterfly };
+    }
+}
