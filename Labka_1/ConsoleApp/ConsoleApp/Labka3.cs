@@ -163,7 +163,7 @@ public class Program
 
 
     /// <summary>
-    /// Вывод результатов по каждому упражнению
+    /// Вывод результатов по каждому упражнению 123
     /// </summary>
     private static void ShowResults(List<IExercise> exercises)
     {
