@@ -8,117 +8,89 @@ using Model;
 namespace View
 {
     /// <summary>
-    /// Форма фильтрации упражнений
+    /// Окно фильтрации списка упражнений
     /// </summary>
     public partial class FilterForm : Form
     {
         /// <summary>
-        /// Исходный список всех упражнений для фильтрации
+        /// Полный список упражнений
         /// </summary>
         private List<IExercise> _allExercises;
 
         /// <summary>
-        /// Событие, возникающее при применении фильтра
+        /// Делегат события - фильтр обновлен
         /// </summary>
         public event Action<List<IExercise>> FilterApplied;
-
         /// <summary>
-        /// Событие, возникающее при отмене фильтра
+        /// Делегат события - фильтр отменён (форма закрыта без применения)
         /// </summary>
         public event Action FilterCanceled;
 
-        /// <summary>
-        /// Конструктор формы
-        /// </summary>
-        /// <param name="exercises">Список упражнений</param>
         public FilterForm(List<IExercise> exercises)
         {
             InitializeComponent();
             _allExercises = exercises;
-            InitializeForm();
-            ApplyGymStyle();
+            InitControls();
+            ApplyDarkTheme();
             this.FormClosing += FilterForm_FormClosing;
         }
 
         /// <summary>
-        /// Стилизация кнопки
+        /// Инициализация контролов
         /// </summary>
-        private void StyleButton(Button button, Color backColor)
+        private void InitControls()
         {
-            button.BackColor = backColor;
-            button.ForeColor = Color.White;
-            button.FlatStyle = FlatStyle.Flat;
-            button.FlatAppearance.BorderSize = 0;
-            button.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            button.Cursor = Cursors.Hand;
+            CheckedListBoxExercise.Items.AddRange(ExerciseTypes.AllExerciseTypes);
+            for (int i = 0; i < CheckedListBoxExercise.Items.Count; i++)
+                CheckedListBoxExercise.SetItemChecked(i, true);
         }
 
         /// <summary>
-        /// Обрабатывает событие закрытия формы
+        /// Закрытие формы
         /// </summary>
         private void FilterForm_FormClosing(object sender,
-            FormClosingEventArgs arg)
+         FormClosingEventArgs arg)
         {
             if (arg.CloseReason == CloseReason.UserClosing)
             {
                 FilterCanceled?.Invoke();
-                ResetCheckboxes();
-                MessageBox.Show(
-                    "Фильтр отменен. Показаны все упражнения.",
-                    "Отмена фильтра",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                RestoreCheckboxes();
+                MessageBox.Show("Фильтр сброшен", "Инфо", MessageBoxButtons.OK,
+                 MessageBoxIcon.Information);
             }
         }
 
         /// <summary>
-        /// Сброс галочек на все выбранные
+        /// Восстановление всех галочек
         /// </summary>
-        private void ResetCheckboxes()
+        private void RestoreCheckboxes()
         {
             for (int i = 0; i < CheckedListBoxExercise.Items.Count; i++)
-            {
                 CheckedListBoxExercise.SetItemChecked(i, true);
-            }
             TextBoxFilter.Clear();
         }
 
         /// <summary>
-        /// Первоначальная настройка элементов управления формы фильтрации
-        /// </summary>
-        private void InitializeForm()
-        {
-            CheckedListBoxExercise.Items.AddRange(Constants.AllExerciseTypes);
-            for (int i = 0; i < CheckedListBoxExercise.Items.Count; i++)
-            {
-                CheckedListBoxExercise.SetItemChecked(i, true);
-            }
-        }
-
-        /// <summary>
-        /// Обработчик нажатия кнопки Фильтр
+        /// Кнопка "Фильтр"
         /// </summary>
         private void ButtonFilter_Click(object sender, EventArgs arg)
         {
-            PerformFilter();
+            ApplyFilter();
         }
 
         /// <summary>
-        /// Обработчик нажатия кнопки Отменить
+        /// Кнопка "Отменить"
         /// </summary>
         private void ButtonCancel_Click(object sender, EventArgs arg)
         {
             FilterCanceled?.Invoke();
-            ResetCheckboxes();
-            MessageBox.Show(
-                "Фильтр отменен. Показаны все упражнения.",
-                "Отмена фильтра",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            RestoreCheckboxes();
+            MessageBox.Show("Фильтр сброшен", "Инфо", MessageBoxButtons.OK,
+             MessageBoxIcon.Information);
         }
 
         /// <summary>
-        /// Обработчик нажатия кнопки Закрыть
+        /// Кнопка "Закрыть"
         /// </summary>
         private void ButtonClose_Click(object sender, EventArgs arg)
         {
@@ -126,133 +98,115 @@ namespace View
         }
 
         /// <summary>
-        /// Выполнение фильтрации
+        /// Применение фильтрации
         /// </summary>
-        private void PerformFilter()
+        private void ApplyFilter()
         {
-            var searchTerm = TextBoxFilter.Text.Trim();
+            string search = TextBoxFilter.Text.Trim();
             var selectedTypes = new List<string>();
+            
             foreach (var item in CheckedListBoxExercise.CheckedItems)
-            {
                 selectedTypes.Add(item.ToString());
-            }
 
             if (selectedTypes.Count == 0)
-            {
-                selectedTypes.AddRange(Constants.AllExerciseTypes);
-            }
+                selectedTypes.AddRange(ExerciseTypes.AllExerciseTypes);
 
-            var filteredExercises = _allExercises
-                .Where(ex => IsExerciseTypeSelected(ex, selectedTypes) 
-                             &&
-                             ContainsSearchTerm(ex, searchTerm)).ToList();
+            var filtered = _allExercises
+                .Where(ex => MatchType(ex, selectedTypes) 
+                && MatchSearch(ex, search))
+                .ToList();
 
-            FilterApplied?.Invoke(filteredExercises);
-            MessageBox.Show(
-                $"Найдено упражнений: {filteredExercises.Count}",
-                "Результаты фильтрации",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            FilterApplied?.Invoke(filtered);
+            MessageBox.Show($"Найдено: {filtered.Count}", "Результат",
+             MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /// <summary>
-        /// Проверка соответствия типа упражнения выбранным типам
+        /// Проверка типа упражнения
         /// </summary>
-        /// <param name="exercise">Упражнение</param>
-        /// <param name="selectedTypes">Выбранный тип</param>
-        /// <returns>true если тип выбран</returns>
-        private bool IsExerciseTypeSelected(IExercise exercise,
-            List<string> selectedTypes)
+        private bool MatchType(IExercise ex, List<string> types)
         {
-            string exerciseType;
-            switch (exercise)
+            string type = ex 
+
+            switch
             {
-                case Running running:
-                {
-                    exerciseType = Constants.Running;
-                    break;
-                }
-                case Swimming swimming:
-                {
-                    exerciseType = Constants.Swimming;
-                    break;
-                }
-                case BenchPress benchPress:
-                {
-                    exerciseType = Constants.BenchPress;
-                    break;
-                }
-                default:
-                {
-                    throw new InvalidOperationException("Неизвестный" +
-                        " тип упражнения");
-                }
-            }
-            return selectedTypes.Contains(exerciseType);
+                Running => ExerciseTypes.Running,
+                Swimming => ExerciseTypes.Swimming,
+                BenchPress => ExerciseTypes.BenchPress,
+                _ => throw new InvalidOperationException("Неизвестный тип")
+            };
+
+            return types.Contains(type);
         }
 
         /// <summary>
-        /// Проверка содержания поискового запроса в данных упражнения
+        /// Поиск по тексту
         /// </summary>
-        /// <param name="exercise">Упражнение</param>
-        /// <param name="searchTerm">Поисковый запрос</param>
-        /// <returns>true если найдено совпадение</returns>
-        private bool ContainsSearchTerm(IExercise exercise, string searchTerm)
+        private bool MatchSearch(IExercise ex, string term)
         {
-            var searchLower = searchTerm.ToLower();
-            if (exercise.Name.ToLower().Contains(searchLower))
-            {
-                return true;
-            }
-            if (exercise.ExerciseInfo.ToLower().Contains(searchLower))
-            {
-                return true;
-            }
-            if (exercise.Calories.ToString("F2").Contains(searchTerm) ||
-                exercise.Calories.ToString("F0").Contains(searchTerm))
-            {
-                return true;
-            }
+            if (string.IsNullOrEmpty(term)) return true;
+            var lower = term.ToLower();
+            if (ex.Name.ToLower().Contains(lower)) return true;
+            if (ex.ExerciseInfo.ToLower().Contains(lower)) return true;
+            if (ex.Calories.ToString("F2").Contains(term)) return true;
+            if (ex.Calories.ToString("F0").Contains(term)) return true;
+            
             return false;
         }
-        private void ApplyGymStyle()
-        {
-            Color darkBg = Color.FromArgb(30, 30, 30);
-            Color darkPanel = Color.FromArgb(45, 45, 45);
-            Color accentOrange = Color.FromArgb(255, 140, 0);
-            Color accentRed = Color.FromArgb(220, 20, 60);
-            Color textLight = Color.FromArgb(240, 240, 240);
 
-            this.BackColor = darkBg;
-            this.ForeColor = textLight;
+        /// <summary>
+        /// Тёмное оформление
+        /// </summary>
+        private void ApplyDarkTheme()
+        {
+            Color bg = Color.FromArgb(30, 30, 30);
+            Color panel = Color.FromArgb(45, 45, 45);
+            Color orange = Color.FromArgb(255, 140, 0);
+            Color red = Color.FromArgb(220, 20, 60);
+            Color text = Color.FromArgb(240, 240, 240);
+
+            this.BackColor = bg;
+            this.ForeColor = text;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.StartPosition = FormStartPosition.CenterParent;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
 
-            ExerciseGroupBox.BackColor = darkPanel;
-            ExerciseGroupBox.ForeColor = accentOrange;
+            ExerciseGroupBox.BackColor = panel;
+            ExerciseGroupBox.ForeColor = orange;
             ExerciseGroupBox.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            ExerciseGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            ExerciseGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | 
+            AnchorStyles.Right;
 
-            LabelSearch.ForeColor = textLight;
+            LabelSearch.ForeColor = text;
             LabelSearch.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
 
             TextBoxFilter.BackColor = Color.FromArgb(60, 60, 60);
-            TextBoxFilter.ForeColor = textLight;
+            TextBoxFilter.ForeColor = text;
             TextBoxFilter.BorderStyle = BorderStyle.FixedSingle;
             TextBoxFilter.Font = new Font("Segoe UI", 10F);
 
             CheckedListBoxExercise.BackColor = Color.FromArgb(60, 60, 60);
-            CheckedListBoxExercise.ForeColor = textLight;
+            CheckedListBoxExercise.ForeColor = text;
             CheckedListBoxExercise.BorderStyle = BorderStyle.FixedSingle;
             CheckedListBoxExercise.CheckOnClick = true;
 
-            StyleButton(ButtonFilter, accentOrange);
-            StyleButton(ButtonCancel, accentRed);
-            StyleButton(ButtonClose, Color.FromArgb(80, 80, 80));
+            ApplyButtonStyle(ButtonFilter, orange);
+            ApplyButtonStyle(ButtonCancel, red);
+            ApplyButtonStyle(ButtonClose, Color.FromArgb(80, 80, 80));
         }
 
-
+        /// <summary>
+        /// Оформление кнопки
+        /// </summary>
+        private void ApplyButtonStyle(Button btn, Color clr)
+        {
+            btn.BackColor = clr;
+            btn.ForeColor = Color.White;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 0;
+            btn.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btn.Cursor = Cursors.Hand;
+        }
     }
 }

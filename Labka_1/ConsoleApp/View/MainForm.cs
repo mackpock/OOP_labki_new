@@ -11,188 +11,82 @@ using Model;
 namespace View
 {
     /// <summary>
-    /// Главная форма приложения
+    /// Основная форма программы
     /// </summary>
     public partial class MainForm : Form
     {
-        /// <summary>
-        /// Коллекция упражнений для отображения в DataGridView
-        /// </summary>
-        private BindingList<IExercise> _exercises;
-
-        /// <summary>
-        /// Исходная коллекция упражнений для восстановления после фильтрации
-        /// </summary>
+        // Список для хранения всех упражнений
         private List<IExercise> _originalExercises;
-
-        /// <summary>
-        /// Ссылка на открытую форму добавления упражнения
-        /// </summary>
+        
+        // Список для отображения в таблице
+        private BindingList<IExercise> _exercises;
+        
+        // Форма добавления
         private AddForm _addForm;
-
-        /// <summary>
-        /// Ссылка на открытую форму фильтрации
-        /// </summary>
+        
+        // Форма фильтрации
         private FilterForm _filterForm;
-
+        
         /// <summary>
-        /// Конструктор главной формы
+        /// Конструктор формы - настройка данных и стилей
         /// </summary>
         public MainForm()
         {
             InitializeComponent();
-            InitializeData();
-            this.Text = "Ex0rcise - Калькулятор калорий";
-            ApplyGymStyle();
+            SetupData();
+            SetupVisualStyles();
+            this.Text = "Ex0rcise - Расчёт калорий";
         }
 
         /// <summary>
-        /// Стилизация кнопки
+        /// Применяет стиль к кнопке
         /// </summary>
-        private void StyleButton(Button button, Color backColor)
+        private void ApplyButtonStyle(Button btn, Color color)
         {
-            button.BackColor = backColor;
-            button.ForeColor = Color.White;
-            button.FlatStyle = FlatStyle.Flat;
-            button.FlatAppearance.BorderSize = 0;
-            button.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            button.Cursor = Cursors.Hand;
+            btn.BackColor = color;
+            btn.ForeColor = Color.White;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 0;
+            btn.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btn.Cursor = Cursors.Hand;
         }
 
         /// <summary>
-        /// Инициализация данных
+        /// Первоначальная настройка данных
         /// </summary>
-        private void InitializeData()
+        private void SetupData()
         {
             _exercises = new BindingList<IExercise>();
             _originalExercises = new List<IExercise>();
             ExerciseDataGridView.DataSource = _exercises;
-            ConfigureDataGridView();
-            UpdateButtonsState();
+            SetupColumns();
+            RefreshButtons();
         }
 
         /// <summary>
-        /// Настройка таблицы упражнений
+        /// Обновление доступности кнопок
         /// </summary>
-        private void ConfigureDataGridView()
+        private void RefreshButtons()
         {
-            ExerciseDataGridView.AutoGenerateColumns = false;
-            ExerciseDataGridView.AutoSizeColumnsMode =
-                DataGridViewAutoSizeColumnsMode.Fill;
-            ExerciseDataGridView.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
-            ExerciseDataGridView.ReadOnly = true;
-            ExerciseDataGridView.RowHeadersVisible = false;
-            ExerciseDataGridView.Columns.Clear();
-            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Padding
-                = new Padding(0);
-            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Alignment
-                = DataGridViewContentAlignment.MiddleLeft;
-
-            DataGridViewTextBoxColumn nameColumn = new
-                DataGridViewTextBoxColumn
-            {
-                DataPropertyName = "Name",
-                HeaderText = "Название",
-                Name = "nameColumn",
-                ReadOnly = true,
-                HeaderCell =
-                { Style =
-                    {
-                        BackColor = Color.FromArgb(40, 40, 40),
-                        ForeColor = Color.White
-                    }
-                }
-            };
-
-            DataGridViewTextBoxColumn detailsColumn = new
-                DataGridViewTextBoxColumn
-            {
-                DataPropertyName = "ExerciseInfo",
-                HeaderText = "Детали",
-                Name = "detailsColumn",
-                ReadOnly = true,
-                HeaderCell =
-                { Style =
-                    {
-                        BackColor = Color.FromArgb(40, 40, 40),
-                        ForeColor = Color.White
-                    }
-                }
-            };
-
-            DataGridViewTextBoxColumn caloriesColumn = new
-                DataGridViewTextBoxColumn
-            {
-                DataPropertyName = "Calories",
-                HeaderText = "Калории",
-                Name = "caloriesColumn",
-                ReadOnly = true,
-                HeaderCell =
-                { Style =
-                    {   BackColor = Color.FromArgb(40, 40, 40),
-                        ForeColor = Color.White
-                    }
-                }
-            };
-
-            // Общий стиль для ячеек
-            var cellStyle = new DataGridViewCellStyle
-            {
-                BackColor = Color.FromArgb(40, 40, 40),
-                ForeColor = Color.White,
-                Font = new Font("Segoe UI", 9F)
-            };
-
-            nameColumn.DefaultCellStyle = cellStyle;
-            detailsColumn.DefaultCellStyle = cellStyle;
-            caloriesColumn.DefaultCellStyle = new DataGridViewCellStyle
-            {
-                BackColor = Color.FromArgb(40, 40, 40),
-                ForeColor = Color.White,
-                Format = "F2",
-                Font = new Font("Segoe UI", 9F)
-            };
-
-            ExerciseDataGridView.Columns.AddRange(new DataGridViewColumn[]
-            {
-                nameColumn,
-                detailsColumn,
-                caloriesColumn
-            });
-
-            // Настройка пропорций колонок
-            nameColumn.FillWeight = 25;
-            detailsColumn.FillWeight = 50;
-            caloriesColumn.FillWeight = 25;
-        }
-
-        /// <summary>
-        /// Обновление состояния кнопок
-        /// </summary>
-        private void UpdateButtonsState()
-        {
-            ButtonRemove.Enabled =
-            ExerciseDataGridView.SelectedRows.Count > 0;
+            ButtonRemove.Enabled = ExerciseDataGridView.SelectedRows.Count > 0;
             ButtonClear.Enabled = _exercises.Count > 0;
         }
 
         /// <summary>
-        /// Внутренний метод для добавления упражнения
+        /// Добавление упражнения в список
         /// </summary>
-        /// <param name="exercise">Упражнение</param>
-        private void AddExerciseInternal(IExercise exercise)
+        private void RegisterExercise(IExercise ex)
         {
-            if (exercise != null)
+            if (ex != null)
             {
-                _exercises.Add(exercise);
-                _originalExercises.Add(exercise);
-                UpdateButtonsState();
+                _exercises.Add(ex);
+                _originalExercises.Add(ex);
+                RefreshButtons();
             }
         }
 
         /// <summary>
-        /// Обработчик нажатия кнопки Добавить
+        /// Клик по кнопке "Добавить"
         /// </summary>
         private void ButtonAdd_Click(object sender, EventArgs arg)
         {
@@ -204,94 +98,15 @@ namespace View
             }
 
             _addForm = new AddForm();
-            _addForm.ExerciseCreated += (exercise) =>
-            {
-                AddExerciseInternal(exercise);
-            };
-
-            _addForm.FormClosed += (s, args) =>
-            {
-                _addForm = null;
-            };
-
+            _addForm.ExerciseCreated += ex => RegisterExercise(ex);
+            _addForm.FormClosed += (s, args) => _addForm = null;
             _addForm.Show();
         }
 
         /// <summary>
-        /// Обработчик нажатия кнопки Удалить
+        /// Клик по кнопке "Фильтр"
         /// </summary>
-        private void ButtonRemove_Click(object sender, EventArgs arg)
-        {
-            if (ExerciseDataGridView.SelectedRows.Count > 0)
-            {
-                var selectedExercise =
-                    ExerciseDataGridView.SelectedRows[0].DataBoundItem
-                    as IExercise;
-                if (selectedExercise != null)
-                {
-                    var result = MessageBox.Show(
-                        $"Вы уверены, что хотите удалить упражнение" +
-                        $" '{selectedExercise.Name}'?",
-                        "Подтверждение удаления",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Question,
-                        MessageBoxDefaultButton.Button1);
-
-                    if (result == DialogResult.Yes)
-                    {
-                        _exercises.Remove(selectedExercise);
-                        _originalExercises.Remove(selectedExercise);
-                        UpdateButtonsState();
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Обработчик нажатия кнопки Удалить всё
-        /// </summary>
-        private void ButtonClear_Click(object sender, EventArgs e)
-        {
-            if (_exercises.Count > 0)
-            {
-                var result = MessageBox.Show(
-                    "Вы уверены, что хотите удалить все упражнения?",
-                    "Подтверждение удаления",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question,
-                    MessageBoxDefaultButton.Button2);
-
-                if (result == DialogResult.Yes)
-                {
-                    var exercisesToRemove = _exercises.ToList();
-                    foreach (var exercise in exercisesToRemove)
-                    {
-                        _exercises.Remove(exercise);
-                        _originalExercises.Remove(exercise);
-                    }
-                    UpdateButtonsState();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Внутренний метод для обновления отображаемых упражнений
-        /// </summary>
-        /// <param name="exercises">Отфильтрованные упражнения</param>
-        private void UpdateExercisesInternal(List<IExercise> exercises)
-        {
-            _exercises.Clear();
-            foreach (var exercise in exercises)
-            {
-                _exercises.Add(exercise);
-            }
-            UpdateButtonsState();
-        }
-
-        /// <summary>
-        /// Обработчик нажатия кнопки Фильтр
-        /// </summary>
-        private void ButtonFilter_Click(object sender, EventArgs e)
+        private void ButtonFilter_Click(object sender, EventArgs arg)
         {
             if (_filterForm != null && !_filterForm.IsDisposed)
             {
@@ -301,197 +116,223 @@ namespace View
             }
 
             _filterForm = new FilterForm(_originalExercises);
-            _filterForm.FilterApplied += (filteredExercises) =>
-            {
-                UpdateExercisesInternal(filteredExercises);
-            };
-
-            _filterForm.FilterCanceled += () =>
-            {
-                UpdateExercisesInternal(_originalExercises);
-            };
-
-            _filterForm.FormClosed += (s, args) =>
-            {
-                _filterForm = null;
-            };
+            _filterForm.FilterApplied += list => UpdateDisplayList(list);
+            _filterForm.FilterCanceled += () 
+            => UpdateDisplayList(_originalExercises);
+            _filterForm.FormClosed += (s, args) => _filterForm = null;
             _filterForm.Show();
         }
 
         /// <summary>
-        /// Обработчик нажатия кнопки Сохранить
+        /// Обновление отображаемого списка
         /// </summary>
-        private void SaveToolStripMenuItem_Click(object sender, EventArgs arg)
+        private void UpdateDisplayList(List<IExercise> list)
+        {
+            _exercises.Clear();
+            foreach (var ex in list)
+                _exercises.Add(ex);
+            RefreshButtons();
+        }
+
+        /// <summary>
+        /// Удаление выбранного упражнения
+        /// </summary>
+        private void ButtonRemove_Click(object sender, EventArgs arg)
+        {
+            if (ExerciseDataGridView.SelectedRows.Count == 0) return;
+
+            var selected = ExerciseDataGridView.SelectedRows[0].DataBoundItem
+             as IExercise;
+            if (selected == null) return;
+
+            var confirm = MessageBox.Show(
+                $"Удалить '{selected.Name}'?",
+                "Подтверждение",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button1);
+
+            if (confirm == DialogResult.Yes)
+            {
+                _exercises.Remove(selected);
+                _originalExercises.Remove(selected);
+                RefreshButtons();
+            }
+        }
+
+        /// <summary>
+        /// Очистка всего списка
+        /// </summary>
+        private void ButtonClear_Click(object sender, EventArgs e)
+        {
+            if (_exercises.Count == 0) 
+            return;
+
+            var confirm = MessageBox.Show(
+                "Очистить весь список?",
+                "Подтверждение",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2);
+
+            if (confirm == DialogResult.Yes)
+            {
+                var toRemove = _exercises.ToList();
+
+                foreach (var ex in toRemove)
+                {
+                    _exercises.Remove(ex);
+                    _originalExercises.Remove(ex);
+                }
+                RefreshButtons();
+            }
+        }
+
+        /// <summary>
+        /// Выбор строки в таблице
+        /// </summary>
+        private void ExerciseDataGridView_SelectionChanged(object sender, 
+        EventArgs args)
+        {
+            RefreshButtons();
+        }
+
+        /// <summary>
+        /// Сохранение в файл
+        /// </summary>
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (_exercises.Count == 0)
             {
-                MessageBox.Show(
-                    "Нет упражнений для сохранения",
-                    "Сохранение",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                MessageBox.Show("Список пуст", "Инфо", MessageBoxButtons.OK,
+                 MessageBoxIcon.Information);
                 return;
             }
 
-            using (var saveDialog = new SaveFileDialog())
+            using (var dlg = new SaveFileDialog())
             {
-                saveDialog.Filter = "Файлы упражнений (*.exs)|*.exs";
-                saveDialog.DefaultExt = "exs";
-                saveDialog.Title = "Сохранить упражнения";
+                dlg.Filter = "Файлы упражнений (*.shizo)|*.shizo";
+                dlg.DefaultExt = "shizo";
+                dlg.Title = "Сохранение данных";
 
-                if (saveDialog.ShowDialog() == DialogResult.OK)
+                if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
-                        SaveExercises(saveDialog.FileName);
-                        MessageBox.Show(
-                            "Данные успешно сохранены",
-                            "Сохранение завершено",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
+                        SerializeExercises(dlg.FileName);
+                        MessageBox.Show("Успешно сохранено", "Готово",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(
-                            $"Ошибка при сохранении: {ex.Message}",
-                            "Ошибка сохранения",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
+                        MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
         }
 
         /// <summary>
-        /// Обработчик нажатия кнопки Открыть
+        /// Загрузка из файла
         /// </summary>
-        private void OpenToolStripMenuItem_Click(object sender, EventArgs arg)
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var openDialog = new OpenFileDialog())
+            using (var dlg = new OpenFileDialog())
             {
-                openDialog.Filter = "Файлы упражнений (*.exs)|*.exs";
-                openDialog.DefaultExt = "exs";
-                openDialog.Title = "Открыть упражнения";
+                dlg.Filter = "Файлы упражнений (*.shizo)|*.shizo";
+                dlg.DefaultExt = "shizo";
+                dlg.Title = "Открытие данных";
 
-                if (openDialog.ShowDialog() == DialogResult.OK)
+                if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
-                        LoadExercises(openDialog.FileName);
-                        MessageBox.Show(
-                            "Данные успешно загружены",
-                            "Загрузка завершено",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
+                        DeserializeExercises(dlg.FileName);
+                        MessageBox.Show("Успешно загружено", "Готово",
+                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(
-                            $"Ошибка при загрузке: {ex.Message}",
-                            "Ошибка загрузки",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
+                        MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
+                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
         }
 
         /// <summary>
-        /// Создает обертку для упражнения
+        /// Сериализация упражнений
         /// </summary>
-        /// <param name="exercise">Упражнение</param>
-        /// <returns>Обертка упражнения</returns>
-        private ExerciseWrapper CreateWrapper(IExercise exercise)
-        {
-            if (exercise is Running running)
-            {
-                return new ExerciseWrapper(running);
-            }
-            else if (exercise is Swimming swimming)
-            {
-                return new ExerciseWrapper(swimming);
-            }
-            else if (exercise is BenchPress benchPress)
-            {
-                return new ExerciseWrapper(benchPress);
-            }
-            else
-            {
-                throw new InvalidOperationException("Неизвестный" +
-                    " тип упражнения");
-            }
-        }
-
-        /// <summary>
-        /// Сохраняет список упражнений в файл в формате 
-        /// </summary>
-        /// <param name="fileName">Имя файла для сохранения</param>
-        private void SaveExercises(string fileName)
+        private void SerializeExercises(string path)
         {
             var serializer = new XmlSerializer(typeof(List<ExerciseWrapper>));
-            var wrappedExercises = _originalExercises.Select(ex
-                => CreateWrapper(ex)).ToList();
-            using (var stream = new FileStream(fileName, FileMode.Create))
+            var wrapped = _originalExercises.Select(CreateWrapper).ToList();
+            using (var fs = new FileStream(path, FileMode.Create))
             {
-                serializer.Serialize(stream, wrappedExercises);
+                serializer.Serialize(fs, wrapped);
             }
         }
 
         /// <summary>
-        /// Загружает список упражнений из файла в формате
+        /// Десериализация упражнений
         /// </summary>
-        /// <param name="fileName">Имя файла для загрузки</param>
-        private void LoadExercises(string fileName)
+        private void DeserializeExercises(string path)
         {
-            string xmlContent = File.ReadAllText(fileName);
-            if (xmlContent.Contains(">NaN<") || xmlContent.Contains(">nan<"))
-            {
+            var content = File.ReadAllText(path);
+            if (content.Contains(">NaN<") ||
+             content.Contains(">nan<"))
                 throw new InvalidDataException(
-                    "Файл поврежден: содержит некорректные" +
-                    " числовые значения (NaN).");
-            }
+                    "Повреждённый файл (NaN значения)");
 
             var serializer = new XmlSerializer(typeof(List<ExerciseWrapper>));
-            using (var stream = new FileStream(fileName, FileMode.Open))
+            using (var fs = new FileStream(path, FileMode.Open))
             {
-                var wrappedExercises =
-                    (List<ExerciseWrapper>)serializer.Deserialize(stream);
+                var wrapped = (List<ExerciseWrapper>)serializer.Deserialize(fs);
                 _exercises.Clear();
                 _originalExercises.Clear();
-                foreach (var wrapped in wrappedExercises)
+
+                foreach (var word in wrapped)
                 {
-                    var exercise = wrapped.GetExercise();
-                    _exercises.Add(exercise);
-                    _originalExercises.Add(exercise);
+                    var ex = word.RecoverExercise();
+                    _exercises.Add(ex);
+                    _originalExercises.Add(ex);
                 }
             }
-            UpdateButtonsState();
+            RefreshButtons();
         }
 
         /// <summary>
-        /// Обработчик изменения выбранной строки
+        /// Создание обёртки для упражнения
         /// </summary>
-        private void ExerciseDataGridView_SelectionChanged(object sender,
-            EventArgs arg)
+        private ExerciseWrapper CreateWrapper(IExercise ex)
         {
-            UpdateButtonsState();
+            if (ex is Running r) 
+            return new ExerciseWrapper(r);
+
+            if (ex is Swimming s) 
+            return new ExerciseWrapper(s);
+
+            if (ex is BenchPress b) 
+            return new ExerciseWrapper(b);
+
+            throw new InvalidOperationException("Неизвестный тип");
         }
         /// <summary>
-        /// Применение стиля
+        /// Настройка визуального оформления
         /// </summary>
-        private void ApplyGymStyle()
+        private void SetupVisualStyles()
         {
-            Color darkBg = Color.FromArgb(30, 30, 30);
-            Color darkPanel = Color.FromArgb(45, 45, 45);
-            Color accentOrange = Color.FromArgb(255, 140, 0);
-            Color accentRed = Color.FromArgb(220, 20, 60);
-            Color textLight = Color.FromArgb(240, 240, 240);
+            Color bgColor = Color.FromArgb(30, 30, 30);
+            Color panelColor = Color.FromArgb(45, 45, 45);
+            Color orangeAccent = Color.FromArgb(255, 140, 0);
+            Color redAccent = Color.FromArgb(220, 20, 60);
+            Color lightText = Color.FromArgb(240, 240, 240);
 
-            this.BackColor = darkBg;
-            this.ForeColor = textLight;
+            this.BackColor = bgColor;
+            this.ForeColor = lightText;
 
-            ExercisesGroupBox.BackColor = darkPanel;
-            ExercisesGroupBox.ForeColor = accentOrange;
+            ExercisesGroupBox.BackColor = panelColor;
+            ExercisesGroupBox.ForeColor = orangeAccent;
             ExercisesGroupBox.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
 
             ExerciseDataGridView.BackgroundColor = Color.FromArgb(50, 50, 50);
@@ -512,31 +353,117 @@ namespace View
             ExerciseDataGridView.AdvancedColumnHeadersBorderStyle.All = DataGridViewAdvancedCellBorderStyle.None;
             ExerciseDataGridView.RowTemplate.Height = 30;
             ExerciseDataGridView.DefaultCellStyle.BackColor = Color.FromArgb(40, 40, 40);
-            ExerciseDataGridView.DefaultCellStyle.ForeColor = textLight;
+            ExerciseDataGridView.DefaultCellStyle.ForeColor = lightText;
             ExerciseDataGridView.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
             ExerciseDataGridView.DefaultCellStyle.SelectionBackColor = Color.FromArgb(80, 60, 60);
             ExerciseDataGridView.DefaultCellStyle.SelectionForeColor = Color.White;
 
-            // Кнопки
-            StyleButton(ButtonAdd, accentOrange);
-            StyleButton(ButtonRemove, accentRed);
-            StyleButton(ButtonClear, accentRed);
-            StyleButton(ButtonFilter, accentOrange);
+            // Стилизация кнопок
+            ApplyButtonStyle(ButtonAdd, orangeAccent);
+            ApplyButtonStyle(ButtonRemove, redAccent);
+            ApplyButtonStyle(ButtonClear, redAccent);
+            ApplyButtonStyle(ButtonFilter, orangeAccent);
 
-            // MenuStrip
-            MainMenuStrip.BackColor = darkPanel;
-            MainMenuStrip.ForeColor = textLight;
-            fileToolStripMenuItem.BackColor = darkPanel;
-            fileToolStripMenuItem.ForeColor = textLight;
-            saveToolStripMenuItem.BackColor = darkPanel;
-            saveToolStripMenuItem.ForeColor = textLight;
-            openToolStripMenuItem.BackColor = darkPanel;
-            openToolStripMenuItem.ForeColor = textLight;
+            // Меню
+            MainMenuStrip.BackColor = panelColor;
+            MainMenuStrip.ForeColor = lightText;
+            fileToolStripMenuItem.BackColor = panelColor;
+            fileToolStripMenuItem.ForeColor = lightText;
+            saveToolStripMenuItem.BackColor = panelColor;
+            saveToolStripMenuItem.ForeColor = lightText;
+            openToolStripMenuItem.BackColor = panelColor;
+            openToolStripMenuItem.ForeColor = lightText;
         }
-
-        private void ExercisesGroupBox_Enter(object sender, EventArgs e)
+        /// <summary>
+        /// Конфигурация колонок таблицы
+        /// </summary>
+        private void SetupColumns()
         {
+            ExerciseDataGridView.AutoGenerateColumns = false;
+            ExerciseDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            ExerciseDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            ExerciseDataGridView.ReadOnly = true;
+            ExerciseDataGridView.RowHeadersVisible = false;
+            ExerciseDataGridView.Columns.Clear();
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Padding = new Padding(0);
+            ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
+            var nameCol = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Name",
+                HeaderText = "Название",
+                Name = "nameColumn",
+                ReadOnly = true,
+                HeaderCell = 
+                { 
+                    Style = 
+                    { 
+                      BackColor = Color.FromArgb(40, 40, 40),
+                      ForeColor = Color.White 
+                    } 
+                }
+            };
+
+            var infoCol = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "ExerciseInfo",
+                HeaderText = "Детали",
+                Name = "detailsColumn",
+                ReadOnly = true,
+                HeaderCell = 
+                { Style = 
+                    { 
+                       BackColor = Color.FromArgb(40, 40, 40),
+                       ForeColor = Color.White 
+                    } 
+                }
+            };
+
+            var calCol = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Calories",
+                HeaderText = "Калории",
+                Name = "caloriesColumn",
+                ReadOnly = true,
+                HeaderCell = 
+                { 
+                    Style = 
+                    { 
+                        BackColor = Color.FromArgb(40, 40, 40),
+                        ForeColor = Color.White 
+                    } 
+                }
+            };
+
+            var commonStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(40, 40, 40),
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 9F)
+            };
+
+            nameCol.DefaultCellStyle = commonStyle;
+            infoCol.DefaultCellStyle = commonStyle;
+            calCol.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(40, 40, 40),
+                ForeColor = Color.White,
+                Format = "F2",
+                Font = new Font("Segoe UI", 9F)
+            };
+
+            ExerciseDataGridView.Columns.AddRange
+            (
+                nameCol, 
+                infoCol, 
+                calCol
+            );
+
+            // Пропорции
+            nameCol.FillWeight = 25;
+            infoCol.FillWeight = 50;
+            calCol.FillWeight = 25;
         }
+    
     }
 }

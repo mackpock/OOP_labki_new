@@ -7,253 +7,198 @@ using Model;
 namespace View
 {
     /// <summary>
-    /// Форма добавления упражнения
+    /// Окно создания нового упражнения
     /// </summary>
     public partial class AddForm : Form
     {
+
         /// <summary>
-        /// Событие, возникающее при создании нового упражнения
+        /// Событие создания упражнения
         /// </summary>
         public event Action<IExercise> ExerciseCreated;
 
         /// <summary>
-        /// Конструктор формы
+        /// Добавить форму и настроить её
         /// </summary>
         public AddForm()
         {
             InitializeComponent();
-            InitializeForm();
-            ApplyGymStyle();
-            // Кнопка видима только при отладке
+            ConfigureControls();
+            ApplyDarkTheme();
             ButtonCreateRandom.Visible = Debugger.IsAttached;
         }
 
         /// <summary>
-        /// Стилизация кнопки
+        /// Настройка элементов управления
         /// </summary>
-        private void StyleButton(Button button, Color backColor)
+        private void ConfigureControls()
         {
-            button.BackColor = backColor;
-            button.ForeColor = Color.White;
-            button.FlatStyle = FlatStyle.Flat;
-            button.FlatAppearance.BorderSize = 0;
-            button.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            button.Cursor = Cursors.Hand;
-        }
-
-        /// <summary>
-        /// Первоначальная настройка элементов управления формы
-        /// </summary>
-        private void InitializeForm()
-        {
-            ComboBoxExercise.Items.AddRange(Constants.AllExerciseTypes);
+            ComboBoxExercise.Items.AddRange(ExerciseTypes.AllExerciseTypes);
             ComboBoxExercise.SelectedIndex = 0;
-            ComboBoxStyle.Items.AddRange(Constants.AllSwimmingStyles);
+            ComboBoxStyle.Items.AddRange(ExerciseTypes.AllSwimmingStyles);
             ComboBoxStyle.SelectedIndex = 0;
+
             LabelIntensityUnit.Text = "км/ч";
             LabelRunningDistanceUnit.Text = "км";
             LabelSwimmingDistanceUnit.Text = "м";
             LabelWeightUnit.Text = "кг";
-            UpdateExerciseParameters();
+
+            SwitchExerciseType();
         }
 
         /// <summary>
-        /// Обновление параметров упражнения
+        /// Переключение видимости панелей
         /// </summary>
-        private void UpdateExerciseParameters()
+        private void SwitchExerciseType()
         {
             PanelRunning.Visible = false;
             PanelSwimming.Visible = false;
             PanelBenchPress.Visible = false;
-            switch (ComboBoxExercise.SelectedItem.ToString())
-            {
-                case Constants.Running:
-                {
-                    PanelRunning.Visible = true;
-                    break;
-                }
-                case Constants.Swimming:
-                {
-                    PanelSwimming.Visible = true;
-                    break;
-                }
-                case Constants.BenchPress:
-                {
-                    PanelBenchPress.Visible = true;
-                    break;
-                }
-            }
-        }
 
-        /// <summary>           
-        /// Обработчик изменения типа упражнения
-        /// </summary>
-        private void ComboBoxExercise_SelectedIndexChanged(object sender,
-            EventArgs arg)
-        {
-            UpdateExerciseParameters();
+            string selected = ComboBoxExercise.SelectedItem.ToString();
+            if (selected == ExerciseTypes.Running) PanelRunning.Visible = true;
+
+            else if (selected == ExerciseTypes.Swimming) PanelSwimming.Visible 
+            = true;
+
+            else if (selected == ExerciseTypes.BenchPress)
+             PanelBenchPress.Visible = true;
         }
 
         /// <summary>
-        /// Обработчик нажатия кнопки Создать
+        /// Смена типа упражнения
         /// </summary>
-        private void ButtonCreate_Click(object sender, EventArgs arg)
+        private void ComboBoxExercise_SelectedIndexChanged(object sender,
+         EventArgs arg)
+        {
+            SwitchExerciseType();
+        }
+
+        /// <summary>
+        /// Создание упражнения (кнопка)
+        /// </summary>
+        private void ButtonCreate_Click(object sender, EventArgs e)
         {
             try
             {
-                if (ValidateInput())
+                if (CheckInputData())
                 {
-                    var exercise = CreateExercise();
+                    var exercise = BuildExercise();
                     ExerciseCreated?.Invoke(exercise);
                     TextBoxName.Clear();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    $"Ошибка при создании упражнения: {ex.Message}",
-                    "Ошибка",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
+                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         /// <summary>
-        /// Обработчик нажатия кнопки Закрыть
+        /// Закрытие окна
         /// </summary>
-        private void ButtonClose_Click(object sender, EventArgs arg)
+        private void ButtonClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
         /// <summary>
-        /// Обработчик нажатия кнопки Создать случайное упражнение
+        /// Генерация случайного упражнения
         /// </summary>
-        private void ButtonCreateRandom_Click(object sender, EventArgs arg)
+        private void ButtonCreateRandom_Click(object sender, EventArgs e)
         {
             try
             {
-                var random = new Random();
-                TextBoxName.Text = $"Упражнение {random.Next(1000)}";
-                switch (ComboBoxExercise.SelectedItem.ToString())
+                var rnd = new Random();
+                TextBoxName.Text = $"Упражнение {rnd.Next(1000)}";
+                string type = ComboBoxExercise.SelectedItem.ToString();
+
+                if (type == ExerciseTypes.Running)
                 {
-                    case Constants.Running:
-                        {
-
-                            NumericIntensity.Value = (decimal)
-                                Math.Round(random.NextDouble() * 29 + 1, 2);
-                            NumericRunningDistance.Value = (decimal)
-                                Math.Round(random.NextDouble() * 99.9 + 0.1, 2);
-                            break;
-                        }
-                    case Constants.Swimming:
-                        {
-                            ComboBoxStyle.SelectedIndex =
-                                random.Next(ComboBoxStyle.Items.Count);
-
-                            NumericSwimmingDistance.Value = (decimal)
-                                Math.Round(random.NextDouble() * 9999 + 1, 2);
-                            break;
-                        }
-                    case Constants.BenchPress:
-                        {
-                            NumericWeight.Value = (decimal)
-                                Math.Round(random.NextDouble() * 340 + 1, 2);
-                            NumericRepetitions.Value = random.Next(1, 1001);
-                            break;
-                        }
+                    NumericIntensity.Value = (decimal)
+                    Math.Round(rnd.NextDouble() * 29 + 1, 2);
+                    NumericRunningDistance.Value = (decimal)
+                    Math.Round(rnd.NextDouble() * 99.9 + 0.1, 2);
                 }
-                if (ValidateInput())
+                else if (type == ExerciseTypes.Swimming)
                 {
-                    var exercise = CreateExercise();
+                    ComboBoxStyle.SelectedIndex = rnd.Next
+                    (ComboBoxStyle.Items.Count);
+                    NumericSwimmingDistance.Value = (decimal)
+                    Math.Round(rnd.NextDouble() * 9999 + 1, 2);
+                }
+                else if (type == ExerciseTypes.BenchPress)
+                {
+                    NumericWeight.Value = (decimal)
+                    Math.Round(rnd.NextDouble() * 340 + 1, 2);
+                    NumericRepetitions.Value = rnd.Next(1, 1001);
+                }
+
+                if (CheckInputData())
+                {
+                    var exercise = BuildExercise();
                     ExerciseCreated?.Invoke(exercise);
                     TextBoxName.Clear();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    $"Ошибка при создании случайного упражнения: " +
-                    $"{ex.Message}",
-                    "Ошибка",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
+                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         /// <summary>
-        /// Валидация введенных данных имени и параметров
+        /// Проверка корректности ввода
         /// </summary>
-        /// <returns>true если данные валидны</returns>
-        private bool ValidateInput()
+        private bool CheckInputData()
         {
             if (string.IsNullOrWhiteSpace(TextBoxName.Text))
             {
-                MessageBox.Show(
-                    "Название упражнения не может быть пустым",
-                    "Ошибка ввода",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+                MessageBox.Show("Введите название", "Ошибка",
+                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 TextBoxName.Focus();
                 return false;
             }
             if (TextBoxName.Text.Length > 50)
             {
-                MessageBox.Show(
-                    "Название упражнения слишком длинное" +
-                    " (максимум 50 символов)",
-                    "Ошибка ввода",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+                MessageBox.Show("Длинное название (макс. 50)", "Ошибка",
+                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 TextBoxName.Focus();
                 return false;
             }
-            switch (ComboBoxExercise.SelectedItem.ToString())
+
+            string type = ComboBoxExercise.SelectedItem.ToString();
+            return type 
+            
+            switch
             {
-                case Constants.Running:
-                    {
-                        return ValidateRunningInput();
-                    }
-                case Constants.Swimming:
-                    {
-                        return ValidateSwimmingInput();
-                    }
-                case Constants.BenchPress:
-                    {
-                        return ValidateBenchPressInput();
-                    }
-                default:
-                    {
-                        return false;
-                    }
-            }
+                ExerciseTypes.Running => CheckRunningData(),
+                ExerciseTypes.Swimming => CheckSwimmingData(),
+                ExerciseTypes.BenchPress => CheckBenchPressData(),
+                _ => false
+            };
         }
 
         /// <summary>
-        /// Валидация данных для бега
+        /// Проверка данных для бега
         /// </summary>
-        /// <returns>true если данные валидны</returns>
-        private bool ValidateRunningInput()
+        private bool CheckRunningData()
         {
             if (NumericIntensity.Value < 1m ||
                 NumericIntensity.Value > 30)
             {
-                MessageBox.Show(
-                    "Интенсивность должна быть от 1 до 30 км/ч",
-                    "Ошибка ввода",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+                MessageBox.Show("Интенсивность 1-30 км/ч", "Ошибка",
+                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 NumericIntensity.Focus();
                 return false;
             }
             if (NumericRunningDistance.Value < 0.1m ||
                 NumericRunningDistance.Value > 100)
             {
-                MessageBox.Show(
-                    "Дистанция должна быть от 0,1 до 100 км",
-                    "Ошибка ввода",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+                MessageBox.Show("Дистанция 0,1-100 км", "Ошибка",
+                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 NumericRunningDistance.Focus();
                 return false;
             }
@@ -261,19 +206,15 @@ namespace View
         }
 
         /// <summary>
-        /// Валидация данных для плавания
+        /// Проверка данных для плавания
         /// </summary>
-        /// <returns>true если данные валидны</returns>
-        private bool ValidateSwimmingInput()
+        private bool CheckSwimmingData()
         {
             if (NumericSwimmingDistance.Value < 1 ||
-                NumericSwimmingDistance.Value > 10000)
+             NumericSwimmingDistance.Value > 10000)
             {
-                MessageBox.Show(
-                    "Дистанция должна быть от 1 до 10000 метров",
-                    "Ошибка ввода",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+                MessageBox.Show("Дистанция 1-10000 м", "Ошибка",
+                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 NumericSwimmingDistance.Focus();
                 return false;
             }
@@ -281,30 +222,21 @@ namespace View
         }
 
         /// <summary>
-        /// Валидация данных для жима штанги
+        /// Проверка данных для жима
         /// </summary>
-        /// <returns>true если данные валидны</returns>
-        private bool ValidateBenchPressInput()
+        private bool CheckBenchPressData()
         {
-            if (NumericWeight.Value < 1 ||
-                NumericWeight.Value > 341)
+            if (NumericWeight.Value < 1 || NumericWeight.Value > 341)
             {
-                MessageBox.Show(
-                    "Вес должен быть от 1 до 341 кг",
-                    "Ошибка ввода",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+                MessageBox.Show("Вес 1-341 кг", "Ошибка", 
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 NumericWeight.Focus();
                 return false;
             }
-            if (NumericRepetitions.Value < 1 ||
-                NumericRepetitions.Value > 1000)
+            if (NumericRepetitions.Value < 1 || NumericRepetitions.Value > 1000)
             {
-                MessageBox.Show(
-                    "Количество повторений должно быть от 1 до 1000",
-                    "Ошибка ввода",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+                MessageBox.Show("Повторения 1-1000", "Ошибка", 
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 NumericRepetitions.Focus();
                 return false;
             }
@@ -312,139 +244,119 @@ namespace View
         }
 
         /// <summary>
-        /// Создание упражнения
+        /// Построение объекта упражнения
         /// </summary>
-        /// <returns>Упражнение</returns>
-        private IExercise CreateExercise()
+        private IExercise BuildExercise()
         {
             string name = TextBoxName.Text.Trim();
-            string exerciseType = ComboBoxExercise.SelectedItem.ToString();
-            switch (exerciseType)
-            {
-                case Constants.Running:
-                    {
-                        return new Running(
-                            name,
-                            (double)NumericIntensity.Value,
-                            (double)NumericRunningDistance.Value);
-                    }
-                case Constants.Swimming:
-                    {
-                        SwimmingStyle style;
-                        string styleString = ComboBoxStyle.SelectedItem.ToString();
-                        switch (styleString)
-                        {
-                            case Constants.Freestyle:
-                            {
-                                style = SwimmingStyle.Freestyle;
-                                break;
-                            }
-                            case Constants.Butterfly:
-                            {
-                                style = SwimmingStyle.Butterfly;
-                                break;
-                            }
-                            default:
-                            {
-                                style = SwimmingStyle.Freestyle;
-                                break;
-                            }
-                        }
-                        return new Swimming(
-                            name,
-                            style,
-                            (double)NumericSwimmingDistance.Value);
-                    }
-                case Constants.BenchPress:
-                    {
-                        return new BenchPress(
-                            name,
-                            (double)NumericWeight.Value,
-                            (int)NumericRepetitions.Value);
-                    }
-                default:
-                    {
-                        throw new InvalidOperationException("Неизвестный тип упражнения");
-                    }
-            }
-        }
-        /// <summary>
-        /// стиль
-        /// </summary>
-        private void ApplyGymStyle()
-        {
-            // Тёмная тема 
-            Color darkBg = Color.FromArgb(30, 30, 30);
-            Color darkPanel = Color.FromArgb(45, 45, 45);
-            Color accentOrange = Color.FromArgb(255, 140, 0);
-            Color accentRed = Color.FromArgb(220, 20, 60);
-            Color textLight = Color.FromArgb(240, 240, 240);
-            Color textDim = Color.FromArgb(180, 180, 180);
+            string type = ComboBoxExercise.SelectedItem.ToString();
 
-            // Основная форма
-            this.BackColor = darkBg;
-            this.ForeColor = textLight;
+            if (type == ExerciseTypes.Running)
+            {
+                return new Running(name, (double)NumericIntensity.Value,
+                 (double)NumericRunningDistance.Value);
+            }
+            else if (type == ExerciseTypes.Swimming)
+            {
+                var style = ComboBoxStyle.SelectedItem.ToString() 
+                switch
+                {
+                    ExerciseTypes.Freestyle => SwimmingStyle.Freestyle,
+                    ExerciseTypes.Butterfly => SwimmingStyle.Butterfly,
+                    _ => SwimmingStyle.Freestyle
+                };
+                return new Swimming(name, style,
+                 (double)NumericSwimmingDistance.Value);
+            }
+            else if (type == ExerciseTypes.BenchPress)
+            {
+                return new BenchPress(name, (double)NumericWeight.Value,
+                 (int)NumericRepetitions.Value);
+            }
+
+            throw new InvalidOperationException("Неизвестный тип");
+        }
+
+        /// <summary>
+        /// Тёмная тема оформления
+        /// </summary>
+        private void ApplyDarkTheme()
+        {
+            Color bg = Color.FromArgb(30, 30, 30);
+            Color panel = Color.FromArgb(45, 45, 45);
+            Color orange = Color.FromArgb(255, 140, 0);
+            Color red = Color.FromArgb(220, 20, 60);
+            Color text = Color.FromArgb(240, 240, 240);
+            Color dimText = Color.FromArgb(180, 180, 180);
+
+            this.BackColor = bg;
+            this.ForeColor = text;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.StartPosition = FormStartPosition.CenterParent;
 
-            // GroupBox
-            ExerciseGroupBox.BackColor = darkPanel;
-            ExerciseGroupBox.ForeColor = accentOrange;
+            ExerciseGroupBox.BackColor = panel;
+            ExerciseGroupBox.ForeColor = orange;
             ExerciseGroupBox.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             ExerciseGroupBox.FlatStyle = FlatStyle.Flat;
 
-            // Панели
-            PanelRunning.BackColor = darkPanel;
-            PanelSwimming.BackColor = darkPanel;
-            PanelBenchPress.BackColor = darkPanel;
+            PanelRunning.BackColor = panel;
+            PanelSwimming.BackColor = panel;
+            PanelBenchPress.BackColor = panel;
 
-            // Labels
-            LabelName.ForeColor = textLight;
+            LabelName.ForeColor = text;
             LabelName.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            LabelParameters.ForeColor = accentOrange;
+            LabelParameters.ForeColor = orange;
             LabelParameters.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            LabelIntensity.ForeColor = textDim;
-            LabelRunningDistance.ForeColor = textDim;
-            LabelSwimmingDistance.ForeColor = textDim;
-            LabelStyle.ForeColor = textDim;
-            LabelWeight.ForeColor = textDim;
-            LabelRepetitions.ForeColor = textDim;
-            LabelIntensityUnit.ForeColor = textDim;
-            LabelRunningDistanceUnit.ForeColor = textDim;
-            LabelSwimmingDistanceUnit.ForeColor = textDim;
-            LabelWeightUnit.ForeColor = textDim;
-            LabelRepetitionsUnit.ForeColor = textDim;
+            
+            foreach (var lbl in new[] 
+            {
+             LabelIntensity,     LabelRunningDistance, LabelSwimmingDistance, 
+             LabelStyle,         LabelWeight,          LabelRepetitions,
+             LabelIntensityUnit, LabelRunningDistanceUnit, 
+             LabelSwimmingDistanceUnit, LabelWeightUnit, LabelRepetitionsUnit 
+            })
+            {
+                lbl.ForeColor = dimText;
+            }
 
-            // TextBox
             TextBoxName.BackColor = Color.FromArgb(60, 60, 60);
-            TextBoxName.ForeColor = textLight;
+            TextBoxName.ForeColor = text;
             TextBoxName.BorderStyle = BorderStyle.FixedSingle;
             TextBoxName.Font = new Font("Segoe UI", 10F);
 
-            // ComboBox
             ComboBoxExercise.BackColor = Color.FromArgb(60, 60, 60);
-            ComboBoxExercise.ForeColor = textLight;
+            ComboBoxExercise.ForeColor = text;
             ComboBoxExercise.Font = new Font("Segoe UI", 10F);
+            
             ComboBoxStyle.BackColor = Color.FromArgb(60, 60, 60);
-            ComboBoxStyle.ForeColor = textLight;
+            ComboBoxStyle.ForeColor = text;
             ComboBoxStyle.Font = new Font("Segoe UI", 10F);
 
-            // кастомная стилизация 
-            NumericIntensity.BackColor = Color.FromArgb(60, 60, 60);
-            NumericIntensity.ForeColor = textLight;
-            NumericRunningDistance.BackColor = Color.FromArgb(60, 60, 60);
-            NumericRunningDistance.ForeColor = textLight;
-            NumericSwimmingDistance.BackColor = Color.FromArgb(60, 60, 60);
-            NumericSwimmingDistance.ForeColor = textLight;
-            NumericWeight.BackColor = Color.FromArgb(60, 60, 60);
-            NumericWeight.ForeColor = textLight;
-            NumericRepetitions.BackColor = Color.FromArgb(60, 60, 60);
-            NumericRepetitions.ForeColor = textLight;
+            foreach (var num in new[] 
+            { NumericIntensity,        NumericRunningDistance, 
+              NumericSwimmingDistance, NumericWeight, 
+              NumericRepetitions })
+            {
+                num.BackColor = Color.FromArgb(60, 60, 60);
+                num.ForeColor = text;
+            }
 
-            // Кнопки
-            StyleButton(ButtonCreate, accentOrange);
-            StyleButton(ButtonClose, Color.FromArgb(80, 80, 80));
-            StyleButton(ButtonCreateRandom, accentRed);
+            ApplyButtonStyle(ButtonCreate, orange);
+            ApplyButtonStyle(ButtonClose, Color.FromArgb(80, 80, 80));
+            ApplyButtonStyle(ButtonCreateRandom, red);
+        }
+
+        /// <summary>
+        /// Стиль кнопки
+        /// </summary>
+        private void ApplyButtonStyle(Button btn, Color clr)
+        {
+            btn.BackColor = clr;
+            btn.ForeColor = Color.White;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 0;
+            btn.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btn.Cursor = Cursors.Hand;
         }
     }
 }

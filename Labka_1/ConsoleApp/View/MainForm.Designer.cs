@@ -55,11 +55,10 @@ namespace View
             ExercisesGroupBox.Size = new Size(566, 293);
             ExercisesGroupBox.TabIndex = 0;
             ExercisesGroupBox.TabStop = false;
-            ExercisesGroupBox.Text = "Лист упражнений";
-            ExercisesGroupBox.Enter += ExercisesGroupBox_Enter;
-            // 
+            ExercisesGroupBox.Text = "Список упражнений";
+            //
             // ButtonClear
-            // 
+            //
             ButtonClear.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             ButtonClear.Enabled = false;
             ButtonClear.Location = new Point(339, 246);

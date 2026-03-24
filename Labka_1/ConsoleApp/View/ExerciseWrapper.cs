@@ -4,142 +4,92 @@ using System;
 namespace View
 {
     /// <summary>
-    /// Класс-обертка для сериализации упражнений
+    /// Обёртка для XML-сериализации объектов упражнений
     /// </summary>
     [Serializable]
     public class ExerciseWrapper
     {
-        /// <summary>
-        /// Тип упражнения
-        /// </summary>
+        // Тип (Бег/Плавание/Жим)
         public string Type { get; set; }
 
-        /// <summary>
-        /// Название упражнения
-        /// </summary>
+        // Наименование
         public string Name { get; set; }
 
-        /// <summary>
-        /// Дистанция упражнения Бег и Плавание
-        /// </summary>
+        // Дистанция (для бега и плавания)
         public double Distance { get; set; }
 
-        /// <summary>
-        /// Интенсивность упражнения Бег
-        /// </summary>
+        // Интенсивность (для бега)
         public double Intensity { get; set; }
 
-        /// <summary>
-        /// Вес упражнения Жим штанги
-        /// </summary>
+        // Вес снаряда (для жима)
         public double Weight { get; set; }
 
-        /// <summary>
-        /// Количество повторений упражнения Жим штанги
-        /// </summary>
+        // Число повторений (для жима)
         public int Repetitions { get; set; }
 
-        /// <summary>
-        /// Стиль плавания упражнения Плавание
-        /// </summary>
+        // Стиль (для плавания)
         public SwimmingStyle Style { get; set; }
 
-        /// <summary>
-        /// Пустой конструктор для XML сериализации
-        /// </summary>
-        private ExerciseWrapper()
-        {
-        }
+        // Конструктор по умолчанию для сериализации
+        private ExerciseWrapper() { }
 
         /// <summary>
-        /// Инициализация нового экземпляра класса
+        /// Создание обёртки из упражнения
         /// </summary>
-        /// <param name="exercise">Упражнение</param>
         public ExerciseWrapper(IExercise exercise)
         {
             Name = exercise.Name;
-            if (exercise is Running running)
+
+            if (exercise is Running run)
             {
-                Type = Constants.Running;
-                Distance = running.Distance;
-                Intensity = running.Intensity;
+                Type = ExerciseTypes.Running;
+                Distance = run.Distance;
+                Intensity = run.Intensity;
             }
-            else if (exercise is Swimming swimming)
+            else if (exercise is Swimming swim)
             {
-                Type = Constants.Swimming;
-                Distance = swimming.Distance;
-                Style = swimming.Style;
+                Type = ExerciseTypes.Swimming;
+                Distance = swim.Distance;
+                Style = swim.Style;
             }
-            else if (exercise is BenchPress benchPress)
+            else if (exercise is BenchPress press)
             {
-                Type = Constants.BenchPress;
-                Weight = benchPress.Weight;
-                Repetitions = benchPress.Repetitions;
+                Type = ExerciseTypes.BenchPress;
+                Weight = press.Weight;
+                Repetitions = press.Repetitions;
             }
         }
 
-        /// <summary>
-        /// Отображение Дистанции при сериализации
-        /// </summary>
-        /// <returns>true если нужно сериализовать</returns>
+        // Методы для сериализации полей
         public bool ShouldSerializeDistance() => 
-            Type == Constants.Running || 
-            Type == Constants.Swimming;
-
-        /// <summary>
-        /// Отображение Интенсивность при сериализации
-        /// </summary>
-        /// <returns>true если нужно сериализовать</returns>
+        Type == ExerciseTypes.Running ||
+        Type == ExerciseTypes.Swimming;
         public bool ShouldSerializeIntensity() =>
-            Type == Constants.Running;
-
-        /// <summary>
-        /// Отображение Веса штанги при сериализации
-        /// </summary>
-        /// <returns>true если нужно сериализовать</returns>
-        public bool ShouldSerializeWeight() =>
-            Type == Constants.BenchPress;
-
-        /// <summary>
-        /// Отображение Количества повторений при сериализации
-        /// </summary>
-        /// <returns>true если нужно сериализовать</returns>
+        Type == ExerciseTypes.Running;
+        public bool ShouldSerializeWeight() => 
+        Type == ExerciseTypes.BenchPress;
         public bool ShouldSerializeRepetitions() =>
-            Type == Constants.BenchPress;
+        Type == ExerciseTypes.BenchPress;
+        public bool ShouldSerializeStyle() => 
+        Type == ExerciseTypes.Swimming;
 
         /// <summary>
-        /// Отображение Стиля плавания при сериализации
+        /// Восстановление упражнения из обёртки
         /// </summary>
-        /// <returns>true если нужно сериализовать</returns>
-        public bool ShouldSerializeStyle() =>
-            Type == Constants.Swimming;
-
-        /// <summary>
-        /// Восстановление объекта упражнения из обертки
-        /// </summary>
-        /// <returns>Восстановленный объект упражнения</returns>
-        public IExercise GetExercise()
+        public IExercise RecoverExercise()
         {
-            switch (Type)
+            return Type 
+            switch
             {
-                case Constants.Running:
-                {
-                    return new Running(Name, Intensity, Distance);
-                }
-                case Constants.Swimming:
-                {
-                    return new Swimming(Name, Style, Distance);
-                }
-                case Constants.BenchPress:
-                {
-                    return new BenchPress(Name, Weight, Repetitions);
-                }
-                default:
-                {
-                    throw new InvalidOperationException("Неизвестный" +
-                        " тип упражнения");
-                }
-            }
+                ExerciseTypes.Running => 
+                new Running(Name, Intensity, Distance),
+                ExerciseTypes.Swimming => 
+                new Swimming(Name, Style, Distance),
+                ExerciseTypes.BenchPress => 
+                new BenchPress(Name, Weight, Repetitions),
+                _ => throw new 
+                InvalidOperationException("Неизвестный тип упражнения")
+            };
         }
     }
 }
