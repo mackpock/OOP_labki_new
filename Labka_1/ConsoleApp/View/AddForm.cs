@@ -53,20 +53,20 @@ namespace View
             switch (ComboBoxExercise.SelectedItem.ToString())
             {
                 case Constants.Running:
-                    {
-                        PanelRunning.Visible = true;
-                        break;
-                    }
+                {
+                    PanelRunning.Visible = true;
+                    break;
+                }
                 case Constants.Swimming:
-                    {
-                        PanelSwimming.Visible = true;
-                        break;
-                    }
+                {
+                    PanelSwimming.Visible = true;
+                    break;
+                }
                 case Constants.BenchPress:
-                    {
-                        PanelBenchPress.Visible = true;
-                        break;
-                    }
+                {
+                    PanelBenchPress.Visible = true;
+                    break;
+                }
             }
         }
 
@@ -122,26 +122,28 @@ namespace View
                 switch (ComboBoxExercise.SelectedItem.ToString())
                 {
                     case Constants.Running:
-                        {
-                            // Интенсивность: 1-30 км/ч, Дистанция: 0.1-100 км
-                            NumericIntensity.Value = (decimal)Math.Round(random.NextDouble() * 29 + 1, 2);
-                            NumericRunningDistance.Value = (decimal)Math.Round(random.NextDouble() * 99.9 + 0.1, 2);
-                            break;
-                        }
+                    {
+                        NumericIntensity.Value = (decimal)
+                                Math.Round(random.NextDouble() * 29 + 1, 2);
+                        NumericRunningDistance.Value = (decimal)
+                                Math.Round(random.NextDouble() * 99.9 + 0.1, 2);
+                        break;
+                    }
                     case Constants.Swimming:
-                        {
-                            ComboBoxStyle.SelectedIndex = random.Next(ComboBoxStyle.Items.Count);
-                            // Дистанция: 1-10000 м
-                            NumericSwimmingDistance.Value = (decimal)Math.Round(random.NextDouble() * 9999 + 1, 2);
-                            break;
-                        }
+                    {
+                        ComboBoxStyle.SelectedIndex = 
+                                random.Next(ComboBoxStyle.Items.Count);
+                        NumericSwimmingDistance.Value = (decimal)
+                                Math.Round(random.NextDouble() * 9999 + 1, 2);
+                        break;
+                    }
                     case Constants.BenchPress:
-                        {
-                            // Вес: 1-341 кг, Повторения: 1-1000
-                            NumericWeight.Value = (decimal)Math.Round(random.NextDouble() * 340 + 1, 2);
-                            NumericRepetitions.Value = random.Next(1, 1001);
-                            break;
-                        }
+                    {
+                        NumericWeight.Value = (decimal)
+                                Math.Round(random.NextDouble() * 340 + 1, 2);
+                        NumericRepetitions.Value = random.Next(1, 1001);
+                        break;
+                    }
                 }
                 if (ValidateInput())
                 {
@@ -179,7 +181,8 @@ namespace View
             if (TextBoxName.Text.Length > 50)
             {
                 MessageBox.Show(
-                    "Название упражнения слишком длинное (максимум 50 символов)",
+                    "Название упражнения слишком длинное" +
+                    " (максимум 50 символов)",
                     "Ошибка ввода",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
@@ -189,21 +192,21 @@ namespace View
             switch (ComboBoxExercise.SelectedItem.ToString())
             {
                 case Constants.Running:
-                    {
-                        return ValidateRunningInput();
-                    }
+                {
+                    return ValidateRunningInput();
+                }
                 case Constants.Swimming:
-                    {
-                        return ValidateSwimmingInput();
-                    }
+                {
+                    return ValidateSwimmingInput();
+                }
                 case Constants.BenchPress:
-                    {
-                        return ValidateBenchPressInput();
-                    }
+                {
+                    return ValidateBenchPressInput();
+                }
                 default:
-                    {
-                        return false;
-                    }
+                {
+                    return false;
+                }
             }
         }
 
@@ -213,7 +216,8 @@ namespace View
         /// <returns>true если данные валидны</returns>
         private bool ValidateRunningInput()
         {
-            if (NumericIntensity.Value < 1m || NumericIntensity.Value > 30)
+            if (NumericIntensity.Value < 1m ||
+                NumericIntensity.Value > 30)
             {
                 MessageBox.Show(
                     "Интенсивность должна быть от 1 до 30 км/ч",
@@ -223,7 +227,8 @@ namespace View
                 NumericIntensity.Focus();
                 return false;
             }
-            if (NumericRunningDistance.Value < 0.1m || NumericRunningDistance.Value > 100)
+            if (NumericRunningDistance.Value < 0.1m ||
+                NumericRunningDistance.Value > 100)
             {
                 MessageBox.Show(
                     "Дистанция должна быть от 0,1 до 100 км",
@@ -242,7 +247,8 @@ namespace View
         /// <returns>true если данные валидны</returns>
         private bool ValidateSwimmingInput()
         {
-            if (NumericSwimmingDistance.Value < 1 || NumericSwimmingDistance.Value > 10000)
+            if (NumericSwimmingDistance.Value < 1 ||
+                NumericSwimmingDistance.Value > 10000)
             {
                 MessageBox.Show(
                     "Дистанция должна быть от 1 до 10000 метров",
@@ -261,7 +267,8 @@ namespace View
         /// <returns>true если данные валидны</returns>
         private bool ValidateBenchPressInput()
         {
-            if (NumericWeight.Value < 1 || NumericWeight.Value > 341)
+            if (NumericWeight.Value < 1 ||
+                NumericWeight.Value > 341)
             {
                 MessageBox.Show(
                     "Вес должен быть от 1 до 341 кг",
@@ -271,7 +278,8 @@ namespace View
                 NumericWeight.Focus();
                 return false;
             }
-            if (NumericRepetitions.Value < 1 || NumericRepetitions.Value > 1000)
+            if (NumericRepetitions.Value < 1 ||
+                NumericRepetitions.Value > 1000)
             {
                 MessageBox.Show(
                     "Количество повторений должно быть от 1 до 1000",
@@ -295,39 +303,39 @@ namespace View
             switch (exerciseType)
             {
                 case Constants.Running:
-                    {
-                        return new Running(
-                            name,
-                            (double)NumericIntensity.Value,
-                            (double)NumericRunningDistance.Value);
-                    }
+                {
+                    return new Running(
+                        name,
+                        (double)NumericIntensity.Value,
+                        (double)NumericRunningDistance.Value);
+                }
                 case Constants.Swimming:
+                {
+                    SwimmingStyle style;
+                    string styleString = ComboBoxStyle.SelectedItem.ToString();
+                    switch (styleString)
                     {
-                        SwimmingStyle style;
-                        string styleString = ComboBoxStyle.SelectedItem.ToString();
-                        switch (styleString)
+                        case Constants.Freestyle:
                         {
-                            case Constants.Freestyle:
-                                {
-                                    style = SwimmingStyle.Freestyle;
-                                    break;
-                                }
-                            case Constants.Butterfly:
-                                {
-                                    style = SwimmingStyle.Butterfly;
-                                    break;
-                                }
-                            default:
-                                {
-                                    style = SwimmingStyle.Freestyle;
-                                    break;
-                                }
+                            style = SwimmingStyle.Freestyle;
+                            break;
                         }
-                        return new Swimming(
-                            name,
-                            style,
-                            (double)NumericSwimmingDistance.Value);
+                        case Constants.Butterfly:
+                        {
+                            style = SwimmingStyle.Butterfly;
+                            break;
+                        }
+                        default:
+                        {
+                            style = SwimmingStyle.Freestyle;
+                            break;
+                        }
                     }
+                    return new Swimming(
+                        name,
+                        style,
+                        (double)NumericSwimmingDistance.Value);
+                }
                 case Constants.BenchPress:
                     {
                         return new BenchPress(
@@ -337,7 +345,8 @@ namespace View
                     }
                 default:
                     {
-                        throw new InvalidOperationException("Неизвестный тип упражнения");
+                        throw new InvalidOperationException
+                            ("Неизвестный тип упражнения");
                     }
             }
         }
