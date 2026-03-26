@@ -11,11 +11,10 @@ namespace View
     /// </summary>
     public partial class AddForm : Form
     {
-
         /// <summary>
         /// Событие создания упражнения
         /// </summary>
-        public event Action<IExercise> ExerciseCreated;
+        public event Action<IExercise>? ExerciseCreated;
 
         /// <summary>
         /// Добавить форму и настроить её

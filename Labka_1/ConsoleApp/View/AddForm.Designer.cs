@@ -67,10 +67,10 @@ namespace View
             ExerciseGroupBox.TabIndex = 0;
             ExerciseGroupBox.TabStop = false;
             ExerciseGroupBox.Text = "Выбор упражнения";
-            // 
+            //
             // ComboBoxExercise
-            // 
-            ComboBoxExercise.DropDownStyle = ComboBoxStyle.DropDownList;
+            //
+            ComboBoxExercise.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             ComboBoxExercise.FlatStyle = FlatStyle.Flat;
             ComboBoxExercise.FormattingEnabled = true;
             ComboBoxExercise.Location = new Point(7, 22);
@@ -233,10 +233,10 @@ namespace View
             LabelSwimmingDistance.Size = new Size(69, 15);
             LabelSwimmingDistance.TabIndex = 2;
             LabelSwimmingDistance.Text = "Дистанция:";
-            // 
+            //
             // ComboBoxStyle
-            // 
-            ComboBoxStyle.DropDownStyle = ComboBoxStyle.DropDownList;
+            //
+            ComboBoxStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             ComboBoxStyle.FormattingEnabled = true;
             ComboBoxStyle.Location = new Point(108, 18);
             ComboBoxStyle.Margin = new Padding(4);

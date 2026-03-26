@@ -20,11 +20,12 @@ namespace View
         /// <summary>
         /// Делегат события - фильтр обновлен
         /// </summary>
-        public event Action<List<IExercise>> FilterApplied;
+        public event Action<List<IExercise>>? FilterApplied;
+
         /// <summary>
         /// Делегат события - фильтр отменён (форма закрыта без применения)
         /// </summary>
-        public event Action FilterCanceled;
+        public event Action? FilterCanceled;
 
         public FilterForm(List<IExercise> exercises)
         {

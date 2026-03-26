@@ -9,28 +9,44 @@ namespace View
     [Serializable]
     public class ExerciseWrapper
     {
-        // Тип (Бег/Плавание/Жим)
+        /// <summary>
+        /// Тип упражнения (Бег/Плавание/Жим)
+        /// </summary>
         public string Type { get; set; }
 
-        // Наименование
+        /// <summary>
+        /// Наименование упражнения
+        /// </summary>
         public string Name { get; set; }
 
-        // Дистанция (для бега и плавания)
+        /// <summary>
+        /// Дистанция (для бега и плавания)
+        /// </summary>
         public double Distance { get; set; }
 
-        // Интенсивность (для бега)
+        /// <summary>
+        /// Интенсивность (для бега, км/ч)
+        /// </summary>
         public double Intensity { get; set; }
 
-        // Вес снаряда (для жима)
+        /// <summary>
+        /// Вес снаряда (для жима, кг)
+        /// </summary>
         public double Weight { get; set; }
 
-        // Число повторений (для жима)
+        /// <summary>
+        /// Число повторений (для жима)
+        /// </summary>
         public int Repetitions { get; set; }
 
-        // Стиль (для плавания)
+        /// <summary>
+        /// Стиль плавания (для плавания)
+        /// </summary>
         public SwimmingStyle Style { get; set; }
 
-        // Конструктор по умолчанию для сериализации
+        /// <summary>
+        /// Конструктор по умолчанию для сериализации
+        /// </summary>
         private ExerciseWrapper() { }
 
         /// <summary>

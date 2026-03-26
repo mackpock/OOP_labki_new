@@ -15,17 +15,25 @@ namespace View
     /// </summary>
     public partial class MainForm : Form
     {
-        // Список для хранения всех упражнений
-        private List<IExercise> _originalExercises;
-        
-        // Список для отображения в таблице
-        private BindingList<IExercise> _exercises;
-        
-        // Форма добавления
-        private AddForm _addForm;
-        
-        // Форма фильтрации
-        private FilterForm _filterForm;
+        /// <summary>
+        /// Список для хранения всех упражнений
+        /// </summary>
+        private List<IExercise>? _originalExercises;
+
+        /// <summary>
+        /// Список для отображения в таблице
+        /// </summary>
+        private BindingList<IExercise>? _exercises;
+
+        /// <summary>
+        /// Форма добавления
+        /// </summary>
+        private AddForm? _addForm;
+
+        /// <summary>
+        /// Форма фильтрации
+        /// </summary>
+        private FilterForm? _filterForm;
         
         /// <summary>
         /// Конструктор формы - настройка данных и стилей
