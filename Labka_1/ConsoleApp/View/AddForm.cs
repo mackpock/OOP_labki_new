@@ -68,7 +68,7 @@ namespace View
         /// Смена типа упражнения
         /// </summary>
         private void ComboBoxExercise_SelectedIndexChanged(object sender,
-         EventArgs arg)
+            EventArgs arg)
         {
             SwitchExerciseType();
         }
@@ -113,6 +113,7 @@ namespace View
                 TextBoxName.Text = $"Упражнение {rnd.Next(1000)}";
                 string type = ComboBoxExercise.SelectedItem.ToString();
 
+                //TODO: switch-case
                 if (type == ExerciseTypes.Running)
                 {
                     NumericIntensity.Value = (decimal)
@@ -180,11 +181,13 @@ namespace View
             };
         }
 
+        //TODO: refactor to Model
         /// <summary>
         /// Проверка данных для бега
         /// </summary>
         private bool CheckRunningData()
         {
+            //TODO: magic (to const)
             if (NumericIntensity.Value < 1m ||
                 NumericIntensity.Value > 30)
             {
@@ -193,6 +196,7 @@ namespace View
                 NumericIntensity.Focus();
                 return false;
             }
+            //TODO: magic (to const)
             if (NumericRunningDistance.Value < 0.1m ||
                 NumericRunningDistance.Value > 100)
             {
@@ -209,6 +213,7 @@ namespace View
         /// </summary>
         private bool CheckSwimmingData()
         {
+            //TODO: magic (to const)
             if (NumericSwimmingDistance.Value < 1 ||
              NumericSwimmingDistance.Value > 10000)
             {
@@ -225,6 +230,7 @@ namespace View
         /// </summary>
         private bool CheckBenchPressData()
         {
+            //TODO: magic (to const)
             if (NumericWeight.Value < 1 || NumericWeight.Value > 341)
             {
                 MessageBox.Show("Вес 1-341 кг", "Ошибка", 
@@ -232,6 +238,7 @@ namespace View
                 NumericWeight.Focus();
                 return false;
             }
+            //TODO: magic (to const)
             if (NumericRepetitions.Value < 1 || NumericRepetitions.Value > 1000)
             {
                 MessageBox.Show("Повторения 1-1000", "Ошибка", 
@@ -249,7 +256,7 @@ namespace View
         {
             string name = TextBoxName.Text.Trim();
             string type = ComboBoxExercise.SelectedItem.ToString();
-
+            //TODO: switch-case
             if (type == ExerciseTypes.Running)
             {
                 return new Running(name, (double)NumericIntensity.Value,
@@ -281,6 +288,8 @@ namespace View
         /// </summary>
         private void ApplyDarkTheme()
         {
+            //TODO: RSDN
+            //TODO: to const
             Color bg = Color.FromArgb(30, 30, 30);
             Color panel = Color.FromArgb(45, 45, 45);
             Color orange = Color.FromArgb(255, 140, 0);
@@ -307,6 +316,7 @@ namespace View
             LabelParameters.ForeColor = orange;
             LabelParameters.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             
+            //TOOD: отступы
             foreach (var lbl in new[] 
             {
              LabelIntensity,     LabelRunningDistance, LabelSwimmingDistance, 
@@ -350,6 +360,7 @@ namespace View
         /// </summary>
         private void ApplyButtonStyle(Button btn, Color clr)
         {
+            //TODO: RSDN
             btn.BackColor = clr;
             btn.ForeColor = Color.White;
             btn.FlatStyle = FlatStyle.Flat;

@@ -46,6 +46,7 @@ namespace View
             this.Text = "Ex0rcise - Расчёт калорий";
         }
 
+        //TODO: duplication
         /// <summary>
         /// Применяет стиль к кнопке
         /// </summary>
@@ -83,6 +84,7 @@ namespace View
         /// <summary>
         /// Добавление упражнения в список
         /// </summary>
+        /// //TODO: RSDN
         private void RegisterExercise(IExercise ex)
         {
             if (ex != null)
@@ -137,6 +139,7 @@ namespace View
         private void UpdateDisplayList(List<IExercise> list)
         {
             _exercises.Clear();
+            //TODO: {}
             foreach (var ex in list)
                 _exercises.Add(ex);
             RefreshButtons();
@@ -149,6 +152,7 @@ namespace View
         {
             if (ExerciseDataGridView.SelectedRows.Count == 0) return;
 
+            //TOOD: отступы
             var selected = ExerciseDataGridView.SelectedRows[0].DataBoundItem
              as IExercise;
             if (selected == null) return;
@@ -173,6 +177,7 @@ namespace View
         /// </summary>
         private void ButtonClear_Click(object sender, EventArgs e)
         {
+            //TOOD: отступы
             if (_exercises.Count == 0) 
             return;
 
@@ -187,6 +192,7 @@ namespace View
             {
                 var toRemove = _exercises.ToList();
 
+                //TODO: RSDN
                 foreach (var ex in toRemove)
                 {
                     _exercises.Remove(ex);
@@ -200,6 +206,7 @@ namespace View
         /// Выбор строки в таблице
         /// </summary>
         private void ExerciseDataGridView_SelectionChanged(object sender, 
+            //TOOD: отступы
         EventArgs args)
         {
             RefreshButtons();
@@ -217,6 +224,7 @@ namespace View
                 return;
             }
 
+            //TODO: RSDN
             using (var dlg = new SaveFileDialog())
             {
                 dlg.Filter = "Файлы упражнений (*.shizo)|*.shizo";
@@ -245,6 +253,7 @@ namespace View
         /// </summary>
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //TODO: RSDN
             using (var dlg = new OpenFileDialog())
             {
                 dlg.Filter = "Файлы упражнений (*.shizo)|*.shizo";
@@ -315,6 +324,7 @@ namespace View
         /// </summary>
         private ExerciseWrapper CreateWrapper(IExercise ex)
         {
+            //TODO: switch-case
             if (ex is Running r) 
             return new ExerciseWrapper(r);
 
@@ -326,6 +336,8 @@ namespace View
 
             throw new InvalidOperationException("Неизвестный тип");
         }
+
+        //TODO: duplication
         /// <summary>
         /// Настройка визуального оформления
         /// </summary>
@@ -397,6 +409,7 @@ namespace View
             ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Padding = new Padding(0);
             ExerciseDataGridView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
+            //TODO: RSDN
             var nameCol = new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Name",
@@ -413,6 +426,7 @@ namespace View
                 }
             };
 
+            //TODO: RSDN
             var infoCol = new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "ExerciseInfo",
@@ -428,6 +442,7 @@ namespace View
                 }
             };
 
+            //TODO: RSDN
             var calCol = new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Calories",

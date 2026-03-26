@@ -42,6 +42,7 @@ namespace View
         private void InitControls()
         {
             CheckedListBoxExercise.Items.AddRange(ExerciseTypes.AllExerciseTypes);
+            //TODO: {}
             for (int i = 0; i < CheckedListBoxExercise.Items.Count; i++)
                 CheckedListBoxExercise.SetItemChecked(i, true);
         }
@@ -50,6 +51,7 @@ namespace View
         /// Закрытие формы
         /// </summary>
         private void FilterForm_FormClosing(object sender,
+            //TOOD: отступы
          FormClosingEventArgs arg)
         {
             if (arg.CloseReason == CloseReason.UserClosing)
@@ -66,6 +68,7 @@ namespace View
         /// </summary>
         private void RestoreCheckboxes()
         {
+            //TODO: {}
             for (int i = 0; i < CheckedListBoxExercise.Items.Count; i++)
                 CheckedListBoxExercise.SetItemChecked(i, true);
             TextBoxFilter.Clear();
@@ -86,6 +89,7 @@ namespace View
         {
             FilterCanceled?.Invoke();
             RestoreCheckboxes();
+            //TOOD: отступы
             MessageBox.Show("Фильтр сброшен", "Инфо", MessageBoxButtons.OK,
              MessageBoxIcon.Information);
         }
@@ -106,9 +110,11 @@ namespace View
             string search = TextBoxFilter.Text.Trim();
             var selectedTypes = new List<string>();
 
+            //TODO: {}
             foreach (var item in CheckedListBoxExercise.CheckedItems)
                 selectedTypes.Add(item.ToString());
 
+            //TODO: {}
             if (selectedTypes.Count == 0)
                 selectedTypes.AddRange(ExerciseTypes.AllExerciseTypes);
 
@@ -173,6 +179,7 @@ namespace View
             return false;
         }
 
+        //TODO: duplication
         /// <summary>
         /// Тёмное оформление
         /// </summary>
@@ -215,6 +222,7 @@ namespace View
             ApplyButtonStyle(ButtonClose, Color.FromArgb(80, 80, 80));
         }
 
+        //TODO: duplication
         /// <summary>
         /// Оформление кнопки
         /// </summary>
@@ -227,7 +235,7 @@ namespace View
             btn.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btn.Cursor = Cursors.Hand;
         }
-
+        //TODO: remove
         private void LabelSearch_Click(object sender, EventArgs e)
         {
 

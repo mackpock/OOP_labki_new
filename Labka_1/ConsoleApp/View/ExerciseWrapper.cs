@@ -55,7 +55,7 @@ namespace View
         public ExerciseWrapper(IExercise exercise)
         {
             Name = exercise.Name;
-
+            //TODO: switch-case
             if (exercise is Running run)
             {
                 Type = ExerciseTypes.Running;
@@ -77,6 +77,8 @@ namespace View
         }
 
         // Методы для сериализации полей
+        //TODO: XML
+        //TOOD: отступы
         public bool ShouldSerializeDistance() => 
         Type == ExerciseTypes.Running ||
         Type == ExerciseTypes.Swimming;
@@ -97,6 +99,7 @@ namespace View
             return Type 
             switch
             {
+                //TOOD: отступы
                 ExerciseTypes.Running => 
                 new Running(Name, Intensity, Distance),
                 ExerciseTypes.Swimming => 

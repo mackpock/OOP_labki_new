@@ -6,6 +6,7 @@ namespace View
     public static class ExerciseTypes
     {
         // Типы упражнений
+        //TODO: XML
         public const string Running = "Бег";
         public const string Swimming = "Плавание";
         public const string BenchPress = "Жим штанги";
