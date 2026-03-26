@@ -127,8 +127,7 @@ namespace View
         /// </summary>
         private bool MatchType(IExercise ex, List<string> types)
         {
-            string type = ex
-
+            string type = ex 
             switch
             {
                 Running => ExerciseTypes.Running,
@@ -145,12 +144,31 @@ namespace View
         /// </summary>
         private bool MatchSearch(IExercise ex, string term)
         {
-            if (string.IsNullOrEmpty(term)) return true;
+            if (string.IsNullOrEmpty(term))
+            {
+                return true;
+            }
+
             var lower = term.ToLower();
-            if (ex.Name.ToLower().Contains(lower)) return true;
-            if (ex.ExerciseInfo.ToLower().Contains(lower)) return true;
-            if (ex.Calories.ToString("F2").Contains(term)) return true;
-            if (ex.Calories.ToString("F0").Contains(term)) return true;
+            if (ex.Name.ToLower().Contains(lower))
+            {
+                return true;
+            }
+
+            if (ex.ExerciseInfo.ToLower().Contains(lower))
+            {
+                return true;
+            }
+
+            if (ex.Calories.ToString("F2").Contains(term))
+            {
+                return true;
+            }
+
+            if (ex.Calories.ToString("F0").Contains(term))
+            {
+                return true;
+            }
 
             return false;
         }

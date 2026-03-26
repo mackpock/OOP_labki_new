@@ -287,10 +287,10 @@ namespace View
         private void DeserializeExercises(string path)
         {
             var content = File.ReadAllText(path);
-            if (content.Contains(">NaN<") ||
-             content.Contains(">nan<"))
-                throw new InvalidDataException(
-                    "Повреждённый файл (NaN значения)");
+            if (content.Contains(">NaN<") || content.Contains(">nan<"))
+            {
+                throw new InvalidDataException("Повреждённый файл (NaN значения)");
+            }
 
             var serializer = new XmlSerializer(typeof(List<ExerciseWrapper>));
             using (var fs = new FileStream(path, FileMode.Open))
@@ -306,6 +306,7 @@ namespace View
                     _originalExercises.Add(ex);
                 }
             }
+
             RefreshButtons();
         }
 
