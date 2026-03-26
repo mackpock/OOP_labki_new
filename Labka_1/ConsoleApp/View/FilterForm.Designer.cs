@@ -62,7 +62,7 @@ namespace View
             // 
             // ButtonFilter
             // 
-            ButtonFilter.Location = new Point(12, 180);
+            ButtonFilter.Location = new Point(345, 40);
             ButtonFilter.Name = "ButtonFilter";
             ButtonFilter.Size = new Size(90, 30);
             ButtonFilter.TabIndex = 3;
@@ -72,7 +72,7 @@ namespace View
             // 
             // ButtonClose
             // 
-            ButtonClose.Location = new Point(222, 180);
+            ButtonClose.Location = new Point(345, 144);
             ButtonClose.Name = "ButtonClose";
             ButtonClose.Size = new Size(90, 30);
             ButtonClose.TabIndex = 5;
@@ -82,7 +82,7 @@ namespace View
             // 
             // ButtonCancel
             // 
-            ButtonCancel.Location = new Point(117, 180);
+            ButtonCancel.Location = new Point(345, 94);
             ButtonCancel.Name = "ButtonCancel";
             ButtonCancel.Size = new Size(90, 30);
             ButtonCancel.TabIndex = 4;
@@ -94,7 +94,7 @@ namespace View
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(324, 220);
+            ClientSize = new Size(453, 183);
             Controls.Add(ButtonCancel);
             Controls.Add(ButtonClose);
             Controls.Add(ButtonFilter);

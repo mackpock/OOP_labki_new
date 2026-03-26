@@ -17,391 +17,390 @@ namespace View
 
         private void InitializeComponent()
         {
-            this.ExerciseGroupBox = new System.Windows.Forms.GroupBox();
-            this.ComboBoxExercise = new System.Windows.Forms.ComboBox();
-            this.LabelName = new System.Windows.Forms.Label();
-            this.TextBoxName = new System.Windows.Forms.TextBox();
-            this.LabelParameters = new System.Windows.Forms.Label();
-            this.PanelRunning = new System.Windows.Forms.Panel();
-            this.LabelRunningDistanceUnit = new System.Windows.Forms.Label();
-            this.NumericRunningDistance = new System.Windows.Forms.NumericUpDown();
-            this.LabelRunningDistance = new System.Windows.Forms.Label();
-            this.LabelIntensityUnit = new System.Windows.Forms.Label();
-            this.NumericIntensity = new System.Windows.Forms.NumericUpDown();
-            this.LabelIntensity = new System.Windows.Forms.Label();
-            this.PanelSwimming = new System.Windows.Forms.Panel();
-            this.LabelSwimmingDistanceUnit = new System.Windows.Forms.Label();
-            this.NumericSwimmingDistance = new System.Windows.Forms.NumericUpDown();
-            this.LabelSwimmingDistance = new System.Windows.Forms.Label();
-            this.ComboBoxStyle = new System.Windows.Forms.ComboBox();
-            this.LabelStyle = new System.Windows.Forms.Label();
-            this.PanelBenchPress = new System.Windows.Forms.Panel();
-            this.LabelRepetitionsUnit = new System.Windows.Forms.Label();
-            this.NumericRepetitions = new System.Windows.Forms.NumericUpDown();
-            this.LabelRepetitions = new System.Windows.Forms.Label();
-            this.LabelWeightUnit = new System.Windows.Forms.Label();
-            this.NumericWeight = new System.Windows.Forms.NumericUpDown();
-            this.LabelWeight = new System.Windows.Forms.Label();
-            this.ButtonCreate = new System.Windows.Forms.Button();
-            this.ButtonClose = new System.Windows.Forms.Button();
-            this.ButtonCreateRandom = new System.Windows.Forms.Button();
-            this.ExerciseGroupBox.SuspendLayout();
-            this.PanelRunning.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumericRunningDistance)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumericIntensity)).BeginInit();
-            this.PanelSwimming.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumericSwimmingDistance)).BeginInit();
-            this.PanelBenchPress.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumericRepetitions)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumericWeight)).BeginInit();
-            this.SuspendLayout();
+            ExerciseGroupBox = new GroupBox();
+            ComboBoxExercise = new ComboBox();
+            LabelName = new Label();
+            TextBoxName = new TextBox();
+            LabelParameters = new Label();
+            PanelRunning = new Panel();
+            LabelRunningDistanceUnit = new Label();
+            NumericRunningDistance = new NumericUpDown();
+            LabelRunningDistance = new Label();
+            LabelIntensityUnit = new Label();
+            NumericIntensity = new NumericUpDown();
+            LabelIntensity = new Label();
+            PanelSwimming = new Panel();
+            LabelSwimmingDistanceUnit = new Label();
+            NumericSwimmingDistance = new NumericUpDown();
+            LabelSwimmingDistance = new Label();
+            ComboBoxStyle = new ComboBox();
+            LabelStyle = new Label();
+            PanelBenchPress = new Panel();
+            LabelRepetitionsUnit = new Label();
+            NumericRepetitions = new NumericUpDown();
+            LabelRepetitions = new Label();
+            LabelWeightUnit = new Label();
+            NumericWeight = new NumericUpDown();
+            LabelWeight = new Label();
+            ButtonCreate = new Button();
+            ButtonClose = new Button();
+            ButtonCreateRandom = new Button();
+            ExerciseGroupBox.SuspendLayout();
+            PanelRunning.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)NumericRunningDistance).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)NumericIntensity).BeginInit();
+            PanelSwimming.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)NumericSwimmingDistance).BeginInit();
+            PanelBenchPress.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)NumericRepetitions).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)NumericWeight).BeginInit();
+            SuspendLayout();
             // 
             // ExerciseGroupBox
             // 
-            this.ExerciseGroupBox.Controls.Add(this.ComboBoxExercise);
-            this.ExerciseGroupBox.Location = new System.Drawing.Point(16, 15);
-            this.ExerciseGroupBox.Margin = new System.Windows.Forms.Padding(4);
-            this.ExerciseGroupBox.Name = "ExerciseGroupBox";
-            this.ExerciseGroupBox.Padding = new System.Windows.Forms.Padding(4);
-            this.ExerciseGroupBox.Size = new System.Drawing.Size(295, 62);
-            this.ExerciseGroupBox.TabIndex = 0;
-            this.ExerciseGroupBox.TabStop = false;
-            this.ExerciseGroupBox.Text = "Выбор упражнения";
+            ExerciseGroupBox.Controls.Add(ComboBoxExercise);
+            ExerciseGroupBox.Location = new Point(14, 14);
+            ExerciseGroupBox.Margin = new Padding(4);
+            ExerciseGroupBox.Name = "ExerciseGroupBox";
+            ExerciseGroupBox.Padding = new Padding(4);
+            ExerciseGroupBox.Size = new Size(258, 58);
+            ExerciseGroupBox.TabIndex = 0;
+            ExerciseGroupBox.TabStop = false;
+            ExerciseGroupBox.Text = "Выбор упражнения";
             // 
             // ComboBoxExercise
-            //
-            this.ComboBoxExercise.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboBoxExercise.FormattingEnabled = true;
-            this.ComboBoxExercise.Location = new System.Drawing.Point(8, 23);
-            this.ComboBoxExercise.Margin = new System.Windows.Forms.Padding(4);
-            this.ComboBoxExercise.Name = "ComboBoxExercise";
-            this.ComboBoxExercise.Size = new System.Drawing.Size(278, 24);
-            this.ComboBoxExercise.TabIndex = 0;
-            this.ComboBoxExercise.SelectedIndexChanged += new System.EventHandler(this.ComboBoxExercise_SelectedIndexChanged);
-            this.ComboBoxExercise.FlatStyle = FlatStyle.Flat;
+            // 
+            ComboBoxExercise.DropDownStyle = ComboBoxStyle.DropDownList;
+            ComboBoxExercise.FlatStyle = FlatStyle.Flat;
+            ComboBoxExercise.FormattingEnabled = true;
+            ComboBoxExercise.Location = new Point(7, 22);
+            ComboBoxExercise.Margin = new Padding(4);
+            ComboBoxExercise.Name = "ComboBoxExercise";
+            ComboBoxExercise.Size = new Size(244, 23);
+            ComboBoxExercise.TabIndex = 0;
+            ComboBoxExercise.SelectedIndexChanged += ComboBoxExercise_SelectedIndexChanged;
             // 
             // LabelName
             // 
-            this.LabelName.AutoSize = true;
-            this.LabelName.Location = new System.Drawing.Point(16, 92);
-            this.LabelName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LabelName.Name = "LabelName";
-            this.LabelName.Size = new System.Drawing.Size(76, 16);
-            this.LabelName.TabIndex = 1;
-            this.LabelName.Text = "Название:";
+            LabelName.AutoSize = true;
+            LabelName.Location = new Point(14, 86);
+            LabelName.Margin = new Padding(4, 0, 4, 0);
+            LabelName.Name = "LabelName";
+            LabelName.Size = new Size(62, 15);
+            LabelName.TabIndex = 1;
+            LabelName.Text = "Название:";
             // 
             // TextBoxName
             // 
-            this.TextBoxName.Location = new System.Drawing.Point(104, 89);
-            this.TextBoxName.Margin = new System.Windows.Forms.Padding(4);
-            this.TextBoxName.MaxLength = 50;
-            this.TextBoxName.Name = "TextBoxName";
-            this.TextBoxName.Size = new System.Drawing.Size(198, 22);
-            this.TextBoxName.TabIndex = 2;
+            TextBoxName.Location = new Point(91, 83);
+            TextBoxName.Margin = new Padding(4);
+            TextBoxName.MaxLength = 50;
+            TextBoxName.Name = "TextBoxName";
+            TextBoxName.Size = new Size(174, 23);
+            TextBoxName.TabIndex = 2;
             // 
             // LabelParameters
             // 
-            this.LabelParameters.AutoSize = true;
-            this.LabelParameters.Location = new System.Drawing.Point(16, 129);
-            this.LabelParameters.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LabelParameters.Name = "LabelParameters";
-            this.LabelParameters.Size = new System.Drawing.Size(85, 16);
-            this.LabelParameters.TabIndex = 3;
-            this.LabelParameters.Text = "Параметры:";
+            LabelParameters.AutoSize = true;
+            LabelParameters.Location = new Point(14, 121);
+            LabelParameters.Margin = new Padding(4, 0, 4, 0);
+            LabelParameters.Name = "LabelParameters";
+            LabelParameters.Size = new Size(74, 15);
+            LabelParameters.TabIndex = 3;
+            LabelParameters.Text = "Параметры:";
             // 
             // PanelRunning
             // 
-            this.PanelRunning.Controls.Add(this.LabelRunningDistanceUnit);
-            this.PanelRunning.Controls.Add(this.NumericRunningDistance);
-            this.PanelRunning.Controls.Add(this.LabelRunningDistance);
-            this.PanelRunning.Controls.Add(this.LabelIntensityUnit);
-            this.PanelRunning.Controls.Add(this.NumericIntensity);
-            this.PanelRunning.Controls.Add(this.LabelIntensity);
-            this.PanelRunning.Location = new System.Drawing.Point(16, 149);
-            this.PanelRunning.Margin = new System.Windows.Forms.Padding(4);
-            this.PanelRunning.Name = "PanelRunning";
-            this.PanelRunning.Size = new System.Drawing.Size(295, 98);
-            this.PanelRunning.TabIndex = 4;
+            PanelRunning.Controls.Add(LabelRunningDistanceUnit);
+            PanelRunning.Controls.Add(NumericRunningDistance);
+            PanelRunning.Controls.Add(LabelRunningDistance);
+            PanelRunning.Controls.Add(LabelIntensityUnit);
+            PanelRunning.Controls.Add(NumericIntensity);
+            PanelRunning.Controls.Add(LabelIntensity);
+            PanelRunning.Location = new Point(14, 140);
+            PanelRunning.Margin = new Padding(4);
+            PanelRunning.Name = "PanelRunning";
+            PanelRunning.Size = new Size(258, 92);
+            PanelRunning.TabIndex = 4;
             // 
             // LabelRunningDistanceUnit
             // 
-            this.LabelRunningDistanceUnit.AutoSize = true;
-            this.LabelRunningDistanceUnit.Location = new System.Drawing.Point(251, 58);
-            this.LabelRunningDistanceUnit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LabelRunningDistanceUnit.Name = "LabelRunningDistanceUnit";
-            this.LabelRunningDistanceUnit.Size = new System.Drawing.Size(23, 16);
-            this.LabelRunningDistanceUnit.TabIndex = 5;
-            this.LabelRunningDistanceUnit.Text = "км";
+            LabelRunningDistanceUnit.AutoSize = true;
+            LabelRunningDistanceUnit.Location = new Point(220, 54);
+            LabelRunningDistanceUnit.Margin = new Padding(4, 0, 4, 0);
+            LabelRunningDistanceUnit.Name = "LabelRunningDistanceUnit";
+            LabelRunningDistanceUnit.Size = new Size(22, 15);
+            LabelRunningDistanceUnit.TabIndex = 5;
+            LabelRunningDistanceUnit.Text = "км";
             // 
             // NumericRunningDistance
-            //
-            this.NumericRunningDistance.DecimalPlaces = 2;
-            this.NumericRunningDistance.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
-            this.NumericRunningDistance.Location = new System.Drawing.Point(123, 56);
-            this.NumericRunningDistance.Margin = new System.Windows.Forms.Padding(4);
-            this.NumericRunningDistance.Maximum = new decimal(new int[] { 100, 0, 0, 0 });
-            this.NumericRunningDistance.Minimum = new decimal(new int[] { 1, 0, 0, 131072 });
-            this.NumericRunningDistance.Name = "NumericRunningDistance";
-            this.NumericRunningDistance.Size = new System.Drawing.Size(120, 22);
-            this.NumericRunningDistance.TabIndex = 3;
-            this.NumericRunningDistance.Value = new decimal(new int[] { 1, 0, 0, 131072 });
+            // 
+            NumericRunningDistance.DecimalPlaces = 2;
+            NumericRunningDistance.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
+            NumericRunningDistance.Location = new Point(108, 52);
+            NumericRunningDistance.Margin = new Padding(4);
+            NumericRunningDistance.Minimum = new decimal(new int[] { 1, 0, 0, 131072 });
+            NumericRunningDistance.Name = "NumericRunningDistance";
+            NumericRunningDistance.Size = new Size(105, 23);
+            NumericRunningDistance.TabIndex = 3;
+            NumericRunningDistance.Value = new decimal(new int[] { 1, 0, 0, 131072 });
             // 
             // LabelRunningDistance
             // 
-            this.LabelRunningDistance.AutoSize = true;
-            this.LabelRunningDistance.Location = new System.Drawing.Point(4, 58);
-            this.LabelRunningDistance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LabelRunningDistance.Name = "LabelRunningDistance";
-            this.LabelRunningDistance.Size = new System.Drawing.Size(80, 16);
-            this.LabelRunningDistance.TabIndex = 2;
-            this.LabelRunningDistance.Text = "Дистанция:";
+            LabelRunningDistance.AutoSize = true;
+            LabelRunningDistance.Location = new Point(4, 54);
+            LabelRunningDistance.Margin = new Padding(4, 0, 4, 0);
+            LabelRunningDistance.Name = "LabelRunningDistance";
+            LabelRunningDistance.Size = new Size(69, 15);
+            LabelRunningDistance.TabIndex = 2;
+            LabelRunningDistance.Text = "Дистанция:";
             // 
             // LabelIntensityUnit
             // 
-            this.LabelIntensityUnit.AutoSize = true;
-            this.LabelIntensityUnit.Location = new System.Drawing.Point(251, 21);
-            this.LabelIntensityUnit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LabelIntensityUnit.Name = "LabelIntensityUnit";
-            this.LabelIntensityUnit.Size = new System.Drawing.Size(35, 16);
-            this.LabelIntensityUnit.TabIndex = 4;
-            this.LabelIntensityUnit.Text = "км/ч";
+            LabelIntensityUnit.AutoSize = true;
+            LabelIntensityUnit.Location = new Point(220, 20);
+            LabelIntensityUnit.Margin = new Padding(4, 0, 4, 0);
+            LabelIntensityUnit.Name = "LabelIntensityUnit";
+            LabelIntensityUnit.Size = new Size(34, 15);
+            LabelIntensityUnit.TabIndex = 4;
+            LabelIntensityUnit.Text = "км/ч";
             // 
             // NumericIntensity
-            //
-            this.NumericIntensity.DecimalPlaces = 2;
-            this.NumericIntensity.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
-            this.NumericIntensity.Location = new System.Drawing.Point(123, 19);
-            this.NumericIntensity.Margin = new System.Windows.Forms.Padding(4);
-            this.NumericIntensity.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
-            this.NumericIntensity.Minimum = new decimal(new int[] { 1, 0, 0, 131072 });
-            this.NumericIntensity.Name = "NumericIntensity";
-            this.NumericIntensity.Size = new System.Drawing.Size(120, 22);
-            this.NumericIntensity.TabIndex = 1;
-            this.NumericIntensity.Value = new decimal(new int[] { 1, 0, 0, 131072 });
+            // 
+            NumericIntensity.DecimalPlaces = 2;
+            NumericIntensity.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
+            NumericIntensity.Location = new Point(108, 18);
+            NumericIntensity.Margin = new Padding(4);
+            NumericIntensity.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
+            NumericIntensity.Minimum = new decimal(new int[] { 1, 0, 0, 131072 });
+            NumericIntensity.Name = "NumericIntensity";
+            NumericIntensity.Size = new Size(105, 23);
+            NumericIntensity.TabIndex = 1;
+            NumericIntensity.Value = new decimal(new int[] { 1, 0, 0, 131072 });
             // 
             // LabelIntensity
             // 
-            this.LabelIntensity.AutoSize = true;
-            this.LabelIntensity.Location = new System.Drawing.Point(4, 21);
-            this.LabelIntensity.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LabelIntensity.Name = "LabelIntensity";
-            this.LabelIntensity.Size = new System.Drawing.Size(111, 16);
-            this.LabelIntensity.TabIndex = 0;
-            this.LabelIntensity.Text = "Интенсивность:";
+            LabelIntensity.AutoSize = true;
+            LabelIntensity.Location = new Point(4, 20);
+            LabelIntensity.Margin = new Padding(4, 0, 4, 0);
+            LabelIntensity.Name = "LabelIntensity";
+            LabelIntensity.Size = new Size(94, 15);
+            LabelIntensity.TabIndex = 0;
+            LabelIntensity.Text = "Интенсивность:";
             // 
             // PanelSwimming
             // 
-            this.PanelSwimming.Controls.Add(this.LabelSwimmingDistanceUnit);
-            this.PanelSwimming.Controls.Add(this.NumericSwimmingDistance);
-            this.PanelSwimming.Controls.Add(this.LabelSwimmingDistance);
-            this.PanelSwimming.Controls.Add(this.ComboBoxStyle);
-            this.PanelSwimming.Controls.Add(this.LabelStyle);
-            this.PanelSwimming.Location = new System.Drawing.Point(16, 149);
-            this.PanelSwimming.Margin = new System.Windows.Forms.Padding(4);
-            this.PanelSwimming.Name = "PanelSwimming";
-            this.PanelSwimming.Size = new System.Drawing.Size(295, 98);
-            this.PanelSwimming.TabIndex = 5;
+            PanelSwimming.Controls.Add(LabelSwimmingDistanceUnit);
+            PanelSwimming.Controls.Add(NumericSwimmingDistance);
+            PanelSwimming.Controls.Add(LabelSwimmingDistance);
+            PanelSwimming.Controls.Add(ComboBoxStyle);
+            PanelSwimming.Controls.Add(LabelStyle);
+            PanelSwimming.Location = new Point(14, 140);
+            PanelSwimming.Margin = new Padding(4);
+            PanelSwimming.Name = "PanelSwimming";
+            PanelSwimming.Size = new Size(258, 92);
+            PanelSwimming.TabIndex = 5;
             // 
             // LabelSwimmingDistanceUnit
             // 
-            this.LabelSwimmingDistanceUnit.AutoSize = true;
-            this.LabelSwimmingDistanceUnit.Location = new System.Drawing.Point(251, 58);
-            this.LabelSwimmingDistanceUnit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LabelSwimmingDistanceUnit.Name = "LabelSwimmingDistanceUnit";
-            this.LabelSwimmingDistanceUnit.Size = new System.Drawing.Size(16, 16);
-            this.LabelSwimmingDistanceUnit.TabIndex = 4;
-            this.LabelSwimmingDistanceUnit.Text = "м";
+            LabelSwimmingDistanceUnit.AutoSize = true;
+            LabelSwimmingDistanceUnit.Location = new Point(220, 54);
+            LabelSwimmingDistanceUnit.Margin = new Padding(4, 0, 4, 0);
+            LabelSwimmingDistanceUnit.Name = "LabelSwimmingDistanceUnit";
+            LabelSwimmingDistanceUnit.Size = new Size(16, 15);
+            LabelSwimmingDistanceUnit.TabIndex = 4;
+            LabelSwimmingDistanceUnit.Text = "м";
             // 
             // NumericSwimmingDistance
             // 
-            this.NumericSwimmingDistance.DecimalPlaces = 2;
-            this.NumericSwimmingDistance.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
-            this.NumericSwimmingDistance.Location = new System.Drawing.Point(123, 56);
-            this.NumericSwimmingDistance.Margin = new System.Windows.Forms.Padding(4);
-            this.NumericSwimmingDistance.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
-            this.NumericSwimmingDistance.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            this.NumericSwimmingDistance.Name = "NumericSwimmingDistance";
-            this.NumericSwimmingDistance.Size = new System.Drawing.Size(120, 22);
-            this.NumericSwimmingDistance.TabIndex = 3;
-            this.NumericSwimmingDistance.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            NumericSwimmingDistance.DecimalPlaces = 2;
+            NumericSwimmingDistance.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
+            NumericSwimmingDistance.Location = new Point(108, 52);
+            NumericSwimmingDistance.Margin = new Padding(4);
+            NumericSwimmingDistance.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+            NumericSwimmingDistance.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            NumericSwimmingDistance.Name = "NumericSwimmingDistance";
+            NumericSwimmingDistance.Size = new Size(105, 23);
+            NumericSwimmingDistance.TabIndex = 3;
+            NumericSwimmingDistance.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // LabelSwimmingDistance
             // 
-            this.LabelSwimmingDistance.AutoSize = true;
-            this.LabelSwimmingDistance.Location = new System.Drawing.Point(4, 58);
-            this.LabelSwimmingDistance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LabelSwimmingDistance.Name = "LabelSwimmingDistance";
-            this.LabelSwimmingDistance.Size = new System.Drawing.Size(80, 16);
-            this.LabelSwimmingDistance.TabIndex = 2;
-            this.LabelSwimmingDistance.Text = "Дистанция:";
+            LabelSwimmingDistance.AutoSize = true;
+            LabelSwimmingDistance.Location = new Point(4, 54);
+            LabelSwimmingDistance.Margin = new Padding(4, 0, 4, 0);
+            LabelSwimmingDistance.Name = "LabelSwimmingDistance";
+            LabelSwimmingDistance.Size = new Size(69, 15);
+            LabelSwimmingDistance.TabIndex = 2;
+            LabelSwimmingDistance.Text = "Дистанция:";
             // 
             // ComboBoxStyle
-            //
-            this.ComboBoxStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboBoxStyle.FormattingEnabled = true;
-            this.ComboBoxStyle.Location = new System.Drawing.Point(123, 19);
-            this.ComboBoxStyle.Margin = new System.Windows.Forms.Padding(4);
-            this.ComboBoxStyle.Name = "ComboBoxStyle";
-            this.ComboBoxStyle.Size = new System.Drawing.Size(120, 24);
-            this.ComboBoxStyle.TabIndex = 1;
+            // 
+            ComboBoxStyle.DropDownStyle = ComboBoxStyle.DropDownList;
+            ComboBoxStyle.FormattingEnabled = true;
+            ComboBoxStyle.Location = new Point(108, 18);
+            ComboBoxStyle.Margin = new Padding(4);
+            ComboBoxStyle.Name = "ComboBoxStyle";
+            ComboBoxStyle.Size = new Size(106, 23);
+            ComboBoxStyle.TabIndex = 1;
             // 
             // LabelStyle
             // 
-            this.LabelStyle.AutoSize = true;
-            this.LabelStyle.Location = new System.Drawing.Point(4, 22);
-            this.LabelStyle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LabelStyle.Name = "LabelStyle";
-            this.LabelStyle.Size = new System.Drawing.Size(49, 16);
-            this.LabelStyle.TabIndex = 0;
-            this.LabelStyle.Text = "Стиль:";
+            LabelStyle.AutoSize = true;
+            LabelStyle.Location = new Point(4, 21);
+            LabelStyle.Margin = new Padding(4, 0, 4, 0);
+            LabelStyle.Name = "LabelStyle";
+            LabelStyle.Size = new Size(43, 15);
+            LabelStyle.TabIndex = 0;
+            LabelStyle.Text = "Стиль:";
             // 
             // PanelBenchPress
             // 
-            this.PanelBenchPress.Controls.Add(this.LabelRepetitionsUnit);
-            this.PanelBenchPress.Controls.Add(this.NumericRepetitions);
-            this.PanelBenchPress.Controls.Add(this.LabelRepetitions);
-            this.PanelBenchPress.Controls.Add(this.LabelWeightUnit);
-            this.PanelBenchPress.Controls.Add(this.NumericWeight);
-            this.PanelBenchPress.Controls.Add(this.LabelWeight);
-            this.PanelBenchPress.Location = new System.Drawing.Point(16, 149);
-            this.PanelBenchPress.Margin = new System.Windows.Forms.Padding(4);
-            this.PanelBenchPress.Name = "PanelBenchPress";
-            this.PanelBenchPress.Size = new System.Drawing.Size(295, 98);
-            this.PanelBenchPress.TabIndex = 6;
+            PanelBenchPress.Controls.Add(LabelRepetitionsUnit);
+            PanelBenchPress.Controls.Add(NumericRepetitions);
+            PanelBenchPress.Controls.Add(LabelRepetitions);
+            PanelBenchPress.Controls.Add(LabelWeightUnit);
+            PanelBenchPress.Controls.Add(NumericWeight);
+            PanelBenchPress.Controls.Add(LabelWeight);
+            PanelBenchPress.Location = new Point(14, 140);
+            PanelBenchPress.Margin = new Padding(4);
+            PanelBenchPress.Name = "PanelBenchPress";
+            PanelBenchPress.Size = new Size(258, 92);
+            PanelBenchPress.TabIndex = 6;
             // 
             // LabelRepetitionsUnit
             // 
-            this.LabelRepetitionsUnit.AutoSize = true;
-            this.LabelRepetitionsUnit.Location = new System.Drawing.Point(251, 58);
-            this.LabelRepetitionsUnit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LabelRepetitionsUnit.Name = "LabelRepetitionsUnit";
-            this.LabelRepetitionsUnit.Size = new System.Drawing.Size(31, 16);
-            this.LabelRepetitionsUnit.TabIndex = 5;
-            this.LabelRepetitionsUnit.Text = "раз";
+            LabelRepetitionsUnit.AutoSize = true;
+            LabelRepetitionsUnit.Location = new Point(220, 54);
+            LabelRepetitionsUnit.Margin = new Padding(4, 0, 4, 0);
+            LabelRepetitionsUnit.Name = "LabelRepetitionsUnit";
+            LabelRepetitionsUnit.Size = new Size(25, 15);
+            LabelRepetitionsUnit.TabIndex = 5;
+            LabelRepetitionsUnit.Text = "раз";
             // 
             // NumericRepetitions
-            //
-            this.NumericRepetitions.Location = new System.Drawing.Point(123, 56);
-            this.NumericRepetitions.Margin = new System.Windows.Forms.Padding(4);
-            this.NumericRepetitions.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            this.NumericRepetitions.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
-            this.NumericRepetitions.Name = "NumericRepetitions";
-            this.NumericRepetitions.Size = new System.Drawing.Size(120, 22);
-            this.NumericRepetitions.TabIndex = 3;
-            this.NumericRepetitions.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            NumericRepetitions.Location = new Point(108, 52);
+            NumericRepetitions.Margin = new Padding(4);
+            NumericRepetitions.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            NumericRepetitions.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            NumericRepetitions.Name = "NumericRepetitions";
+            NumericRepetitions.Size = new Size(105, 23);
+            NumericRepetitions.TabIndex = 3;
+            NumericRepetitions.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // LabelRepetitions
             // 
-            this.LabelRepetitions.AutoSize = true;
-            this.LabelRepetitions.Location = new System.Drawing.Point(4, 58);
-            this.LabelRepetitions.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LabelRepetitions.Name = "LabelRepetitions";
-            this.LabelRepetitions.Size = new System.Drawing.Size(90, 16);
-            this.LabelRepetitions.TabIndex = 2;
-            this.LabelRepetitions.Text = "Повторения:";
+            LabelRepetitions.AutoSize = true;
+            LabelRepetitions.Location = new Point(4, 54);
+            LabelRepetitions.Margin = new Padding(4, 0, 4, 0);
+            LabelRepetitions.Name = "LabelRepetitions";
+            LabelRepetitions.Size = new Size(77, 15);
+            LabelRepetitions.TabIndex = 2;
+            LabelRepetitions.Text = "Повторения:";
             // 
             // LabelWeightUnit
             // 
-            this.LabelWeightUnit.AutoSize = true;
-            this.LabelWeightUnit.Location = new System.Drawing.Point(251, 21);
-            this.LabelWeightUnit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LabelWeightUnit.Name = "LabelWeightUnit";
-            this.LabelWeightUnit.Size = new System.Drawing.Size(20, 16);
-            this.LabelWeightUnit.TabIndex = 4;
-            this.LabelWeightUnit.Text = "кг";
+            LabelWeightUnit.AutoSize = true;
+            LabelWeightUnit.Location = new Point(220, 20);
+            LabelWeightUnit.Margin = new Padding(4, 0, 4, 0);
+            LabelWeightUnit.Name = "LabelWeightUnit";
+            LabelWeightUnit.Size = new Size(18, 15);
+            LabelWeightUnit.TabIndex = 4;
+            LabelWeightUnit.Text = "кг";
             // 
             // NumericWeight
-            //
-            this.NumericWeight.DecimalPlaces = 2;
-            this.NumericWeight.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
-            this.NumericWeight.Location = new System.Drawing.Point(123, 19);
-            this.NumericWeight.Margin = new System.Windows.Forms.Padding(4);
-            this.NumericWeight.Maximum = new decimal(new int[] { 341, 0, 0, 0 });
-            this.NumericWeight.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            this.NumericWeight.Name = "NumericWeight";
-            this.NumericWeight.Size = new System.Drawing.Size(120, 22);
-            this.NumericWeight.TabIndex = 1;
-            this.NumericWeight.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            NumericWeight.DecimalPlaces = 2;
+            NumericWeight.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
+            NumericWeight.Location = new Point(108, 18);
+            NumericWeight.Margin = new Padding(4);
+            NumericWeight.Maximum = new decimal(new int[] { 341, 0, 0, 0 });
+            NumericWeight.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            NumericWeight.Name = "NumericWeight";
+            NumericWeight.Size = new Size(105, 23);
+            NumericWeight.TabIndex = 1;
+            NumericWeight.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // LabelWeight
             // 
-            this.LabelWeight.AutoSize = true;
-            this.LabelWeight.Location = new System.Drawing.Point(4, 21);
-            this.LabelWeight.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LabelWeight.Name = "LabelWeight";
-            this.LabelWeight.Size = new System.Drawing.Size(34, 16);
-            this.LabelWeight.TabIndex = 0;
-            this.LabelWeight.Text = "Вес:";
+            LabelWeight.AutoSize = true;
+            LabelWeight.Location = new Point(4, 20);
+            LabelWeight.Margin = new Padding(4, 0, 4, 0);
+            LabelWeight.Name = "LabelWeight";
+            LabelWeight.Size = new Size(29, 15);
+            LabelWeight.TabIndex = 0;
+            LabelWeight.Text = "Вес:";
             // 
             // ButtonCreate
             // 
-            this.ButtonCreate.Location = new System.Drawing.Point(16, 260);
-            this.ButtonCreate.Margin = new System.Windows.Forms.Padding(4);
-            this.ButtonCreate.Name = "ButtonCreate";
-            this.ButtonCreate.Size = new System.Drawing.Size(139, 37);
-            this.ButtonCreate.TabIndex = 7;
-            this.ButtonCreate.Text = "Создать";
-            this.ButtonCreate.UseVisualStyleBackColor = true;
-            this.ButtonCreate.Click += new System.EventHandler(this.ButtonCreate_Click);
+            ButtonCreate.Location = new Point(280, 24);
+            ButtonCreate.Margin = new Padding(4);
+            ButtonCreate.Name = "ButtonCreate";
+            ButtonCreate.Size = new Size(122, 35);
+            ButtonCreate.TabIndex = 7;
+            ButtonCreate.Text = "Создать";
+            ButtonCreate.UseVisualStyleBackColor = true;
+            ButtonCreate.Click += ButtonCreate_Click;
             // 
             // ButtonClose
             // 
-            this.ButtonClose.Location = new System.Drawing.Point(173, 260);
-            this.ButtonClose.Margin = new System.Windows.Forms.Padding(4);
-            this.ButtonClose.Name = "ButtonClose";
-            this.ButtonClose.Size = new System.Drawing.Size(138, 37);
-            this.ButtonClose.TabIndex = 8;
-            this.ButtonClose.Text = "Закрыть";
-            this.ButtonClose.UseVisualStyleBackColor = true;
-            this.ButtonClose.Click += new System.EventHandler(this.ButtonClose_Click);
+            ButtonClose.Location = new Point(281, 189);
+            ButtonClose.Margin = new Padding(4);
+            ButtonClose.Name = "ButtonClose";
+            ButtonClose.Size = new Size(121, 35);
+            ButtonClose.TabIndex = 8;
+            ButtonClose.Text = "Закрыть";
+            ButtonClose.UseVisualStyleBackColor = true;
+            ButtonClose.Click += ButtonClose_Click;
             // 
             // ButtonCreateRandom
             // 
-            this.ButtonCreateRandom.Location = new System.Drawing.Point(16, 305);
-            this.ButtonCreateRandom.Margin = new System.Windows.Forms.Padding(4);
-            this.ButtonCreateRandom.Name = "ButtonCreateRandom";
-            this.ButtonCreateRandom.Size = new System.Drawing.Size(295, 37);
-            this.ButtonCreateRandom.TabIndex = 9;
-            this.ButtonCreateRandom.Text = "Создать случайное";
-            this.ButtonCreateRandom.UseVisualStyleBackColor = true;
-            this.ButtonCreateRandom.Click += new System.EventHandler(this.ButtonCreateRandom_Click);
+            ButtonCreateRandom.Location = new Point(280, 111);
+            ButtonCreateRandom.Margin = new Padding(4);
+            ButtonCreateRandom.Name = "ButtonCreateRandom";
+            ButtonCreateRandom.Size = new Size(120, 35);
+            ButtonCreateRandom.TabIndex = 9;
+            ButtonCreateRandom.Text = "Создать случайное";
+            ButtonCreateRandom.UseVisualStyleBackColor = true;
+            ButtonCreateRandom.Click += ButtonCreateRandom_Click;
             // 
-            // AddExerciseForm
+            // AddForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(331, 354);
-            this.Controls.Add(this.PanelSwimming);
-            this.Controls.Add(this.ButtonCreateRandom);
-            this.Controls.Add(this.ButtonClose);
-            this.Controls.Add(this.ButtonCreate);
-            this.Controls.Add(this.LabelParameters);
-            this.Controls.Add(this.TextBoxName);
-            this.Controls.Add(this.LabelName);
-            this.Controls.Add(this.PanelBenchPress);
-            this.Controls.Add(this.ExerciseGroupBox);
-            this.Controls.Add(this.PanelRunning);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "AddExerciseForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Добавить упражнение";
-            this.ExerciseGroupBox.ResumeLayout(false);
-            this.PanelRunning.ResumeLayout(false);
-            this.PanelRunning.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumericRunningDistance)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumericIntensity)).EndInit();
-            this.PanelSwimming.ResumeLayout(false);
-            this.PanelSwimming.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumericSwimmingDistance)).EndInit();
-            this.PanelBenchPress.ResumeLayout(false);
-            this.PanelBenchPress.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumericRepetitions)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumericWeight)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(404, 237);
+            Controls.Add(PanelSwimming);
+            Controls.Add(ButtonCreateRandom);
+            Controls.Add(ButtonClose);
+            Controls.Add(ButtonCreate);
+            Controls.Add(LabelParameters);
+            Controls.Add(TextBoxName);
+            Controls.Add(LabelName);
+            Controls.Add(PanelBenchPress);
+            Controls.Add(ExerciseGroupBox);
+            Controls.Add(PanelRunning);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(4);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "AddForm";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Добавить упражнение";
+            ExerciseGroupBox.ResumeLayout(false);
+            PanelRunning.ResumeLayout(false);
+            PanelRunning.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)NumericRunningDistance).EndInit();
+            ((System.ComponentModel.ISupportInitialize)NumericIntensity).EndInit();
+            PanelSwimming.ResumeLayout(false);
+            PanelSwimming.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)NumericSwimmingDistance).EndInit();
+            PanelBenchPress.ResumeLayout(false);
+            PanelBenchPress.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)NumericRepetitions).EndInit();
+            ((System.ComponentModel.ISupportInitialize)NumericWeight).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
