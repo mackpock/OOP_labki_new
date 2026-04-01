@@ -55,59 +55,84 @@ namespace View
         public ExerciseWrapper(IExercise exercise)
         {
             Name = exercise.Name;
-            //TODO: switch-case
-            if (exercise is Running run)
+            //TODO: switch-case +
+            switch (exercise)
             {
-                Type = ExerciseTypes.Running;
-                Distance = run.Distance;
-                Intensity = run.Intensity;
+                case Running run:
+                {
+                    Type = ExerciseTypes.Running;
+                    Distance = run.Distance;
+                    Intensity = run.Intensity;
+                    break;
             }
-            else if (exercise is Swimming swim)
-            {
-                Type = ExerciseTypes.Swimming;
-                Distance = swim.Distance;
-                Style = swim.Style;
-            }
-            else if (exercise is BenchPress press)
-            {
-                Type = ExerciseTypes.BenchPress;
-                Weight = press.Weight;
-                Repetitions = press.Repetitions;
+                case Swimming swim:
+                {
+                    Type = ExerciseTypes.Swimming;
+                    Distance = swim.Distance;
+                    Style = swim.Style;
+                    break;
+                }
+                case BenchPress press:
+                {
+                    Type = ExerciseTypes.BenchPress;
+                    Weight = press.Weight;
+                    Repetitions = press.Repetitions;
+                    break;
+                }
             }
         }
 
-        // Методы для сериализации полей
-        //TODO: XML
-        //TOOD: отступы
-        public bool ShouldSerializeDistance() => 
-        Type == ExerciseTypes.Running ||
-        Type == ExerciseTypes.Swimming;
+        //TODO: XML +
+        //TODO: отступы +
+
+        /// <summary>
+        /// Нужно ли сериализовать дистанцию
+        /// </summary>
+        public bool ShouldSerializeDistance() =>
+            Type == ExerciseTypes.Running ||
+            Type == ExerciseTypes.Swimming;
+
+        /// <summary>
+        /// Нужно ли сериализовать интенсивность
+        /// </summary>
         public bool ShouldSerializeIntensity() =>
-        Type == ExerciseTypes.Running;
-        public bool ShouldSerializeWeight() => 
-        Type == ExerciseTypes.BenchPress;
+            Type == ExerciseTypes.Running;
+
+        /// <summary>
+        /// Нужно ли сериализовать вес
+        /// </summary>
+        public bool ShouldSerializeWeight() =>
+            Type == ExerciseTypes.BenchPress;
+
+        /// <summary>
+        /// Нужно ли сериализовать повторения
+        /// </summary>
         public bool ShouldSerializeRepetitions() =>
-        Type == ExerciseTypes.BenchPress;
-        public bool ShouldSerializeStyle() => 
-        Type == ExerciseTypes.Swimming;
+            Type == ExerciseTypes.BenchPress;
+
+        /// <summary>
+        /// Нужно ли сериализовать стиль
+        /// </summary>
+        public bool ShouldSerializeStyle() =>
+            Type == ExerciseTypes.Swimming;
 
         /// <summary>
         /// Восстановление упражнения из обёртки
         /// </summary>
         public IExercise RecoverExercise()
         {
-            return Type 
-            switch
+            //TODO: отступы +
+            return Type switch
             {
-                //TOOD: отступы
-                ExerciseTypes.Running => 
-                new Running(Name, Intensity, Distance),
-                ExerciseTypes.Swimming => 
-                new Swimming(Name, Style, Distance),
-                ExerciseTypes.BenchPress => 
-                new BenchPress(Name, Weight, Repetitions),
-                _ => throw new 
-                InvalidOperationException("Неизвестный тип упражнения")
+                ExerciseTypes.Running =>
+                    new Running(Name, Intensity, Distance),
+                ExerciseTypes.Swimming =>
+                    new Swimming(Name, Style, Distance),
+                ExerciseTypes.BenchPress =>
+                    new BenchPress(
+                        Name, Weight, Repetitions),
+                _ => throw new InvalidOperationException(
+                    "Неизвестный тип упражнения")
             };
         }
     }

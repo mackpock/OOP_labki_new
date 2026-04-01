@@ -51,7 +51,7 @@ namespace View
             LabelSearch.Size = new Size(45, 15);
             LabelSearch.TabIndex = 1;
             LabelSearch.Text = "Поиск:";
-            LabelSearch.Click += LabelSearch_Click;
+
             // 
             // TextBoxFilter
             // 

@@ -10,12 +10,22 @@ namespace Model
         /// <summary>
         /// Минимальная допустимая интенсивность бега (км/ч)
         /// </summary>
-        private const double MinIntensity = 1;
+        public const double MinIntensity = 1;
 
         /// <summary>
         /// Максимальная допустимая интенсивность бега (км/ч)
         /// </summary>
-        private const double MaxIntensity = 30;
+        public const double MaxIntensity = 30;
+
+        /// <summary>
+        /// Минимальная допустимая дистанция бега (км)
+        /// </summary>
+        public const double MinDistance = 0.1;
+
+        /// <summary>
+        /// Максимальная допустимая дистанция бега (км)
+        /// </summary>
+        public const double MaxDistance = 100;
 
         /// <summary>
         /// Дистанция бега

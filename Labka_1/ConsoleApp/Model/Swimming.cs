@@ -6,6 +6,16 @@
 public class Swimming : ExerciseBase
 {
     /// <summary>
+    /// Минимальная допустимая дистанция (м)
+    /// </summary>
+    public const double MinDistance = 1;
+
+    /// <summary>
+    /// Максимальная допустимая дистанция (м)
+    /// </summary>
+    public const double MaxDistance = 10000;
+
+    /// <summary>
     /// Стиль плавания
     /// </summary>
     private SwimmingStyle _style;

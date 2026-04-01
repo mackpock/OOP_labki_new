@@ -23,7 +23,7 @@ namespace View
         public event Action<List<IExercise>>? FilterApplied;
 
         /// <summary>
-        /// Делегат события - фильтр отменён (форма закрыта без применения)
+        /// Делегат события - фильтр отменён
         /// </summary>
         public event Action? FilterCanceled;
 
@@ -41,25 +41,33 @@ namespace View
         /// </summary>
         private void InitControls()
         {
-            CheckedListBoxExercise.Items.AddRange(ExerciseTypes.AllExerciseTypes);
-            //TODO: {}
-            for (int i = 0; i < CheckedListBoxExercise.Items.Count; i++)
-                CheckedListBoxExercise.SetItemChecked(i, true);
+            CheckedListBoxExercise.Items.AddRange(
+                ExerciseTypes.AllExerciseTypes);
+            //TODO: {} +
+            for (int i = 0;
+                i < CheckedListBoxExercise.Items.Count;
+                i++)
+            {
+                CheckedListBoxExercise.SetItemChecked(
+                    i, true);
+            }
         }
 
         /// <summary>
         /// Закрытие формы
         /// </summary>
-        private void FilterForm_FormClosing(object sender,
-            //TOOD: отступы
-         FormClosingEventArgs arg)
+        //TODO: отступы +
+        private void FilterForm_FormClosing(
+            object sender, FormClosingEventArgs arg)
         {
             if (arg.CloseReason == CloseReason.UserClosing)
             {
                 FilterCanceled?.Invoke();
                 RestoreCheckboxes();
-                MessageBox.Show("Фильтр сброшен", "Инфо", MessageBoxButtons.OK,
-                 MessageBoxIcon.Information);
+                MessageBox.Show(
+                    "Фильтр сброшен", "Инфо",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
         }
 
@@ -68,16 +76,22 @@ namespace View
         /// </summary>
         private void RestoreCheckboxes()
         {
-            //TODO: {}
-            for (int i = 0; i < CheckedListBoxExercise.Items.Count; i++)
-                CheckedListBoxExercise.SetItemChecked(i, true);
+            //TODO: {} +
+            for (int i = 0;
+                i < CheckedListBoxExercise.Items.Count;
+                i++)
+            {
+                CheckedListBoxExercise.SetItemChecked(
+                    i, true);
+            }
             TextBoxFilter.Clear();
         }
 
         /// <summary>
         /// Кнопка "Фильтр"
         /// </summary>
-        private void ButtonFilter_Click(object sender, EventArgs arg)
+        private void ButtonFilter_Click(
+            object sender, EventArgs arg)
         {
             ApplyFilter();
         }
@@ -85,19 +99,23 @@ namespace View
         /// <summary>
         /// Кнопка "Отменить"
         /// </summary>
-        private void ButtonCancel_Click(object sender, EventArgs arg)
+        private void ButtonCancel_Click(
+            object sender, EventArgs arg)
         {
             FilterCanceled?.Invoke();
             RestoreCheckboxes();
-            //TOOD: отступы
-            MessageBox.Show("Фильтр сброшен", "Инфо", MessageBoxButtons.OK,
-             MessageBoxIcon.Information);
+            //TODO: отступы +
+            MessageBox.Show(
+                "Фильтр сброшен", "Инфо",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
 
         /// <summary>
         /// Кнопка "Закрыть"
         /// </summary>
-        private void ButtonClose_Click(object sender, EventArgs arg)
+        private void ButtonClose_Click(
+            object sender, EventArgs arg)
         {
             this.Close();
         }
@@ -110,36 +128,47 @@ namespace View
             string search = TextBoxFilter.Text.Trim();
             var selectedTypes = new List<string>();
 
-            //TODO: {}
-            foreach (var item in CheckedListBoxExercise.CheckedItems)
+            //TODO: {} +
+            foreach (var item in
+                CheckedListBoxExercise.CheckedItems)
+            {
                 selectedTypes.Add(item.ToString());
+            }
 
-            //TODO: {}
+            //TODO: {} +
             if (selectedTypes.Count == 0)
-                selectedTypes.AddRange(ExerciseTypes.AllExerciseTypes);
+            {
+                selectedTypes.AddRange(
+                    ExerciseTypes.AllExerciseTypes);
+            }
 
             var filtered = _allExercises
-                .Where(ex => MatchType(ex, selectedTypes)
-                && MatchSearch(ex, search))
+                .Where(ex =>
+                    MatchType(ex, selectedTypes)
+                    && MatchSearch(ex, search))
                 .ToList();
 
             FilterApplied?.Invoke(filtered);
-            MessageBox.Show($"Найдено: {filtered.Count}", "Результат",
-             MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(
+                $"Найдено: {filtered.Count}",
+                "Результат",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
 
         /// <summary>
         /// Проверка типа упражнения
         /// </summary>
-        private bool MatchType(IExercise ex, List<string> types)
+        private bool MatchType(
+            IExercise ex, List<string> types)
         {
-            string type = ex 
-            switch
+            string type = ex switch
             {
-                Running => ExerciseTypes.Running,
-                Swimming => ExerciseTypes.Swimming,
+                Running    => ExerciseTypes.Running,
+                Swimming   => ExerciseTypes.Swimming,
                 BenchPress => ExerciseTypes.BenchPress,
-                _ => throw new InvalidOperationException("Неизвестный тип")
+                _ => throw new InvalidOperationException(
+                    "Неизвестный тип")
             };
 
             return types.Contains(type);
@@ -148,7 +177,8 @@ namespace View
         /// <summary>
         /// Поиск по тексту
         /// </summary>
-        private bool MatchSearch(IExercise ex, string term)
+        private bool MatchSearch(
+            IExercise ex, string term)
         {
             if (string.IsNullOrEmpty(term))
             {
@@ -179,66 +209,37 @@ namespace View
             return false;
         }
 
-        //TODO: duplication
+        //TODO: duplication +
         /// <summary>
         /// Тёмное оформление
         /// </summary>
         private void ApplyDarkTheme()
         {
-            Color bg = Color.FromArgb(30, 30, 30);
-            Color panel = Color.FromArgb(45, 45, 45);
-            Color orange = Color.FromArgb(255, 140, 0);
-            Color red = Color.FromArgb(220, 20, 60);
-            Color text = Color.FromArgb(240, 240, 240);
-
-            this.BackColor = bg;
-            this.ForeColor = text;
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.StartPosition = FormStartPosition.CenterParent;
+            ThemeHelper.StyleForm(this);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
 
-            ExerciseGroupBox.BackColor = panel;
-            ExerciseGroupBox.ForeColor = orange;
-            ExerciseGroupBox.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            ExerciseGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Left |
-            AnchorStyles.Right;
+            ThemeHelper.StyleGroupBox(ExerciseGroupBox);
+            ExerciseGroupBox.Anchor =
+                AnchorStyles.Top | AnchorStyles.Left
+                | AnchorStyles.Right;
 
-            LabelSearch.ForeColor = text;
-            LabelSearch.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-
-            TextBoxFilter.BackColor = Color.FromArgb(60, 60, 60);
-            TextBoxFilter.ForeColor = text;
-            TextBoxFilter.BorderStyle = BorderStyle.FixedSingle;
-            TextBoxFilter.Font = new Font("Segoe UI", 10F);
-
-            CheckedListBoxExercise.BackColor = Color.FromArgb(60, 60, 60);
-            CheckedListBoxExercise.ForeColor = text;
-            CheckedListBoxExercise.BorderStyle = BorderStyle.FixedSingle;
+            ThemeHelper.StyleLabel(
+                LabelSearch, bold: true);
+            ThemeHelper.StyleTextBox(TextBoxFilter);
+            ThemeHelper.StyleCheckedListBox(
+                CheckedListBoxExercise);
             CheckedListBoxExercise.CheckOnClick = true;
 
-            ApplyButtonStyle(ButtonFilter, orange);
-            ApplyButtonStyle(ButtonCancel, red);
-            ApplyButtonStyle(ButtonClose, Color.FromArgb(80, 80, 80));
+            //TODO: duplication +
+            ThemeHelper.ApplyButtonStyle(
+                ButtonFilter, ThemeHelper.Orange);
+            ThemeHelper.ApplyButtonStyle(
+                ButtonCancel, ThemeHelper.Red);
+            ThemeHelper.ApplyButtonStyle(
+                ButtonClose, ThemeHelper.ButtonGray);
         }
 
-        //TODO: duplication
-        /// <summary>
-        /// Оформление кнопки
-        /// </summary>
-        private void ApplyButtonStyle(Button btn, Color clr)
-        {
-            btn.BackColor = clr;
-            btn.ForeColor = Color.White;
-            btn.FlatStyle = FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
-            btn.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btn.Cursor = Cursors.Hand;
-        }
-        //TODO: remove
-        private void LabelSearch_Click(object sender, EventArgs e)
-        {
-
-        }
+        //TODO: remove +
     }
 }

@@ -8,23 +8,23 @@ public class BenchPress : ExerciseBase
     /// <summary>
     /// Минимальный допустимый вес штанги (кг)
     /// </summary>
-    private const double MinWeight = 1;
+    public const double MinWeight = 1;
 
     /// <summary>
     /// Максимальный допустимый вес штанги (кг)
     /// </summary>
-    private const double MaxWeight = 341;
+    public const double MaxWeight = 341;
 
     /// <summary>
     /// Минимальное допустимое количество повторений
     /// </summary>
-    private const int MinRepetitions = 1;
+    public const int MinRepetitions = 1;
 
 
     /// <summary>
     /// Максимальное допустимое количество повторений
     /// </summary>
-    private const int MaxRepetitions = 1000;
+    public const int MaxRepetitions = 1000;
 
     /// <summary>
     /// Вес штанги (кг)
