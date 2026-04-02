@@ -27,7 +27,6 @@ namespace View
         /// </summary>
         public event Action? FilterCanceled;
 
-        //TODO: XML +
         /// <summary>
         /// Создание формы фильтрации
         /// </summary>

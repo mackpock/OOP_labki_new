@@ -71,6 +71,7 @@ namespace View
         /// Шрифт заголовка раздела
         /// </summary>
         public static readonly Font SectionFont =
+            //TODO: duplication
             new Font("Segoe UI", 11F, FontStyle.Bold);
 
         /// <summary>

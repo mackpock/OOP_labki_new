@@ -226,7 +226,6 @@ namespace View
                 return;
             }
 
-            //TODO: RSDN +
             using var saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter =
                 "Файлы упражнений (*.shizo)|*.shizo";
@@ -260,7 +259,6 @@ namespace View
         private void OpenToolStripMenuItem_Click(
             object sender, EventArgs e)
         {
-            //TODO: RSDN +
             using var openFileDialog = new OpenFileDialog();
             openFileDialog.Filter =
                 "Файлы упражнений (*.shizo)|*.shizo";
@@ -351,7 +349,6 @@ namespace View
         {
             return exercise switch
             {
-                //TODO: RSDN +
                 Running running =>
                     new ExerciseWrapper(running),
                 Swimming swimming =>
@@ -363,7 +360,6 @@ namespace View
             };
         }
 
-        //TODO: duplication +
         /// <summary>
         /// Настройка визуального оформления
         /// </summary>
@@ -460,7 +456,6 @@ namespace View
                 }
             };
 
-            //TODO: duplication +
             var commonStyle = new DataGridViewCellStyle
             {
                 BackColor = ThemeHelper.DarkCell,
@@ -470,7 +465,6 @@ namespace View
 
             nameCol.DefaultCellStyle = commonStyle;
             infoCol.DefaultCellStyle = commonStyle;
-            //TODO: duplication +
             calCol.DefaultCellStyle =
                 new DataGridViewCellStyle
             {
