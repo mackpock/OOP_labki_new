@@ -99,7 +99,6 @@ namespace View
         /// Шрифт заголовка раздела
         /// </summary>
         public static readonly Font SectionFont =
-            //TODO: duplication +
             new Font(FontFamily, FontSizeSection, FontStyle.Bold);
 
         /// <summary>
