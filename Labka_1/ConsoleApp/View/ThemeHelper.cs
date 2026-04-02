@@ -57,28 +57,56 @@ namespace View
             Color.FromArgb(80, 80, 80);
 
         /// <summary>
+        /// Название шрифта интерфейса
+        /// </summary>
+        public const string FontFamily = "Segoe UI";
+
+        /// <summary>
         /// Формат отображения чисел с плавающей точкой
         /// </summary>
         public const string FloatFormat = "F2";
 
         /// <summary>
+        /// Базовый размер шрифта
+        /// </summary>
+        /// <summary>
+        /// Размер шрифта ячеек таблицы
+        /// </summary>
+        public const float FontSizeCell = 9F;
+
+        /// <summary>
+        /// Базовый размер шрифта
+        /// </summary>
+        public const float FontSizeBase = 10F;
+
+        /// <summary>
+        /// Размер шрифта заголовка раздела
+        /// </summary>
+        public const float FontSizeSection = 11F;
+
+        /// <summary>
+        /// Увеличенный размер шрифта заголовка раздела
+        /// </summary>
+        public const float FontSizeSectionLarge = 12F;
+
+        /// <summary>
         /// Шрифт ячеек таблицы
         /// </summary>
         public static readonly Font CellFont =
-            new Font("Segoe UI", 9F);
+            new Font(FontFamily, FontSizeCell);
 
         /// <summary>
         /// Шрифт заголовка раздела
         /// </summary>
         public static readonly Font SectionFont =
-            //TODO: duplication
-            new Font("Segoe UI", 11F, FontStyle.Bold);
+            //TODO: duplication +
+            new Font(FontFamily, FontSizeSection, FontStyle.Bold);
 
         /// <summary>
         /// Увеличенный шрифт заголовка раздела
         /// </summary>
         public static readonly Font SectionFontLarge =
-            new Font("Segoe UI", 12F, FontStyle.Bold);
+            new Font(FontFamily, FontSizeSectionLarge, FontStyle.Bold);
 
         /// <summary>
         /// Базовый стиль формы
@@ -112,7 +140,7 @@ namespace View
             textBox.BackColor = Input;
             textBox.ForeColor = Text;
             textBox.BorderStyle = BorderStyle.FixedSingle;
-            textBox.Font = new Font("Segoe UI", 10F);
+            textBox.Font = new Font(FontFamily, FontSizeBase);
         }
 
         /// <summary>
@@ -123,7 +151,7 @@ namespace View
         {
             comboBox.BackColor = Input;
             comboBox.ForeColor = Text;
-            comboBox.Font = new Font("Segoe UI", 10F);
+            comboBox.Font = new Font(FontFamily, FontSizeBase);
         }
 
         /// <summary>
@@ -148,7 +176,7 @@ namespace View
             if (bold)
             {
                 label.Font = new Font(
-                    "Segoe UI", 10F, FontStyle.Bold);
+                    FontFamily, FontSizeBase, FontStyle.Bold);
             }
         }
 
@@ -216,7 +244,7 @@ namespace View
             headerStyle.BackColor = DarkCell;
             headerStyle.ForeColor = Color.White;
             headerStyle.Font = new Font(
-                "Segoe UI", 10F, FontStyle.Bold);
+                FontFamily, FontSizeBase, FontStyle.Bold);
             headerStyle.Padding = new Padding(5);
             headerStyle.SelectionBackColor = Input;
             headerStyle.SelectionForeColor = Color.White;
@@ -264,14 +292,14 @@ namespace View
         /// </summary>
         public static void ApplyButtonStyle(
             Button button, Color color,
-            float fontSize = 10F)
+            float fontSize = FontSizeBase)
         {
             button.BackColor = color;
             button.ForeColor = Color.White;
             button.FlatStyle = FlatStyle.Flat;
             button.FlatAppearance.BorderSize = 0;
             button.Font = new Font(
-                "Segoe UI", fontSize, FontStyle.Bold);
+                FontFamily, fontSize, FontStyle.Bold);
             button.Cursor = Cursors.Hand;
         }
     }
