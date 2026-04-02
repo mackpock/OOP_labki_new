@@ -71,7 +71,6 @@ namespace View
         /// <summary>
         /// Добавление упражнения в список
         /// </summary>
-        /// //TODO: RSDN +
         private void RegisterExercise(
             IExercise exercise)
         {
@@ -136,7 +135,6 @@ namespace View
             List<IExercise> list)
         {
             _exercises.Clear();
-            //TODO: {} +
             foreach (var exercise in list)
             {
                 _exercises.Add(exercise);
@@ -155,7 +153,6 @@ namespace View
                 return;
             }
 
-            //TODO: отступы +
             var selected =
                 ExerciseDataGridView.SelectedRows[0]
                     .DataBoundItem as IExercise;
@@ -182,7 +179,6 @@ namespace View
         /// <summary>
         /// Очистка всего списка
         /// </summary>
-        //TODO: отступы +
         private void ButtonClear_Click(
             object sender, EventArgs e)
         {
@@ -200,7 +196,6 @@ namespace View
 
             if (confirm == DialogResult.Yes)
             {
-                //TODO: RSDN +
                 _exercises.Clear();
                 _originalExercises.Clear();
                 RefreshButtons();
@@ -210,7 +205,6 @@ namespace View
         /// <summary>
         /// Выбор строки в таблице
         /// </summary>
-        //TODO: отступы +
         private void ExerciseDataGridView_SelectionChanged(
             object sender, EventArgs args)
         {
@@ -232,7 +226,7 @@ namespace View
                 return;
             }
 
-            //TODO: RSDN +
+            //TODO: RSDN
             using var dlg = new SaveFileDialog();
             dlg.Filter =
                 "Файлы упражнений (*.shizo)|*.shizo";
@@ -266,7 +260,7 @@ namespace View
         private void OpenToolStripMenuItem_Click(
             object sender, EventArgs e)
         {
-            //TODO: RSDN +
+            //TODO: RSDN
             using var dlg = new OpenFileDialog();
             dlg.Filter =
                 "Файлы упражнений (*.shizo)|*.shizo";
@@ -350,9 +344,9 @@ namespace View
         private ExerciseWrapper CreateWrapper(
             IExercise exercise)
         {
-            //TODO: switch-case +
             return exercise switch
             {
+                //TODO: RSDN
                 Running r =>
                     new ExerciseWrapper(r),
                 Swimming s =>
@@ -364,7 +358,7 @@ namespace View
             };
         }
 
-        //TODO: duplication +
+        //TODO: duplication
         /// <summary>
         /// Настройка визуального оформления
         /// </summary>
@@ -377,7 +371,6 @@ namespace View
             ThemeHelper.StyleDataGridView(
                 ExerciseDataGridView);
 
-            //TODO: duplication +
             ThemeHelper.ApplyButtonStyle(
                 ButtonAdd, ThemeHelper.Orange);
             ThemeHelper.ApplyButtonStyle(
@@ -415,7 +408,6 @@ namespace View
 
             var darkBg = Color.FromArgb(40, 40, 40);
 
-            //TODO: RSDN +
             var nameCol = new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Name",
@@ -432,7 +424,6 @@ namespace View
                 }
             };
 
-            //TODO: RSDN +
             var infoCol = new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "ExerciseInfo",
@@ -449,7 +440,6 @@ namespace View
                 }
             };
 
-            //TODO: RSDN +
             var calCol = new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Calories",
@@ -466,6 +456,7 @@ namespace View
                 }
             };
 
+            //TODO: duplication
             var commonStyle = new DataGridViewCellStyle
             {
                 BackColor = darkBg,
@@ -475,6 +466,7 @@ namespace View
 
             nameCol.DefaultCellStyle = commonStyle;
             infoCol.DefaultCellStyle = commonStyle;
+            //TODO: duplication
             calCol.DefaultCellStyle =
                 new DataGridViewCellStyle
             {

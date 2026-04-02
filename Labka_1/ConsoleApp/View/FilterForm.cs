@@ -27,6 +27,7 @@ namespace View
         /// </summary>
         public event Action? FilterCanceled;
 
+        //TODO: XML
         public FilterForm(List<IExercise> exercises)
         {
             InitializeComponent();
@@ -43,20 +44,17 @@ namespace View
         {
             CheckedListBoxExercise.Items.AddRange(
                 ExerciseTypes.AllExerciseTypes);
-            //TODO: {} +
             for (int i = 0;
                 i < CheckedListBoxExercise.Items.Count;
                 i++)
             {
-                CheckedListBoxExercise.SetItemChecked(
-                    i, true);
+                CheckedListBoxExercise.SetItemChecked(i, true);
             }
         }
 
         /// <summary>
         /// Закрытие формы
         /// </summary>
-        //TODO: отступы +
         private void FilterForm_FormClosing(
             object sender, FormClosingEventArgs arg)
         {
@@ -76,7 +74,6 @@ namespace View
         /// </summary>
         private void RestoreCheckboxes()
         {
-            //TODO: {} +
             for (int i = 0;
                 i < CheckedListBoxExercise.Items.Count;
                 i++)
@@ -104,7 +101,6 @@ namespace View
         {
             FilterCanceled?.Invoke();
             RestoreCheckboxes();
-            //TODO: отступы +
             MessageBox.Show(
                 "Фильтр сброшен", "Инфо",
                 MessageBoxButtons.OK,
@@ -128,14 +124,11 @@ namespace View
             string search = TextBoxFilter.Text.Trim();
             var selectedTypes = new List<string>();
 
-            //TODO: {} +
-            foreach (var item in
-                CheckedListBoxExercise.CheckedItems)
+            foreach (var item in CheckedListBoxExercise.CheckedItems)
             {
                 selectedTypes.Add(item.ToString());
             }
 
-            //TODO: {} +
             if (selectedTypes.Count == 0)
             {
                 selectedTypes.AddRange(
@@ -178,6 +171,7 @@ namespace View
         /// Поиск по тексту
         /// </summary>
         private bool MatchSearch(
+            //TODO: RSDN
             IExercise ex, string term)
         {
             if (string.IsNullOrEmpty(term))
@@ -209,7 +203,6 @@ namespace View
             return false;
         }
 
-        //TODO: duplication +
         /// <summary>
         /// Тёмное оформление
         /// </summary>
@@ -231,7 +224,6 @@ namespace View
                 CheckedListBoxExercise);
             CheckedListBoxExercise.CheckOnClick = true;
 
-            //TODO: duplication +
             ThemeHelper.ApplyButtonStyle(
                 ButtonFilter, ThemeHelper.Orange);
             ThemeHelper.ApplyButtonStyle(
@@ -239,7 +231,5 @@ namespace View
             ThemeHelper.ApplyButtonStyle(
                 ButtonClose, ThemeHelper.ButtonGray);
         }
-
-        //TODO: remove +
     }
 }
