@@ -131,7 +131,6 @@ namespace View
                     ComboBoxExercise.SelectedItem
                         ?.ToString() ?? "";
 
-                //TODO: switch-case +
                 switch (type)
                 {
                     case ExerciseTypes.Running:
@@ -193,10 +192,10 @@ namespace View
                 TextBoxName.Focus();
                 return false;
             }
-            if (TextBoxName.Text.Length > 50)
+            if (TextBoxName.Text.Length > ExerciseBase.MaxNameLength)
             {
                 MessageBox.Show(
-                    "Длинное название (макс. 50)",
+                    $"Длинное название (макс. {ExerciseBase.MaxNameLength})",
                     "Ошибка",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
@@ -206,7 +205,8 @@ namespace View
 
             string type =
                 ComboBoxExercise.SelectedItem
-                    ?.ToString() ?? "";
+                    ?.ToString() 
+                    ?? "";
             return type switch
             {
                 ExerciseTypes.Running =>
@@ -219,13 +219,11 @@ namespace View
             };
         }
 
-        //TODO: refactor to Model +
         /// <summary>
         /// Проверка данных для бега
         /// </summary>
         private bool CheckRunningData()
         {
-            //TODO: magic (to const) +
             if (NumericIntensity.Value <
                 (decimal)Running.MinIntensity ||
                 NumericIntensity.Value >
@@ -238,7 +236,6 @@ namespace View
                 NumericIntensity.Focus();
                 return false;
             }
-            //TODO: magic (to const) +
             if (NumericRunningDistance.Value <
                 (decimal)Running.MinDistance ||
                 NumericRunningDistance.Value >
@@ -259,7 +256,6 @@ namespace View
         /// </summary>
         private bool CheckSwimmingData()
         {
-            //TODO: magic (to const) +
             if (NumericSwimmingDistance.Value <
                 (decimal)Swimming.MinDistance ||
                 NumericSwimmingDistance.Value >
@@ -280,7 +276,6 @@ namespace View
         /// </summary>
         private bool CheckBenchPressData()
         {
-            //TODO: magic (to const) +
             if 
                 (NumericWeight.Value <
                 (decimal)BenchPress.MinWeight ||
@@ -294,7 +289,6 @@ namespace View
                 NumericWeight.Focus();
                 return false;
             }
-            //TODO: magic (to const) +
             if (NumericRepetitions.Value <
                 (decimal)BenchPress.MinRepetitions ||
                 NumericRepetitions.Value >
@@ -319,7 +313,7 @@ namespace View
             string type =
                 ComboBoxExercise.SelectedItem
                     ?.ToString() ?? "";
-            //TODO: switch-case +
+
             return type switch
             {
                 ExerciseTypes.Running =>
@@ -354,9 +348,6 @@ namespace View
         /// <summary>
         /// Тёмная тема оформления
         /// </summary>
-        //TODO: to const +
-        //TODO: RSDN +
-        //TODO: duplication +
         private void ApplyDarkTheme()
         {
             ThemeHelper.StyleForm(this);
@@ -371,10 +362,8 @@ namespace View
             ThemeHelper.StyleLabel(
                 LabelName, bold: true);
             LabelParameters.ForeColor = ThemeHelper.Orange;
-            LabelParameters.Font =
-                new Font("Segoe UI", 11F, FontStyle.Bold);
+            LabelParameters.Font = ThemeHelper.SectionFont;
 
-            //TODO: отступы +
             foreach (var label in new[]
             {
                 LabelIntensity,
@@ -409,13 +398,15 @@ namespace View
                 ThemeHelper.StyleNumericUpDown(numeric);
             }
 
-            //TODO: RSDN +
             ThemeHelper.ApplyButtonStyle(
-                ButtonCreate, ThemeHelper.Orange, 11F);
+                ButtonCreate, ThemeHelper.Orange,
+                ThemeHelper.SectionFont.Size);
             ThemeHelper.ApplyButtonStyle(
-                ButtonClose, ThemeHelper.ButtonGray, 11F);
+                ButtonClose, ThemeHelper.ButtonGray,
+                ThemeHelper.SectionFont.Size);
             ThemeHelper.ApplyButtonStyle(
-                ButtonCreateRandom, ThemeHelper.Red, 11F);
+                ButtonCreateRandom, ThemeHelper.Red,
+                ThemeHelper.SectionFont.Size);
         }
     }
 }

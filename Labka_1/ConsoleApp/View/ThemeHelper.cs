@@ -57,6 +57,29 @@ namespace View
             Color.FromArgb(80, 80, 80);
 
         /// <summary>
+        /// Формат отображения чисел с плавающей точкой
+        /// </summary>
+        public const string FloatFormat = "F2";
+
+        /// <summary>
+        /// Шрифт ячеек таблицы
+        /// </summary>
+        public static readonly Font CellFont =
+            new Font("Segoe UI", 9F);
+
+        /// <summary>
+        /// Шрифт заголовка раздела
+        /// </summary>
+        public static readonly Font SectionFont =
+            new Font("Segoe UI", 11F, FontStyle.Bold);
+
+        /// <summary>
+        /// Увеличенный шрифт заголовка раздела
+        /// </summary>
+        public static readonly Font SectionFontLarge =
+            new Font("Segoe UI", 12F, FontStyle.Bold);
+
+        /// <summary>
         /// Базовый стиль формы
         /// </summary>
         public static void StyleForm(Form form)
@@ -73,12 +96,11 @@ namespace View
         /// Стиль группы
         /// </summary>
         public static void StyleGroupBox(
-            GroupBox groupBox, float fontSize = 11F)
+            GroupBox groupBox, Font? font = null)
         {
             groupBox.BackColor = Panel;
             groupBox.ForeColor = Orange;
-            groupBox.Font = new Font(
-                "Segoe UI", fontSize, FontStyle.Bold);
+            groupBox.Font = font ?? SectionFont;
         }
 
         /// <summary>
@@ -143,8 +165,23 @@ namespace View
         /// <summary>
         /// Фон ячеек таблицы
         /// </summary>
-        private static readonly Color DarkCell =
+        public static readonly Color DarkCell =
             Color.FromArgb(40, 40, 40);
+
+        /// <summary>
+        /// Вес колонки с названием
+        /// </summary>
+        public const float ColWeightName = 25F;
+
+        /// <summary>
+        /// Вес колонки с деталями
+        /// </summary>
+        public const float ColWeightInfo = 50F;
+
+        /// <summary>
+        /// Вес колонки с калориями
+        /// </summary>
+        public const float ColWeightCalories = 25F;
 
         /// <summary>
         /// Фон таблицы
@@ -200,7 +237,7 @@ namespace View
             var cellStyle = dgv.DefaultCellStyle;
             cellStyle.BackColor = DarkCell;
             cellStyle.ForeColor = Text;
-            cellStyle.Font = new Font("Segoe UI", 9F);
+            cellStyle.Font = CellFont;
             cellStyle.SelectionBackColor = Selection;
             cellStyle.SelectionForeColor = Color.White;
         }

@@ -9,12 +9,6 @@ namespace ConsoleLoader;
 public static class InputHelper
 {
     /// <summary>
-    /// Максимальная длина названия упражнения (для валидации ввода в UI)
-    /// </summary>
-    /// <remarks>
-    public const int MaxNameLength = 50;
-
-    /// <summary>
     /// Ввод строки с валидацией
     /// </summary>
     public static string GetValidStringInput(string prompt)
@@ -31,11 +25,11 @@ public static class InputHelper
                 continue;
             }
 
-            if (input.Length > MaxNameLength)
+            if (input.Length > ExerciseBase.MaxNameLength)
             {
                 Console.WriteLine(
                     $"Ошибка: Название слишком длинное " +
-                    $"(макс. {MaxNameLength} символов)");
+                    $"(макс. {ExerciseBase.MaxNameLength} символов)");
                 continue;
             }
 

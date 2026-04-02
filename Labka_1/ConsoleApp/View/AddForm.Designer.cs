@@ -1,3 +1,5 @@
+using Model;
+
 namespace View
 {
     partial class AddForm
@@ -94,7 +96,7 @@ namespace View
             // 
             TextBoxName.Location = new Point(91, 83);
             TextBoxName.Margin = new Padding(4);
-            TextBoxName.MaxLength = 50;
+            TextBoxName.MaxLength = ExerciseBase.MaxNameLength;
             TextBoxName.Name = "TextBoxName";
             TextBoxName.Size = new Size(174, 23);
             TextBoxName.TabIndex = 2;

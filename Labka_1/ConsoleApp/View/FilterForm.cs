@@ -27,7 +27,11 @@ namespace View
         /// </summary>
         public event Action? FilterCanceled;
 
-        //TODO: XML
+        //TODO: XML +
+        /// <summary>
+        /// Создание формы фильтрации
+        /// </summary>
+        /// <param name="exercises">Список упражнений</param>
         public FilterForm(List<IExercise> exercises)
         {
             InitializeComponent();
@@ -171,31 +175,30 @@ namespace View
         /// Поиск по тексту
         /// </summary>
         private bool MatchSearch(
-            //TODO: RSDN
-            IExercise ex, string term)
-        {
-            if (string.IsNullOrEmpty(term))
+            IExercise exercise, string query)
+            {
+            if (string.IsNullOrEmpty(query))
             {
                 return true;
             }
 
-            var lower = term.ToLower();
-            if (ex.Name.ToLower().Contains(lower))
+            var lower = query.ToLower();
+            if (exercise.Name.ToLower().Contains(lower))
             {
                 return true;
             }
 
-            if (ex.ExerciseInfo.ToLower().Contains(lower))
+            if (exercise.ExerciseInfo.ToLower().Contains(lower))
             {
                 return true;
             }
 
-            if (ex.Calories.ToString("F2").Contains(term))
+            if (exercise.Calories.ToString("F2").Contains(query))
             {
                 return true;
             }
 
-            if (ex.Calories.ToString("F0").Contains(term))
+            if (exercise.Calories.ToString("F0").Contains(query))
             {
                 return true;
             }

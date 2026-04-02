@@ -1,5 +1,4 @@
-﻿using ConsoleLoader;
-using System;
+﻿using System;
 
 namespace Model;
 
@@ -8,6 +7,11 @@ namespace Model;
 /// </summary>
 public abstract class ExerciseBase : IExercise
 {
+    /// <summary>
+    /// Максимальная длина названия упражнения
+    /// </summary>
+    public const int MaxNameLength = 50;
+
     /// <summary>
     /// Название
     /// </summary>
@@ -28,11 +32,11 @@ public abstract class ExerciseBase : IExercise
                     nameof(Name));
             }
 
-            if (value.Length > InputHelper.MaxNameLength)
+            if (value.Length > MaxNameLength)
             {
                 throw new ArgumentException(
                     $"Название упражнения слишком длинное " +
-                    $"(макс. {InputHelper.MaxNameLength} символов)",
+                    $"(макс. {MaxNameLength} символов)",
                     nameof(Name));
             }
 

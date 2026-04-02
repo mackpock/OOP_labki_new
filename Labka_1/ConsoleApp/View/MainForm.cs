@@ -226,18 +226,18 @@ namespace View
                 return;
             }
 
-            //TODO: RSDN
-            using var dlg = new SaveFileDialog();
-            dlg.Filter =
+            //TODO: RSDN +
+            using var saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter =
                 "Файлы упражнений (*.shizo)|*.shizo";
-            dlg.DefaultExt = "shizo";
-            dlg.Title = "Сохранение данных";
+            saveFileDialog.DefaultExt = "shizo";
+            saveFileDialog.Title = "Сохранение данных";
 
-            if (dlg.ShowDialog() == DialogResult.OK)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    SerializeExercises(dlg.FileName);
+                    SerializeExercises(saveFileDialog.FileName);
                     MessageBox.Show(
                         "Успешно сохранено", "Готово",
                         MessageBoxButtons.OK,
@@ -260,18 +260,18 @@ namespace View
         private void OpenToolStripMenuItem_Click(
             object sender, EventArgs e)
         {
-            //TODO: RSDN
-            using var dlg = new OpenFileDialog();
-            dlg.Filter =
+            //TODO: RSDN +
+            using var openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter =
                 "Файлы упражнений (*.shizo)|*.shizo";
-            dlg.DefaultExt = "shizo";
-            dlg.Title = "Открытие данных";
+            openFileDialog.DefaultExt = "shizo";
+            openFileDialog.Title = "Открытие данных";
 
-            if (dlg.ShowDialog() == DialogResult.OK)
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    DeserializeExercises(dlg.FileName);
+                    DeserializeExercises(openFileDialog.FileName);
                     MessageBox.Show(
                         "Успешно загружено", "Готово",
                         MessageBoxButtons.OK,
@@ -297,10 +297,10 @@ namespace View
                 typeof(List<ExerciseWrapper>));
             var wrapped = _originalExercises
                 .Select(CreateWrapper).ToList();
-            using (var fs = new FileStream(
+            using (var fileStream = new FileStream(
                 path, FileMode.Create))
             {
-                serializer.Serialize(fs, wrapped);
+                serializer.Serialize(fileStream, wrapped);
             }
         }
 
@@ -319,20 +319,25 @@ namespace View
 
             var serializer = new XmlSerializer(
                 typeof(List<ExerciseWrapper>));
-            using (var fs = new FileStream(
+            List<ExerciseWrapper> wrapped;
+            using (var fileStream = new FileStream(
                 path, FileMode.Open))
             {
-                var wrapped = (List<ExerciseWrapper>)
-                    serializer.Deserialize(fs);
-                _exercises.Clear();
-                _originalExercises.Clear();
+                wrapped =
+                    serializer.Deserialize(fileStream)
+                    as List<ExerciseWrapper>
+                    ?? throw new InvalidDataException(
+                        "Не удалось десериализовать файл");
+            }
 
-                foreach (var word in wrapped)
-                {
-                    var exercise = word.RecoverExercise();
-                    _exercises.Add(exercise);
-                    _originalExercises.Add(exercise);
-                }
+            _exercises.Clear();
+            _originalExercises.Clear();
+
+            foreach (var word in wrapped)
+            {
+                var exercise = word.RecoverExercise();
+                _exercises.Add(exercise);
+                _originalExercises.Add(exercise);
             }
 
             RefreshButtons();
@@ -346,19 +351,19 @@ namespace View
         {
             return exercise switch
             {
-                //TODO: RSDN
-                Running r =>
-                    new ExerciseWrapper(r),
-                Swimming s =>
-                    new ExerciseWrapper(s),
-                BenchPress b =>
-                    new ExerciseWrapper(b),
+                //TODO: RSDN +
+                Running running =>
+                    new ExerciseWrapper(running),
+                Swimming swimming =>
+                    new ExerciseWrapper(swimming),
+                BenchPress benchPress =>
+                    new ExerciseWrapper(benchPress),
                 _ => throw new InvalidOperationException(
                     "Неизвестный тип")
             };
         }
 
-        //TODO: duplication
+        //TODO: duplication +
         /// <summary>
         /// Настройка визуального оформления
         /// </summary>
@@ -366,7 +371,8 @@ namespace View
         {
             ThemeHelper.StyleForm(this);
             ThemeHelper.StyleGroupBox(
-                ExercisesGroupBox, 12F);
+                ExercisesGroupBox,
+                ThemeHelper.SectionFontLarge);
 
             ThemeHelper.StyleDataGridView(
                 ExerciseDataGridView);
@@ -392,21 +398,19 @@ namespace View
         /// </summary>
         private void SetupColumns()
         {
-            var dgv = ExerciseDataGridView;
-            dgv.AutoGenerateColumns = false;
-            dgv.AutoSizeColumnsMode =
+            var dataGridView = ExerciseDataGridView;
+            dataGridView.AutoGenerateColumns = false;
+            dataGridView.AutoSizeColumnsMode =
                 DataGridViewAutoSizeColumnsMode.Fill;
-            dgv.SelectionMode =
+            dataGridView.SelectionMode =
                 DataGridViewSelectionMode.FullRowSelect;
-            dgv.ReadOnly = true;
-            dgv.RowHeadersVisible = false;
-            dgv.Columns.Clear();
-            dgv.ColumnHeadersDefaultCellStyle.Padding =
+            dataGridView.ReadOnly = true;
+            dataGridView.RowHeadersVisible = false;
+            dataGridView.Columns.Clear();
+            dataGridView.ColumnHeadersDefaultCellStyle.Padding =
                 new Padding(0);
-            dgv.ColumnHeadersDefaultCellStyle.Alignment =
+            dataGridView.ColumnHeadersDefaultCellStyle.Alignment =
                 DataGridViewContentAlignment.MiddleLeft;
-
-            var darkBg = Color.FromArgb(40, 40, 40);
 
             var nameCol = new DataGridViewTextBoxColumn
             {
@@ -418,7 +422,7 @@ namespace View
                 {
                     Style =
                     {
-                        BackColor = darkBg,
+                        BackColor = ThemeHelper.DarkCell,
                         ForeColor = Color.White
                     }
                 }
@@ -434,7 +438,7 @@ namespace View
                 {
                     Style =
                     {
-                        BackColor = darkBg,
+                        BackColor = ThemeHelper.DarkCell,
                         ForeColor = Color.White
                     }
                 }
@@ -450,40 +454,40 @@ namespace View
                 {
                     Style =
                     {
-                        BackColor = darkBg,
+                        BackColor = ThemeHelper.DarkCell,
                         ForeColor = Color.White
                     }
                 }
             };
 
-            //TODO: duplication
+            //TODO: duplication +
             var commonStyle = new DataGridViewCellStyle
             {
-                BackColor = darkBg,
+                BackColor = ThemeHelper.DarkCell,
                 ForeColor = Color.White,
-                Font = new Font("Segoe UI", 9F)
+                Font = ThemeHelper.CellFont
             };
 
             nameCol.DefaultCellStyle = commonStyle;
             infoCol.DefaultCellStyle = commonStyle;
-            //TODO: duplication
+            //TODO: duplication +
             calCol.DefaultCellStyle =
                 new DataGridViewCellStyle
             {
-                BackColor = darkBg,
+                BackColor = ThemeHelper.DarkCell,
                 ForeColor = Color.White,
-                Format = "F2",
-                Font = new Font("Segoe UI", 9F)
+                Format = ThemeHelper.FloatFormat,
+                Font = ThemeHelper.CellFont
             };
 
-            dgv.Columns.AddRange(
+            dataGridView.Columns.AddRange(
                 nameCol,
                 infoCol,
                 calCol);
 
-            nameCol.FillWeight = 25;
-            infoCol.FillWeight = 50;
-            calCol.FillWeight = 25;
+            nameCol.FillWeight = ThemeHelper.ColWeightName;
+            infoCol.FillWeight = ThemeHelper.ColWeightInfo;
+            calCol.FillWeight = ThemeHelper.ColWeightCalories;
         }
     }
 }

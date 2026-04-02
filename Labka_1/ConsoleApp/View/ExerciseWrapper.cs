@@ -55,7 +55,6 @@ namespace View
         public ExerciseWrapper(IExercise exercise)
         {
             Name = exercise.Name;
-            //TODO: switch-case +
             switch (exercise)
             {
                 case Running run:
@@ -64,7 +63,7 @@ namespace View
                     Distance = run.Distance;
                     Intensity = run.Intensity;
                     break;
-            }
+                }
                 case Swimming swim:
                 {
                     Type = ExerciseTypes.Swimming;
@@ -81,9 +80,6 @@ namespace View
                 }
             }
         }
-
-        //TODO: XML +
-        //TODO: отступы +
 
         /// <summary>
         /// Нужно ли сериализовать дистанцию
@@ -121,7 +117,6 @@ namespace View
         /// </summary>
         public IExercise RecoverExercise()
         {
-            //TODO: отступы +
             return Type switch
             {
                 ExerciseTypes.Running =>

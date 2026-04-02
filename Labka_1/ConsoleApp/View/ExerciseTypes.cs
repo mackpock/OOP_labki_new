@@ -5,7 +5,6 @@ namespace View
     /// </summary>
     public static class ExerciseTypes
     {
-        //TODO: XML +
 
         /// <summary>
         /// Тип упражнения — бег
