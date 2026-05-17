@@ -45,7 +45,8 @@ namespace Model
             get => _distance;
             set
             {
-                ValidatePositiveValue(value, nameof(Distance));
+                ValidateRange(value, MinDistance,
+                    MaxDistance, nameof(Distance));
                 _distance = value;
             }
         }

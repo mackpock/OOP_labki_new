@@ -56,21 +56,6 @@ public abstract class ExerciseBase : IExercise
     protected ExerciseBase(string name) => Name = name;
 
     /// <summary>
-    /// Проверка положительности значения
-    /// </summary>
-    protected static void ValidatePositiveValue(
-        double value,
-        string parameterName)
-    {
-        if (value <= 0)
-        {
-            throw new ArgumentOutOfRangeException(
-                parameterName,
-                "Значение должно быть положительным");
-        }
-    }
-
-    /// <summary>
     /// Проверка диапазона значений (double)
     /// </summary>
     protected static void ValidateRange(

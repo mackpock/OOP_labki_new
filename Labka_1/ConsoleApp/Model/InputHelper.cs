@@ -1,11 +1,12 @@
 ﻿using Model;
 using System;
-
+using System.Diagnostics.CodeAnalysis;
 namespace ConsoleLoader;
 
 /// <summary>
 /// Вспомогательный класс для ввода данных с консоли
 /// </summary>
+[ExcludeFromCodeCoverage]
 public static class InputHelper
 {
     /// <summary>

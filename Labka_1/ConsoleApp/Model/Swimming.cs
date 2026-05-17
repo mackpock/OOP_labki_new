@@ -42,7 +42,8 @@ public class Swimming : ExerciseBase
         get => _distance;
         set
         {
-            ValidatePositiveValue(value, nameof(Distance));
+            ValidateRange(value, MinDistance,
+                MaxDistance, nameof(Distance));
             _distance = value;
         }
     }
