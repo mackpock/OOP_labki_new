@@ -10,6 +10,7 @@ namespace UnitTests.Model
     [TestFixture]
     public class BenchPressTest
     {
+        //TODO: duplication
         /// <summary>
         /// Допустимое отклонение для сравнения double.
         /// </summary>

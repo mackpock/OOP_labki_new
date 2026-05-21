@@ -11,6 +11,7 @@ namespace UnitTests.Model
     [TestFixture]
     public class ExerciseBaseTest
     {
+        //TODO: duplication
         /// <summary>
         /// Допустимое отклонение для сравнения double.
         /// </summary>
