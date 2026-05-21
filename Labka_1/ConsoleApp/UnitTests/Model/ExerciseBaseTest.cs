@@ -5,25 +5,26 @@ using NUnit.Framework;
 namespace UnitTests.Model
 {
     /// <summary>
-    /// Набор тестов для класса ExerciseBase
-    /// (тестируется через дочерний BenchPress, т.к. ExerciseBase абстрактный).
+    /// Набор тестов для абстрактного класса ExerciseBase.
+    /// Тестируется через минимальную тестовую реализацию-stub,
+    /// чтобы тесты не зависели от конкретных наследников.
     /// </summary>
     [TestFixture]
-    public class ExerciseBaseTest
+    public class ExerciseBaseTest : TestBase
     {
-        //TODO: duplication
         /// <summary>
-        /// Допустимое отклонение для сравнения double.
+        /// Минимальная тестовая реализация ExerciseBase для проверки
+        /// поведения базового класса в изоляции от наследников.
         /// </summary>
-        private const double Tolerance = 0.01;
-
-        /// <summary>
-        /// Создание валидного экземпляра BenchPress для тестирования
-        /// унаследованных свойств.
-        /// </summary>
-        private static BenchPress CreateValidExercise()
+        private sealed class TestExercise : ExerciseBase
         {
-            return new BenchPress("Жим", 50.0, 10);
+            public double FakeCalories { get; set; }
+
+            public TestExercise(string name) : base(name) { }
+
+            public override string ExerciseInfo => $"Test: {Name}";
+
+            public override double CalculateCalories() => FakeCalories;
         }
 
         /// <summary>
@@ -62,7 +63,7 @@ namespace UnitTests.Model
         )]
         public void NameTest_ValidValues(string name)
         {
-            var exercise = CreateValidExercise();
+            var exercise = new TestExercise("Тест");
             exercise.Name = name;
             Assert.That(exercise.Name, Is.EqualTo(name));
         }
@@ -103,7 +104,7 @@ namespace UnitTests.Model
         public void NameTest_InvalidValues_ThrowsException(
             string? name)
         {
-            var exercise = CreateValidExercise();
+            var exercise = new TestExercise("Тест");
             Assert.Throws<ArgumentException>(
                 () => exercise.Name = name!);
         }
@@ -139,7 +140,7 @@ namespace UnitTests.Model
         )]
         public void NameTest_MaxLength_ValidEdge(int length)
         {
-            var exercise = CreateValidExercise();
+            var exercise = new TestExercise("Тест");
             var name = new string('A', length);
             exercise.Name = name;
             Assert.That(exercise.Name, Is.EqualTo(name));
@@ -171,7 +172,7 @@ namespace UnitTests.Model
         public void
             NameTest_MaxLength_Exceeds_ThrowsException(int length)
         {
-            var exercise = CreateValidExercise();
+            var exercise = new TestExercise("Тест");
             var name = new string('A', length);
             Assert.Throws<ArgumentException>(
                 () => exercise.Name = name);
@@ -179,43 +180,42 @@ namespace UnitTests.Model
 
         /// <summary>
         /// Тестирование свойства Calories — должно возвращать
-        /// результат CalculateCalories().
+        /// результат CalculateCalories(), независимо от реализации.
         /// </summary>
         [Test]
         [TestCase(
-            10.0, 5, 5.0,
+            0.0,
             TestName =
-                "Тестирование Calories " +
-                "при стандартных значениях BenchPress."
+                "Тестирование Calories при нулевом значении."
         )]
         [TestCase(
-            100.0, 10, 100.0,
+            1.0,
             TestName =
-                "Тестирование Calories " +
-                "при больших значениях BenchPress."
+                "Тестирование Calories при значении 1."
         )]
         [TestCase(
-            1.0, 1, 0.1,
+            100.5,
             TestName =
-                "Тестирование Calories " +
-                "при минимальных значениях BenchPress."
+                "Тестирование Calories при дробном значении."
         )]
         [TestCase(
-            341.0, 1000, 34100.0,
+            999999.0,
             TestName =
-                "Тестирование Calories " +
-                "при максимальных значениях BenchPress."
+                "Тестирование Calories при очень большом значении."
         )]
         [TestCase(
-            50.5, 8, 40.4,
+            -5.0,
             TestName =
-                "Тестирование Calories " +
-                "при дробном весе BenchPress."
+                "Тестирование Calories при отрицательном значении " +
+                "(свойство не валидирует, только пересылает)."
         )]
-        public void CaloriesTest_BenchPress(
-            double weight, int reps, double expected)
+        public void CaloriesTest_ReturnsCalculateCaloriesResult(
+            double expected)
         {
-            var exercise = new BenchPress("Жим", weight, reps);
+            var exercise = new TestExercise("Тест")
+            {
+                FakeCalories = expected
+            };
             Assert.That(
                 exercise.Calories,
                 Is.EqualTo(expected).Within(Tolerance));

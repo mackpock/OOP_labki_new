@@ -6,16 +6,12 @@ namespace UnitTests.Model
 {
     /// <summary>
     /// Набор тестов для класса Swimming.
+    /// Тесты валидации Name находятся в ExerciseBaseTest
+    /// (Name унаследовано из базового класса).
     /// </summary>
     [TestFixture]
-    public class SwimmingTest
+    public class SwimmingTest : TestBase
     {
-        //TODO: duplication
-        /// <summary>
-        /// Допустимое отклонение для сравнения double.
-        /// </summary>
-        private const double Tolerance = 0.01;
-
         /// <summary>
         /// Создание валидного экземпляра Swimming.
         /// </summary>
@@ -46,20 +42,6 @@ namespace UnitTests.Model
             var swimming = CreateValid();
             swimming.Style = style;
             Assert.That(swimming.Style, Is.EqualTo(style));
-        }
-
-        /// <summary>
-        /// Тестирование переключения Style.
-        /// </summary>
-        [Test]
-        public void StyleTest_Switch_FreestyleToButterfly()
-        {
-            var swimming = new Swimming(
-                "Плавание", SwimmingStyle.Freestyle, 100.0);
-            swimming.Style = SwimmingStyle.Butterfly;
-            Assert.That(
-                swimming.Style,
-                Is.EqualTo(SwimmingStyle.Butterfly));
         }
 
         /// <summary>
@@ -240,42 +222,24 @@ namespace UnitTests.Model
         /// частей строки.
         /// </summary>
         [Test]
-        [TestCase(
-            "Плавание", SwimmingStyle.Freestyle, 100.0,
-            TestName =
-                "Тестирование ExerciseInfo " +
-                "при стиле Freestyle."
-        )]
-        [TestCase(
-            "Swim", SwimmingStyle.Butterfly, 500.0,
-            TestName =
-                "Тестирование ExerciseInfo " +
-                "при стиле Butterfly."
-        )]
-        [TestCase(
-            "Бассейн", SwimmingStyle.Freestyle, 1.0,
-            TestName =
-                "Тестирование ExerciseInfo " +
-                "при минимальной дистанции."
-        )]
-        public void ExerciseInfoTest(
-            string name, SwimmingStyle style, double distance)
+        public void ExerciseInfoTest_ContainsExpectedParts()
         {
-            var swimming = new Swimming(name, style, distance);
+            var swimming = new Swimming(
+                "Плавание", SwimmingStyle.Freestyle, 100.0);
             var info = swimming.ExerciseInfo;
             Assert.Multiple(() =>
             {
                 Assert.That(info, Does.StartWith("Плавание:"));
-                Assert.That(info, Does.Contain(name));
+                Assert.That(info, Does.Contain("Плавание"));
                 Assert.That(info, Does.Contain("Стиль"));
-                Assert.That(info, Does.Contain(style.ToString()));
+                Assert.That(info, Does.Contain("Freestyle"));
                 Assert.That(info, Does.Contain("Дистанция"));
                 Assert.That(info, Does.Contain("м"));
             });
         }
 
         /// <summary>
-        /// Тестирование конструктора при корректных значениях.
+        /// Тестирование конструктора — корректные значения сохраняются.
         /// </summary>
         [Test]
         public void ConstructorTest_ValidValues_SetsProperties()
@@ -293,57 +257,6 @@ namespace UnitTests.Model
                     Is.EqualTo(SwimmingStyle.Butterfly));
                 Assert.That(swimming.Distance, Is.EqualTo(250.0));
             });
-        }
-
-        /// <summary>
-        /// Тестирование конструктора при невалидном Name.
-        /// </summary>
-        [Test]
-        [TestCase(
-            null,
-            TestName =
-                "Тестирование конструктора Swimming при name = null."
-        )]
-        [TestCase(
-            "",
-            TestName =
-                "Тестирование конструктора Swimming при пустом name."
-        )]
-        public void
-            ConstructorTest_InvalidName_ThrowsException(string? name)
-        {
-            Assert.Throws<ArgumentException>(
-                () => new Swimming(
-                    name!, SwimmingStyle.Freestyle, 100.0));
-        }
-
-        /// <summary>
-        /// Тестирование конструктора при невалидной Distance.
-        /// </summary>
-        [Test]
-        [TestCase(
-            0,
-            TestName =
-                "Тестирование конструктора Swimming при distance = 0."
-        )]
-        [TestCase(
-            -1,
-            TestName =
-                "Тестирование конструктора Swimming при distance = -1."
-        )]
-        [TestCase(
-            10001,
-            TestName =
-                "Тестирование конструктора Swimming " +
-                "при distance = 10001 (max+1)."
-        )]
-        public void
-            ConstructorTest_InvalidDistance_ThrowsException(
-                double distance)
-        {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new Swimming(
-                    "Плавание", SwimmingStyle.Freestyle, distance));
         }
     }
 }

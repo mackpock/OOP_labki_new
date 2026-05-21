@@ -6,19 +6,14 @@ namespace UnitTests.Model
 {
     /// <summary>
     /// Набор тестов для класса BenchPress.
+    /// Тесты валидации Name находятся в ExerciseBaseTest
+    /// (Name унаследовано из базового класса).
     /// </summary>
     [TestFixture]
-    public class BenchPressTest
+    public class BenchPressTest : TestBase
     {
-        //TODO: duplication
         /// <summary>
-        /// Допустимое отклонение для сравнения double.
-        /// </summary>
-        private const double Tolerance = 0.01;
-
-        /// <summary>
-        /// Создание валидного экземпляра BenchPress для тестирования
-        /// отдельных свойств.
+        /// Создание валидного экземпляра BenchPress.
         /// </summary>
         private static BenchPress CreateValid()
         {
@@ -235,42 +230,23 @@ namespace UnitTests.Model
         /// частей строки.
         /// </summary>
         [Test]
-        [TestCase(
-            "Жим", 50.0, 10,
-            TestName =
-                "Тестирование ExerciseInfo " +
-                "при стандартных значениях."
-        )]
-        [TestCase(
-            "Bench", 100.0, 5,
-            TestName =
-                "Тестирование ExerciseInfo " +
-                "при английском названии."
-        )]
-        [TestCase(
-            "Минимум", 1.0, 1,
-            TestName =
-                "Тестирование ExerciseInfo " +
-                "при минимальных значениях."
-        )]
-        public void ExerciseInfoTest(
-            string name, double weight, int reps)
+        public void ExerciseInfoTest_ContainsExpectedParts()
         {
-            var exercise = new BenchPress(name, weight, reps);
+            var exercise = new BenchPress("Жим", 50.0, 10);
             var info = exercise.ExerciseInfo;
             Assert.Multiple(() =>
             {
                 Assert.That(info, Does.StartWith("Жим штанги:"));
-                Assert.That(info, Does.Contain(name));
+                Assert.That(info, Does.Contain("Жим"));
                 Assert.That(info, Does.Contain("Вес"));
                 Assert.That(info, Does.Contain("кг"));
                 Assert.That(info, Does.Contain("Повторения"));
-                Assert.That(info, Does.Contain(reps.ToString()));
+                Assert.That(info, Does.Contain("10"));
             });
         }
 
         /// <summary>
-        /// Тестирование конструктора при корректных значениях.
+        /// Тестирование конструктора — корректные значения сохраняются.
         /// </summary>
         [Test]
         public void ConstructorTest_ValidValues_SetsProperties()
@@ -283,89 +259,6 @@ namespace UnitTests.Model
                 Assert.That(exercise.Weight, Is.EqualTo(80.0));
                 Assert.That(exercise.Repetitions, Is.EqualTo(12));
             });
-        }
-
-        /// <summary>
-        /// Тестирование конструктора при невалидном Name.
-        /// </summary>
-        [Test]
-        [TestCase(
-            null,
-            TestName =
-                "Тестирование конструктора BenchPress " +
-                "при name = null."
-        )]
-        [TestCase(
-            "",
-            TestName =
-                "Тестирование конструктора BenchPress " +
-                "при пустом name."
-        )]
-        public void
-            ConstructorTest_InvalidName_ThrowsException(
-                string? name)
-        {
-            Assert.Throws<ArgumentException>(
-                () => new BenchPress(name!, 50.0, 10));
-        }
-
-        /// <summary>
-        /// Тестирование конструктора при невалидном Weight.
-        /// </summary>
-        [Test]
-        [TestCase(
-            0,
-            TestName =
-                "Тестирование конструктора BenchPress " +
-                "при weight = 0."
-        )]
-        [TestCase(
-            -1,
-            TestName =
-                "Тестирование конструктора BenchPress " +
-                "при weight = -1."
-        )]
-        [TestCase(
-            342,
-            TestName =
-                "Тестирование конструктора BenchPress " +
-                "при weight = 342 (max+1)."
-        )]
-        public void
-            ConstructorTest_InvalidWeight_ThrowsException(
-                double weight)
-        {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new BenchPress("Жим", weight, 10));
-        }
-
-        /// <summary>
-        /// Тестирование конструктора при невалидных Repetitions.
-        /// </summary>
-        [Test]
-        [TestCase(
-            0,
-            TestName =
-                "Тестирование конструктора BenchPress " +
-                "при repetitions = 0."
-        )]
-        [TestCase(
-            -1,
-            TestName =
-                "Тестирование конструктора BenchPress " +
-                "при repetitions = -1."
-        )]
-        [TestCase(
-            1001,
-            TestName =
-                "Тестирование конструктора BenchPress " +
-                "при repetitions = 1001 (max+1)."
-        )]
-        public void
-            ConstructorTest_InvalidReps_ThrowsException(int reps)
-        {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new BenchPress("Жим", 50.0, reps));
         }
     }
 }

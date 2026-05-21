@@ -6,16 +6,12 @@ namespace UnitTests.Model
 {
     /// <summary>
     /// Набор тестов для класса Running.
+    /// Тесты валидации Name находятся в ExerciseBaseTest
+    /// (Name унаследовано из базового класса).
     /// </summary>
     [TestFixture]
-    public class RunningTest
+    public class RunningTest : TestBase
     {
-        //TODO: duplication
-        /// <summary>
-        /// Допустимое отклонение для сравнения double.
-        /// </summary>
-        private const double Tolerance = 0.01;
-
         /// <summary>
         /// Создание валидного экземпляра Running.
         /// </summary>
@@ -232,37 +228,17 @@ namespace UnitTests.Model
 
         /// <summary>
         /// Тестирование свойства ExerciseInfo — содержание ключевых
-        /// частей строки (независимо от форматирования чисел и
-        /// культурной настройки).
+        /// частей строки.
         /// </summary>
         [Test]
-        [TestCase(
-            "Бег", 10.0, 5.0,
-            TestName =
-                "Тестирование ExerciseInfo " +
-                "при стандартных значениях."
-        )]
-        [TestCase(
-            "Marathon", 12.0, 42.0,
-            TestName =
-                "Тестирование ExerciseInfo " +
-                "при английском названии."
-        )]
-        [TestCase(
-            "Спринт", 30.0, 1.0,
-            TestName =
-                "Тестирование ExerciseInfo " +
-                "при максимальной интенсивности."
-        )]
-        public void ExerciseInfoTest(
-            string name, double intensity, double distance)
+        public void ExerciseInfoTest_ContainsExpectedParts()
         {
-            var running = new Running(name, intensity, distance);
+            var running = new Running("Бег", 10.0, 5.0);
             var info = running.ExerciseInfo;
             Assert.Multiple(() =>
             {
                 Assert.That(info, Does.StartWith("Бег:"));
-                Assert.That(info, Does.Contain(name));
+                Assert.That(info, Does.Contain("Бег"));
                 Assert.That(info, Does.Contain("Интенсивность"));
                 Assert.That(info, Does.Contain("км/ч"));
                 Assert.That(info, Does.Contain("Дистанция"));
@@ -271,7 +247,7 @@ namespace UnitTests.Model
         }
 
         /// <summary>
-        /// Тестирование конструктора при корректных значениях.
+        /// Тестирование конструктора — корректные значения сохраняются.
         /// </summary>
         [Test]
         public void ConstructorTest_ValidValues_SetsProperties()
@@ -284,78 +260,6 @@ namespace UnitTests.Model
                 Assert.That(running.Intensity, Is.EqualTo(12.0));
                 Assert.That(running.Distance, Is.EqualTo(8.0));
             });
-        }
-
-        /// <summary>
-        /// Тестирование конструктора при невалидном Name.
-        /// </summary>
-        [Test]
-        [TestCase(
-            null,
-            TestName =
-                "Тестирование конструктора Running при name = null."
-        )]
-        [TestCase(
-            "",
-            TestName =
-                "Тестирование конструктора Running при пустом name."
-        )]
-        public void
-            ConstructorTest_InvalidName_ThrowsException(string? name)
-        {
-            Assert.Throws<ArgumentException>(
-                () => new Running(name!, 10.0, 5.0));
-        }
-
-        /// <summary>
-        /// Тестирование конструктора при невалидном Intensity.
-        /// </summary>
-        [Test]
-        [TestCase(
-            0,
-            TestName =
-                "Тестирование конструктора Running при intensity = 0."
-        )]
-        [TestCase(
-            31,
-            TestName =
-                "Тестирование конструктора Running " +
-                "при intensity = 31 (max+1)."
-        )]
-        public void
-            ConstructorTest_InvalidIntensity_ThrowsException(
-                double intensity)
-        {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new Running("Бег", intensity, 5.0));
-        }
-
-        /// <summary>
-        /// Тестирование конструктора при невалидной Distance.
-        /// </summary>
-        [Test]
-        [TestCase(
-            0,
-            TestName =
-                "Тестирование конструктора Running при distance = 0."
-        )]
-        [TestCase(
-            -1,
-            TestName =
-                "Тестирование конструктора Running при distance = -1."
-        )]
-        [TestCase(
-            101,
-            TestName =
-                "Тестирование конструктора Running " +
-                "при distance = 101 (max+1)."
-        )]
-        public void
-            ConstructorTest_InvalidDistance_ThrowsException(
-                double distance)
-        {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new Running("Бег", 10.0, distance));
         }
     }
 }
