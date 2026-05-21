@@ -18,6 +18,7 @@ namespace UnitTests.Model
         /// </summary>
         private sealed class TestExercise : ExerciseBase
         {
+            //TODO: XML
             public double FakeCalories { get; set; }
 
             public TestExercise(string name) : base(name) { }
