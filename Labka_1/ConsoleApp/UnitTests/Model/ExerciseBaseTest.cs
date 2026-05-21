@@ -18,13 +18,27 @@ namespace UnitTests.Model
         /// </summary>
         private sealed class TestExercise : ExerciseBase
         {
-            //TODO: XML
+            /// <summary>
+            /// Заранее заданное значение калорий, которое вернёт
+            /// CalculateCalories(). Позволяет тестировать свойство
+            /// Calories без зависимости от формулы конкретного упражнения.
+            /// </summary>
             public double FakeCalories { get; set; }
 
+            /// <summary>
+            /// Создание тестового экземпляра ExerciseBase.
+            /// </summary>
+            /// <param name="name">Название упражнения.</param>
             public TestExercise(string name) : base(name) { }
 
+            /// <summary>
+            /// Информация об упражнении (заглушка для тестов).
+            /// </summary>
             public override string ExerciseInfo => $"Test: {Name}";
 
+            /// <summary>
+            /// Расчёт калорий — возвращает значение из FakeCalories.
+            /// </summary>
             public override double CalculateCalories() => FakeCalories;
         }
 
